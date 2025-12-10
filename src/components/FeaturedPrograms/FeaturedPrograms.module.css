@@ -1,0 +1,45 @@
+    .certgrid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    .certcard {
+        background: var(--white);
+        border-radius: 16px;
+        border: 1px solid var(--border-light);
+        padding: 24px;
+        display: flex;
+        gap: 20px;
+    }
+
+    .certlogo {
+        width: 80px;
+        height: 80px;
+        background: var(--bg-light);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .certcontent h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    .certcontent p {
+        font-size: 14px;
+        color: var(--text-secondary);
+        margin-bottom: 12px;
+    }
+
+    .certcontent .rating {
+        font-size: 14px;
+        color: var(--text-secondary);
+    }
+
+    .certcontent .rating span {
+        color: #FFC107;
+    }

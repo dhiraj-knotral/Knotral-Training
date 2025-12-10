@@ -1,0 +1,137 @@
+         .sectionheader {
+             margin-bottom: 40px;
+         }
+
+         .sectiontitle {
+             font-size: 32px;
+             font-weight: 600;
+             color: var(--primary-navy);
+             margin-bottom: 12px;
+         }
+
+
+         .sectionheader.center {
+             text-align: center;
+         }
+
+         .sectionheader.center .sectionsubtitle {
+             margin: 0 auto;
+         }
+
+         .card {
+             background: var(--white);
+             border-radius: 12px;
+             border: 1px solid var(--border-light);
+             overflow: hidden;
+             transition: all 0.2s;
+         }
+
+         .card:hover {
+             transform: translateY(-4px);
+             box-shadow: var(--shadow-card-hover);
+         }
+
+         .cardbody {
+             padding: 24px;
+         }
+
+         .pricingtable {
+             display: grid;
+             grid-template-columns: repeat(3, 1fr);
+             gap: 24px;
+         }
+
+         .pricingcard {
+             background: var(--white);
+             border-radius: 16px;
+             border: 2px solid var(--border-light);
+             overflow: hidden;
+         }
+
+         .pricingcard.featured {
+             border-color: var(--accent-teal);
+         }
+
+         .pricingcard .header {
+             padding: 24px;
+             background: var(--bg-light);
+             text-align: center;
+         }
+
+         .pricingcard.featured .header {
+             background: var(--accent-teal);
+             color: var(--white);
+         }
+
+         .pricingcard .header h3 {
+             font-size: 24px;
+             margin-bottom: 8px;
+         }
+
+         .pricingcard .header .price {
+             font-size: 36px;
+             font-weight: 700;
+         }
+
+         .pricingcard .header .price span {
+             font-size: 14px;
+             font-weight: 400;
+         }
+
+         .pricingcard .body {
+             padding: 24px;
+         }
+
+         .pricingcard .body ul {
+             list-style: none;
+             margin-bottom: 24px;
+         }
+
+         .pricingcard .body ul li {
+             padding: 10px 0;
+             border-bottom: 1px solid var(--border-light);
+             font-size: 14px;
+         }
+
+         .pricingcard .body ul li:last-child {
+             border-bottom: none;
+         }
+
+         .statsbar {
+             display: grid;
+             grid-template-columns: repeat(4, 1fr);
+             gap: 24px;
+             background: var(--white);
+             padding: 32px;
+             border-radius: 16px;
+             margin-top: -60px;
+             position: relative;
+             z-index: 10;
+             box-shadow: var(--shadow-card);
+         }
+
+         .statitem {
+             text-align: center;
+         }
+
+         .statitem .number {
+             font-size: 36px;
+             font-weight: 700;
+             color: var(--primary-navy);
+         }
+
+         .statitem .label {
+             font-size: 14px;
+             color: var(--text-secondary);
+         }
+
+
+         @media (max-width: 1024px) {
+            .pricingtable { grid-template-columns: 1fr; }
+         }
+
+         @media (max-width: 768px) {
+             .statsbar {
+                 grid-template-columns: repeat(2, 1fr);
+             }
+         }

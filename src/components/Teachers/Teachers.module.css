@@ -1,0 +1,131 @@
+     .sectionheader {
+         margin-bottom: 40px;
+     }
+
+     .sectiontitle {
+         font-size: 32px;
+         font-weight: 600;
+         color: var(--primary-navy);
+         margin-bottom: 12px;
+     }
+
+
+     .sectionheader.center {
+         text-align: center;
+     }
+
+     .sectionheader.center .section-subtitle {
+         margin: 0 auto;
+     }
+
+
+     .valuecards {
+         display: grid;
+         grid-template-columns: repeat(3, 1fr);
+         gap: 24px;
+         margin-top: -80px;
+         position: relative;
+         z-index: 10;
+     }
+
+     .valuecard {
+         background: var(--white);
+         border-radius: 16px;
+         padding: 32px;
+         text-align: center;
+         box-shadow: var(--shadow-card);
+     }
+
+     .valuecard .icon {
+         font-size: 48px;
+         margin-bottom: 16px;
+     }
+
+     .valuecard h3 {
+         font-size: 20px;
+         margin-bottom: 12px;
+         color: var(--primary-navy);
+     }
+
+     .valuecard p {
+         font-size: 14px;
+         color: var(--text-secondary);
+     }
+
+     .howitworks {
+         counter-reset: step;
+     }
+
+     .stepitem {
+         display: flex;
+         gap: 24px;
+         margin-bottom: 40px;
+         align-items: flex-start;
+     }
+
+     .stepnumber {
+         width: 48px;
+         height: 48px;
+         background: var(--primary-navy);
+         color: var(--white);
+         border-radius: 50%;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         font-weight: 700;
+         font-size: 20px;
+         flex-shrink: 0;
+     }
+
+     .stepcontent h3 {
+         font-size: 20px;
+         margin-bottom: 8px;
+     }
+
+     .stepcontent p {
+         color: var(--text-secondary);
+     }
+
+     .aboutimage {
+         background: var(--bg-light);
+         border-radius: 16px;
+         height: 400px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         color: var(--text-muted);
+     }
+
+
+     .benefitlist {
+         list-style: none;
+     }
+
+     .benefitlist li {
+         padding: 16px 0;
+         border-bottom: 1px solid var(--border-light);
+         display: flex;
+         align-items: flex-start;
+         gap: 16px;
+     }
+
+     .benefitlist li:last-child {
+         border-bottom: none;
+     }
+
+     .benefitlist .check {
+         color: var(--accent-teal);
+         font-size: 20px;
+     }
+
+
+     /* Responsive */
+     @media (max-width: 1024px) {
+         .valuesgrid {
+             grid-template-columns: repeat(2, 1fr);
+         }
+
+         .valuecards {
+             grid-template-columns: 1fr;
+         }
+     }

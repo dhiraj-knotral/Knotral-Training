@@ -1,0 +1,23 @@
+  /* TRUST BAR */
+  .trustbar {
+      background: var(--white);
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border-light);
+  }
+
+  .trustbar .container {
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+  }
+
+  .trustitem .number {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary-navy);
+  }
+
+  .trustitem .label {
+      font-size: 14px;
+      color: var(--text-secondary);
+  }

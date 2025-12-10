@@ -1,0 +1,115 @@
+         .sectionheader {
+             margin-bottom: 40px;
+         }
+
+         .sectiontitle {
+             font-size: 32px;
+             font-weight: 600;
+             color: var(--primary-navy);
+             margin-bottom: 12px;
+         }
+
+
+         .sectionheader.center {
+             text-align: center;
+         }
+
+         .sectionheader.center .sectionsubtitle {
+             margin: 0 auto;
+         }
+
+         .spbenefitgrid {
+             display: grid;
+             grid-template-columns: repeat(2, 1fr);
+             gap: 24px;
+         }
+
+         .spbenefitcard {
+             background: var(--white);
+             border-radius: 12px;
+             padding: 24px;
+             border: 1px solid var(--border-light);
+             display: flex;
+             gap: 16px;
+         }
+
+         .spbenefitcard .icon {
+             font-size: 32px;
+             flex-shrink: 0;
+         }
+
+         .spbenefitcard h4 {
+             font-size: 18px;
+             margin-bottom: 8px;
+         }
+
+         .spbenefitcard p {
+             font-size: 14px;
+             color: var(--text-secondary);
+         }
+
+         .processtimeline {
+             position: relative;
+             padding-left: 40px;
+         }
+
+         .processtimeline::before {
+             content: '';
+             position: absolute;
+             left: 15px;
+             top: 0;
+             bottom: 0;
+             width: 2px;
+             background: var(--border-light);
+         }
+
+         .timelineitem {
+             position: relative;
+             margin-bottom: 32px;
+         }
+
+         .timelineitem::before {
+             content: '';
+             position: absolute;
+             left: -33px;
+             top: 4px;
+             width: 16px;
+             height: 16px;
+             background: var(--accent-teal);
+             border-radius: 50%;
+         }
+
+         .timelineitem h4 {
+             font-size: 18px;
+             margin-bottom: 8px;
+         }
+
+         .timelineitem p {
+             font-size: 14px;
+             color: var(--text-secondary);
+         }
+
+
+         .card {
+             background: var(--white);
+             border-radius: 12px;
+             border: 1px solid var(--border-light);
+             overflow: hidden;
+             transition: all 0.2s;
+         }
+
+         .card:hover {
+             transform: translateY(-4px);
+             box-shadow: var(--shadow-card-hover);
+         }
+
+         .cardbody {
+             padding: 24px;
+         }
+
+
+         @media (max-width: 768px) {
+             .spbenefitgrid {
+                 grid-template-columns: 1fr;
+             }
+         }

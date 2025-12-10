@@ -1,0 +1,44 @@
+    .ctasection {
+        background: var(--primary-navy);
+        padding: 64px 0;
+    }
+
+    .ctagrid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 48px;
+    }
+
+    .ctabox {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 40px;
+        text-align: center;
+    }
+
+    .ctabox h3 {
+        color: var(--white);
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    .ctabox p {
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 24px;
+    }
+
+    .ctabox .btn {
+        background: var(--white);
+        color: var(--primary-navy);
+    }
+
+    .ctabox .btn:hover {
+        background: var(--bg-light);
+    }
+
+
+    @media (max-width: 768px) {
+        .ctagrid {
+            grid-template-columns: 1fr;
+        }
+    }

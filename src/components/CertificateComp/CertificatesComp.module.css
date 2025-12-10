@@ -1,0 +1,204 @@
+          .sectionheader {
+              margin-bottom: 40px;
+          }
+
+          .sectiontitle {
+              font-size: 32px;
+              font-weight: 600;
+              color: var(--primary-navy);
+              margin-bottom: 12px;
+          }
+
+
+          .sectionheader.center {
+              text-align: center;
+          }
+
+          .sectionheader.center .sectionsubtitle {
+              margin: 0 auto;
+          }
+
+          .certherocard {
+              background: linear-gradient(135deg, #1E3A5F 0%, #1E3A5F 100%);
+              border-radius: 16px;
+              padding: 48px;
+              color: var(--white);
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 48px;
+              align-items: center;
+              margin-bottom: 48px;
+          }
+
+          .certherocard h2 {
+              font-size: 32px;
+              margin-bottom: 16px;
+          }
+
+          .certherocard p {
+              opacity: 0.9;
+              margin-bottom: 24px;
+          }
+
+          .certherocard .stats {
+              display: flex;
+              gap: 32px;
+          }
+
+          .certherocard .stat {
+              text-align: center;
+          }
+
+          .certherocard .stat .num {
+              font-size: 32px;
+              font-weight: 700;
+          }
+
+          .certherocard .stat .label {
+              font-size: 12px;
+              opacity: 0.8;
+          }
+
+          .certprogramcard {
+              background: var(--white);
+              border-radius: 16px;
+              border: 1px solid var(--border-light);
+              overflow: hidden;
+          }
+
+          .splogo {
+              width: 80px;
+              height: 80px;
+              background: var(--bg-light);
+              border-radius: 12px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-weight: 600;
+              color: var(--secondary-blue);
+          }
+
+          .certprogramcard .header {
+              padding: 24px;
+              border-bottom: 1px solid var(--border-light);
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-start;
+          }
+
+          .certprogramcard .sp-logo {
+              width: 64px;
+              height: 64px;
+              background: var(--bg-light);
+              border-radius: 12px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-weight: 600;
+              color: var(--secondary-blue);
+              margin-bottom: 16px;
+          }
+
+          .certprogramcard h3 {
+              font-size: 22px;
+              margin-bottom: 8px;
+          }
+
+          .certprogramcard .provider {
+              font-size: 14px;
+              color: var(--text-secondary);
+          }
+
+          .certprogramcard .metabadge {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-end;
+              gap: 8px;
+          }
+
+          .certprogramcard .modules {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 12px;
+              padding: 24px;
+              background: var(--bg-light);
+          }
+
+          .certprogramcard .module {
+              background: var(--white);
+              padding: 16px;
+              border-radius: 8px;
+              font-size: 14px;
+          }
+
+          .certprogramcard .module .num {
+              font-size: 12px;
+              color: var(--accent-teal);
+              font-weight: 600;
+              margin-bottom: 4px;
+          }
+
+          .certprogramcard .footer {
+              background-color: var(--footer);
+              padding: 24px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+          }
+
+          .certprogramcard .footer .info {
+              display: flex;
+              gap: 24px;
+              font-size: 14px;
+              color: var(--text-secondary);
+          }
+
+
+          .pagination {
+              display: flex;
+              justify-content: center;
+              gap: 8px;
+              margin-top: 40px;
+          }
+
+          .pagination a {
+              width: 40px;
+              height: 40px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-radius: 8px;
+              background: var(--white);
+              border: 1px solid var(--border-light);
+              color: var(--text-primary);
+              text-decoration: none;
+              font-size: 14px;
+          }
+
+          .pagination a.active {
+              background: var(--primary-navy);
+              color: var(--white);
+              border-color: var(--primary-navy);
+          }
+
+          .pagination a:hover:not(.active) {
+              background: var(--bg-light);
+          }
+
+
+          /* Responsive */
+          @media (max-width: 1024px) {
+
+              .splogo {
+                  margin: 0 auto;
+              }
+
+              .certherocard {
+                  grid-template-columns: 1fr;
+                  text-align: center;
+              }
+
+              .certherocard .stats {
+                  justify-content: center;
+              }
+          }
