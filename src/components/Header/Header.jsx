@@ -10,7 +10,10 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <div className={`${styles.container} container`}>
+      {/* <div className={`${styles.container} container`}> */}
+              <div className= {styles.container}>
+
+            <div className={styles.logoWrapper}>
         <Link href="/" className={styles.logo}>
           <img
             src="/7.png"       // path in /public folder
@@ -18,6 +21,7 @@ const Header = () => {
             className={styles.logoImage}
           />
         </Link>
+        </div>
         <nav className={styles.navLinks}>
           <Link
             href="/for-teachers"

@@ -12,22 +12,33 @@
         align-items: center;
         justify-content: space-between;
         height: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
     }
 
     .container Link {
         text-decoration: none;
     }
 
-    .logo {
-       color: var(--white);
-        margin-bottom: 12px;
+    .header .logoWrapper {
+        flex: 0 0 auto;
+        /* prevents it from stretching */
+        display: flex;
+        align-items: center;
     }
 
-    .logoImage {
-    vertical-align: middle;
-    width: 120px;
-    height: auto;
-    display: inline-block;
+    .header .logo {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        /* left-align inside wrapper */
+    }
+
+    .header .logoImage {
+        width: 220px;
+        height: auto;
+        display: block;
     }
 
     .logo span {
@@ -98,10 +109,30 @@
         background: var(--secondary-blue);
     }
 
-
-    @media (max-width: 768px) {
-        .navLinks {
-            display: none;
-        }
-
+   @media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0 16px;
     }
+
+    .navLinks {
+        display: none;
+    }
+
+    .header .logoImage {
+        width: 200px; /* correct width for <=768px */
+    }
+}
+
+@media (max-width: 480px) {
+    .header .logoImage {
+        width: 170px;
+    }
+}
+
+@media (max-width: 360px) {
+    .header .logoImage {
+        width: 150px;
+    }
+}

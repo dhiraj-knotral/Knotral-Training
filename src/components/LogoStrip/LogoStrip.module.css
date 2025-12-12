@@ -1,28 +1,100 @@
-   .logostrip {
-       background: var(--white);
-       padding: 40px 0;
-       border-top: 1px solid var(--border-light);
-       border-bottom: 1px solid var(--border-light);
-   }
+.logostrip {
+    background: var(--white);
+    padding:0px 0 30px 0;
+    overflow: hidden;
+}
 
-   .logostrip .container {
-       display: flex;
-       justify-content: center;
-       align-items: center;
-       gap: 48px;
-       flex-wrap: wrap;
-   }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-   .partnerlogo {
-       height: 32px;
-       opacity: 0.6;
-       filter: grayscale(100%);
-       transition: all 0.2s;
-       font-weight: 600;
-       color: var(--text-secondary);
-   }
+.slider {
+  overflow: hidden;
+  width: 100%;
+}
 
-   .partnerlogo:hover {
-       opacity: 1;
-       filter: none;
-   }
+.slideTrack {
+  display: flex;
+  gap: 40px;
+  animation: scroll 30s linear infinite;
+}
+
+.partnerlogo {
+  flex: 0 0 auto;
+  width: 200px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  opacity: 0.4;
+  filter: grayscale(100%);
+}
+
+/* Desktop scroll distance: 7 logos duplicated */
+@keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-1680px); } /* 7*(200+40) */
+}
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+    .partnerlogo {
+        width: 140px;
+        height: 50px;
+        margin-right: 20px;
+        font-size: 14px;
+    }
+
+    .slideTrack {
+        gap: 20px;
+        animation-duration: 15s;
+    }
+
+    @keyframes scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-1120px); } /* 7*(140+20) */
+    }
+}
+
+/* Small screens (480px and below) */
+@media (max-width: 480px) {
+    .partnerlogo {
+        width: 120px;
+        height: 45px;
+        margin-right: 15px;
+        font-size: 12px;
+    }
+
+    .slideTrack {
+        gap: 15px;
+        animation-duration: 12s;
+    }
+
+    @keyframes scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-945px); } /* 7*(120+15) */
+    }
+}
+
+/* Extra small screens (360px and below) */
+@media (max-width: 360px) {
+    .partnerlogo {
+        width: 100px;
+        height: 40px;
+        margin-right: 10px;
+        font-size: 11px;
+    }
+
+    .slideTrack {
+        gap: 10px;
+        animation-duration: 10s;
+    }
+
+    @keyframes scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-770px); } /* 7*(100+10) */
+    }
+}
+

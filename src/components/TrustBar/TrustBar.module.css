@@ -21,3 +21,48 @@
       font-size: 14px;
       color: var(--text-secondary);
   }
+
+  /* Responsive: tablets */
+@media (max-width: 1024px) {
+    .trustitem .number {
+        font-size: 28px;
+    }
+
+    .trustitem .label {
+        font-size: 13px;
+    }
+}
+
+/* Responsive: mobile */
+@media (max-width: 768px) {
+    .trustbar .container {
+        flex-direction: column; /* stack items vertically */
+        justify-content: center; /* center items */
+        align-items: center;
+    }
+
+    .trustitem {
+        margin: 12px 0;
+        text-align: center;
+        width: 100%; /* full width on mobile */
+    }
+
+    .trustitem .number {
+        font-size: 24px;
+    }
+
+    .trustitem .label {
+        font-size: 12px;
+    }
+}
+
+/* Extra small mobile */
+@media (max-width: 480px) {
+    .trustitem .number {
+        font-size: 20px;
+    }
+
+    .trustitem .label {
+        font-size: 11px;
+    }
+}

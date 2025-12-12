@@ -14,12 +14,16 @@ const logos = [
 const LogoStrip = () => {
   return (
     <section className={styles.logostrip}>
-<div className={`${styles.container} container`}>
-        {logos.map((logo, index) => (
-          <div key={index} className={styles.partnerlogo}>
-            {logo}
+      <div className={`${styles.container} container`}>
+        <div className={styles.slider}>
+           <div className={styles.slideTrack}>
+          {[...logos, ...logos].map((logo, index) => (
+            <div key={index} className={styles.partnerlogo}>
+              {logo}
+            </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );
