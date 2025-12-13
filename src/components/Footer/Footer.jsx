@@ -5,14 +5,13 @@ import styles from "./Footer.module.css";
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      {/* <div className={`${styles.container} container`}> */}
             <div className="container">
 
         <div className={styles.footergrid}>
           <div className={styles.footerbrand}>
               <Link href="/" className={styles.logo}>
                 <img
-                  src="/KnotralFoot.png"       // path in /public folder
+                  src="/KnotralFoot.png"      
                   alt="Knotral Footer"
                   className={styles.logoImage}
                   

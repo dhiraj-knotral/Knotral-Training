@@ -21,9 +21,9 @@ const FeaturedPrograms = () => {
     return (
         <section className="section" style={{ background: "var(--white)" }}>
             <div className="container">
-                <div className="sectionheader">
-                    <h2 className="sectiontitle">🏆 Featured Certification Programs</h2>
-                    <Link href="/certificates" className="viewall">Browse All →</Link>
+                <div className={styles.sectionheader}>
+                    <h2 className={styles.sectiontitle}>🏆Featured Certification Programs</h2>
+                    <Link href="/certificates" className={styles.viewall}>View All →</Link>
                 </div>
                 <div className={styles.certgrid}>
                     {certifications.map((item, index) => (

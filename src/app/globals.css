@@ -283,23 +283,35 @@
       grid-template-columns: repeat(2, 1fr);
     }
 
-    .grid33 {
+    .grid3 {
       grid-template-columns: 1fr;
     }
 
-        .btn {
-        padding: 9px 18px;
-        font-size: 13px;
+    .btn {
+      padding: 9px 18px;
+      font-size: 13px;
     }
 
     .btnsm {
-        padding: 7px 14px;
-        font-size: 12px;
+      padding: 7px 14px;
+      font-size: 12px;
     }
 
     .btnlg {
-        padding: 12px 24px;
-        font-size: 15px;
+      padding: 12px 24px;
+      font-size: 15px;
+    }
+
+    .sectiontitle {
+      font-size: 24px;
+    }
+
+    .sectionsubtitle {
+      font-size: 16px;
+    }
+
+    .viewall {
+      font-size: 24px;
     }
   }
 
@@ -314,44 +326,95 @@
     }
 
     .btn {
-        padding: 8px 16px;
-        font-size: 12px;
+      padding: 8px 16px;
+      font-size: 12px;
     }
 
     .btnsm {
-        padding: 6px 12px;
-        font-size: 11px;
+      padding: 6px 12px;
+      font-size: 11px;
     }
 
     .btnlg {
-        padding: 10px 20px;
-        font-size: 14px;
+      padding: 10px 20px;
+      font-size: 14px;
     }
 
     .btnblock {
-        width: 100%;
+      width: 100%;
+    }
+
+    .sectiontitle {
+      font-size: 20px;
+    }
+
+    .sectionsubtitle {
+      font-size: 14px;
+    }
+
+    .viewall {
+      font-size: 20px;
     }
   }
 
 
   /* Extra small mobile */
-@media (max-width: 480px) {
+  @media (max-width: 480px) {
     .btn {
-        padding: 6px 12px;
-        font-size: 11px;
+      padding: 6px 12px;
+      font-size: 11px;
     }
 
     .btnsm {
-        padding: 4px 10px;
-        font-size: 10px;
+      padding: 4px 10px;
+      font-size: 10px;
     }
 
     .btnlg {
-        padding: 8px 16px;
-        font-size: 13px;
+      padding: 8px 16px;
+      font-size: 13px;
     }
 
     .btnblock {
-        width: 100%;
+      width: 100%;
     }
-}
+
+    .sectiontitle {
+      font-size: 18px;
+    }
+
+    .sectionsubtitle {
+      font-size: 13px;
+    }
+
+    .viewall {
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .sectionheader {
+      gap: 2px;
+    }
+
+    .sectiontitle {
+      font-size: 18px;
+    }
+
+    .sectionsubtitle {
+      font-size: 12px;
+    }
+
+    .viewall {
+      margin-top: 2px;
+      font-size: 10px;
+    }
+
+    .pagehero h1 {
+      font-size: 24px;
+    }
+
+    .pagehero p {
+      font-size: 12px;
+    }
+  }

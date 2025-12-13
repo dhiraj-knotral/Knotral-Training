@@ -64,9 +64,73 @@
     }
 
 
-    @media (max-width: 768px) {
-        .hero h1 {
-            font-size: 32px;
-        }
-
+   /* Responsive font sizes and layout */
+@media (max-width: 1024px) {
+    .hero {
+        padding: 60px 0;
     }
+    .hero h1 {
+        font-size: 40px;
+    }
+    .hero p {
+        font-size: 18px;
+    }
+    .searchBar input {
+        height: 50px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 50px 16px;
+    }
+    .hero h1 {
+        font-size: 32px;
+    }
+    .hero p {
+        font-size: 16px;
+    }
+    .searchBar input {
+        height: 45px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 40px 12px;
+    }
+    .hero h1 {
+        font-size: 28px;
+    }
+    .hero p {
+        font-size: 14px;
+    }
+    .searchBar input {
+        height: 42px;
+        font-size: 13px;
+    }
+     .popularTags span{
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero {
+        padding: 30px 8px;
+    }
+    .hero h1 {
+        font-size: 24px;
+    }
+    .hero p {
+        font-size: 12px;
+    }
+    .searchBar input {
+        height: 38px;
+        font-size: 12px;
+    }
+    .popularTags span{
+        font-size: 10px;
+    }
+}

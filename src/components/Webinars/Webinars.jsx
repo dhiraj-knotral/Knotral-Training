@@ -156,23 +156,15 @@ const WebinarsList = () => {
                             marginBottom: "24px",
                         }}
                     >
-                        <div style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
+                        <div className={styles.trainingscount}>
                             Showing <strong>24</strong> of <strong>156</strong> trainings
                         </div>
 
                         <div>
-                            <label style={{ fontSize: "14px", marginRight: "8px" }}>
+                            <label className={styles.filterlabel}>
                                 Sort by:
                             </label>
-                            <select
-                                style={{
-                                    height: "36px",
-                                    border: "1px solid var(--border-light)",
-                                    borderRadius: "6px",
-                                    padding: "0 12px",
-                                    fontSize: "14px",
-                                }}
-                            >
+                            <select className={styles.filterselect}>
                                 <option>Date (Newest First)</option>
                                 <option>Date (Oldest First)</option>
                                 <option>Most Popular</option>
@@ -319,12 +311,12 @@ const WebinarsList = () => {
                                             <span
                                                 key={i}
                                                 className={`badge ${badge === "LIVE"
-                                                        ? "badgelive"
-                                                        : badge === "FREE"
-                                                            ? "badgefree"
-                                                            : badge === "CERTIFICATION"
-                                                                ? "badgecert"
-                                                                : "badgeondemand"
+                                                    ? "badgelive"
+                                                    : badge === "FREE"
+                                                        ? "badgefree"
+                                                        : badge === "CERTIFICATION"
+                                                            ? "badgecert"
+                                                            : "badgeondemand"
                                                     }`}
                                             >
                                                 {badge}
@@ -351,7 +343,7 @@ const WebinarsList = () => {
                                     </div>
 
                                     <Link
-                                        href={item.link}
+                                        href="/register"
                                         className={`btn ${item.actionType === "primary" ? "btnprimary" : "btnsecondary"
                                             }`}
                                     >
