@@ -37,6 +37,12 @@
         color: var(--secondary-blue);
         font-size: 12px;
     }
+    .splogo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* or cover depending on how you want it to scale */
+  border-radius: 8px;  /* same as container to match corners */
+}
 
     .cardtitle {
         font-size: 16px;
@@ -68,6 +74,7 @@
 
     .cardprice {
         font-weight: 600;
+
     }
 
     .cardprice.free {

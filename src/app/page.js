@@ -9,15 +9,26 @@ import Testimonials from "@/components/Testimionials/Testimonials";
 import CtaSection from "@/components/CtaSection/CtaSection";
 import Footer from "@/components/Footer/Footer";
 
-export default function Home() {
+export const revalidate = 0; // optional, for no caching
+
+export default async function Home() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/webinars/get-webinars`,
+    { cache: "no-store" } // ensures SSR, fresh data
+  );
+  const data = await res.json();
+  const webinars = data.success ? data.response : [];
+
+  // Filter certified webinars
+  const certifiedWebinars = webinars.filter(webinar => webinar.isCertified);
   return (
     <>
       <Header />
       <Hero />
       <TrustBar />
-      <LiveSessions />
+      <LiveSessions webinars={webinars} />
       <Category />
-      <FeaturedPrograms />
+      <FeaturedPrograms webinars={certifiedWebinars} />
       <LogoStrip />
       <Testimonials />
       <CtaSection />

@@ -25,24 +25,24 @@ const Footer = () => {
 
           <div className={styles.footercol}>
             <h4>Browse</h4>
-            <Link href="/subjects" className={styles.link}>By Subject</Link>
-            <Link href="/providers" className={styles.link}>By Provider</Link>
-            <Link href="/certifications" className={styles.link}>Certifications</Link>
-            <Link href="/on-demand" className={styles.link}>On-Demand</Link>
+            <Link href="/" className={styles.link}>By Subject</Link>
+            <Link href="/" className={styles.link}>By Provider</Link>
+            <Link href="/" className={styles.link}>Certifications</Link>
+            <Link href="/" className={styles.link}>On-Demand</Link>
           </div>
 
           <div className={styles.footercol}>
             <h4>About</h4>
             <Link href="/about" className={styles.link}>About Us</Link>
-            <Link href="/careers" className={styles.link}>Careers</Link>
-            <Link href="/blog" className={styles.link}>Blog</Link>
+            <Link href="/" className={styles.link}>Careers</Link>
+            <Link href="/" className={styles.link}>Blog</Link>
           </div>
 
           <div className={styles.footercol}>
             <h4>Support</h4>
-            <Link href="/help" className={styles.link}>Help Center</Link>
-            <Link href="/contact" className={styles.link}>Contact</Link>
-            <Link href="/faq" className={styles.link}>FAQ</Link>
+            <Link href="/" className={styles.link}>Help Center</Link>
+            <Link href="/" className={styles.link}>Contact</Link>
+            <Link href="/" className={styles.link}>FAQ</Link>
           </div>
         </div>
 

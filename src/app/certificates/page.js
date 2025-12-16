@@ -4,14 +4,32 @@ import Header from '@/components/Header/Header'
 import React from 'react'
 
 
-const Certificates = () => {
+export default async function ({ searchParams }) {
+  const params = await searchParams; // if it's a Promise
+  const page = parseInt(params.page) || 1;
+
+  // Build query string safely
+  const query = new URLSearchParams({
+    page,
+  }).toString();
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/webinars/get-certified-webinars?${query}`,
+    { cache: "no-store" }
+  );
+
+  const data = await res.json();
+  const webinars = data.success ? data.response : [];
+
+  const dataPagination = data.success ? data.pagination : {};
+
   return (
     <>
-    <Header />
-    <CertificatesComp />
-    <Footer />
+      <Header />
+      <CertificatesComp webinars={webinars}
+        pagination={dataPagination}
+      />
+      <Footer />
     </>
   )
 }
-
-export default Certificates

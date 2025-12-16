@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "./Register.module.css"
 import Link from "next/link";
+import moment from "moment";
 
-const RegisterComp = () => {
+const RegisterComp = ({ webinar }) => {
   return (
     <section className={styles.landingcontent}>
       <div className="container">
@@ -20,28 +21,30 @@ const RegisterComp = () => {
                   color: "var(--secondary-blue)",
                 }}
               >
-                SME
+                <img
+                  src={webinar.logo.url}
+                  alt="Logo"
+                  style={{ width: "65px", height: "65px" }}
+                />
               </div>
-              <span className="badge badgelive">LIVE WEBINAR</span>
+              {webinar.isLive && (
+                <span className="badge badgelive">LIVE WEBINAR</span>
+              )}
             </div>
 
             <h1>
-              Formative Assessment Strategies That Actually Work in Indian
-              Classrooms
+              {webinar.title}
             </h1>
             <p className={styles.description}>
-              Learn practical techniques to assess student learning without
-              adding to your workload. Walk away with ready-to-use templates.
+              {webinar.description}
             </p>
 
             <div className={styles.contentsection}>
               <h2>What You'll Learn</h2>
               <ul>
-                <li>3 formative assessment techniques that take less than 5 minutes</li>
-                <li>How to use exit tickets without paper waste</li>
-                <li>Digital tools that auto-analyze student responses</li>
-                <li>NEP 2020 competency mapping for assessments</li>
-                <li>Ready-to-use templates you can implement tomorrow</li>
+                {webinar.features.map((item) => (
+                  <li key={item._id}>{item.feature}</li>
+                ))}
               </ul>
             </div>
 
@@ -84,47 +87,41 @@ const RegisterComp = () => {
             </div>
 
             <div className={styles.contentsection}>
-              <h2>Meet Your Trainer</h2>
-              <div className={styles.trainercard}>
-                <div className={styles.photo}><img src="/defaultImage.webp" alt="Trainer"/></div>
-                <div>
-                  <h3>Dr. Sarah Mitchell</h3>
-                  <div className={styles.title}>Head of Pedagogy, Save My Exams</div>
-                  <p>
-                    Former Math teacher with 15 years classroom experience. PhD
-                    in Educational Assessment. Trained 5,000+ teachers globally.
-                  </p>
-                </div>
-              </div>
+              {webinar.trainer[0] && (
+                <>
+                  <h2>Meet Your Trainer</h2>
+                  <div className={styles.trainercard}>
+                    <div className={styles.photo}>
+                      <img
+                        src={webinar.trainer[0].trainerImage?.url || "/defaultImage.webp"}
+                        alt={webinar.trainer[0].trainerName || "Trainer"}
+                      />
+                    </div>
+                    <div>
+                      <h3>{webinar.trainer[0].trainerName}</h3>
+                      <div className={styles.title}>{webinar.trainer[0].designation}, {webinar.trainer[0].worksAt}</div>
+                      <p>
+                        {webinar.trainer[0].description}
+                      </p>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className={styles.contentsection}>
               <h2>Session Agenda</h2>
               <div className={styles.agendalist}>
-                <div className={styles.agendaitem}>
-                  <div className={styles.time}>0:00 - 0:10</div>
-                  <div className={styles.topic}>Welcome & Context Setting</div>
-                </div>
-                <div className={styles.agendaitem}>
-                  <div className={styles.time}>0:10 - 0:25</div>
-                  <div className={styles.topic}>The 3 Assessment Techniques (with demos)</div>
-                </div>
-                <div className={styles.agendaitem}>
-                  <div className={styles.time}>0:25 - 0:40</div>
-                  <div className={styles.topic}>Live Tool Walkthrough</div>
-                </div>
-                <div className={styles.agendaitem}>
-                  <div className={styles.time}>0:40 - 0:50</div>
-                  <div className={styles.topic}>Implementation in Your Classroom</div>
-                </div>
-                <div className={styles.agendaitem}>
-                  <div className={styles.time}>0:50 - 1:00</div>
-                  <div className={styles.topic}>Q&A + Special Offer</div>
-                </div>
+                {webinar?.sessionAgenda?.map((item) => (
+                  <div key={item._id} className={styles.agendaitem}>
+                    <div className={styles.time}>{item.time}</div>
+                    <div className={styles.topic}>{item.title}</div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div className={styles.contentsection}>
+            {/* <div className={styles.contentsection}>
               <h2>🎁 Exclusive Attendee Benefits</h2>
               <div className={styles.benefitbox}>
                 <h3>FREE for All Attendees</h3>
@@ -140,6 +137,25 @@ const RegisterComp = () => {
                   Learn More About Save My Exams →
                 </Link>
               </div>
+            </div> */}
+
+
+            <div className={styles.contentsection}>
+              <h2>🎁 Exclusive Attendee Benefits</h2>
+              <div className={styles.benefitbox}>
+                <h3>{webinar.attendeeBenefits.title}</h3>
+                <p style={{ marginBottom: "16px", opacity: 0.9 }}>
+                  30-Day Free Trial of {webinar.organisedBy}
+                </p>
+                <ul>
+                  {webinar.attendeeBenefits?.features?.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
+                <Link href="/register" className={styles.productlink}>
+                  Learn More About {webinar.organisedBy} →
+                </Link>
+              </div>
             </div>
           </div>
 
@@ -148,30 +164,30 @@ const RegisterComp = () => {
             <div className={styles.registrationcard}>
               <div className={styles.regmeta}>
                 <div className={styles.item}>
-                  <span className={styles.icon}>📅</span> December 15, 2025
+                  <span className={styles.icon}>📅</span>{moment(webinar.date).format("MMM DD, YYYY")}
                 </div>
                 <div className={styles.item}>
-                  <span className={styles.icon}>🕓</span> 4:00 PM IST
+                  <span className={styles.icon}>🕓</span> {webinar.startTime}
                 </div>
                 <div className={styles.item}>
-                  <span className={styles.icon}>⏱️</span> 60 minutes
+                  <span className={styles.icon}>⏱️</span> {webinar.duration}
                 </div>
                 <div className={styles.item}>
                   <span className={styles.icon}>🌐</span> Online (Zoom)
                 </div>
               </div>
               <div className={styles.regdivider}></div>
-             <div className={`${styles.regprice} ${styles.free}`}>FREE</div>
+              <div className={`${styles.regprice} ${styles.free}`}>FREE</div>
               <button className="btn btnprimary btnblock">REGISTER NOW</button>
               <div className={styles.regbonus}>
                 <div className={styles.label}>🎁 BONUS</div>
-                <p>Free trial of Save My Exams for all attendees</p>
+                <p>Free trial of {webinar.organisedBy} for all attendees</p>
               </div>
               <div className={styles.regdivider}></div>
               <div className={styles.regfooter}>
                 <p>👥 142 registered • 🔥 Limited seats</p>
                 <p style={{ marginTop: "12px" }}>
-                  <Link href="/register">📧 Get reminder</Link> • <Link href="/register">📲 Add to calendar</Link>
+                  <Link href="/">📧 Get reminder</Link> • <Link href="/">📲 Add to calendar</Link>
                 </p>
               </div>
             </div>

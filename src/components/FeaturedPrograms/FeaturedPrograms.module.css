@@ -1,33 +1,33 @@
     .sectionheader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-  }
-  
-  .sectiontitle {
-    font-size: 28px;
-    font-weight: 600;
-    color: var(--primary-navy);
-  }
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+    }
 
-  .sectionsubtitle {
-    font-size: 18px;
-    color: var(--text-secondary);
-    max-width: 600px;
-  }
+    .sectiontitle {
+        font-size: 28px;
+        font-weight: 600;
+        color: var(--primary-navy);
+    }
 
-  .sectionheader.center .sectionsubtitle {
-    margin: 0 auto;
-  }
+    .sectionsubtitle {
+        font-size: 18px;
+        color: var(--text-secondary);
+        max-width: 600px;
+    }
 
-  .viewall {
-    color: var(--secondary-blue);
-    text-decoration: none;
-    font-weight: 500;
-  }
+    .sectionheader.center .sectionsubtitle {
+        margin: 0 auto;
+    }
 
-.certgrid {
+    .viewall {
+        color: var(--secondary-blue);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .certgrid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 24px;
@@ -53,6 +53,12 @@
         flex-shrink: 0;
     }
 
+    .certlogo img {
+        width: 85px;
+        height: 85px;
+        object-fit: contain;
+    }
+
     .certcontent h3 {
         font-size: 18px;
         margin-bottom: 8px;
@@ -74,113 +80,126 @@
     }
 
     /* Responsive: tablets */
-@media (max-width: 1024px) {
-    .certgrid {
-        grid-template-columns: 1fr; /* stack in 1 column */
-        gap: 20px;
+    @media (max-width: 1024px) {
+        .certgrid {
+            grid-template-columns: 1fr;
+            /* stack in 1 column */
+            gap: 20px;
+        }
+
+        .certcard {
+            padding: 20px;
+            gap: 16px;
+        }
+
+        .certcontent h3 {
+            font-size: 16px;
+        }
+
+        .certcontent p,
+        .certcontent .rating {
+            font-size: 13px;
+        }
+
+        .sectiontitle {
+            font-size: 24px;
+        }
+
+        .sectionsubtitle {
+            font-size: 16px;
+        }
+
+        .viewall {
+            font-size: 24px;
+        }
     }
 
-    .certcard {
-        padding: 20px;
-        gap: 16px;
-    }
+    /* Responsive: mobile */
+    @media (max-width: 768px) {
+        .certgrid {
+            grid-template-columns: 1fr;
+            /* single column on mobile */
+            gap: 16px;
+        }
 
-    .certcontent h3 {
-        font-size: 16px;
-    }
-
-    .certcontent p,
-    .certcontent .rating {
-        font-size: 13px;
-    }
-
-           .sectiontitle {
-        font-size: 24px;
-    }
-    .sectionsubtitle {
-        font-size: 16px;
-    }
-    .viewall{
-      font-size: 24px;
-    }
-}
-
-/* Responsive: mobile */
-@media (max-width: 768px) {
-    .certgrid {
-        grid-template-columns: 1fr; /* single column on mobile */
-        gap: 16px;
-    }
-
-    .certcard {
-        flex-direction: column; /* stack logo above content */
-        align-items: flex-start;
-        padding: 16px;
-        gap: 12px;
-    }
+        .certcard {
+            flex-direction: column;
+            /* stack logo above content */
+            align-items: flex-start;
+            padding: 16px;
+            gap: 12px;
+        }
 
 
-    .certcontent h3 {
-        font-size: 15px;
+        .certcontent h3 {
+            font-size: 15px;
+        }
+
+        .certcontent p,
+        .certcontent .rating {
+            font-size: 12px;
+        }
+
+        .sectiontitle {
+            font-size: 20px;
+        }
+
+        .sectionsubtitle {
+            font-size: 14px;
+        }
+
+        .viewall {
+            font-size: 20px;
+        }
     }
 
-    .certcontent p,
-    .certcontent .rating {
-        font-size: 12px;
-    }
-
-         .sectiontitle {
-        font-size: 20px;
-    }
-    .sectionsubtitle {
-        font-size: 14px;
-    }
-     .viewall{
-      font-size: 20px;
-    }
-}
-
-/* Extra small mobile */
-@media (max-width: 480px) {
-    .certcard {
-        padding: 12px;
-        gap: 8px;
-    }
+    /* Extra small mobile */
+    @media (max-width: 480px) {
+        .certcard {
+            padding: 12px;
+            gap: 8px;
+        }
 
 
-    .certcontent h3 {
-        font-size: 14px;
+        .certcontent h3 {
+            font-size: 14px;
+        }
+
+        .certcontent p,
+        .certcontent .rating {
+            font-size: 11px;
+        }
+
+        .sectiontitle {
+            font-size: 18px;
+        }
+
+        .sectionsubtitle {
+            font-size: 13px;
+        }
+
+        .viewall {
+            margin-top: 2px;
+            font-size: 12px;
+        }
     }
 
-    .certcontent p,
-    .certcontent .rating {
-        font-size: 11px;
-    }
-       .sectiontitle {
-        font-size: 18px;
-    }
-    .sectionsubtitle {
-        font-size: 13px;
-    }
-     .viewall{
-        margin-top: 2px;
-      font-size: 12px;
-    }
-}
 
+    @media (max-width: 360px) {
+        .sectionheader {
+            gap: 0px;
+        }
 
-@media (max-width: 360px) {
-  .sectionheader{
-    gap: 0px;
-  }
-    .sectiontitle {
-        font-size: 18px;
+        .sectiontitle {
+            font-size: 18px;
+        }
+
+        .sectionsubtitle {
+            font-size: 12px;
+        }
+
+        .viewall {
+            margin-top: 2px;
+            font-size: 10px;
+        }
     }
-    .sectionsubtitle {
-        font-size: 12px;
-    }
-     .viewall{
-      margin-top: 2px;
-      font-size: 10px;
-    }
-}

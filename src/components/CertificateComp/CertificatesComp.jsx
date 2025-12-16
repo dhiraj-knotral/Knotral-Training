@@ -81,7 +81,8 @@ const certificatesData = [
 ];
 
 
-const CertificatesComp = () => {
+const CertificatesComp = ({ webinars, pagination }) => {
+
     return (
         <>
             <section
@@ -160,53 +161,94 @@ const CertificatesComp = () => {
                         }}
                     >
                         <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
-                            {certificatesData.map((cert) => (
-                                <div key={cert.id} className={styles.certprogramcard}>
-                                    <div className={styles.header}>
-                                        <div>
-                                            <div className={styles.splogo}>{cert.logo}</div>
-                                            <h3>{cert.title}</h3>
-                                            <div className={styles.provider}>{cert.provider}</div>
-                                        </div>
-
-                                        <div className={styles.metabadge}>
-                                            <span className="badge badgefree">{cert.price}</span>
-                                            <span className="badge badgecert">{cert.modulesCount}</span>
-                                        </div>
-                                    </div>
-
-                                    <div className={styles.modules}>
-                                        {cert.modules.map((mod, index) => (
-                                            <div key={index} className={styles.module}>
-                                                <div className={styles.num}>MODULE {index + 1}</div>
-                                                {mod}
+                            {webinars.map((cert) => (
+                                <React.Fragment key={cert._id}>
+                                    <div className={styles.certprogramcard}>
+                                        <div className={styles.header}>
+                                            <div>
+                                                <div className={styles.splogo}>
+                                                    <img
+                                                        src={cert.logo.url}
+                                                        alt={cert.title || "Certification logo"}
+                                                        className={styles.logoImg}
+                                                    />
+                                                </div>
+                                                <h3>{cert.title}</h3>
+                                                <div className={styles.provider}>By {cert.organisedBy}</div>
                                             </div>
-                                        ))}
-                                    </div>
 
-                                    <div className={styles.footer}>
-                                        <div className={styles.info}>
-                                            <span>⏱️ {cert.duration}</span>
-                                            <span>📅 {cert.schedule}</span>
-                                            <span>{cert.rating}</span>
+                                            <div className={styles.metabadge}>
+                                                <span className="badge badgefree">
+                                                    {cert.isFree ? "FREE" : `₹${cert.price}`}
+                                                </span>
+                                                <span className="badge badgecert">{cert.modules.length} modules</span>
+                                            </div>
                                         </div>
-                                        <Link href="#" className="btn btnprimary">
-                                            {cert.buttonText}
-                                        </Link>
+
+                                        <div className={styles.modules}>
+                                            {cert.modules.map((mod, index) => (
+                                                <div key={index} className={styles.module}>
+                                                    <div className={styles.num}>MODULE {index + 1}</div>
+                                                    <div>{mod.moduleTitle}</div>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        <div className={styles.footer}>
+                                            <div className={styles.info}>
+                                                <span>⏱️ {cert.duration}</span>
+                                                <span>📅 {cert.modules.length} live sessions</span>
+                                                {/* <span>{cert.rating}</span> */}
+                                                <span> ⭐ 4.8 (234 certified)</span>
+                                            </div>
+                                            <Link
+                                                href={`/${cert.slug}`}
+                                                className="btn btnprimary">
+                                                {cert.actions?.canStartProgram
+                                                    ? "Start Course"
+                                                    : cert.actions?.canEnroll
+                                                        ? "Enroll Now"
+                                                        : "Register"}
+                                            </Link>
+                                        </div>
                                     </div>
-                                </div>
+                                </React.Fragment>
                             ))}
                         </div>
 
                     </div>
 
                     <div className={styles.pagination} style={{ marginTop: "48px" }}>
-                        <a href="#" className={styles.active}>
+                        {/* <a href="#" className={styles.active}>
                             1
                         </a>
                         <a href="#">2</a>
                         <a href="#">3</a>
-                        <a href="#">→</a>
+                        <a href="#">→</a> */}
+                             {/* Previous Button */}
+                        {pagination.page > 1 && (
+                            <a href={`/certificates?page=${pagination.page - 1}`} className={styles.pageBtn}>
+                                ←
+                            </a>
+                        )}
+
+                        {/* Numbered pages */}
+                        {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map((p) => (
+                            <a
+                                key={p}
+                                href={`/certificates?page=${p}`}
+                                className={p === pagination.page ? styles.active : styles.pageBtn}
+                            >
+                                {p}
+                            </a>
+                        ))}
+
+                        {/* Next Button */}
+                        {pagination.page < pagination.totalPages && (
+                            <a href={`/certificates?page=${pagination.page + 1}`} className={styles.pageBtn}>
+                                →
+                            </a>
+                        )}
                     </div>
                 </div>
             </section>

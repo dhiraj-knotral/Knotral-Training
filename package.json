@@ -8,10 +8,11 @@
     "start": "next start",
     "lint": "eslint"
   },
-    "engines": {
+  "engines": {
     "node": "18.x"
   },
   "dependencies": {
+    "moment": "^2.30.1",
     "next": "16.0.8",
     "react": "19.2.1",
     "react-dom": "19.2.1"
