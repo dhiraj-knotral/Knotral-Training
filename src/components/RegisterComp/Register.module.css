@@ -233,6 +233,13 @@
  .regprice.free {
      color: var(--free-green);
  }
+ .regprice.free {
+     color: var(--free-green);
+ }
+
+  .regprice.price {
+     color: var(--primary-navy);
+ }
 
  .btnblock {
      width: 100%;
@@ -268,7 +275,6 @@
  .regfooter a {
      color: var(--secondary-blue);
  }
-
 
  /* RESPONSIVE */
  @media (max-width: 1024px) {

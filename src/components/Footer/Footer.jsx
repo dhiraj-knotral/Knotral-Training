@@ -41,7 +41,7 @@ const Footer = () => {
           <div className={styles.footercol}>
             <h4>Support</h4>
             <Link href="/" className={styles.link}>Help Center</Link>
-            <Link href="/" className={styles.link}>Contact</Link>
+            <Link href="/contact" className={styles.link}>Contact</Link>
             <Link href="/" className={styles.link}>FAQ</Link>
           </div>
         </div>

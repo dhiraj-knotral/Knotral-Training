@@ -199,18 +199,6 @@ const WebinarsList = ({ webinars, pagination, filters }) => {
                         ))}
                     </div>
 
-
-
-                    {/* <div className={styles.pagination}>
-                        <a href="#" className={styles.active}>1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">...</a>
-                        <a href="#">12</a>
-                        <a href="#">→</a>
-                    </div> */}
-
                     <div className={styles.pagination}>
                         {/* Previous Button */}
                         {pagination.page > 1 && (

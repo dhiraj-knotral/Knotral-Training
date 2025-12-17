@@ -1,11 +1,26 @@
-"use client";
-
 import React from "react";
 import styles from "./Register.module.css"
 import Link from "next/link";
 import moment from "moment";
 
 const RegisterComp = ({ webinar }) => {
+
+  // Determine button text and style based on webinar actions
+  const buttonText = webinar.actions?.canStartProgram
+    ? "Start Course"
+    : webinar.actions?.canEnroll
+      ? "Watch Now"
+      : "Register Now";
+
+  const buttonClass = webinar.actions?.canStartProgram || webinar.actions?.canEnroll
+    ? "btn btnsecondary btnblock"
+    : "btn btnprimary btnblock";
+
+  // Determine link destination (e.g., registration page)
+const href = webinar.actions?.canStartProgram || webinar.actions?.canEnroll
+  ? `/course/${webinar.slug}`     // Course page
+  : `/register/${webinar._id}`;  // Registration page
+
   return (
     <section className={styles.landingcontent}>
       <div className="container">
@@ -179,8 +194,15 @@ const RegisterComp = ({ webinar }) => {
                 </div>
               </div>
               <div className={styles.regdivider}></div>
-              <div className={`${styles.regprice} ${styles.free}`}>FREE</div>
-              <button className="btn btnprimary btnblock">REGISTER NOW</button>
+              {/* <div className={`${styles.regprice} ${styles.free}`}>FREE</div> */}
+              <div className={`${styles.regprice} ${webinar.isFree ? styles.free : ""}`}>
+                {webinar.isFree ? "FREE" : `₹${webinar.price}`}
+              </div>
+
+              {/* <button className="btn btnprimary btnblock">REGISTER NOW</button> */}
+              <Link href={href}  className={buttonClass}>
+                {buttonText}
+              </Link>
               <div className={styles.regbonus}>
                 <div className={styles.label}>🎁 BONUS</div>
                 <p>Free trial of {webinar.organisedBy} for all attendees</p>
