@@ -11,10 +11,13 @@ export default async function Webinars({ searchParams }) {
   const type = params.type || "";
   const price = params.price || "";
   const search = params.search || "";
+    const sort = params.sort || "dateNew"; // ✅ ADD THIS
+
 
   // Build query string safely
   const query = new URLSearchParams({
     page,
+    sort, // ✅ pass to API
     ...(category && { category }),
     ...(type && { type }),
     ...(price && { price }),
@@ -37,7 +40,7 @@ export default async function Webinars({ searchParams }) {
       <WebinarsList
         webinars={webinars}
         pagination={dataPagination}
-        filters={{ category, type, price, search }}
+        filters={{ category, type, price, search, sort }}
       />
       <Footer />
     </>

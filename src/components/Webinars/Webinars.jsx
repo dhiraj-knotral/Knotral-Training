@@ -116,11 +116,15 @@ const WebinarsList = ({ webinars, pagination, filters }) => {
                             <label className={styles.filterlabel}>
                                 Sort by:
                             </label>
-                            <select className={styles.filterselect}>
-                                <option>Date (Newest First)</option>
-                                <option>Date (Oldest First)</option>
-                                <option>Most Popular</option>
-                                <option>Provider A-Z</option>
+                            <select
+                                className={styles.filterselect}
+                                value={filters.sort}
+                                onChange={(e) => updateFilter("sort", e.target.value)}
+                            >
+                                <option value="dateNew">Date (Newest First)</option>
+                                <option value="dateOld">Date (Oldest First)</option>
+                                <option value="popular">Most Popular</option>
+                                <option value="provider">Provider A–Z</option>
                             </select>
                         </div>
                     </div>

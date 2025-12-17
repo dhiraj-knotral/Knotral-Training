@@ -25,6 +25,16 @@
     min-width: 160px;
 }
 
+.filterbar select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background: url('/dropdownIcon.png') no-repeat;
+    background-position: right 6px center;
+    background-size: 16px;
+}
+
 .filterbar .searchinput {
     flex: 1;
     min-width: 250px;
@@ -67,11 +77,13 @@
     color: var(--secondary-blue);
 }
 
-    .splogo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* or cover depending on how you want it to scale */
-  border-radius: 8px;  /* same as container to match corners */
+.splogo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* or cover depending on how you want it to scale */
+    border-radius: 8px;
+    /* same as container to match corners */
 }
 
 .webinarcard .content {
@@ -149,14 +161,24 @@
     font-size: 14px;
 }
 
-    .filterlabel {
+.filterselect {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background: url('/dropdownIcon.png') no-repeat;
+    background-position: right 0.5px center;
+    background-size: 14px;
+}
+
+.filterlabel {
     font-size: 14px;
     margin-right: 8px;
     display: inline-block;
 }
 
-.trainingscount{
-            font-size: 14px;
+.trainingscount {
+    font-size: 14px;
     color: var(--text-secondary);
 }
 
@@ -231,10 +253,12 @@
         font-size: 13px;
         height: 36px;
     }
-     .filterlabel {
+
+    .filterlabel {
         font-size: 13px;
     }
-      .trainingscount {
+
+    .trainingscount {
         font-size: 15px;
     }
 }
@@ -287,10 +311,12 @@
         height: 34px;
         font-size: 12px;
     }
-        .filterlabel {
+
+    .filterlabel {
         font-size: 12px;
     }
-      .trainingscount {
+
+    .trainingscount {
         font-size: 14px;
     }
 }
@@ -346,12 +372,14 @@
         height: 32px;
         font-size: 11px;
     }
-      .filterlabel {
+
+    .filterlabel {
         font-size: 11px;
         display: block;
         margin-bottom: 4px;
     }
-      .trainingscount {
+
+    .trainingscount {
         font-size: 13px;
     }
 }
@@ -406,10 +434,12 @@
         height: 30px;
         font-size: 10px;
     }
-      .filterlabel {
+
+    .filterlabel {
         font-size: 10px;
     }
-      .trainingscount {
+
+    .trainingscount {
         font-size: 12px;
     }
 }

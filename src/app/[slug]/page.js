@@ -5,9 +5,6 @@ import Link from "next/link";
 
 export default async function Register({ params }) {
   const { slug } = await params;
-
-  console.log(slug)
-
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/webinars/get-webinar-by-slug?slug=${slug}`,
     { cache: "no-store" }
@@ -16,6 +13,17 @@ export default async function Register({ params }) {
   const data = await res.json();
 
   const webinar = data.success ? data.response : null;
+
+
+  try {
+  await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/webinars/increment-views`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ webinarId: webinar._id }),
+  });
+} catch (err) {
+  console.error("Failed to increment views:", err);
+}
 
   // Function to capitalize each word
   const capitalizeSlug = (slug) => {
