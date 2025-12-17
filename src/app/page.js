@@ -24,7 +24,7 @@ export default async function Home() {
   return (
     <>
       <Header />
-      <Hero />
+      <Hero webinars={webinars} />
       <TrustBar />
       <LiveSessions webinars={webinars} />
       <Category />
