@@ -128,22 +128,22 @@
     }
 
     .footerbrand .logo .logoImage {
-        width: 90px;
+        width: 120px;
     }
 
     .footerbrand p {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .footercol h4 {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .footercol a {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .footerbottom {
-        font-size: 11px;
+        font-size: 12px;
     }
 }

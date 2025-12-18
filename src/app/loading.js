@@ -10,7 +10,7 @@ export default function Loading() {
         alignItems: "center",
       }}
     >
-      <Spinner type="beat" size={60} />
+      <Spinner type="bar" size={60} />
     </div>
   );
 }

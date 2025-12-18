@@ -214,6 +214,12 @@
                   gap: 32px;
               }
 
+              .splogo {
+                  /* margin: 0 auto 12px auto; */
+                  width: 70px;
+                  height: 70px;
+              }
+
               .certherocard .stats {
                   justify-content: center;
                   gap: 24px;
@@ -254,6 +260,11 @@
                   align-items: center;
                   text-align: center;
                   gap: 16px;
+              }
+
+              .splogo {
+                  width: 60px;
+                  height: 60px;
               }
 
               .certprogramcard .metabadge {
@@ -307,6 +318,11 @@
 
               .certherocard p {
                   font-size: 14px;
+              }
+
+              .splogo {
+                  width: 50px;
+                  height: 50px;
               }
 
               .certherocard .stat .num {
@@ -365,6 +381,11 @@
 
               .certherocard .stat .num {
                   font-size: 20px;
+              }
+
+              .splogo {
+                  width: 45px;
+                  height: 45px;
               }
 
               .certprogramcard .header {
