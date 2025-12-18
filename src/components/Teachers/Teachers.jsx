@@ -16,8 +16,8 @@ const Teachers = () => {
             classroom.
           </p>
           <div style={{ display: "flex", gap: "16px", justifyContent: "center" }}>
-            <Link href="/" className="btn btnprimary btnlg">Browse Trainings</Link>
-            <Link href="/" className="btn btnoutline btnlg">View Certifications</Link>
+            <Link href="/webinars?page=1" className="btn btnprimary btnlg">Browse Trainings</Link>
+            <Link href="/certificates?page=1" className="btn btnoutline btnlg">View Certifications</Link>
           </div>
         </div>
       </section>
@@ -151,7 +151,7 @@ const Teachers = () => {
           <p style={{ color: "var(--text-secondary)", marginBottom: "32px" }}>
             Join 12,000+ teachers already using Knotral
           </p>
-          <Link href="#" className="btn btnprimary btnlg">
+          <Link href="/webinars?page=1" className="btn btnprimary btnlg">
             Browse All Trainings →
           </Link>
         </div>

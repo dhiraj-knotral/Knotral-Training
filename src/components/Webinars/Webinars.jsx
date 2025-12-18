@@ -200,30 +200,53 @@ const WebinarsList = ({ webinars, pagination, filters }) => {
                     </div>
 
                     <div className={styles.pagination}>
-                        {/* Previous Button */}
-                        {pagination.page > 1 && (
-                            <a href={`/webinars?page=${pagination.page - 1}`} className={styles.pageBtn}>
-                                ←
-                            </a>
-                        )}
 
-                        {/* Numbered pages */}
-                        {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map((p) => (
-                            <a
-                                key={p}
-                                href={`/webinars?page=${p}`}
-                                className={p === pagination.page ? styles.active : styles.pageBtn}
-                            >
-                                {p}
-                            </a>
-                        ))}
+                        {/* Previous Button */}
+                        {pagination.page > 1 && (() => {
+                            const params = new URLSearchParams(searchParams.toString());
+                            params.set("page", pagination.page - 1);
+
+                            return (
+                                <Link
+                                    href={`/webinars?${params.toString()}`}
+                                    className={styles.pageBtn}
+                                >
+                                    ←
+                                </Link>
+                            );
+                        })()}
+
+                        {/* Numbered Pages */}
+                        {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map((p) => {
+                            const params = new URLSearchParams(searchParams.toString());
+                            params.set("page", p);
+
+                            return (
+                                <Link
+                                    key={p}
+                                    href={`/webinars?${params.toString()}`}
+                                    className={p === pagination.page ? styles.active : styles.pageBtn}
+                                >
+                                    {p}
+                                </Link>
+                            );
+                        })}
 
                         {/* Next Button */}
-                        {pagination.page < pagination.totalPages && (
-                            <a href={`/webinars?page=${pagination.page + 1}`} className={styles.pageBtn}>
-                                →
-                            </a>
-                        )}
+                        {pagination.page < pagination.totalPages && (() => {
+                            const params = new URLSearchParams(searchParams.toString());
+                            params.set("page", pagination.page + 1);
+
+                            return (
+                                <Link
+                                    href={`/webinars?${params.toString()}`}
+                                    className={styles.pageBtn}
+                                >
+                                    →
+                                </Link>
+                            );
+                        })()}
+
                     </div>
                 </div>
             </section>

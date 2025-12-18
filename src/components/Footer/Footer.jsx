@@ -25,10 +25,10 @@ const Footer = () => {
 
           <div className={styles.footercol}>
             <h4>Browse</h4>
-            <Link href="/" className={styles.link}>By Subject</Link>
-            <Link href="/" className={styles.link}>By Provider</Link>
-            <Link href="/" className={styles.link}>Certifications</Link>
-            <Link href="/" className={styles.link}>On-Demand</Link>
+            {/* <Link href="/webinars?page=1&category=provider" className={styles.link}>By Subject</Link> */}
+            <Link href="/webinars?page=1&sort=provider" className={styles.link}>By Provider</Link>
+            <Link href="/webinars?page=1&type=certified" className={styles.link}>Certifications</Link>
+            <Link href="/webinars?page=1&type=ondemand" className={styles.link}>On-Demand</Link>
           </div>
 
           <div className={styles.footercol}>
@@ -40,7 +40,7 @@ const Footer = () => {
 
           <div className={styles.footercol}>
             <h4>Support</h4>
-            <Link href="/" className={styles.link}>Help Center</Link>
+            {/* <Link href="/" className={styles.link}>Help Center</Link> */}
             <Link href="/contact" className={styles.link}>Contact</Link>
             <Link href="/" className={styles.link}>FAQ</Link>
           </div>

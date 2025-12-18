@@ -71,31 +71,105 @@
         gap: 12px;
     }
 
-
-   @media (max-width: 768px) {
-    .container {
-        max-width: 100%;
-        margin: 0;
-        padding: 0 16px;
-    }
-
-    .navLinks {
+    .hamburger {
         display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
     }
 
-    .header .logoImage {
-        width: 120px; /* correct width for <=768px */
-    }
-}
 
-@media (max-width: 480px) {
-    .header .logoImage {
-        width: 100px;
-    }
-}
+    @media (max-width: 768px) {
+        .container {
+            max-width: 100%;
+            margin: 0;
+            padding: 0 16px;
+        }
 
-@media (max-width: 360px) {
-    .header .logoImage {
-        width: 80px;
+        .hamburger {
+            display: block;
+        }
+
+        .headerActions {
+            display: none;
+        }
+
+        .navLinks {
+            display: none;
+        }
+
+
+        .header .logoImage {
+            width: 120px;
+            /* correct width for <=768px */
+        }
+
+        /* Mobile menu – light fullscreen */
+        .mobileMenu {
+            position: fixed;
+            top: 64px;
+            /* 👈 height of header */
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            background: var(--bg-light);
+
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            gap: 16px;
+
+            z-index: 2000;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        /* Mobile links */
+        .mobileLink {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+
+            padding: 12px 4px;
+            border-radius: 0;
+            /* 👈 no pill */
+            transition: color 0.2s ease;
+        }
+
+        /* Hover state (subtle) */
+        .mobileLink:hover {
+            color: var(--secondary-blue);
+        }
+
+        /* Active state – ONLY color */
+        .active {
+            color: var(--secondary-blue);
+            font-weight: 600;
+        }
+
+        /* Slide animation */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     }
-}
+
+    @media (max-width: 480px) {
+        .header .logoImage {
+            width: 100px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .header .logoImage {
+            width: 80px;
+        }
+    }

@@ -2,6 +2,19 @@ import Link from "next/link";
 import React from "react";
 import styles from "./Schools.module.css"
 
+const schools = [
+  "DPS",
+  "Ryan International",
+  "Amity",
+  "Podar",
+  "Vibgyor",
+    "DPS",
+  "Ryan International",
+  "Amity",
+  "Podar",
+  "Vibgyor",
+];
+
 const Schools = () => {
     return (
         <>
@@ -224,6 +237,15 @@ const Schools = () => {
                             Vibgyor
                         </span>
                     </div>
+                        {/* <div className={styles.slider}>
+        <div className={styles.slideTrack}>
+          {[...schools, ...schools].map((school, index) => (
+            <div key={index} className={styles.schoolItem}>
+              {school}
+            </div>
+          ))}
+        </div>
+        </div> */}
                 </div>
             </section>
 

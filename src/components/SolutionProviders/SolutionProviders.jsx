@@ -2,6 +2,15 @@ import Link from 'next/link';
 import React from 'react';
 import styles from "./SolutionProviders.module.css"
 
+const partners = [
+  { name: "EdShed", country: "UK" },
+  { name: "Save My Exams", country: "UK" },
+  { name: "IDL Group", country: "UK" },
+  { name: "Mathspace", country: "Australia" },
+  { name: "EdThena", country: "USA" },
+  { name: "+40 more", country: "" },
+];
+
 const SolutionProviders = () => {
     return (
         <>
@@ -12,7 +21,7 @@ const SolutionProviders = () => {
                             <span className="badge badgenew" style={{ marginBottom: "16px" }}>
                                 FOR EDTECH & PUBLISHERS
                             </span>
-                            <h1 style={{ fontSize: "38px" }}>
+                            <h1 className={styles.heading}>
                                 Reach 50,000+ Indian Educators<br />Through Training.
                             </h1>
                             <p>
@@ -21,13 +30,13 @@ const SolutionProviders = () => {
                             </p>
                             <div style={{ display: "flex", gap: "16px" }}>
                                 <Link href="/" className="btn btnprimary btnlg">Become a Partner</Link>
-                                <Link href="/" className="btn btnoutline btnlg">See How It Works</Link>
+                                <Link href="#how-it-works" className="btn btnoutline btnlg">See How It Works</Link>
                             </div>
                         </div>
 
                         <div style={{ textAlign: "center" }}>
                             <div style={{ background: "rgba(255,255,255,0.1)", borderRadius: "16px", padding: "40px" }}>
-                                <div style={{ fontSize: "64px", fontWeight: "700" }}>45+</div>
+                                <div className={styles.brands}>45+</div>
                                 <div style={{ opacity: "0.8" }}>Global brands already on Knotral</div>
                             </div>
                         </div>
@@ -60,7 +69,7 @@ const SolutionProviders = () => {
                 </div>
             </section>
 
-            <section className="section">
+            <section className="section" id="how-it-works">
                 <div className="container">
                     <div
                         className="grid2"
@@ -119,7 +128,7 @@ const SolutionProviders = () => {
                                 className={styles.card}
                                 style={{ border: "2px solid var(--accent-teal)" }}
                             >
-                                <div className={styles.cardbody}>
+                                {/* <div className={styles.cardbody}>
                                     <h3 style={{ marginBottom: "24px" }}>Training Packages</h3>
 
                                     <div
@@ -211,6 +220,36 @@ const SolutionProviders = () => {
                                     >
                                         Request Partnership Info
                                     </a>
+                                </div> */}
+                                <div className={styles.cardbody}>
+                                    <h3 className={styles.pricingTitle}>Training Packages</h3>
+
+                                    <div className={styles.pricingBlock}>
+                                        <div className={styles.pricingLabel}>SINGLE WEBINAR</div>
+                                        <div className={styles.pricingPrice}>₹25,000 - ₹50,000</div>
+                                        <p className={styles.pricingDesc}>One-time live training session</p>
+                                    </div>
+
+                                    <div className={styles.pricingBlock}>
+                                        <div className={styles.pricingLabel}>CERTIFICATION PROGRAM</div>
+                                        <div className={styles.pricingPrice}>₹1,00,000 - ₹2,00,000</div>
+                                        <p className={styles.pricingDesc}>
+                                            4–6 module certification with branded certificates
+                                        </p>
+                                    </div>
+
+                                    <div className={`${styles.pricingBlock} ${styles.last}`}>
+                                        <div className={styles.pricingLabel}>ANNUAL PARTNERSHIP</div>
+                                        <div className={styles.pricingPrice}>Custom</div>
+                                        <p className={styles.pricingDesc}>
+                                            Unlimited trainings, priority placement, dedicated support
+                                        </p>
+                                    </div>
+
+                                    <a href="#"  className="btn btnteal btnblock"
+                                        style={{ marginTop: "24px" }}>
+                                        Request Partnership Info
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -224,7 +263,20 @@ const SolutionProviders = () => {
                         <h2 className={styles.sectiontitle}>Trusted by Global EdTech Leaders</h2>
                     </div>
 
-                    <div
+                    <div className={styles.slider}>
+        <div className={styles.slideTrack}>
+          {[...partners, ...partners].map((item, index) => (
+            <div key={index} className={styles.partnerCard}>
+              <div className={styles.name}>{item.name}</div>
+              {item.country && (
+                <div className={styles.country}>{item.country}</div>
+              )}
+            </div>
+          ))}
+        </div>
+        </div>
+
+                    {/* <div
                         style={{
                             display: "flex",
                             justifyContent: "center",
@@ -273,7 +325,7 @@ const SolutionProviders = () => {
                                 +40 more
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </section>
 

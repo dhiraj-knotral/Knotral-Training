@@ -84,6 +84,7 @@
 
      .stepcontent p {
          color: var(--text-secondary);
+         font-size: 18px;
      }
 
      .aboutimage {
@@ -109,6 +110,13 @@
          gap: 16px;
      }
 
+     .benefitlist li strong{
+        font-size: 18px;
+     }
+       .benefitlist li div{
+        font-size: 16px;
+     }
+
      .benefitlist li:last-child {
          border-bottom: none;
      }
@@ -121,11 +129,153 @@
 
      /* Responsive */
      @media (max-width: 1024px) {
-         .valuesgrid {
-             grid-template-columns: repeat(2, 1fr);
+         .valuecards {
+             grid-template-columns: 1fr;
+             margin-top: -40px;
+             /* slightly less negative margin for smaller screens */
+         }
+
+         .stepitem {
+             flex-direction: row;
+             gap: 16px;
+         }
+
+         .sectiontitle {
+             font-size: 28px;
+         }
+
+         .valuecard {
+             padding: 24px;
+         }
+     }
+
+     /* 768px and below (tablets) */
+     @media (max-width: 768px) {
+         .sectiontitle {
+             font-size: 24px;
+         }
+
+         .valuecard h3 {
+             font-size: 18px;
+         }
+
+         .valuecard p {
+             font-size: 13px;
+         }
+
+         .stepnumber {
+             width: 40px;
+             height: 40px;
+             font-size: 18px;
+         }
+
+         .stepcontent h3 {
+             font-size: 18px;
+         }
+
+         .stepcontent p {
+             font-size: 16px;
+         }
+
+         .aboutimage {
+             height: 300px;
+         }
+          .benefitlist li strong{
+        font-size: 18px;
+     }
+       .benefitlist li div{
+        font-size: 16px;
+     }
+     }
+
+     /* 480px and below (large mobile) */
+     @media (max-width: 480px) {
+         .sectiontitle {
+             font-size: 22px;
          }
 
          .valuecards {
-             grid-template-columns: 1fr;
+             gap: 16px;
          }
+
+         .valuecard {
+             padding: 20px;
+         }
+
+         .stepitem {
+             gap: 12px;
+         }
+
+         .stepnumber {
+             width: 36px;
+             height: 36px;
+             font-size: 16px;
+         }
+
+         .stepcontent h3 {
+             font-size: 16px;
+         }
+
+         .stepcontent p {
+             font-size: 14px;
+         }
+
+         .aboutimage {
+             height: 250px;
+         }
+
+         .benefitlist li {
+             padding: 12px 0;
+         }
+              .benefitlist li strong{
+        font-size: 16px;
+     }
+       .benefitlist li div{
+        font-size: 14px;
+     }
+     }
+
+     /* 360px and below (small mobile) */
+     @media (max-width: 360px) {
+         .sectiontitle {
+             font-size: 20px;
+         }
+
+         .valuecard h3 {
+             font-size: 16px;
+         }
+
+         .valuecard p {
+             font-size: 12px;
+         }
+
+         .stepnumber {
+             width: 32px;
+             height: 32px;
+             font-size: 14px;
+         }
+
+         .stepcontent h3 {
+             font-size: 14px;
+         }
+
+         .stepcontent p {
+             font-size: 12px;
+         }
+
+
+         .aboutimage {
+             height: 200px;
+         }
+
+         .benefitlist li {
+             padding: 10px 0;
+             gap: 12px;
+         }
+              .benefitlist li strong{
+        font-size: 14px;
+     }
+       .benefitlist li div{
+        font-size: 12px;
+     }
      }

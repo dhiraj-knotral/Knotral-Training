@@ -125,13 +125,70 @@
              color: var(--text-secondary);
          }
 
+         /* .slider {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slideTrack {
+  display: flex;
+  gap: 48px;
+  animation: scroll 25s linear infinite;
+}
+
+.schoolItem {
+  flex: 0 0 auto;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-960px); } /* 5*(144+48 approx) 
+} */
+
 
          @media (max-width: 1024px) {
-            .pricingtable { grid-template-columns: 1fr; }
+             .pricingtable {
+                 grid-template-columns: 1fr;
+             }
          }
 
          @media (max-width: 768px) {
              .statsbar {
                  grid-template-columns: repeat(2, 1fr);
              }
+
+             .statitem .number {
+                 font-size: 30px;
+             }
+
+             .sectiontitle {
+                 font-size: 24px;
+
+             }
+
+
+         }
+
+         @media (max-width: 480px) {
+             .statitem .number {
+                 font-size: 25px;
+             }
+
+             .statitem .label {
+                 font-size: 12px;
+             }
+
+             .sectiontitle {
+                 font-size: 20px;
+
+             }
+
+             .pricingcard .header .price {
+                 font-size: 24px;
+             }
+
          }

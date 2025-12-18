@@ -18,6 +18,15 @@
              margin: 0 auto;
          }
 
+         .heading {
+             font-size: 38px;
+         }
+
+         .brands {
+             font-size: 64px;
+             font-weight: 700;
+         }
+
          .spbenefitgrid {
              display: grid;
              grid-template-columns: repeat(2, 1fr);
@@ -71,7 +80,7 @@
          .timelineitem::before {
              content: '';
              position: absolute;
-             left: -33px;
+             left: -32px;
              top: 4px;
              width: 16px;
              height: 16px;
@@ -107,9 +116,352 @@
              padding: 24px;
          }
 
+         .pricingTitle {
+             margin-bottom: 24px;
+         }
 
+         .pricingBlock {
+             margin-bottom: 24px;
+             padding-bottom: 24px;
+             border-bottom: 1px solid var(--border-light);
+         }
+
+         .last {
+             border-bottom: none;
+             padding-bottom: 0;
+             margin-bottom: 0;
+         }
+
+         .pricingLabel {
+             font-size: 14px;
+             color: var(--accent-teal);
+             font-weight: 600;
+             margin-bottom: 4px;
+         }
+
+         .pricingPrice {
+             font-size: 28px;
+             font-weight: 700;
+             margin-bottom: 4px;
+         }
+
+         .pricingDesc {
+             font-size: 14px;
+             color: var(--text-secondary);
+         }
+
+         .slider {
+             width: 100%;
+             overflow: hidden;
+         }
+
+         .slideTrack {
+             display: flex;
+             gap: 48px;
+             animation: scroll 30s linear infinite;
+         }
+
+         /* Partner Card */
+         .partnerCard {
+             flex: 0 0 auto;
+             width: 180px;
+             text-align: center;
+         }
+
+         .name {
+             font-weight: 600;
+             font-size: 18px;
+             color: var(--text-secondary);
+         }
+
+         .country {
+             font-size: 13px;
+             color: var(--text-muted);
+             margin-top: 4px;
+         }
+
+         /* Desktop animation */
+         @keyframes scroll {
+             from {
+                 transform: translateX(0);
+             }
+
+             to {
+                 transform: translateX(-1368px);
+             }
+
+             /* 6 * (180 + 48) */
+         }
+
+         /* 1024px and below */
+         @media (max-width: 1024px) {
+             .sectiontitle {
+                 font-size: 28px;
+             }
+
+             .spbenefitgrid {
+                 gap: 20px;
+             }
+
+             .spbenefitcard {
+                 padding: 20px;
+             }
+
+             .spbenefitcard h4,
+             .timelineitem h4 {
+                 font-size: 17px;
+             }
+
+             .spbenefitcard p,
+             .timelineitem p {
+                 font-size: 13px;
+             }
+
+             .processtimeline {
+                 padding-left: 32px;
+             }
+
+             .timelineitem::before {
+                 left: -28px;
+             }
+         }
+
+         /* 768px and below (Tablet) */
          @media (max-width: 768px) {
+             .sectionheader {
+                 margin-bottom: 32px;
+             }
+
+             .sectiontitle {
+                 font-size: 24px;
+             }
+
              .spbenefitgrid {
                  grid-template-columns: 1fr;
              }
+
+             .spbenefitcard {
+                 gap: 12px;
+             }
+
+             .spbenefitcard .icon {
+                 font-size: 28px;
+             }
+
+             .cardbody {
+                 padding: 20px;
+             }
+
+             .brands {
+                 font-size: 50px;
+             }
+
+             .pricingTitle {
+                 font-size: 22px;
+             }
+
+             .pricingPrice {
+                 font-size: 24px;
+             }
+
+             .pricingBlock {
+                 margin-bottom: 20px;
+                 padding-bottom: 20px;
+             }
+
+             .timelineitem::before {
+                 width: 16px;
+                 height: 16px;
+                 left: -24px;
+             }
+
+             .partnerCard {
+                 width: 140px;
+             }
+
+             .name {
+                 font-size: 16px;
+             }
+
+             .slideTrack {
+                 gap: 32px;
+                 animation-duration: 18s;
+             }
+
+             @keyframes scroll {
+                 from {
+                     transform: translateX(0);
+                 }
+
+                 to {
+                     transform: translateX(-1032px);
+                 }
+
+                 /* 6*(140+32) */
+             }
+         }
+
+         /* 480px and below (Mobile) */
+         @media (max-width: 480px) {
+             .sectionheader {
+                 margin-bottom: 24px;
+             }
+
+             .sectiontitle {
+                 font-size: 22px;
+             }
+
+             .spbenefitcard {
+                 padding: 16px;
+             }
+
+             .spbenefitcard h4,
+             .timelineitem h4 {
+                 font-size: 16px;
+             }
+
+             .spbenefitcard p,
+             .timelineitem p {
+                 font-size: 12px;
+             }
+
+             .spbenefitcard .icon {
+                 font-size: 24px;
+             }
+
+             .processtimeline {
+                 padding-left: 28px;
+             }
+
+             .processtimeline::before {
+                 left: 12px;
+             }
+
+             .timelineitem::before {
+                 width: 14px;
+                 height: 14px;
+                 left: -22px;
+             }
+
+             .cardbody {
+                 padding: 16px;
+             }
+
+             .brands {
+                 font-size: 40px;
+             }
+
+             .pricingTitle {
+                 font-size: 20px;
+             }
+
+             .pricingLabel {
+                 font-size: 13px;
+             }
+
+             .pricingPrice {
+                 font-size: 22px;
+             }
+
+             .pricingDesc {
+                 font-size: 13px;
+             }
+
+             .partnerCard {
+                 width: 120px;
+             }
+
+             .name {
+                 font-size: 14px;
+             }
+
+             .slideTrack {
+                 gap: 24px;
+                 animation-duration: 14s;
+             }
+
+             @keyframes scroll {
+                 from {
+                     transform: translateX(0);
+                 }
+
+                 to {
+                     transform: translateX(-864px);
+                 }
+
+                 /* 6*(120+24) */
+             }
+         }
+
+         /* 360px and below (Small Mobile) */
+         @media (max-width: 360px) {
+             .sectiontitle {
+                 font-size: 18px;
+             }
+
+             .spbenefitcard {
+                 padding: 14px;
+                 gap: 10px;
+             }
+
+             .spbenefitcard h4,
+             .timelineitem h4 {
+                 font-size: 15px;
+             }
+
+             .spbenefitcard p,
+             .timelineitem p {
+                 font-size: 11px;
+             }
+
+             .spbenefitcard .icon {
+                 font-size: 22px;
+             }
+
+             .processtimeline {
+                 padding-left: 24px;
+             }
+
+             .timelineitem {
+                 margin-bottom: 24px;
+             }
+
+             .pricingPrice {
+                 font-size: 20px;
+             }
+
+             .pricingDesc {
+                 font-size: 12px;
+             }
+
+             .timelineitem::before {
+                 width: 12px;
+                 height: 12px;
+                 left: -17px;
+             }
+               .partnerCard {
+    width: 100px;
+  }
+
+  .name {
+    font-size: 13px;
+  }
+
+  .country {
+    font-size: 11px;
+  }
+
+  .slideTrack {
+    gap: 16px;
+    animation-duration: 10s;
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-696px);
+    } /* 6*(100 + 16) */
+  }
          }
