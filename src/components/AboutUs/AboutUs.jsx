@@ -171,7 +171,7 @@ const AboutUs = () => {
                     <div className={styles.teamgrid}>
                         <div className={styles.teamcard}>
                             <div className={styles.photo}></div>
-                            <h4>Dhiraj Gupta</h4>
+                            <h4>Dhiraj Taraku</h4>
                             <div className={styles.role}>Founder & Director</div>
                         </div>
 
