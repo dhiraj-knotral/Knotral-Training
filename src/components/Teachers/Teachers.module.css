@@ -97,21 +97,23 @@
          font-size: 18px;
      }
 
-.aboutimage {
-  background: var(--bg-light);
-  border-radius: 16px;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden; /* important */
-}
+     .aboutimage {
+         background: var(--bg-light);
+         border-radius: 16px;
+         height: 400px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         overflow: hidden;
+         /* important */
+     }
 
-.aboutimage img {
-  max-height: 100%;
-  max-width: 100%;
-  object-fit: contain; /* keep image sharp */
-}
+     .aboutimage img {
+         max-height: 100%;
+         max-width: 100%;
+         object-fit: contain;
+         /* keep image sharp */
+     }
 
 
      .benefitlist {
@@ -266,10 +268,11 @@
          }
 
          .aboutimage img {
-  max-height: 90%;
-  max-width: 90%;
-  object-fit: contain; /* keep image sharp */
-}
+             max-height: 90%;
+             max-width: 90%;
+             object-fit: contain;
+             /* keep image sharp */
+         }
 
          .benefitlist li {
              padding: 12px 0;
@@ -287,10 +290,10 @@
              font-size: 40px;
          }
 
-            .valuecard .icon img {
-         width: 70px;
-         height: 70px;
-     }
+         .valuecard .icon img {
+             width: 70px;
+             height: 70px;
+         }
 
          .customGrid {
              gap: 0px;
