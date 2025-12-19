@@ -9,12 +9,16 @@
          margin-bottom: 12px;
      }
 
+     .sectioncontent {
+         font-size: 20px;
+     }
+
 
      .sectionheader.center {
          text-align: center;
      }
 
-     .sectionheader.center .section-subtitle {
+     .sectionheader.center .sectionsubtitle {
          margin: 0 auto;
      }
 
@@ -39,6 +43,12 @@
      .valuecard .icon {
          font-size: 48px;
          margin-bottom: 16px;
+     }
+
+     .valuecard .icon img {
+         width: 100px;
+         height: 100px;
+         object-fit: contain;
      }
 
      .valuecard h3 {
@@ -87,15 +97,21 @@
          font-size: 18px;
      }
 
-     .aboutimage {
-         background: var(--bg-light);
-         border-radius: 16px;
-         height: 400px;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         color: var(--text-muted);
-     }
+.aboutimage {
+  background: var(--bg-light);
+  border-radius: 16px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* important */
+}
+
+.aboutimage img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain; /* keep image sharp */
+}
 
 
      .benefitlist {
@@ -110,11 +126,12 @@
          gap: 16px;
      }
 
-     .benefitlist li strong{
-        font-size: 18px;
+     .benefitlist li strong {
+         font-size: 18px;
      }
-       .benefitlist li div{
-        font-size: 16px;
+
+     .benefitlist li div {
+         font-size: 16px;
      }
 
      .benefitlist li:last-child {
@@ -124,6 +141,11 @@
      .benefitlist .check {
          color: var(--accent-teal);
          font-size: 20px;
+     }
+
+     .customGrid {
+         max-width: 900px;
+         margin: 0 auto;
      }
 
 
@@ -144,6 +166,10 @@
              font-size: 28px;
          }
 
+         .sectioncontent {
+             font-size: 16px;
+         }
+
          .valuecard {
              padding: 24px;
          }
@@ -153,6 +179,10 @@
      @media (max-width: 768px) {
          .sectiontitle {
              font-size: 24px;
+         }
+
+         .sectioncontent {
+             font-size: 16px;
          }
 
          .valuecard h3 {
@@ -180,18 +210,29 @@
          .aboutimage {
              height: 300px;
          }
-          .benefitlist li strong{
-        font-size: 18px;
-     }
-       .benefitlist li div{
-        font-size: 16px;
-     }
+
+         .benefitlist li strong {
+             font-size: 18px;
+         }
+
+         .benefitlist li div {
+             font-size: 16px;
+         }
+
+         .benefitlist:first-of-type li:nth-child(3) {
+             border-bottom: 1px solid var(--border-light);
+             padding-bottom: 16px;
+         }
      }
 
      /* 480px and below (large mobile) */
      @media (max-width: 480px) {
          .sectiontitle {
              font-size: 22px;
+         }
+
+         .sectioncontent {
+             font-size: 14px;
          }
 
          .valuecards {
@@ -224,21 +265,46 @@
              height: 250px;
          }
 
+         .aboutimage img {
+  max-height: 90%;
+  max-width: 90%;
+  object-fit: contain; /* keep image sharp */
+}
+
          .benefitlist li {
              padding: 12px 0;
          }
-              .benefitlist li strong{
-        font-size: 16px;
+
+         .benefitlist li strong {
+             font-size: 16px;
+         }
+
+         .benefitlist li div {
+             font-size: 14px;
+         }
+
+         .valuecard .icon {
+             font-size: 40px;
+         }
+
+            .valuecard .icon img {
+         width: 70px;
+         height: 70px;
      }
-       .benefitlist li div{
-        font-size: 14px;
-     }
+
+         .customGrid {
+             gap: 0px;
+         }
      }
 
      /* 360px and below (small mobile) */
      @media (max-width: 360px) {
          .sectiontitle {
              font-size: 20px;
+         }
+
+         .sectioncontent {
+             font-size: 14px;
          }
 
          .valuecard h3 {
@@ -272,10 +338,16 @@
              padding: 10px 0;
              gap: 12px;
          }
-              .benefitlist li strong{
-        font-size: 14px;
-     }
-       .benefitlist li div{
-        font-size: 12px;
-     }
+
+         .benefitlist li strong {
+             font-size: 14px;
+         }
+
+         .benefitlist li div {
+             font-size: 12px;
+         }
+
+         .valuecard .icon {
+             font-size: 36px;
+         }
      }

@@ -166,7 +166,7 @@ const href = webinar.actions?.canStartProgram || webinar.actions?.canEnroll
                 </p>
                 <ul>
                   {webinar.attendeeBenefits?.features?.map((feature, index) => (
-                    <li key={index}>{feature}</li>
+                    <li key={index} className={styles.benefits}>{feature}</li>
                   ))}
                 </ul>
                 <Link href="/register" className={styles.productlink}>

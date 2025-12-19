@@ -25,6 +25,12 @@
        margin-bottom: 8px;
    }
 
+   .categorypill img {
+       width: 100px;
+       height: 100px;
+       object-fit: contain;
+   }
+
    .categorypill .name {
        font-size: 14px;
        font-weight: 500;
@@ -42,4 +48,9 @@
        .categorygrid {
            grid-template-columns: repeat(2, 1fr);
        }
+       .categorypill img {
+       width: 80px;
+       height: 80px;
+       object-fit: contain;
+   }
    }

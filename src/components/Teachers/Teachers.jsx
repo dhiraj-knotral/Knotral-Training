@@ -26,27 +26,42 @@ const Teachers = () => {
         <div className="container">
           <div className={styles.valuecards}>
             <div className={styles.valuecard}>
-              <div className={styles.icon}>🆓</div>
+              <div className={styles.icon}>
+                <img src="/teachers1.png" alt="100% Free Access" />
+              </div>
               <h3>100% Free Access</h3>
-              <p>Most trainings are completely free. Get premium PD without spending from your pocket.</p>
+              <p>
+                Most trainings are completely free. Get premium PD without spending from your pocket.
+              </p>
             </div>
+
             <div className={styles.valuecard}>
-              <div className={styles.icon}>🌍</div>
+              <div className={styles.icon}>
+                <img src="/teachers2.png" alt="Global Expertise" />
+              </div>
               <h3>Global Expertise</h3>
-              <p>Learn from educators and experts from UK, Australia, US, and more — all adapted for Indian classrooms.</p>
+              <p>
+                Learn from educators and experts from UK, Australia, US, and more — all adapted for Indian classrooms.
+              </p>
             </div>
+
             <div className={styles.valuecard}>
-              <div className={styles.icon}>🏆</div>
+              <div className={styles.icon}>
+                <img src="/teachers3.png" alt="Recognized Certificates" />
+              </div>
               <h3>Recognized Certificates</h3>
-              <p>Earn credentials that boost your resume and help you stand out in your school.</p>
+              <p>
+                Earn credentials that boost your resume and help you stand out in your school.
+              </p>
             </div>
           </div>
+
         </div>
       </section>
 
       <section className="section white">
         <div className="container">
-          <div className="grid2" style={{ gap: "80px", alignItems: "center" }}>
+          <div className="grid2" style={{ gap: "clamp(24px, 6vw, 80px)", alignItems: "center" }}>
             <div>
               <div className={styles.sectionheader}>
                 <h2 className={styles.sectiontitle}>How It Works</h2>
@@ -78,10 +93,7 @@ const Teachers = () => {
             </div>
 
             <div className={styles.aboutimage}>
-              {/* Replace this with an actual image */}
-              <div style={{ textAlign: "center", padding: "40px", background: "#f5f5f5", borderRadius: "12px" }}>
-                Teacher Learning Illustration
-              </div>
+              <img src="/teacherImage.png" alt="Teacher" />
             </div>
           </div>
         </div>
@@ -93,7 +105,8 @@ const Teachers = () => {
             <h2 className={styles.sectiontitle}>Why Teachers Love Knotral</h2>
           </div>
 
-          <div className="grid2" style={{ maxWidth: "900px", margin: "0 auto" }}>
+          {/* <div className="grid2" style={{ maxWidth: "900px", margin: "0 auto"  }}> */}
+          <div className={`grid2 ${styles.customGrid}`}>
             <ul className={styles.benefitlist}>
               <li>
                 <span className={styles.check}>✓</span>
@@ -148,7 +161,7 @@ const Teachers = () => {
       <section className="section white">
         <div className="container" style={{ textAlign: "center" }}>
           <h2 className={styles.sectiontitle}>Ready to Start Learning?</h2>
-          <p style={{ color: "var(--text-secondary)", marginBottom: "32px" }}>
+          <p className={styles.sectioncontent} style={{ color: "var(--text-secondary)", marginBottom: "32px" }}>
             Join 12,000+ teachers already using Knotral
           </p>
           <Link href="/webinars?page=1" className="btn btnprimary btnlg">

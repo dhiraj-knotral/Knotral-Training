@@ -3,16 +3,16 @@ import styles from "./Category.module.css"
 import Link from 'next/link';
 
 const categories = [
-  { icon: "📐", name: "Mathematics" },
-  { icon: "📖", name: "Literacy" },
-  { icon: "🔬", name: "Science" },
-  { icon: "💻", name: "EdTech" },
-  { icon: "🧠", name: "SEL & Wellbeing" },
-  { icon: "🎨", name: "Arts & Music" },
-  { icon: "🌍", name: "Languages" },
-  { icon: "📋", name: "NEP 2020" },
-  { icon: "👶", name: "Early Years" },
-  { icon: "✅", name: "Assessment" },
+  { icon: "/cat1.png", name: "Mathematics" },
+  { icon: "/cat2.png", name: "Literacy" },
+  { icon: "/cat3.png", name: "Science" },
+  { icon: "/cat4.png", name: "EdTech" },
+  { icon: "/cat5.png", name: "SEL & Wellbeing" },
+  { icon: "/cat6.png", name: "Arts & Music" },
+  { icon: "/cat7.png", name: "Languages" },
+  { icon: "/cat8.png", name: "NEP 2020" },
+  { icon: "/cat9.png", name: "Early Years" },
+  { icon: "/cat10.png", name: "Assessment" },
 ];
 
 const Category = () => {
@@ -29,7 +29,7 @@ const Category = () => {
               href={`/webinars?page=1&category=${encodeURIComponent(item.name)}`}
               className={styles.categorypill}
             >
-              <div className={styles.icon}>{item.icon}</div>
+               <img src={item.icon} alt={item.title} />
               <div className={styles.name}>{item.name}</div>
             </Link>
           ))}

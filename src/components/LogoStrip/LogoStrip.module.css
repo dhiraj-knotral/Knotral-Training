@@ -16,26 +16,35 @@
 
 .slideTrack {
   display: flex;
-  gap: 40px;
-  animation: scroll 30s linear infinite;
+  gap: 30px;
+  width: calc((240px + 40px) * 50);
+  animation: scroll 50s linear infinite;
 }
 
 .partnerlogo {
   flex: 0 0 auto;
-  width: 200px;
-  height: 60px;
+  width: 180px;              /* increased */
+  height: 180px;             /* keeps alignment */
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  opacity: 0.4;
-  filter: grayscale(100%);
+}
+
+.partnerlogo img {
+  max-width: 100%;
+   max-height: 180px;
+  object-fit: contain;
 }
 
 /* Desktop scroll distance: 7 logos duplicated */
 @keyframes scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-1680px); } /* 7*(200+40) */
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-1 * (180px + 30px) * 25));
+  }
 }
 
 /* Tablets (768px and below) */
@@ -76,6 +85,8 @@
         from { transform: translateX(0); }
         to { transform: translateX(-945px); } /* 7*(120+15) */
     }
+
+    
 }
 
 /* Extra small screens (360px and below) */

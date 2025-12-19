@@ -2,6 +2,7 @@ import React from 'react'
 import styles from "./TrustBar.module.css"
 
 const TrustBar = () => {
+  
   return (
    <section className={styles.trustbar}>
   <div className={`${styles.container} container`}>

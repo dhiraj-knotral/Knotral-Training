@@ -3,16 +3,31 @@ import React from "react";
 import styles from "./Schools.module.css"
 
 const schools = [
-  "DPS",
-  "Ryan International",
-  "Amity",
-  "Podar",
-  "Vibgyor",
-    "DPS",
-  "Ryan International",
-  "Amity",
-  "Podar",
-  "Vibgyor",
+    "/logo1.png",
+  "/logo2.png",
+  "/logo3.png",
+  "/logo4.png",
+  "/logo5.png",
+  "/logo6.png",
+  "/logo7.png",
+  "/logo8.png",
+  "/logo9.png",
+  "/logo10.png",
+  "/logo11.png",
+  "/logo12.png",
+  "/logo13.png",
+  "/logo14.png",
+  "/logo15.png",
+  "/logo16.png",
+  "/logo17.png",
+  "/logo18.png",
+  "/logo19.png",
+  "/logo20.png",
+  "/logo21.png",
+  "/logo22.png",
+  "/logo23.png",
+  "/logo24.png",
+  "/logo25.png",
 ];
 
 const Schools = () => {
@@ -64,7 +79,7 @@ const Schools = () => {
                     <div className="grid3">
                         <div className={styles.card}>
                             <div className={styles.cardbody} style={{ textAlign: "center" }}>
-                                <div style={{ fontSize: "48px", marginBottom: "16px" }}>💰</div>
+                                <div className={styles.cardIcon}><img src="/school1.png" alt="Cost Effective" /></div>
                                 <h3 style={{ marginBottom: "12px" }}>Cost Effective</h3>
                                 <p style={{ color: "var(--text-secondary)", fontSize: "14px" }}>
                                     One subscription, unlimited trainings. Much cheaper than
@@ -75,7 +90,7 @@ const Schools = () => {
 
                         <div className={styles.card}>
                             <div className={styles.cardbody} style={{ textAlign: "center" }}>
-                                <div style={{ fontSize: "48px", marginBottom: "16px" }}>📊</div>
+                                <div className={styles.cardIcon}><img src="/school2.png" alt="Track Progress" /></div>
                                 <h3 style={{ marginBottom: "12px" }}>Track Progress</h3>
                                 <p style={{ color: "var(--text-secondary)", fontSize: "14px" }}>
                                     Dashboard shows which teachers attended what. Perfect for
@@ -86,7 +101,7 @@ const Schools = () => {
 
                         <div className={styles.card}>
                             <div className={styles.cardbody} style={{ textAlign: "center" }}>
-                                <div style={{ fontSize: "48px", marginBottom: "16px" }}>🎯</div>
+                                <div className={styles.cardIcon}><img src="/school3.png" alt="Curated Content" /></div>
                                 <h3 style={{ marginBottom: "12px" }}>Curated Content</h3>
                                 <p style={{ color: "var(--text-secondary)", fontSize: "14px" }}>
                                     NEP 2020 aligned. No need to vet content — we've done the
@@ -202,7 +217,7 @@ const Schools = () => {
                         Join 200+ schools across India
                     </p>
 
-                    <div
+                    {/* <div
                         style={{
                             display: "flex",
                             justifyContent: "center",
@@ -236,16 +251,16 @@ const Schools = () => {
                         >
                             Vibgyor
                         </span>
+                    </div> */}
+                    <div className={styles.slider}>
+                        <div className={styles.slideTrack}>
+                            {[...schools, ...schools].map((school, index) => (
+                                <div key={index} className={styles.schoolItem}>
+                                    <img src={school} alt="Partner logo" />
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                        {/* <div className={styles.slider}>
-        <div className={styles.slideTrack}>
-          {[...schools, ...schools].map((school, index) => (
-            <div key={index} className={styles.schoolItem}>
-              {school}
-            </div>
-          ))}
-        </div>
-        </div> */}
                 </div>
             </section>
 
@@ -258,10 +273,10 @@ const Schools = () => {
                 }}
             >
                 <div className="container">
-                    <h2 style={{ fontSize: "32px", marginBottom: "16px" }}>
+                    <h2 className={styles.heading}>
                         Ready to Transform Your School's PD?
                     </h2>
-                    <p style={{ opacity: 0.8, marginBottom: "32px" }}>
+                    <p className={styles.content}>
                         Schedule a free demo and see how Knotral can work for your school.
                     </p>
                     <a href="#" className="btn btnprimary btnlg">

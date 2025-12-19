@@ -63,6 +63,15 @@
      font-weight: 600;
  }
 
+ .contentsection ul .benefits::before {
+     content: "✓";
+     position: absolute;
+     left: 0;
+     color: var(--white);
+     font-weight: 600;
+ }
+
+
  .audiencegrid {
      display: grid;
      grid-template-columns: repeat(4, 1fr);

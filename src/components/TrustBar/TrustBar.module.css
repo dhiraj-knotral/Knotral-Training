@@ -1,15 +1,23 @@
   /* TRUST BAR */
   .trustbar {
+
       background: var(--white);
       padding: 24px 0;
       border-bottom: 1px solid var(--border-light);
   }
-
-  .trustbar .container {
+  /* .trustbar .container {
       display: flex;
       justify-content: space-around;
       text-align: center;
-  }
+  } */
+
+  .trustbar .container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      /* border-radius: 16px; */
+      text-align: center;
+}
 
   .trustitem .number {
       font-size: 32px;
@@ -23,46 +31,46 @@
   }
 
   /* Responsive: tablets */
-@media (max-width: 1024px) {
-    .trustitem .number {
-        font-size: 28px;
-    }
+  @media (max-width: 1024px) {
+      .trustitem .number {
+          font-size: 28px;
+      }
 
-    .trustitem .label {
-        font-size: 13px;
-    }
-}
+      .trustitem .label {
+          font-size: 13px;
+      }
+  }
 
-/* Responsive: mobile */
-@media (max-width: 768px) {
-    .trustbar .container {
-        flex-direction: column; /* stack items vertically */
-        justify-content: center; /* center items */
-        align-items: center;
-    }
+  /* Responsive: mobile */
+  @media (max-width: 768px) {
+      .trustbar .container {
+          grid-template-columns: repeat(2, 1fr);
 
-    .trustitem {
-        margin: 12px 0;
-        text-align: center;
-        width: 100%; /* full width on mobile */
-    }
+      }
 
-    .trustitem .number {
-        font-size: 24px;
-    }
+      .trustitem {
+          margin: 12px 0;
+          text-align: center;
+          width: 100%;
+          /* full width on mobile */
+      }
 
-    .trustitem .label {
-        font-size: 12px;
-    }
-}
+      .trustitem .number {
+          font-size: 24px;
+      }
 
-/* Extra small mobile */
-@media (max-width: 480px) {
-    .trustitem .number {
-        font-size: 20px;
-    }
+      .trustitem .label {
+          font-size: 14px;
+      }
+  }
 
-    .trustitem .label {
-        font-size: 14px;
-    }
-}
+  /* Extra small mobile */
+  @media (max-width: 480px) {
+      .trustitem .number {
+          font-size: 20px;
+      }
+
+      .trustitem .label {
+          font-size: 11px;
+      }
+  }

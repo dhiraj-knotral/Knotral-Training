@@ -19,7 +19,8 @@ const Footer = () => {
               </Link>
             <p>
               Knowledge. Trade. Link.<br />
-              Connecting global education solutions with Indian schools.
+              Connecting global education solutions with Indian schools.<br />
+              Ph No: 9311526122
             </p>
           </div>
 

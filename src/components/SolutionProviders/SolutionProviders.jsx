@@ -3,12 +3,31 @@ import React from 'react';
 import styles from "./SolutionProviders.module.css"
 
 const partners = [
-  { name: "EdShed", country: "UK" },
-  { name: "Save My Exams", country: "UK" },
-  { name: "IDL Group", country: "UK" },
-  { name: "Mathspace", country: "Australia" },
-  { name: "EdThena", country: "USA" },
-  { name: "+40 more", country: "" },
+    "/logo1.png",
+    "/logo2.png",
+    "/logo3.png",
+    "/logo4.png",
+    "/logo5.png",
+    "/logo6.png",
+    "/logo7.png",
+    "/logo8.png",
+    "/logo9.png",
+    "/logo10.png",
+    "/logo11.png",
+    "/logo12.png",
+    "/logo13.png",
+    "/logo14.png",
+    "/logo15.png",
+    "/logo16.png",
+    "/logo17.png",
+    "/logo18.png",
+    "/logo19.png",
+    "/logo20.png",
+    "/logo21.png",
+    "/logo22.png",
+    "/logo23.png",
+    "/logo24.png",
+    "/logo25.png",
 ];
 
 const SolutionProviders = () => {
@@ -50,7 +69,7 @@ const SolutionProviders = () => {
                         <h2 className={styles.sectiontitle}>Why Partner with Knotral?</h2>
                     </div>
 
-                    <div className={styles.spbenefitgrid}>
+                    {/* <div className={styles.spbenefitgrid}>
                         {[
                             { icon: "🎯", title: "Qualified Teacher Leads", text: "Teachers who attend trainings are already interested in solutions like yours. No cold outreach needed." },
                             { icon: "🇮🇳", title: "India Market Expertise", text: "We localize your training content for Indian teachers. Handle registrations, reminders, and follow-ups." },
@@ -59,6 +78,41 @@ const SolutionProviders = () => {
                         ].map((item, i) => (
                             <div className={styles.spbenefitcard} key={i}>
                                 <div className={styles.icon}>{item.icon}</div>
+                                <div>
+                                    <h4>{item.title}</h4>
+                                    <p>{item.text}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div> */}
+                    <div className={styles.spbenefitgrid}>
+                        {[
+                            {
+                                icon: "/solution1.png",
+                                title: "Qualified Teacher Leads",
+                                text: "Teachers who attend trainings are already interested in solutions like yours. No cold outreach needed.",
+                            },
+                            {
+                                icon: "/solution2.png",
+                                title: "India Market Expertise",
+                                text: "We localize your training content for Indian teachers. Handle registrations, reminders, and follow-ups.",
+                            },
+                            {
+                                icon: "/solution3.png",
+                                title: "Full Analytics",
+                                text: "Track registrations, attendance, engagement, and trial sign-ups. Measure ROI on every training.",
+                            },
+                            {
+                                icon: "/solution4.png",
+                                title: "Product Trial Integration",
+                                text: "Seamlessly offer free trials to attendees. Convert engaged teachers into users.",
+                            },
+                        ].map((item, i) => (
+                            <div className={styles.spbenefitcard} key={i}>
+                                <div className={styles.icon}>
+                                    <img src={item.icon} alt={item.title} />
+                                </div>
+
                                 <div>
                                     <h4>{item.title}</h4>
                                     <p>{item.text}</p>
@@ -246,7 +300,7 @@ const SolutionProviders = () => {
                                         </p>
                                     </div>
 
-                                    <a href="#"  className="btn btnteal btnblock"
+                                    <a href="#" className="btn btnteal btnblock"
                                         style={{ marginTop: "24px" }}>
                                         Request Partnership Info
                                     </a>
@@ -264,17 +318,14 @@ const SolutionProviders = () => {
                     </div>
 
                     <div className={styles.slider}>
-        <div className={styles.slideTrack}>
-          {[...partners, ...partners].map((item, index) => (
-            <div key={index} className={styles.partnerCard}>
-              <div className={styles.name}>{item.name}</div>
-              {item.country && (
-                <div className={styles.country}>{item.country}</div>
-              )}
-            </div>
-          ))}
-        </div>
-        </div>
+                        <div className={styles.slideTrack}>
+                            {[...partners, ...partners].map((item, index) => (
+                                <div key={index} className={styles.partnerCard}>
+                                    <img src={item} alt={"Partner logo"} />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
 
                     {/* <div
                         style={{

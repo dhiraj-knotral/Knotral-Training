@@ -47,6 +47,12 @@
              flex-shrink: 0;
          }
 
+         .spbenefitcard .icon img {
+             width: 100px;
+             height: 100px;
+             object-fit: contain;
+         }
+
          .spbenefitcard h4 {
              font-size: 18px;
              margin-bottom: 8px;
@@ -157,40 +163,39 @@
 
          .slideTrack {
              display: flex;
-             gap: 48px;
-             animation: scroll 30s linear infinite;
+             gap: 30px;
+             width: calc((240px + 40px) * 50);
+             animation: scroll 50s linear infinite;
          }
 
          /* Partner Card */
          .partnerCard {
              flex: 0 0 auto;
              width: 180px;
-             text-align: center;
+             /* increased */
+             height: 180px;
+             /* keeps alignment */
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             border-radius: 12px;
          }
 
-         .name {
-             font-weight: 600;
-             font-size: 18px;
-             color: var(--text-secondary);
+         .partnerCard img {
+             max-width: 100%;
+             max-height: 180px;
+             object-fit: contain;
          }
 
-         .country {
-             font-size: 13px;
-             color: var(--text-muted);
-             margin-top: 4px;
-         }
-
-         /* Desktop animation */
+         /* Desktop scroll distance: 7 logos duplicated */
          @keyframes scroll {
              from {
                  transform: translateX(0);
              }
 
              to {
-                 transform: translateX(-1368px);
+                 transform: translateX(calc(-1 * (180px + 30px) * 25));
              }
-
-             /* 6 * (180 + 48) */
          }
 
          /* 1024px and below */
@@ -367,10 +372,6 @@
                  font-size: 13px;
              }
 
-             .partnerCard {
-                 width: 120px;
-             }
-
              .name {
                  font-size: 14px;
              }
@@ -380,16 +381,40 @@
                  animation-duration: 14s;
              }
 
+
+             .spbenefitcard .icon img {
+                 width: 60px;
+                 height: 60px;
+                 object-fit: contain;
+             }
+
+             .partnerCard {
+                 flex: 0 0 auto;
+                 width: 120px;
+                 /* increased */
+                 height: 80px;
+                 /* keeps alignment */
+                 display: flex;
+                 align-items: center;
+                 justify-content: center;
+                 border-radius: 12px;
+             }
+
+             .partnerCard img {
+                 max-width: 100%;
+                 max-height: 100px;
+                 object-fit: contain;
+             }
+
+             /* Desktop scroll distance: 7 logos duplicated */
              @keyframes scroll {
                  from {
                      transform: translateX(0);
                  }
 
                  to {
-                     transform: translateX(-864px);
+                     transform: translateX(calc(-1 * (120px + 30px) * 25));
                  }
-
-                 /* 6*(120+24) */
              }
          }
 
@@ -439,29 +464,33 @@
                  height: 12px;
                  left: -17px;
              }
-               .partnerCard {
-    width: 100px;
-  }
 
-  .name {
-    font-size: 13px;
-  }
+             .partnerCard {
+                 width: 100px;
+             }
 
-  .country {
-    font-size: 11px;
-  }
+             .name {
+                 font-size: 13px;
+             }
 
-  .slideTrack {
-    gap: 16px;
-    animation-duration: 10s;
-  }
+             .country {
+                 font-size: 11px;
+             }
 
-  @keyframes scroll {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-696px);
-    } /* 6*(100 + 16) */
-  }
+             .slideTrack {
+                 gap: 16px;
+                 animation-duration: 10s;
+             }
+
+             @keyframes scroll {
+                 from {
+                     transform: translateX(0);
+                 }
+
+                 to {
+                     transform: translateX(-696px);
+                 }
+
+                 /* 6*(100 + 16) */
+             }
          }
