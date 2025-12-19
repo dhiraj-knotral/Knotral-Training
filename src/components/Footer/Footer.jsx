@@ -35,7 +35,7 @@ const Footer = () => {
           <div className={styles.footercol}>
             <h4>About</h4>
             <Link href="/about" className={styles.link}>About Us</Link>
-            <Link href="/" className={styles.link}>Careers</Link>
+            <Link href="https://indiamarketentry.zohorecruit.in/jobs/Careers" target="_blank" rel="noopener noreferrer" className={styles.link}>Careers</Link>
             <Link href="/" className={styles.link}>Blog</Link>
           </div>
 
