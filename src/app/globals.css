@@ -1,16 +1,17 @@
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  /* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); */
 
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
+
   html {
-  scroll-behavior: smooth;
-}
+    scroll-behavior: smooth;
+  }
 
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter);
     color: var(--text-primary);
     line-height: 1.6;
     background: var(--bg-light);
@@ -295,7 +296,7 @@
       font-size: 13px;
     }
 
-    
+
     .btnsm {
       padding: 7px 14px;
       font-size: 12px;
@@ -394,10 +395,11 @@
     .viewall {
       font-size: 12px;
     }
-     .pagehero h1 {
+
+    .pagehero h1 {
       font-size: 24px;
     }
-    
+
     .pagehero p {
       font-size: 14px;
     }
@@ -421,14 +423,14 @@
       font-size: 10px;
     }
 
-     .btnlg {
+    .btnlg {
       font-size: 10px;
     }
 
     .pagehero h1 {
       font-size: 20px;
     }
-    
+
     .pagehero p {
       font-size: 12px;
     }
