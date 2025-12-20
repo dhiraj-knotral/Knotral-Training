@@ -131,9 +131,11 @@ export const liveWebinarsStatic = [
 
 const LiveSessions = ({ webinars }) => {
 
-  // const liveWebinars = webinars.filter((webinar) => webinar.isLive);
+const liveWebinars = webinars
+  .filter((webinar) => webinar.isLive)
+  .sort((a, b) => moment(a.date).diff(moment(b.date)));
 
-  const liveWebinars = liveWebinarsStatic.filter((webinar) => webinar.isLive);
+  // const liveWebinars = liveWebinarsStatic.filter((webinar) => webinar.isLive);
 
 
 
@@ -171,12 +173,12 @@ const LiveSessions = ({ webinars }) => {
                 </span>
 
                 <button className="btn btnprimary btnsm">
-                  {/* <Link href={`/${item.slug}`} className={styles.buttonlink}>
-                    Register
-                  </Link> */}
-                   <Link href="/" className={styles.buttonlink}>
+                  <Link href={`/${item.slug}`} className={styles.buttonlink}>
                     Register
                   </Link>
+                   {/* <Link href="/" className={styles.buttonlink}>
+                    Register
+                  </Link> */}
                 </button>
 
               </div>
