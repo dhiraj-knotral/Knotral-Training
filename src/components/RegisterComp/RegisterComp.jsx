@@ -146,7 +146,9 @@ const RegisterComp = ({ webinar }) => {
                     <li key={index} className={styles.benefits}>{feature}</li>
                   ))}
                 </ul>
-                <Link href="/" className={styles.productlink}>
+                <Link href={webinar.link || "/"}
+                  target={webinar.link ? "_blank" : "_self"}
+                  rel={webinar.link ? "noopener noreferrer" : undefined} className={styles.productlink}>
                   Learn More About {webinar.organisedBy} →
                 </Link>
               </div>

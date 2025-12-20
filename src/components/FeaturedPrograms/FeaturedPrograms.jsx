@@ -45,7 +45,7 @@ const FeaturedPrograms = ({ webinars }) => {
                     <Link href="/certificates?page=1" className={styles.viewall}>View All →</Link>
                 </div>
                 <div className={styles.certgrid}>
-                    {certificationsStatic.map((item, index) => (
+                    {certifiedWebinars.map((item, index) => (
                         <div key={index} className={styles.certcard}>
                             <div className={styles.certlogo}>
                                 <img
@@ -76,7 +76,7 @@ const FeaturedPrograms = ({ webinars }) => {
                                 {/* <Link href={`/${item.slug}`} className="btn btnsecondary btnsm" style={{ marginTop: "12px" }}>
                                     Start Program
                                 </Link> */}
-                                <Link href={`${item.cta.url}`} className="btn btnsecondary btnsm" style={{ marginTop: "12px" }}>
+                                <Link  href={item.link || "/"} className="btn btnsecondary btnsm" style={{ marginTop: "12px" }}>
                                     Start Program
                                 </Link>
                             </div>
