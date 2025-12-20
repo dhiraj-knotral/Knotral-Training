@@ -29,7 +29,7 @@ const Category = () => {
               href={`/webinars?page=1&category=${encodeURIComponent(item.name)}`}
               className={styles.categorypill}
             >
-               <img src={item.icon} alt={item.title} />
+               <img src={item.icon} alt={item.name} />
               <div className={styles.name}>{item.name}</div>
             </Link>
           ))}
