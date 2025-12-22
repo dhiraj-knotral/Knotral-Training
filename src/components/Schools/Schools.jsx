@@ -267,7 +267,7 @@ const Schools = () => {
             <section
                 className="section"
                 style={{
-                    background: "var(--primary-navy)",
+                    background: "var(--bg-gradient)",
                     color: "var(--white)",
                     textAlign: "center",
                 }}

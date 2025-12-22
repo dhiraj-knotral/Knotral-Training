@@ -5,7 +5,7 @@
      .sectiontitle {
          font-size: 32px;
          font-weight: 600;
-         color: var(--primary-navy);
+         color: var(--bg-gradient);
          margin-bottom: 12px;
      }
 
