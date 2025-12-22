@@ -689,7 +689,7 @@ useEffect(() => {
                 <div className={styles.contactcta}>
                     <h2>Still Have Questions?</h2>
                     <p>Our team is here to help you succeed</p>
-                    <a href="/contact" className={styles.contactbutton}>
+                    <a href="/contact-us" className={styles.contactbutton}>
                         Contact Us
                     </a>
                 </div>

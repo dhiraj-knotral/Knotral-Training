@@ -229,7 +229,7 @@ const AboutUs = () => {
                             justifyContent: "center",
                         }}
                     >
-                        <a href="#" className="btn btnprimary btnlg">
+                        <a href="/contact-us" className="btn btnprimary btnlg">
                             Contact Us
                         </a>
                         <a href="#" className="btn btnoutline btnlg">
