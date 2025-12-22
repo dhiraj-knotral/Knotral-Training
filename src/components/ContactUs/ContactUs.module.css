@@ -103,7 +103,7 @@
  }
 
  .infocard {
-     background: white;
+     background: var(--white);
      padding: 2rem;
      border-radius: 16px;
      box-shadow: 0 4px 20px rgba(26, 45, 71, 0.08);
@@ -380,47 +380,190 @@
      font-size: 1.5rem;
  }
 
+/* Tablet & below */
+@media (max-width: 968px) {
+  .contentgrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
 
- /* Mobile Responsive */
- @media (max-width: 968px) {
-     .contentgrid {
-         grid-template-columns: 1fr;
-         gap: 3rem;
-     }
+  .formrow {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
 
-     .formrow {
-         grid-template-columns: 1fr;
-         gap: 1.5rem;
-     }
- }
+/* Large Mobile */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.8rem;
+  }
 
- @media (max-width: 768px) {
+  .herotagline {
+    font-size: 1rem;
+  }
 
+  .container {
+    padding: 3rem 5%;
+  }
+
+  .contactform {
+    padding: 2rem 1.5rem;
+  }
+
+  .formtitle {
+    font-size: 2rem;
+  }
+
+  .infobanner {
+    padding: 2rem 1.5rem;
+  }
+
+  .infobanner h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Mobile refinement – up to 480px */
+@media (max-width: 480px) {
+        .hero h1 {
+    font-size: 2.2rem;
+  }
+  .formtitle{
+    font-size: 1.3rem;
+  }
+  .formsubtitle{
+    font-size: 1rem;
+  }
+  .infobanner h2{
+    font-size: 1.3rem;
+  }
+  .infobanner p{
+    font-size: 1rem;
+  }
+  /* Icons */
+  .infoicon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .quicklinkicon {
+    font-size: 1.2rem;
+  }
+
+  /* Cards */
+  .infocard {
+    padding: 1.5rem;
+  }
+
+  .quicklinks {
+    padding: 1.5rem;
+  }
+
+  .quicklinkitem {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  /* Text */
+  .infotitle {
+    font-size: 1.4rem;
+  }
+
+  .infotext {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* Form */
+  .forminput,
+  .formselect,
+  .formtextarea {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .formgroup {
+    margin-bottom: 1.2rem;
+  }
+
+  .submitbutton {
+    font-size: 1rem;
+    padding: 0.9rem;
+  }
+
+  /* Info banner pill */
+  .responsetime {
+    padding: 0.8rem 1.4rem;
+    font-size: 0.9rem;
+  }
+
+  .responseicon {
+    font-size: 1.2rem;
+  }
+}
+
+/* Extra compact – up to 360px */
+@media (max-width: 360px) {
      .hero h1 {
-         font-size: 2.8rem;
-     }
+    font-size: 1.8rem;
+  }
+  /* Icons */
+  .infoicon {
+    width: 42px;
+    height: 42px;
+    font-size: 1.2rem;
+  }
 
-     .herotagline {
-         font-size: 1rem;
-     }
+  .quicklinkicon {
+    font-size: 1.1rem;
+  }
 
-     .container {
-         padding: 3rem 5%;
-     }
+  /* Cards */
+  .infocard {
+    padding: 1.2rem;
+  }
 
-     .contactform {
-         padding: 2rem 1.5rem;
-     }
+  .quicklinks {
+    padding: 1.2rem;
+  }
 
-     .formtitle {
-         font-size: 2rem;
-     }
+  .quicklinkitem {
+    padding: 0.65rem;
+  }
 
-     .infobanner {
-         padding: 2rem 1.5rem;
-     }
+  /* Text */
+  .infotitle {
+    font-size: 1.3rem;
+  }
 
-     .info-banner h2 {
-         font-size: 2rem;
-     }
- }
+  .infotext {
+    font-size: 0.9rem;
+  }
+
+  /* Form */
+  .forminput,
+  .formselect,
+  .formtextarea {
+    padding: 0.75rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .formtextarea {
+    min-height: 110px;
+  }
+
+  .submitbutton {
+    font-size: 0.95rem;
+    padding: 0.85rem;
+  }
+
+  /* Info banner */
+  .responsetime {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.7rem;
+  }
+  
+}

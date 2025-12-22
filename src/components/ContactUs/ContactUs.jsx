@@ -53,7 +53,7 @@ const ContactUs = () => {
               <p className={styles.infotext}>
                 Knotral Training
                 <br />
-                New Delhi, India
+                588, Sector 14, Faridabad <br/> Haryana - 121007
                 <br />
                 <span style={{ fontSize: "0.9rem" }}>
                   Office visits by appointment only
