@@ -135,7 +135,7 @@ const RegisterComp = ({ webinar }) => {
 
 
             <div className={styles.contentsection}>
-              <h2>🎁 Exclusive Attendee Benefits</h2>
+              <h2>Exclusive Attendee Benefits</h2>
               <div className={styles.benefitbox}>
                 <h3>{webinar.attendeeBenefits.title}</h3>
                 {/* <p style={{ marginBottom: "16px", opacity: 0.9 }}>
