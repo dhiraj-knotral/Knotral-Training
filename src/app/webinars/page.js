@@ -11,7 +11,7 @@ export default async function Webinars({ searchParams }) {
   const type = params.type || "";
   const price = params.price || "";
   const search = params.search || "";
-    const sort = params.sort || "dateNew"; // ✅ ADD THIS
+    const sort = params.sort || "dateOld"; // ✅ ADD THIS
 
 
   // Build query string safely
