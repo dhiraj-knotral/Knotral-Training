@@ -131,9 +131,9 @@ export const liveWebinarsStatic = [
 
 const LiveSessions = ({ webinars }) => {
 
-const liveWebinars = webinars
-  .filter((webinar) => webinar.isLive)
-  .sort((a, b) => moment(a.date).diff(moment(b.date)));
+  const liveWebinars = webinars
+    .filter((webinar) => webinar.isLive)
+    .sort((a, b) => moment(a.date).diff(moment(b.date)));
 
   // const liveWebinars = liveWebinarsStatic.filter((webinar) => webinar.isLive);
 
@@ -148,43 +148,43 @@ const liveWebinars = webinars
         </div>
         <div className={styles.cardgrid}>
           {liveWebinars.slice(0, 4).map((item, index) => (
-            <div key={index} className={styles.trainingcard}>
-              <div className={styles.cardheader}>
-                {item.logo?.url && (
-                  <div className={styles.splogo}>
-                    <img src={item.logo.url} alt={item.title} />
-                  </div>
-                )}
-                <span className="badge badgelive">LIVE</span>
-              </div>
+            <Link href={`/${item.slug}`} key={index} className={styles.trainingcardlink}>
 
-              <h3 className={styles.cardtitle}>{item.title}</h3>
+              <div key={index} className={styles.trainingcard}>
+                <div className={styles.cardheader}>
+                  {item.logo?.url && (
+                    <div className={styles.splogo}>
+                      <img src={item.logo.url} alt={item.title} />
+                    </div>
+                  )}
+                  <span className="badge badgelive">LIVE</span>
+                </div>
 
-              <div className={styles.cardmeta}>
-                <span>📅 {moment(item.date).format("MMM DD, YYYY")}</span>
-                <span>🕓 {item.startTime}</span>
-              </div>
+                <h3 className={styles.cardtitle}>{item.title}</h3>
 
-              <div className={styles.cardfooter}>
-                <span
-                  className={`${styles.cardprice} ${item.isFree ? styles.free : ""}`}
-                >
-                  {item.isFree ? "FREE" : `₹${item.price}`}
-                </span>
+                <div className={styles.cardmeta}>
+                  <span>📅 {moment(item.date).format("MMM DD, YYYY")}</span>
+                  <span>🕓 {item.startTime}</span>
+                </div>
 
-                <button className="btn btnprimary btnsm">
-                  <Link href={`/${item.slug}`} className={styles.buttonlink}>
+                <div className={styles.cardfooter}>
+                  <span
+                    className={`${styles.cardprice} ${item.isFree ? styles.free : ""}`}
+                  >
+                    {item.isFree ? "FREE" : `₹${item.price}`}
+                  </span>
+
+                  <Link href={`/${item.slug}`} className="btn btnprimary btnsm">
                     Register
                   </Link>
-                   {/* <Link href="/" className={styles.buttonlink}>
-                    Register
-                  </Link> */}
-                </button>
 
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
+
         </div>
+
 
       </div>
     </section>

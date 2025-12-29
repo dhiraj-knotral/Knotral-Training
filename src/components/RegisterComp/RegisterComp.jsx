@@ -19,7 +19,7 @@ const RegisterComp = ({ webinar }) => {
   // Determine link destination (e.g., registration page)
   const href = webinar.actions?.canStartProgram || webinar.actions?.canEnroll
     ? `/course/${webinar.slug}`     // Course page
-    : `/register/${webinar._id}`;  // Registration page
+    : `/register/${webinar.slug}`;  // Registration page
 
   return (
     <section className={styles.landingcontent}>
@@ -192,7 +192,7 @@ const RegisterComp = ({ webinar }) => {
 
               <div className={styles.regdivider}></div>
               <div className={styles.regfooter}>
-                <p>👥 142 registered • 🔥 Limited seats</p>
+                <p>👥 {webinar?.views} registered • 🔥 Limited seats</p>
                 <p style={{ marginTop: "12px" }}>
                   <Link href="/">📧 Get reminder</Link> • <Link href="/">📲 Add to calendar</Link>
                 </p>
