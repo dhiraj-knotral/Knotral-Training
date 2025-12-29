@@ -85,10 +85,11 @@
      border-radius: 12px;
  }
 
- .audienceitem .icon {
-     font-size: 32px;
-     margin-bottom: 8px;
- }
+.audienceIcon {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
 
  .audienceitem .label {
      font-size: 13px;
@@ -223,8 +224,10 @@
  }
 
  .regmeta .item .icon {
-     width: 20px;
-     text-align: center;
+     width: 18px;
+     height: 18px;
+     margin-right: 8px;
+     object-fit: contain;
  }
 
  .regdivider {
@@ -242,11 +245,12 @@
  .regprice.free {
      color: var(--free-green);
  }
+
  .regprice.free {
      color: var(--free-green);
  }
 
-  .regprice.price {
+ .regprice.price {
      color: var(--primary-navy);
  }
 
@@ -281,9 +285,34 @@
      color: var(--text-secondary);
  }
 
+  .regfooter .iconSmall {
+  width: 16px;
+  height: 16px;
+  margin: 0 6px 0 4px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
  .regfooter a {
      color: var(--secondary-blue);
  }
+
+ .actionLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.linkIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
 
  /* RESPONSIVE */
  @media (max-width: 1024px) {
@@ -294,41 +323,44 @@
      .registrationcard {
          position: static;
      }
-         .trainercard {
-        padding: 20px;
-        gap: 16px;
-    }
 
-    .trainercard .photo {
-        width: 70px;
-        height: 70px;
-    }
+     .trainercard {
+         padding: 20px;
+         gap: 16px;
+     }
 
-    .trainercard h3 {
-        font-size: 17px;
-    }
+     .trainercard .photo {
+         width: 70px;
+         height: 70px;
+     }
 
-    .trainercard .title,
-    .trainercard p {
-        font-size: 13px;
-    }
-      .maincontent h1 {
-        font-size: 28px;
-        margin-bottom: 14px;
-    }
+     .trainercard h3 {
+         font-size: 17px;
+     }
 
-    .maincontent .description {
-        font-size: 16px;
-        margin-bottom: 28px;
-    }
-        .contentsection ul li {
-        padding-left: 24px;
-        font-size: 16px;
-    }
+     .trainercard .title,
+     .trainercard p {
+         font-size: 13px;
+     }
 
-    .contentsection ul li::before {
-        font-size: 16px;
-    }
+     .maincontent h1 {
+         font-size: 28px;
+         margin-bottom: 14px;
+     }
+
+     .maincontent .description {
+         font-size: 16px;
+         margin-bottom: 28px;
+     }
+
+     .contentsection ul li {
+         padding-left: 24px;
+         font-size: 16px;
+     }
+
+     .contentsection ul li::before {
+         font-size: 16px;
+     }
  }
 
  @media (max-width: 768px) {
@@ -336,124 +368,129 @@
          grid-template-columns: repeat(2, 1fr);
      }
 
-         .trainercard {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 16px;
-        gap: 12px;
-    }
+     .trainercard {
+         flex-direction: column;
+         align-items: center;
+         text-align: center;
+         padding: 16px;
+         gap: 12px;
+     }
 
-    .trainercard .photo {
-        width: 80px;
-        height: 80px;
-    }
+     .trainercard .photo {
+         width: 80px;
+         height: 80px;
+     }
 
-    .trainercard h3 {
-        font-size: 16px;
-    }
+     .trainercard h3 {
+         font-size: 16px;
+     }
 
-    .trainercard .title,
-    .trainercard p {
-        font-size: 13px;
-    }
-        .maincontent h1 {
-        font-size: 24px;
-        margin-bottom: 12px;
-        line-height: 1.25;
-    }
+     .trainercard .title,
+     .trainercard p {
+         font-size: 13px;
+     }
 
-    .maincontent .description {
-        font-size: 15px;
-        margin-bottom: 24px;
-    }
-      .contentsection ul li {
-        padding-left: 22px;
-        font-size: 15px;
-    }
+     .maincontent h1 {
+         font-size: 24px;
+         margin-bottom: 12px;
+         line-height: 1.25;
+     }
 
-    .contentsection ul li::before {
-        font-size: 15px;
-    }
+     .maincontent .description {
+         font-size: 15px;
+         margin-bottom: 24px;
+     }
+
+     .contentsection ul li {
+         padding-left: 22px;
+         font-size: 15px;
+     }
+
+     .contentsection ul li::before {
+         font-size: 15px;
+     }
  }
 
  /* Small Phones <=468px */
-@media (max-width: 468px) {
-    .trainercard {
-        padding: 12px;
-        gap: 10px;
-    }
+ @media (max-width: 468px) {
+     .trainercard {
+         padding: 12px;
+         gap: 10px;
+     }
 
-    .trainercard .photo {
-        width: 70px;
-        height: 70px;
-    }
+     .trainercard .photo {
+         width: 70px;
+         height: 70px;
+     }
 
-    .trainercard h3 {
-        font-size: 15px;
-    }
+     .trainercard h3 {
+         font-size: 15px;
+     }
 
-    .trainercard .title,
-    .trainercard p {
-        font-size: 12px;
-    }
+     .trainercard .title,
+     .trainercard p {
+         font-size: 12px;
+     }
+
      .maincontent h1 {
-        font-size: 22px;
-        margin-bottom: 10px;
-        line-height: 1.2;
-    }
+         font-size: 22px;
+         margin-bottom: 10px;
+         line-height: 1.2;
+     }
 
-    .maincontent .description {
-        font-size: 14px;
-        margin-bottom: 20px;
-    }
-    .contentsection ul li {
-        padding-left: 20px;
-        font-size: 14px;
-    }
+     .maincontent .description {
+         font-size: 14px;
+         margin-bottom: 20px;
+     }
 
-    .contentsection ul li::before {
-        font-size: 14px;
-    }
-}
+     .contentsection ul li {
+         padding-left: 20px;
+         font-size: 14px;
+     }
 
-/* Extra Small Phones <=360px */
-@media (max-width: 360px) {
-    .trainercard {
-        padding: 10px;
-        gap: 8px;
-    }
+     .contentsection ul li::before {
+         font-size: 14px;
+     }
+ }
 
-    .trainercard .photo {
-        width: 60px;
-        height: 60px;
-    }
+ /* Extra Small Phones <=360px */
+ @media (max-width: 360px) {
+     .trainercard {
+         padding: 10px;
+         gap: 8px;
+     }
 
-    .trainercard h3 {
-        font-size: 15px;
-    }
+     .trainercard .photo {
+         width: 60px;
+         height: 60px;
+     }
 
-    .trainercard .title,
-    .trainercard p {
-        font-size: 13px;
-    }
-        .maincontent h1 {
-        font-size: 20px;
-        margin-bottom: 8px;
-        line-height: 1.15;
-    }
+     .trainercard h3 {
+         font-size: 15px;
+     }
 
-    .maincontent .description {
-        font-size: 13px;
-        margin-bottom: 16px;
-    }
+     .trainercard .title,
+     .trainercard p {
+         font-size: 13px;
+     }
 
-      .contentsection ul li {
-        padding-left: 18px;
-        font-size: 13px;
-    }
+     .maincontent h1 {
+         font-size: 20px;
+         margin-bottom: 8px;
+         line-height: 1.15;
+     }
 
-    .contentsection ul li::before {
-        font-size: 13px;
-    }
-}
+     .maincontent .description {
+         font-size: 13px;
+         margin-bottom: 16px;
+     }
+
+     .contentsection ul li {
+         padding-left: 18px;
+         font-size: 13px;
+     }
+
+     .contentsection ul li::before {
+         font-size: 13px;
+     }
+ }

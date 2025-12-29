@@ -69,21 +69,25 @@ const RegisterComp = ({ webinar }) => {
               <h2>Who Should Attend</h2>
               <div className={styles.audiencegrid}>
                 {webinar.whoCanAttend && webinar.whoCanAttend.map((audience) => {
-                  // Map keys to icons
+                  // Map keys to image URLs
                   const audienceIcons = {
-                    leaders: "🏫",
-                    teachers: "👩‍🏫",
-                    heads: "👨‍💼",
-                    counsellors: "🧠",
-                    tuition_owners: "🎒",
-                    coaching_owners: "🎓",
-                    consultants: "🤝",
+                    leaders: "/attend3.png",
+                    teachers: "/attend1.png",
+                    heads: "/attend3.png",
+                    counsellors: "/attend2.png",
+                    tuition_owners: "/attend4.png",
+                    coaching_owners: "/attend4.png",
+                    consultants: "/attend2.png",
                   };
 
                   return (
                     <div className={styles.audienceitem} key={audience._id}>
                       <div className={styles.icon}>
-                        {audienceIcons[audience.key] || "👤"}
+                        <img
+                          src={audienceIcons[audience.key] || "/icons/default.png"}
+                          alt={audience.title}
+                          className={styles.audienceIcon}
+                        />
                       </div>
                       <div className={styles.label}>
                         {audience.title}
@@ -160,16 +164,20 @@ const RegisterComp = ({ webinar }) => {
             <div className={styles.registrationcard}>
               <div className={styles.regmeta}>
                 <div className={styles.item}>
-                  <span className={styles.icon}>📅</span>{moment(webinar.date).format("MMM DD, YYYY")}
+                  <img src="/form2.png" alt="date" className={styles.icon} />
+                  {moment(webinar.date).format("MMM DD, YYYY")}
                 </div>
                 <div className={styles.item}>
-                  <span className={styles.icon}>🕓</span> {webinar.startTime}
+                  <img src="/form1.png" alt="start time" className={styles.icon} />
+                  {webinar.startTime}
                 </div>
                 <div className={styles.item}>
-                  <span className={styles.icon}>⏱️</span> {webinar.duration}
+                  <img src="/form2.png" alt="duration" className={styles.icon} />
+                  {webinar.duration}
                 </div>
                 <div className={styles.item}>
-                  <span className={styles.icon}>🌐</span> {webinar.mode}
+                  <img src="/form4.png" alt="mode" className={styles.icon} />
+                  {webinar.mode}
                 </div>
               </div>
               <div className={styles.regdivider}></div>
@@ -192,9 +200,22 @@ const RegisterComp = ({ webinar }) => {
 
               <div className={styles.regdivider}></div>
               <div className={styles.regfooter}>
-                <p>👥 {webinar?.views} registered • 🔥 Limited seats</p>
-                <p style={{ marginTop: "12px" }}>
-                  <Link href="/">📧 Get reminder</Link> • <Link href="/">📲 Add to calendar</Link>
+                <p className={styles.metaInfo}>
+                  <img src="/form5.png" alt="registered" className={styles.iconSmall} />
+                  {webinar?.views} registered {" "}
+                  <img src="/form6.png" alt="limited seats" className={styles.iconSmall} />
+                  Limited seats
+                </p>
+                <p style={{ marginTop: "12px", display: "flex", justifyContent: "center", gap: "16px" }}>
+                  <Link href="/" className={styles.actionLink}>
+                    <img src="/form7.png" alt="Get reminder" className={styles.linkIcon} />
+                    Get reminder
+                  </Link>
+
+                  <Link href="/" className={styles.actionLink}>
+                    <img src="/form8.png" alt="Add to calendar" className={styles.linkIcon} />
+                    Add to calendar
+                  </Link>
                 </p>
               </div>
             </div>

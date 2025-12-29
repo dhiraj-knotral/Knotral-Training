@@ -53,7 +53,7 @@ const ContactUs = () => {
               <p className={styles.infotext}>
                 Knotral Training
                 <br />
-                588, Sector 14, Faridabad <br/> Haryana - 121007
+                588, Sector 14, Faridabad <br /> Haryana - 121007
                 <br />
                 <span style={{ fontSize: "0.9rem" }}>
                   Office visits by appointment only
@@ -65,12 +65,16 @@ const ContactUs = () => {
               <h3>Quick Links</h3>
 
               <a href="/for-teachers" className={styles.quicklinkitem}>
-                <span className={styles.quicklinkicon}>👩‍🏫</span>
+                <span className={styles.quicklinkicon}>
+                  <img src="/getintouch1.png" alt="Teacher" className={styles.quicklinkImg} />
+                </span>
                 <span className={styles.quicklinktext}>I'm a Teacher</span>
               </a>
 
               <a href="/for-schools" className={styles.quicklinkitem}>
-                <span className={styles.quicklinkicon}>🏫</span>
+                <span className={styles.quicklinkicon}>
+                  <img src="/getintouch2.png" alt="School" className={styles.quicklinkImg} />
+                </span>
                 <span className={styles.quicklinktext}>
                   I represent a School
                 </span>
@@ -80,14 +84,18 @@ const ContactUs = () => {
                 href="/for-solution-providers"
                 className={styles.quicklinkitem}
               >
-                <span className={styles.quicklinkicon}>🌍</span>
+                <span className={styles.quicklinkicon}>
+                  <img src="/getintouch3.png" alt="Solution Provider" className={styles.quicklinkImg} />
+                </span>
                 <span className={styles.quicklinktext}>
                   I'm a Solution Provider
                 </span>
               </a>
 
               <a href="/faq" className={styles.quicklinkitem}>
-                <span className={styles.quicklinkicon}>❓</span>
+                <span className={styles.quicklinkicon}>
+                  <img src="/getintouch4.png" alt="Faq" className={styles.quicklinkImg} />
+                </span>
                 <span className={styles.quicklinktext}>View FAQs</span>
               </a>
             </div>

@@ -61,8 +61,8 @@ const Header = () => {
             For Solution Providers</Link>
         </nav>
         <div className={styles.headerActions}>
-          <button className="btn btnghost">Login</button>
-          <button className="btn btnprimary">Sign Up</button>
+          {/* <button className="btn btnghost">Login</button> */}
+          <Link href="/contact-us" className="btn btnprimary">Get in touch</Link>
         </div>
 
         {/* Hamburger */}
