@@ -34,6 +34,7 @@ export default function ZohoForm({ webinar }) {
     Lead_Status: "No Contact Initiated",
     Lead_Source: "Knotral Website",
     Grade: webinar?.organisedBy === "Tilli" ? "" : "",
+    Address: webinar?.organisedBy === "Tilli" ? "" : "",
   });
 
   // Update state on input change
@@ -69,6 +70,8 @@ export default function ZohoForm({ webinar }) {
           Designation: "",
           Lead_Status: "No Contact Initiated",
           Lead_Source: "Knotral",
+          Grade: "",
+          Address: "",
         });
         // Redirect to home page
       } else {
@@ -209,6 +212,16 @@ export default function ZohoForm({ webinar }) {
                     onChange={handleChange} placeholder="Your city" />
                 </div>
               </div>
+
+              {webinar?.organisedBy === "Tilli" && (
+                <div className={styles.formgroup}>
+                  <label>
+                    Address <span className="required">*</span>
+                  </label>
+                  <input type="text" name="Address"
+                    onChange={handleChange} placeholder="Your full address" />
+                </div>
+              )}
 
               {/* <div className={styles.formgroup}>
               <label>Subjects You Teach</label>

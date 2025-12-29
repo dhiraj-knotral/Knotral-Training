@@ -1,8 +1,24 @@
-"use client"
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import styles from "./ContactUs.module.css"
+import { useRouter } from "next/navigation";
 
 const ContactUs = () => {
+  const router = useRouter();
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = "hidden";  // ❌ disable scroll
+    } else {
+      document.body.style.overflow = "auto";    // ✅ enable scroll back
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";    // cleanup
+    };
+  }, [showModal]);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -33,7 +49,7 @@ const ContactUs = () => {
       const data = await res.json();
 
       if (data.success) {
-        alert("Thank you! Your message has been sent.");
+        setShowModal(true); // 👉 show modal instead of alert
 
         setFormData({
           firstName: "",
@@ -46,7 +62,7 @@ const ContactUs = () => {
           message: ""
         });
         // Redirect to home page
-        router.push("/contact-us");
+        // router.push("/contact-us");
       }
     } catch (err) {
       console.error(err);
@@ -321,6 +337,25 @@ const ContactUs = () => {
             </div>
           </div>
         </div>
+
+        {showModal && (
+          <div className={styles.modalOverlay}>
+            <div className={styles.modalBox}>
+              <h2>🎉 Thank You!</h2>
+              <p>Your registration was successful. We’ll contact you soon!</p>
+
+              <button
+                className={styles.modalButton}
+                onClick={() => {
+                  setShowModal(false);
+                  router.push("/contact-us"); // 👉 redirect to homepage
+                }}
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
