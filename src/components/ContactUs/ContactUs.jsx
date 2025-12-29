@@ -1,7 +1,58 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import styles from "./ContactUs.module.css"
 
 const ContactUs = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    category: "",
+    organization: "",
+    subject: "",
+    message: ""
+  });
+
+  // Update state on input change
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/zoho/contact-us`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        alert("Thank you! Your message has been sent.");
+
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          category: "",
+          organization: "",
+          subject: "",
+          message: ""
+        });
+        // Redirect to home page
+        router.push("/contact-us");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("❌ Something went wrong. Try again.");
+    }
+  };
   return (
     <>
       <section className={styles.hero}>
@@ -108,7 +159,7 @@ const ContactUs = () => {
               24 hours
             </p>
 
-            <form id={styles.contactForm}>
+            <form id={styles.contactForm} onSubmit={handleSubmit}>
               <div className={styles.formrow}>
                 <div className={styles.formgroup}>
                   <label className={styles.formlabel} htmlFor="firstName">
@@ -120,7 +171,9 @@ const ContactUs = () => {
                     name="firstName"
                     className={styles.forminput}
                     required
-                    placeholder="John"
+                    placeholder="First Name"
+                    value={formData.firstName}
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -134,7 +187,9 @@ const ContactUs = () => {
                     name="lastName"
                     className={styles.forminput}
                     required
-                    placeholder="Doe"
+                    placeholder="Last Name"
+                    value={formData.lastName}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -150,7 +205,9 @@ const ContactUs = () => {
                     name="email"
                     className={styles.forminput}
                     required
-                    placeholder="john.doe@school.com"
+                    placeholder="example@email.com"
+                    value={formData.email}
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -164,6 +221,8 @@ const ContactUs = () => {
                     name="phone"
                     className={styles.forminput}
                     placeholder="+91 98765 43210"
+                    value={formData.phone}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -177,6 +236,8 @@ const ContactUs = () => {
                   name="category"
                   className={styles.formselect}
                   required
+                  value={formData.category}
+                  onChange={handleChange}
                 >
                   <option value="">Select category...</option>
                   <option value="teacher">Teacher</option>
@@ -204,6 +265,8 @@ const ContactUs = () => {
                   name="school"
                   className={styles.forminput}
                   placeholder="Your school or organization name"
+                  value={formData.organization}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -218,6 +281,8 @@ const ContactUs = () => {
                   className={styles.forminput}
                   required
                   placeholder="How can we help you?"
+                  value={formData.subject}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -231,6 +296,8 @@ const ContactUs = () => {
                   className={styles.formtextarea}
                   required
                   placeholder="Tell us more about your inquiry..."
+                  value={formData.message}
+                  onChange={handleChange}
                 />
               </div>
 

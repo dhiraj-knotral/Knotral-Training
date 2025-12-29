@@ -1,11 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ZohoForms.module.css"
 import { useRouter } from "next/navigation";
 
 export default function ZohoForm({ webinar }) {
-  console.log("📌 Webinar received:", webinar);
   const router = useRouter();
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = "hidden";  // ❌ disable scroll
+    } else {
+      document.body.style.overflow = "auto";    // ✅ enable scroll back
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";    // cleanup
+    };
+  }, [showModal]);
 
 
   // Form state
@@ -20,7 +32,8 @@ export default function ZohoForm({ webinar }) {
     Category: webinar?.category || "Webinar Registration",  // 🔥 Pre-filled here
     FORM_NAME: webinar?.organisedBy || "Webinar Registration",
     Lead_Status: "No Contact Initiated",
-    Lead_Source: "Knotral Website"
+    Lead_Source: "Knotral Website",
+    Grade: webinar?.organisedBy === "Tilli" ? "" : "",
   });
 
   // Update state on input change
@@ -42,7 +55,7 @@ export default function ZohoForm({ webinar }) {
       const data = await res.json();
 
       if (data.success) {
-        alert("🎉 Registration successful!");
+        setShowModal(true); // 👉 show modal instead of alert
         // Reset form
         setFormData({
           First_Name: "",
@@ -58,7 +71,6 @@ export default function ZohoForm({ webinar }) {
           Lead_Source: "Knotral",
         });
         // Redirect to home page
-        router.push("/");
       } else {
         alert("❌ Something went wrong. Try again.");
       }
@@ -149,6 +161,26 @@ export default function ZohoForm({ webinar }) {
                 <input type="text" name="Company"
                   onChange={handleChange} placeholder="Your school or organization" />
               </div>
+              {webinar?.organisedBy === "Tilli" && (
+                <div className={styles.formgroup}>
+                  <label>
+                    Grade <span className="required">*</span>
+                  </label>
+                  <select
+                    name="Grade"
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Select your Grade...</option>
+                    <option>KG</option>
+                    <option>Grade 1</option>
+                    <option>Grade 2</option>
+                    <option>Grade 3</option>
+                    <option>Grade 4</option>
+                    <option>Grade 5</option>
+                  </select>
+                </div>
+              )}
 
               <div className={styles.formrow}>
                 <div className={styles.formgroup}>
@@ -261,6 +293,24 @@ export default function ZohoForm({ webinar }) {
           </div>
         </div>
       </div>
+      {showModal && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalBox}>
+            <h2>🎉 Thank You!</h2>
+            <p>Your registration was successful. We’ll contact you soon!</p>
+
+            <button
+              className={styles.modalButton}
+              onClick={() => {
+                setShowModal(false);
+                router.push("/"); // 👉 redirect to homepage
+              }}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
