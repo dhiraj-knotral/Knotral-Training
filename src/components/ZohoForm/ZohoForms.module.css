@@ -20,6 +20,13 @@
      text-align: center;
  }
 
+ .formcard .subheading {
+    font-size: 12px;
+     text-align: center;
+     color: var(--text-secondary);
+     margin-bottom: 32px;
+ }
+
  .formcard .subtitle {
      text-align: center;
      color: var(--text-secondary);
@@ -124,6 +131,10 @@
      .formcard h2 {
          font-size: 26px;
      }
+
+     .formcard .subheading {
+        font-size: 12px;
+     }
  }
 
  @media (max-width: 768px) {
@@ -137,6 +148,9 @@
 
      .formcard h2 {
          font-size: 24px;
+     }
+       .formcard .subheading {
+         font-size: 12px;
      }
 
      .formrow {
@@ -170,6 +184,10 @@
          font-size: 22px;
      }
 
+       .formcard .subheading {
+        font-size: 11px;
+     }
+
      .formgroup input,
      .formgroup select,
      .formgroup textarea {
@@ -201,6 +219,9 @@
 
      .formcard h2 {
          font-size: 20px;
+     }
+       .formcard .subheading {
+         font-size: 10px;
      }
  }
 

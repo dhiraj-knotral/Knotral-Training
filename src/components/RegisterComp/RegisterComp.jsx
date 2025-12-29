@@ -172,7 +172,7 @@ const RegisterComp = ({ webinar }) => {
                   {webinar.startTime}
                 </div>
                 <div className={styles.item}>
-                  <img src="/form2.png" alt="duration" className={styles.icon} />
+                  <img src="/form3.png" alt="duration" className={styles.icon} />
                   {webinar.duration}
                 </div>
                 <div className={styles.item}>

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function ZohoForm({ webinar }) {
   console.log("📌 Webinar received:", webinar);
-    const router = useRouter();
+  const router = useRouter();
 
 
   // Form state
@@ -73,10 +73,11 @@ export default function ZohoForm({ webinar }) {
       <div className="container">
         <div className={styles.formcontainer}>
           <div className={styles.formcard}>
-            <h2>Register</h2>
-            {/* <p className="subtitle">
-              Formative Assessment Strategies • Dec 15, 4:00 PM IST
-            </p> */}
+            <h2>Register for the Training</h2>
+            {/* <p className={styles.subtitle}>{webinar.registerFormSubheading}</p> */}
+            <p className={styles.subheading}>
+              {webinar.registerFormSubheading}
+            </p>
 
             <form onSubmit={handleSubmit}>
               <div className={styles.formrow}>
@@ -122,21 +123,21 @@ export default function ZohoForm({ webinar }) {
                 <input
                   type="text"
                   name="Category"
-                  value={formData.Category}         
-                  readOnly                         
+                  value={formData.Category}
+                  readOnly
                   style={{ background: "#f5f5f5", cursor: "not-allowed" }} // optional styling
                 />
               </div>
 
-                <div className={styles.formgroup}>
+              <div className={styles.formgroup}>
                 <label>
                   Organised By <span className="required">*</span>
                 </label>
                 <input
                   type="text"
                   name="FORM_NAME"
-                  value={formData.FORM_NAME}         
-                  readOnly                         
+                  value={formData.FORM_NAME}
+                  readOnly
                   style={{ background: "#f5f5f5", cursor: "not-allowed" }} // optional styling
                 />
               </div>
