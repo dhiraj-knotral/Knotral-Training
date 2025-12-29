@@ -196,10 +196,18 @@ const CertificatesComp = ({ webinars, pagination }) => {
 
                                         <div className={styles.footer}>
                                             <div className={styles.info}>
-                                                <span>⏱️ {cert.duration}</span>
-                                                <span>📅 {cert.modules.length} live sessions</span>
+                                                <span className={styles.duration}>
+                                                    <img src="/form1.png" alt="Duration" className={styles.icon} />
+                                                    {cert.duration}
+                                                </span>
+                                                <span className={styles.duration}>
+                                                    <img src="/form2.png" alt="Sessions" className={styles.icon} />
+                                                    {cert.modules.length} live sessions</span>
                                                 {/* <span>{cert.rating}</span> */}
-                                                <span> ⭐ 4.8 (234 certified)</span>
+                                                <span className={styles.duration}>
+                                                    <img src="/star.png" alt="Sessions" className={styles.icon} />
+                                                    4.8
+                                                    </span>
                                             </div>
                                             <Link
                                                 href={`/${cert.slug}`}
@@ -225,7 +233,7 @@ const CertificatesComp = ({ webinars, pagination }) => {
                         <a href="#">2</a>
                         <a href="#">3</a>
                         <a href="#">→</a> */}
-                             {/* Previous Button */}
+                        {/* Previous Button */}
                         {pagination.page > 1 && (
                             <a href={`/certificates?page=${pagination.page - 1}`} className={styles.pageBtn}>
                                 ←

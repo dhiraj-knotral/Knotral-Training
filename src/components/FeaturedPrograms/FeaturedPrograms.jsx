@@ -60,23 +60,21 @@ const FeaturedPrograms = ({ webinars }) => {
 
                                 <p>{item.meta}</p>
 
-
-                                <div className={styles.rating}>
-                                    {item.rating ? (
-                                        <>
-                                            <span>⭐</span> {item.rating}
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span>⭐</span> 4.8 (234 educators certified)
-                                        </>
-                                    )}
-                                </div>
+<div className={styles.rating}>
+  <div className={styles.ratingInner}>
+    <img
+      src="/star.png"
+      alt="Star rating"
+      className={styles.starIcon}
+    />
+    <span>{item?.rating || "4.8"}</span>
+  </div>
+</div>
 
                                 {/* <Link href={`/${item.slug}`} className="btn btnsecondary btnsm" style={{ marginTop: "12px" }}>
                                     Start Program
                                 </Link> */}
-                                <Link  href={item.link || "/"} className="btn btnsecondary btnsm" style={{ marginTop: "12px" }}>
+                                <Link href={item.link || "/"} className="btn btnsecondary btnsm" style={{ marginTop: "12px" }}>
                                     Start Program
                                 </Link>
                             </div>

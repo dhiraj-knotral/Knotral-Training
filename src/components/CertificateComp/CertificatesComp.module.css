@@ -162,6 +162,19 @@
               color: var(--text-secondary);
           }
 
+          .duration {
+              display: flex;
+              align-items: center;
+              gap: 4px;
+              font-size: 12px;
+          }
+
+          .icon {
+              width: 20px;
+              height: 20px;
+              object-fit: contain;
+          }
+
 
           .pagination {
               display: flex;
@@ -361,6 +374,16 @@
                   height: 32px;
                   font-size: 12px;
               }
+
+              .duration {
+                gap: 5px;
+                  flex-direction: column;
+
+              }
+
+              .certprogramcard .footer .info {
+              gap: 16px;
+          }
           }
 
           /* ================================

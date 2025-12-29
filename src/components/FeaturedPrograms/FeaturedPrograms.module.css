@@ -75,9 +75,23 @@
         color: var(--text-secondary);
     }
 
-    .certcontent .rating span {
-        color: #FFC107;
+    .ratingInner {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        /* space between star and number */
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-muted);
     }
+
+    .starIcon {
+        width: 14px;
+        height: 14px;
+        object-fit: contain;
+        vertical-align: middle;
+    }
+
 
     /* Responsive: tablets */
     @media (max-width: 1024px) {
