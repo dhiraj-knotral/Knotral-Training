@@ -25,7 +25,7 @@ const Testimonials = () => {
     <section className="section">
       <div className="container">
         <div className="sectionheader">
-          <h2 className="sectiontitle">💬 What Teachers Say</h2>
+          <h2 className="sectiontitle">What Teachers Say</h2>
         </div>
 
         <div className={styles.testimonialgrid}>

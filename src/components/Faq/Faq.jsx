@@ -5,104 +5,104 @@ import styles from "./Faq.module.css";
 
 const FaqComp = () => {
 
-useEffect(() => {
+    useEffect(() => {
 
-    const questions = document.querySelectorAll(`.${styles.faqquestion}`);
+        const questions = document.querySelectorAll(`.${styles.faqquestion}`);
 
-    const questionHandlers = [];
+        const questionHandlers = [];
 
-    questions.forEach((question) => {
-        const handler = () => {
-            const item = question.closest(`.${styles.faqitem}`);
-            if (!item) return;
+        questions.forEach((question) => {
+            const handler = () => {
+                const item = question.closest(`.${styles.faqitem}`);
+                if (!item) return;
 
-            const isActive = item.classList.contains(styles.active);
+                const isActive = item.classList.contains(styles.active);
 
-            document.querySelectorAll(`.${styles.faqitem}`).forEach((faqItem) => {
-                faqItem.classList.remove(styles.active);
-            });
+                document.querySelectorAll(`.${styles.faqitem}`).forEach((faqItem) => {
+                    faqItem.classList.remove(styles.active);
+                });
 
-            if (!isActive) {
-                item.classList.add(styles.active);
-            }
-        };
-
-        question.addEventListener("click", handler);
-        questionHandlers.push({ question, handler });
-    });
-
-    const tabs = document.querySelectorAll(`.${styles.categorytab}`);
-
-    const tabHandlers = [];
-
-    tabs.forEach((tab) => {
-        const handler = () => {
-            const category = tab.dataset.category;
-
-            tabs.forEach((t) => t.classList.remove(styles.active));
-            tab.classList.add(styles.active);
-
-            document.querySelectorAll(`.${styles.faqcategory}`).forEach((cat) => {
-                if (category === "all" || cat.dataset.category === category) {
-                    cat.style.display = ""; // ✅ reset
-                } else {
-                    cat.style.display = "none";
-                }
-            });
-
-            // Reset FAQ items visibility
-            document.querySelectorAll(`.${styles.faqitem}`).forEach((item) => {
-                item.style.display = "";
-                item.classList.remove(styles.active);
-            });
-        };
-
-        tab.addEventListener("click", handler);
-        tabHandlers.push({ tab, handler });
-    });
-
-    const searchInput = document.getElementById("faqSearch");
-
-    const searchHandler = (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-
-        document.querySelectorAll(`.${styles.faqitem}`).forEach((item) => {
-            const question = item
-                .querySelector(`.${styles.faqquestiontext}`)
-                ?.textContent.toLowerCase();
-
-            const answer = item
-                .querySelector(`.${styles.faqanswercontent}`)
-                ?.textContent.toLowerCase();
-
-            if (question?.includes(searchTerm) || answer?.includes(searchTerm)) {
-                item.style.display = "";
-                if (searchTerm.length > 2) {
+                if (!isActive) {
                     item.classList.add(styles.active);
                 }
-            } else {
-                item.style.display = "none";
-                item.classList.remove(styles.active);
-            }
+            };
+
+            question.addEventListener("click", handler);
+            questionHandlers.push({ question, handler });
         });
 
-        document.querySelectorAll(`.${styles.faqcategory}`).forEach((cat) => {
-            cat.style.display = "";
+        const tabs = document.querySelectorAll(`.${styles.categorytab}`);
+
+        const tabHandlers = [];
+
+        tabs.forEach((tab) => {
+            const handler = () => {
+                const category = tab.dataset.category;
+
+                tabs.forEach((t) => t.classList.remove(styles.active));
+                tab.classList.add(styles.active);
+
+                document.querySelectorAll(`.${styles.faqcategory}`).forEach((cat) => {
+                    if (category === "all" || cat.dataset.category === category) {
+                        cat.style.display = ""; // ✅ reset
+                    } else {
+                        cat.style.display = "none";
+                    }
+                });
+
+                // Reset FAQ items visibility
+                document.querySelectorAll(`.${styles.faqitem}`).forEach((item) => {
+                    item.style.display = "";
+                    item.classList.remove(styles.active);
+                });
+            };
+
+            tab.addEventListener("click", handler);
+            tabHandlers.push({ tab, handler });
         });
-    };
 
-    searchInput?.addEventListener("input", searchHandler);
+        const searchInput = document.getElementById("faqSearch");
 
-    return () => {
-        questionHandlers.forEach(({ question, handler }) =>
-            question.removeEventListener("click", handler)
-        );
-        tabHandlers.forEach(({ tab, handler }) =>
-            tab.removeEventListener("click", handler)
-        );
-        searchInput?.removeEventListener("input", searchHandler);
-    };
-}, []);
+        const searchHandler = (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+
+            document.querySelectorAll(`.${styles.faqitem}`).forEach((item) => {
+                const question = item
+                    .querySelector(`.${styles.faqquestiontext}`)
+                    ?.textContent.toLowerCase();
+
+                const answer = item
+                    .querySelector(`.${styles.faqanswercontent}`)
+                    ?.textContent.toLowerCase();
+
+                if (question?.includes(searchTerm) || answer?.includes(searchTerm)) {
+                    item.style.display = "";
+                    if (searchTerm.length > 2) {
+                        item.classList.add(styles.active);
+                    }
+                } else {
+                    item.style.display = "none";
+                    item.classList.remove(styles.active);
+                }
+            });
+
+            document.querySelectorAll(`.${styles.faqcategory}`).forEach((cat) => {
+                cat.style.display = "";
+            });
+        };
+
+        searchInput?.addEventListener("input", searchHandler);
+
+        return () => {
+            questionHandlers.forEach(({ question, handler }) =>
+                question.removeEventListener("click", handler)
+            );
+            tabHandlers.forEach(({ tab, handler }) =>
+                tab.removeEventListener("click", handler)
+            );
+            searchInput?.removeEventListener("input", searchHandler);
+        };
+    }, []);
 
     return (
         <>
@@ -153,7 +153,15 @@ useEffect(() => {
                 {/* For Teachers FAQs */}
                 <div className={styles.faqcategory} data-category="teachers">
                     <h2 className={styles.categorytitle}>
-                        <span className={styles.categoryicon}>👩‍🏫</span>
+                        <span className={styles.categoryicon}>
+                            <span className={styles.categoryicon}>
+                                <img
+                                    src="/faq1.png"
+                                    alt="Category Icon"
+                                    className={styles.categoryImg}
+                                />
+                            </span>
+                        </span>
                         For Teachers
                     </h2>
 
@@ -387,7 +395,13 @@ useEffect(() => {
                 </div>
                 <div className={styles.faqcategory} data-category="schools">
                     <h2 className={styles.categorytitle}>
-                        <span className={styles.categoryicon}>🏫</span>
+                        <span className={styles.categoryicon}>
+                                <img
+                                    src="/faq2.png"
+                                    alt="Category Icon"
+                                    className={styles.categoryImg}
+                                />
+                        </span>
                         For Schools
                     </h2>
 
@@ -472,7 +486,13 @@ useEffect(() => {
 
                 <div className={styles.faqcategory} data-category="providers">
                     <h2 className={styles.categorytitle}>
-                        <span className={styles.categoryicon}>🌍</span>
+                        <span className={styles.categoryicon}>
+                                <img
+                                    src="/faq3.png"
+                                    alt="Category Icon"
+                                    className={styles.categoryImg}
+                                />
+                        </span>
                         For Solution Providers
                     </h2>
 
@@ -537,7 +557,13 @@ useEffect(() => {
 
                 <div className={styles.faqcategory} data-category="technical">
                     <h2 className={styles.categorytitle}>
-                        <span className={styles.categoryicon}>💻</span>
+                        <span className={styles.categoryicon}>
+                                <img
+                                    src="/faq4.png"
+                                    alt="Category Icon"
+                                    className={styles.categoryImg}
+                                />
+                        </span>
                         Technical & Platform
                     </h2>
 
@@ -621,7 +647,13 @@ useEffect(() => {
 
                 <div className={styles.faqcategory} data-category="all">
                     <h2 className={styles.categorytitle}>
-                        <span className={styles.categoryicon}>ℹ️</span>
+                        <span className={styles.categoryicon}>
+                                <img
+                                    src="/faq5.png"
+                                    alt="Category Icon"
+                                    className={styles.categoryImg}
+                                />
+                        </span>
                         General Information
                     </h2>
 

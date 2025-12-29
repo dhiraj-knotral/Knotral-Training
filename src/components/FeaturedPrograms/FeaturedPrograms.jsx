@@ -41,7 +41,7 @@ const FeaturedPrograms = ({ webinars }) => {
         <section className="section" style={{ background: "var(--white)" }}>
             <div className="container">
                 <div className={styles.sectionheader}>
-                    <h2 className={styles.sectiontitle}>🏆Featured Certification Programs</h2>
+                    <h2 className={styles.sectiontitle}>Featured Certification Programs</h2>
                     <Link href="/certificates?page=1" className={styles.viewall}>View All →</Link>
                 </div>
                 <div className={styles.certgrid}>

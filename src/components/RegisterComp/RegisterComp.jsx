@@ -192,7 +192,7 @@ const RegisterComp = ({ webinar }) => {
               </Link>
               {webinar.bonus && webinar.bonus.title && (
                 <div className={styles.regbonus}>
-                  <div className={styles.label}>🎁 BONUS</div>
+                  <div className={styles.label}>BONUS</div>
                   <p>{webinar.bonus.title}.</p>
                   <p>{webinar.bonus.description || ""}</p>
                 </div>
@@ -206,7 +206,7 @@ const RegisterComp = ({ webinar }) => {
                   <img src="/form6.png" alt="limited seats" className={styles.iconSmall} />
                   Limited seats
                 </p>
-                <p style={{ marginTop: "12px", display: "flex", justifyContent: "center", gap: "16px" }}>
+                {/* <p style={{ marginTop: "12px", display: "flex", justifyContent: "center", gap: "16px" }}>
                   <Link href="/" className={styles.actionLink}>
                     <img src="/form7.png" alt="Get reminder" className={styles.linkIcon} />
                     Get reminder
@@ -216,7 +216,7 @@ const RegisterComp = ({ webinar }) => {
                     <img src="/form8.png" alt="Add to calendar" className={styles.linkIcon} />
                     Add to calendar
                   </Link>
-                </p>
+                </p> */}
               </div>
             </div>
           </div>

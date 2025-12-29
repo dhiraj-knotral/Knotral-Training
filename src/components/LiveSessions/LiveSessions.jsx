@@ -143,7 +143,7 @@ const LiveSessions = ({ webinars }) => {
     <section className="section" style={{ background: "var(--white)" }}>
       <div className="container">
         <div className="sectionheader">
-          <h2 className="sectiontitle">🔴 Upcoming Live Sessions</h2>
+          <h2 className="sectiontitle">Upcoming Live Sessions</h2>
           <Link href="/webinars?page=1" className="viewall">View All →</Link>
         </div>
         <div className={styles.cardgrid}>
