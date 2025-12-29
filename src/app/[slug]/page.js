@@ -24,6 +24,9 @@ export async function generateMetadata({ params }) {
   return {
     title: webinar.metaTitle || webinar.title,
     description: webinar.metaDescription || webinar.description,
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/${slug}`,
+    },
     openGraph: {
       title: webinar.metaTitle || webinar.title,
       description: webinar.metaDescription || webinar.description,
