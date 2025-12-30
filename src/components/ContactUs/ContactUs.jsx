@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ContactUs.module.css"
 import { useRouter } from "next/navigation";
-import Head from "next/head";
 
 const ContactUs = () => {
   const router = useRouter();

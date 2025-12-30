@@ -29,12 +29,13 @@ export default function ZohoForm({ webinar }) {
     Company: "",
     City: "",
     Designation: "",
-    Category: webinar?.category || "Webinar Registration",  // 🔥 Pre-filled here
-    FORM_NAME: webinar?.organisedBy || "Webinar Registration",
+    Category: webinar?.organisedBy,
+    FORM_NAME: `${webinar?.organisedBy} Landing page`,
     Lead_Status: "No Contact Initiated",
-    Lead_Source: "Knotral Website",
+    Lead_Source: "Knotral Tranings",
     Grade: webinar?.organisedBy === "Tilli" ? "" : "",
     Address: webinar?.organisedBy === "Tilli" ? "" : "",
+    Landmark: webinar?.organisedBy === "Tilli" ? "" : "",
   });
 
   // Update state on input change
@@ -72,6 +73,7 @@ export default function ZohoForm({ webinar }) {
           Lead_Source: "Knotral",
           Grade: "",
           Address: "",
+          Landmark: ""
         });
         // Redirect to home page
       } else {
@@ -101,7 +103,7 @@ export default function ZohoForm({ webinar }) {
                     First Name <span className="required">*</span>
                   </label>
                   <input type="text" name="First_Name"
-                    onChange={handleChange} placeholder="Enter first name" />
+                    onChange={handleChange} placeholder="Enter first name" required />
                 </div>
 
                 <div className={styles.formgroup}>
@@ -109,7 +111,7 @@ export default function ZohoForm({ webinar }) {
                     Last Name <span className="required">*</span>
                   </label>
                   <input type="text" name="Last_Name"
-                    onChange={handleChange} placeholder="Enter last name" />
+                    onChange={handleChange} placeholder="Enter last name" required />
                 </div>
               </div>
 
@@ -118,7 +120,7 @@ export default function ZohoForm({ webinar }) {
                   Email Address <span className="required">*</span>
                 </label>
                 <input type="email" name="Email"
-                  onChange={handleChange} placeholder="you@school.edu" />
+                  onChange={handleChange} placeholder="you@school.edu" required />
                 <div className={styles.hint}>We'll send the webinar link here</div>
               </div>
 
@@ -127,7 +129,7 @@ export default function ZohoForm({ webinar }) {
                   WhatsApp Number <span className="required">*</span>
                 </label>
                 <input type="tel" name="Mobile"
-                  onChange={handleChange} placeholder="+91 98765 43210" />
+                  onChange={handleChange} placeholder="+91 98765 43210" required />
                 <div className={styles.hint}>For reminders and follow-up resources</div>
               </div>
 
@@ -144,7 +146,7 @@ export default function ZohoForm({ webinar }) {
                 />
               </div>
 
-              <div className={styles.formgroup}>
+              {/* <div className={styles.formgroup}>
                 <label>
                   Organised By <span className="required">*</span>
                 </label>
@@ -155,7 +157,7 @@ export default function ZohoForm({ webinar }) {
                   readOnly
                   style={{ background: "#f5f5f5", cursor: "not-allowed" }} // optional styling
                 />
-              </div>
+              </div> */}
 
               <div className={styles.formgroup}>
                 <label>
@@ -219,64 +221,21 @@ export default function ZohoForm({ webinar }) {
                     Address <span className="required">*</span>
                   </label>
                   <input type="text" name="Address"
-                    onChange={handleChange} placeholder="Your full address" />
+                    onChange={handleChange} placeholder="Your full address" required />
+                  <div className={styles.hint}>The Workbook will be dispatched to this address. Share the Correct Address...</div>
+
                 </div>
               )}
 
-              {/* <div className={styles.formgroup}>
-              <label>Subjects You Teach</label>
-              <select>
-                <option value="">Select primary subject...</option>
-                <option>Mathematics</option>
-                <option>English</option>
-                <option>Science</option>
-                <option>Social Studies</option>
-                <option>Computer Science</option>
-                <option>Multiple Subjects</option>
-                <option>Other</option>
-              </select>
-            </div>
-
-            <div className={styles.formgroup}>
-              <label>Grade Levels</label>
-              <select>
-                <option value="">Select grade range...</option>
-                <option>Pre-Primary (Nursery-KG)</option>
-                <option>Primary (1-5)</option>
-                <option>Middle School (6-8)</option>
-                <option>Secondary (9-10)</option>
-                <option>Senior Secondary (11-12)</option>
-                <option>Multiple Levels</option>
-              </select>
-            </div> */}
-
-              {/* <div className={styles.formdivider}></div> */}
-
-              {/* <div className="formsectiontitle">Additional Preferences</div> */}
-
-              {/* <div className="checkboxgroup">
-              <input type="checkbox" id="trial" defaultChecked />
-              <label htmlFor="trial">
-                I'm interested in a free trial of Save My Exams
-              </label>
-            </div>
-
-            <div className="checkboxgroup">
-              <input type="checkbox" id="updates" defaultChecked />
-              <label htmlFor="updates">Send me updates about future trainings</label>
-            </div>
-
-            <div className="checkboxgroup">
-              <input type="checkbox" id="school" />
-              <label htmlFor="school">
-                I'd like information about school-wide packages
-              </label>
-            </div> */}
-
-              {/* <div className={styles.formgroup} style={{ marginTop: "24px" }}>
-              <label>Questions or Comments (Optional)</label>
-              <textarea placeholder="Anything specific you'd like covered in the session?" />
-            </div> */}
+              {webinar?.organisedBy === "Tilli" && (
+                <div className={styles.formgroup}>
+                  <label>
+                    Landmark <span className="required">*</span>
+                  </label>
+                  <input type="text" name="Landmark"
+                    onChange={handleChange} placeholder="Landmark" required />
+                </div>
+              )}
 
               <div className={styles.formdivider}></div>
 

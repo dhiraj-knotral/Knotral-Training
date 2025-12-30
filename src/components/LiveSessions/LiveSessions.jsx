@@ -174,9 +174,9 @@ const LiveSessions = ({ webinars }) => {
                     {item.isFree ? "FREE" : `₹${item.price}`}
                   </span>
 
-                  <Link href={`/${item.slug}`} className="btn btnprimary btnsm">
+                  <span href={`/${item.slug}`} className="btn btnprimary btnsm">
                     Register
-                  </Link>
+                  </span>
 
                 </div>
               </div>

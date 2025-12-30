@@ -21,7 +21,7 @@
  }
 
  .formcard .subheading {
-    font-size: 12px;
+     font-size: 12px;
      text-align: center;
      color: var(--text-secondary);
      margin-bottom: 32px;
@@ -76,6 +76,8 @@
      font-size: 12px;
      color: var(--text-muted);
      margin-top: 6px;
+     font-style: italic;
+
  }
 
  .formrow {
@@ -119,37 +121,37 @@
 
 
  .modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100vw;
+     height: 100vh;
+     background: rgba(0, 0, 0, 0.5);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     z-index: 999;
+ }
 
-.modalBox {
-  background: var(--white);
-  padding: 28px;
-  border-radius: 12px;
-  text-align: center;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
+ .modalBox {
+     background: var(--white);
+     padding: 28px;
+     border-radius: 12px;
+     text-align: center;
+     width: 90%;
+     max-width: 400px;
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+ }
 
-.modalButton {
-  background: var(--cta-orange);
-  color: var(--white);
-  border: none;
-  padding: 10px 20px;
-  margin-top: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-}
+ .modalButton {
+     background: var(--cta-orange);
+     color: var(--white);
+     border: none;
+     padding: 10px 20px;
+     margin-top: 12px;
+     border-radius: 8px;
+     cursor: pointer;
+ }
 
  @media (max-width: 1024px) {
      .formpage {
@@ -165,7 +167,7 @@
      }
 
      .formcard .subheading {
-        font-size: 12px;
+         font-size: 12px;
      }
  }
 
@@ -181,7 +183,8 @@
      .formcard h2 {
          font-size: 24px;
      }
-       .formcard .subheading {
+
+     .formcard .subheading {
          font-size: 12px;
      }
 
@@ -216,8 +219,8 @@
          font-size: 22px;
      }
 
-       .formcard .subheading {
-        font-size: 11px;
+     .formcard .subheading {
+         font-size: 11px;
      }
 
      .formgroup input,
@@ -252,7 +255,8 @@
      .formcard h2 {
          font-size: 20px;
      }
-       .formcard .subheading {
+
+     .formcard .subheading {
          font-size: 10px;
      }
  }
