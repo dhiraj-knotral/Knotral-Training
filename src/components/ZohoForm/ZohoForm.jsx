@@ -32,7 +32,7 @@ export default function ZohoForm({ webinar }) {
     Category: webinar?.organisedBy,
     FORM_NAME: `${webinar?.organisedBy} Landing page`,
     Lead_Status: "No Contact Initiated",
-    Lead_Source: "Knotral Tranings",
+    Lead_Source: "Knotral Trainings",
     Grade: webinar?.organisedBy === "Tilli" ? "" : "",
     Address: webinar?.organisedBy === "Tilli" ? "" : "",
     Landmark: webinar?.organisedBy === "Tilli" ? "" : "",
@@ -70,7 +70,7 @@ export default function ZohoForm({ webinar }) {
           City: "",
           Designation: "",
           Lead_Status: "No Contact Initiated",
-          Lead_Source: "Knotral",
+          Lead_Source: "Knotral Trainings",
           Grade: "",
           Address: "",
           Landmark: ""
@@ -90,7 +90,7 @@ export default function ZohoForm({ webinar }) {
       <div className="container">
         <div className={styles.formcontainer}>
           <div className={styles.formcard}>
-            <h2>Register for the Training</h2>
+            <h2>Register for the Trainings</h2>
             {/* <p className={styles.subtitle}>{webinar.registerFormSubheading}</p> */}
             <p className={styles.subheading}>
               {webinar.registerFormSubheading}
