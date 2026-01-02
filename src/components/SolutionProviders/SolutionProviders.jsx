@@ -48,7 +48,7 @@ const SolutionProviders = () => {
                                 product. We handle logistics, you get qualified leads.
                             </p>
                             <div style={{ display: "flex", gap: "16px" }}>
-                                <Link href="/" className="btn btnprimary btnlg">Become a Partner</Link>
+                                <Link href="/solution-providers-form" className="btn btnprimary btnlg">Become a Partner</Link>
                                 <Link href="#how-it-works" className="btn btnoutline btnlg">See How It Works</Link>
                             </div>
                         </div>
@@ -300,10 +300,10 @@ const SolutionProviders = () => {
                                         </p>
                                     </div>
 
-                                    <a href="#" className="btn btnteal btnblock"
+                                    <Link href="/solution-providers-form" className="btn btnteal btnblock"
                                         style={{ marginTop: "24px" }}>
                                         Request Partnership Info
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

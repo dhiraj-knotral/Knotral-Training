@@ -342,7 +342,7 @@ const ContactUs = () => {
           <div className={styles.modalOverlay}>
             <div className={styles.modalBox}>
               <h2>🎉 Thank You!</h2>
-              <p>Your registration was successful. We’ll contact you soon!</p>
+              <p>We have received your request. We’ll contact you soon!</p>
 
               <button
                 className={styles.modalButton}

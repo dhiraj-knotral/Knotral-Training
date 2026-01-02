@@ -43,7 +43,7 @@ export default function SolutionProvidersForm() {
         e.preventDefault();
 
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/zoho/register`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/zoho/solution-providers-form`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
@@ -209,7 +209,7 @@ export default function SolutionProvidersForm() {
                 <div className={styles.modalOverlay}>
                     <div className={styles.modalBox}>
                         <h2>🎉 Thank You!</h2>
-                        <p>Your registration was successful. We’ll contact you soon!</p>
+                        <p>We have received your request for becoming as partner. We’ll contact you soon!</p>
 
                         <button
                             className={styles.modalButton}
