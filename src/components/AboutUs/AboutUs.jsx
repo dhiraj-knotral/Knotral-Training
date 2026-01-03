@@ -95,7 +95,7 @@ const AboutUs = () => {
                         className="grid2"
                         style={{ gap: "64px", alignItems: "center" }}
                     >
-                        <div>
+                        <div className={styles.content}>
                             <h2 className={styles.sectiontitle}>Part of India Market Entry</h2>
 
                             <p
@@ -205,21 +205,10 @@ const AboutUs = () => {
                 }}
             >
                 <div className="container">
-                    <h2 style={{ fontSize: "32px", marginBottom: "16px" }}>
-                        Want to Work With Us?
-                    </h2>
+                    <h2 className={styles.workheading}>Want to Work With Us?</h2>
 
-                    <p
-                        style={{
-                            opacity: 0.8,
-                            marginBottom: "32px",
-                            maxWidth: "500px",
-                            marginLeft: "auto",
-                            marginRight: "auto",
-                        }}
-                    >
-                        Whether you're a teacher, school, or solution provider — we'd love
-                        to hear from you.
+                    <p className={styles.subtitle}>
+                        Whether you're a teacher, school, or solution provider — we'd love to hear from you.
                     </p>
 
                     <div

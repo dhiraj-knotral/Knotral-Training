@@ -7,6 +7,8 @@ import Link from "next/link";
 export default function ZohoForm({ webinar }) {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
+  const [agreed, setAgreed] = useState(false);
+
 
   useEffect(() => {
     if (showModal) {
@@ -58,50 +60,13 @@ export default function ZohoForm({ webinar }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Submit form
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/zoho/register`, {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify(formData),
-  //     });
-
-  //     const data = await res.json();
-
-  //     if (data.success) {
-  //       setShowModal(true); // 👉 show modal instead of alert
-  //       // Reset form
-  //       setFormData({
-  //         First_Name: "",
-  //         Last_Name: "",
-  //         Mobile: "",
-  //         Email: "",
-  //         FORM_NAME: webinar?.title || "",
-  //         Category: webinar?.title || "",
-  //         Company: "",
-  //         City: "",
-  //         Designation: "",
-  //         Lead_Status: "No Contact Initiated",
-  //         Lead_Source: "Knotral Trainings",
-  //         Grade: "",
-  //         Address: "",
-  //         Landmark: ""
-  //       });
-  //       // Redirect to home page
-  //     } else {
-  //       alert("❌ Something went wrong. Try again.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Form error:", error);
-  //     alert("❌ Something went wrong. Try again.");
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!agreed) {
+      alert("Please agree to the Terms of Service and Privacy Policy before registering.");
+      return;
+    }
 
     // 1️⃣ If webinar is free, directly submit the form (same as before)
     if (webinar?.isFree) {
@@ -128,38 +93,38 @@ export default function ZohoForm({ webinar }) {
       const orderData = await orderRes.json();
       if (!orderData?.orderId) return alert("Order creation failed");
 
-   // Step B: Open Razorpay Checkout
-const rzp = new window.Razorpay({
-  key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-  amount: orderData.amount,
-  currency: orderData.currency,
-  name: webinar.title,                 // shows in checkout popup
-  description: "Webinar Registration Payment",
-  order_id: orderData.orderId,
-  
-  // Prefill customer info
-  prefill: {
-    name: formData.First_Name + " " + formData.Last_Name,
-    email: formData.Email,
-    contact: formData.Mobile
-  },
+      // Step B: Open Razorpay Checkout
+      const rzp = new window.Razorpay({
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: orderData.amount,
+        currency: orderData.currency,
+        name: webinar.title,                 // shows in checkout popup
+        description: "Webinar Registration Payment",
+        order_id: orderData.orderId,
 
-  // Store webinar organizer and ID in Razorpay notes
-  notes: {
-    organisedBy: webinar.organisedBy,  // your custom "App Name"
-    webinarName: webinar.title
-  },
+        // Prefill customer info
+        prefill: {
+          name: formData.First_Name + " " + formData.Last_Name,
+          email: formData.Email,
+          contact: formData.Mobile
+        },
 
-  handler: async function (response) {
-    // Step C: Verify Payment on backend
-    const verifyRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/verify-payment`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(response),
-      }
-    );
+        // Store webinar organizer and ID in Razorpay notes
+        notes: {
+          organisedBy: webinar.organisedBy,  // your custom "App Name"
+          webinarName: webinar.title
+        },
+
+        handler: async function (response) {
+          // Step C: Verify Payment on backend
+          const verifyRes = await fetch(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/verify-payment`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(response),
+            }
+          );
 
           const verifyData = await verifyRes.json();
 
@@ -384,23 +349,26 @@ const rzp = new window.Razorpay({
 
             </form>
 
-            <p
-              style={{
-                textAlign: "center",
-                fontSize: "12px",
-                color: "var(--text-muted)",
-                marginTop: "16px",
-              }}
-            >
-              By registering, you agree to Knotral's{" "}
-              <a href="/terms-and-conditions" style={{ color: "var(--secondary-blue)" }}>
-                Terms of Service
-              </a>{" "}
-              and{" "}
-              <Link href="/privacy-policy" style={{ color: "var(--secondary-blue)" }}>
-                Privacy Policy
-              </Link>
-            </p>
+            <div className={styles.agreement}>
+              <label className={styles.agreementLabel}>
+                <input
+                  type="checkbox"
+                  checked={agreed}
+                  onChange={() => setAgreed(!agreed)}
+                  required
+                />
+                <span>
+                  By registering, you agree to Knotral's{" "}
+                  <a href="/terms-and-conditions" style={{ color: "var(--secondary-blue)" }}>
+                    Terms of Service
+                  </a>{" "}
+                  and{" "}
+                  <Link href="/privacy-policy" style={{ color: "var(--secondary-blue)" }}>
+                    Privacy Policy
+                  </Link>
+                </span>
+              </label>
+            </div>
           </div>
         </div>
       </div>

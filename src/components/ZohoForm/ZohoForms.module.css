@@ -153,6 +153,35 @@
      cursor: pointer;
  }
 
+.agreement {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 16px;
+}
+
+.agreementLabel {
+    display: flex;
+    flex-direction: row;      /* always row */
+    align-items: center;  /* key fix */
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.agreementLabel input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;          /* aligns checkbox with first text line */
+    flex-shrink: 0;           /* prevents checkbox shrinking */
+}
+
+.agreementLabel span {
+    line-height: 1.4;
+    text-align: left;
+    max-width: 500px;         /* prevents super-wide text */
+}
+
  @media (max-width: 1024px) {
      .formpage {
          padding: 48px 0;
@@ -259,6 +288,18 @@
      .formcard .subheading {
          font-size: 10px;
      }
+.agreement {
+        font-size: 11px;
+    }
+
+    .agreementLabel span {
+        max-width: 220px;
+    }
+
+    .agreementLabel input[type="checkbox"] {
+        width: 14px;
+        height: 14px;
+    }
  }
 
  @media (max-width: 360px) {

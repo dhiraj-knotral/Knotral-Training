@@ -155,6 +155,27 @@
      }
 
 
+     .workheading {
+         font-size: 32px;
+         /* default for large screens */
+         margin-bottom: 16px;
+         font-weight: bold;
+         text-align: center;
+     }
+
+     .subtitle {
+         opacity: 0.8;
+         margin-bottom: 32px;
+         max-width: 500px;
+         margin-left: auto;
+         margin-right: auto;
+         text-align: center;
+         font-size: 18px;
+         /* default for large screens */
+         line-height: 1.5;
+     }
+
+
      /* Responsive */
      @media (max-width: 1024px) {
          .aboutgrid {
@@ -219,5 +240,34 @@
 
          .valuesgrid {
              grid-template-columns: repeat(1, 1fr);
+         }
+
+         .aboutcontent h2 {
+             font-size: 24px;
+         }
+
+         .aboutcontent p {
+             font-size: 14px;
+         }
+
+         .sectiontitle {
+             font-size: 24px;
+         }
+
+         .content p {
+             font-size: 14px;
+         }
+
+         .statitem .number {
+             font-size: 28px;
+         }
+
+         .workheading {
+             font-size: 24px;
+             /* default for large screens */
+         }
+
+         .subtitle {
+             font-size: 14px;
          }
      }
