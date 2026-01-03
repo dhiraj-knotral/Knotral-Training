@@ -52,7 +52,7 @@ const AboutUs = () => {
 
                     <div className={styles.valuesgrid}>
                         <div className={styles.valueitem}>
-                            <div className={styles.icon}>🎓</div>
+                            <div className={styles.icon}><img src="/believe1.png" alt="Education Icon" /></div>
                             <h4>Teachers First</h4>
                             <p>
                                 Everything we do starts with what helps teachers grow
@@ -61,7 +61,7 @@ const AboutUs = () => {
                         </div>
 
                         <div className={styles.valueitem}>
-                            <div className={styles.icon}>🌍</div>
+                            <div className={styles.icon}><img src="/believe2.png" alt="Global Icon" /></div>
                             <h4>Global × Local</h4>
                             <p>
                                 World-class content, adapted for Indian classroom realities.
@@ -69,7 +69,7 @@ const AboutUs = () => {
                         </div>
 
                         <div className={styles.valueitem}>
-                            <div className={styles.icon}>🤝</div>
+                            <div className={styles.icon}><img src="/believe3.png" alt="Win Icon" /></div>
                             <h4>Win-Win-Win</h4>
                             <p>
                                 Teachers, schools, and solution providers all benefit from our
@@ -78,7 +78,7 @@ const AboutUs = () => {
                         </div>
 
                         <div className={styles.valueitem}>
-                            <div className={styles.icon}>📈</div>
+                            <div className={styles.icon}><img src="/believe4.png" alt="Impact Icon" /></div>
                             <h4>Practical Impact</h4>
                             <p>
                                 Every training should change something in the classroom
@@ -162,7 +162,7 @@ const AboutUs = () => {
                 </div>
             </section>
 
-            <section className="section">
+            {/* <section className="section">
                 <div className="container">
                     <div className={`${styles.sectionheader} ${styles.center}`}>
                         <h2 className={styles.sectiontitle}>Leadership Team</h2>
@@ -170,31 +170,31 @@ const AboutUs = () => {
 
                     <div className={styles.teamgrid}>
                         <div className={styles.teamcard}>
-                            <div className={styles.photo}></div>
-                            <h4>Dhiraj Taraku</h4>
-                            <div className={styles.role}>Founder & Director</div>
+                            <div className={styles.photo}><img src="/team1.png" alt="Team Member" /></div>
+                            <h4>Dhiraj Trakru</h4>
+                            <div className={styles.role}>Founder & Business Development </div>
                         </div>
 
                         <div className={styles.teamcard}>
-                            <div className={styles.photo}></div>
-                            <h4>Team Member</h4>
-                            <div className={styles.role}>Head of Partnerships</div>
+                            <div className={styles.photo}><img src="/team2.png" alt="Team Member" /></div>
+                            <h4>Shashank Agarwal</h4>
+                            <div className={styles.role}>Co-Founder, Finance & Operations</div>
                         </div>
 
                         <div className={styles.teamcard}>
-                            <div className={styles.photo}></div>
-                            <h4>Team Member</h4>
-                            <div className={styles.role}>Training Operations</div>
+                            <div className={styles.photo}><img src="/team3.png" alt="Team Member" /></div>
+                            <h4>Malobika Banerjee</h4>
+                            <div className={styles.role}>General Manager Sales</div>
                         </div>
 
                         <div className={styles.teamcard}>
-                            <div className={styles.photo}></div>
-                            <h4>Team Member</h4>
-                            <div className={styles.role}>School Relations</div>
+                            <div className={styles.photo}><img src="/team4.png" alt="Team Member" /></div>
+                            <h4>Ayan Naskar</h4>
+                            <div className={styles.role}>Marketing Manager </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <section
                 className="section"

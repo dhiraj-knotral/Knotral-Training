@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ZohoForms.module.css"
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function ZohoForm({ webinar }) {
   const router = useRouter();
@@ -392,13 +393,13 @@ const rzp = new window.Razorpay({
               }}
             >
               By registering, you agree to Knotral's{" "}
-              <a href="#" style={{ color: "var(--secondary-blue)" }}>
+              <a href="/terms-and-conditions" style={{ color: "var(--secondary-blue)" }}>
                 Terms of Service
               </a>{" "}
               and{" "}
-              <a href="#" style={{ color: "var(--secondary-blue)" }}>
+              <Link href="/privacy-policy" style={{ color: "var(--secondary-blue)" }}>
                 Privacy Policy
-              </a>
+              </Link>
             </p>
           </div>
         </div>
