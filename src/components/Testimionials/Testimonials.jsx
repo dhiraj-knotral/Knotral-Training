@@ -4,16 +4,19 @@ import styles from "./Testimonials.module.css";
 
 const testimonials = [
   {
+    image: "/female.png",
     quote: "This was the most practical PD I've attended in 10 years. I used the exit ticket technique the very next day!",
     author: "Sneha M.",
     role: "Math Teacher, Delhi",
   },
   {
+    image: "/female.png",
     quote: "The EdShed certification helped me get promoted to Academic Coordinator. It's recognized by my school management.",
     author: "Priya K.",
     role: "Academic Coordinator, Mumbai",
   },
   {
+    image: "/male.png",
     quote: "Got certified and my school adopted the platform. Win-win for everyone including my students.",
     author: "Amit S.",
     role: "Science Teacher, Bangalore",
@@ -30,8 +33,8 @@ const Testimonials = () => {
 
         <div className={styles.testimonialgrid}>
           {testimonials.map((item, index) => (
-            <div className={styles.testimonialcard}key={index}>
-              <div className={styles.avatar}>  <img src="/defaultImage.webp" alt="avatar" />
+            <div className={styles.testimonialcard} key={index}>
+              <div className={styles.avatar}><img src={item.image} alt="avatar" />
               </div>
               <blockquote>"{item.quote}"</blockquote>
               <div className={styles.author}>{item.author}</div>
