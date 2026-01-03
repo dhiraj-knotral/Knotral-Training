@@ -42,3 +42,57 @@
 .subitem {
   margin-bottom: 6px;
 }
+
+
+/* Apply to all small screens (phones & small tablets) */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px 15px; /* reduce padding */
+    max-width: 100%;    /* use full width */
+    margin: 0 auto;
+  }
+
+  .title {
+    font-size: 20px;    /* smaller heading */
+    margin-bottom: 12px;
+    color: #222;
+  }
+
+  .list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  .item {
+    margin-bottom: 6px; /* smaller spacing */
+  }
+
+  .link {
+    text-decoration: none;
+    color: #2B5A8A;
+    transition: color 0.2s ease-in-out;
+    font-size: 14px; /* smaller font for links */
+    word-break: break-word; /* prevent long URLs from overflowing */
+  }
+
+  .link:hover {
+    color: #2B5A8A;
+  }
+
+  .heading {
+    font-weight: bold;
+    color: #444;
+    font-size: 16px; /* smaller headings */
+  }
+
+  .sublist {
+    margin: 4px 0 0 15px; /* smaller indent for sub-items */
+    padding: 0;
+  }
+
+  .subitem {
+    margin-bottom: 4px;
+    font-size: 14px; /* smaller text for subitems */
+  }
+}
