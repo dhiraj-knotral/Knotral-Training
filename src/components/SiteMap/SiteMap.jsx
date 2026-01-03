@@ -13,7 +13,7 @@ const SiteMap = ({ productSlugs }) => {
           <Link href="/" className={styles.link}>Home</Link>
         </li>
         <li className={styles.item}>
-          <Link href="/all-products" className={styles.link}>All Products</Link>
+          <Link href="/webinars?page=1" className={styles.link}>All Webinars</Link>
         </li>
 
         {/* 🔗 Dynamic product links */}
@@ -23,7 +23,7 @@ const SiteMap = ({ productSlugs }) => {
               {productSlugs.map((product) => (
                 <li key={product.slug} className={styles.subitem}>
                   <Link href={`/${product.slug}`} className={styles.link}>
-                    {product.productName}
+                    {product.productName} by <strong>{product.organisedBy}</strong>
                   </Link>
                 </li>
               ))}
@@ -35,7 +35,7 @@ const SiteMap = ({ productSlugs }) => {
           <Link href="/privacy-policy" className={styles.link}>Privacy Policy</Link>
         </li>
         <li className={styles.item}>
-          <Link href="/site-map" className={styles.link}>Sitemap</Link>
+          <Link href="/sitemap" className={styles.link}>Sitemap</Link>
         </li>
       </ul>
     </div>
