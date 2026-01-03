@@ -71,13 +71,13 @@ const RegisterComp = ({ webinar }) => {
                 {webinar.whoCanAttend && webinar.whoCanAttend.map((audience) => {
                   // Map keys to image URLs
                   const audienceIcons = {
-                    leaders: "/attend3.png",
                     teachers: "/attend1.png",
-                    heads: "/attend3.png",
                     counsellors: "/attend2.png",
-                    tuition_owners: "/attend4.png",
+                    tuition_owners: "/attend3.png",
                     coaching_owners: "/attend4.png",
-                    consultants: "/attend2.png",
+                    consultants: "/attend5.png",
+                    leaders: "/attend6.png",
+                    heads: "/attend7.png",
                   };
 
                   return (
