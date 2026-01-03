@@ -33,7 +33,7 @@ export async function generateMetadata({ params }) {
       url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/${slug}`,
       images: [
         {
-          url: webinar.logo?.url,
+          url: webinar.ogImage?.url,
           width: 1200,
           height: 630,
         },
