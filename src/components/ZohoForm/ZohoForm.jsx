@@ -11,6 +11,9 @@ export default function ZohoForm({ webinar }) {
 
   const isTilliKids = webinar?.organisedBy === "Tilli Kids";
 
+  const isOnFire = webinar?.organisedBy === "Onfire";
+
+
   useEffect(() => {
     document.body.style.overflow = showModal ? "hidden" : "auto";
     return () => {
@@ -32,17 +35,22 @@ export default function ZohoForm({ webinar }) {
   const [formData, setFormData] = useState({
     First_Name: "",
     Last_Name: "",
-    Name: "", // For Tilli Kids
+    Name: "",
     Email: "",
     Mobile: "",
-    Company: "",
     City: "",
+    Company: "",
     Designation: "",
-    Category: webinar?.organisedBy,
+    Grade: "",
+    Student_Name: "",
+    Student_Age: "",
+    School_Board: "",
+    Preferred_Program_Level: "",
+    Region_To_Operate: "", // ✅ always exists, used only for Tilli Kids
     FORM_NAME: `${webinar?.organisedBy} Landing page`,
+    Category: webinar?.organisedBy || "",
     Lead_Status: "No Contact Initiated",
     Lead_Source: "Knotral Trainings",
-    ...(isTilliKids && { Region_To_Operate: "" }),
   });
 
   // Update state on input change
@@ -165,28 +173,28 @@ export default function ZohoForm({ webinar }) {
         setFormData(
           isTilliKids
             ? {
-                Name: "",
-                Email: "",
-                Mobile: "",
-                Region_To_Operate: "",
-                Category: webinar?.organisedBy,
-                FORM_NAME: `${webinar?.organisedBy} Landing page`,
-                Lead_Status: "No Contact Initiated",
-                Lead_Source: "Knotral Trainings",
-              }
+              Name: "",
+              Email: "",
+              Mobile: "",
+              Region_To_Operate: "",
+              Category: webinar?.organisedBy,
+              FORM_NAME: `${webinar?.organisedBy} Landing page`,
+              Lead_Status: "No Contact Initiated",
+              Lead_Source: "Knotral Trainings",
+            }
             : {
-                First_Name: "",
-                Last_Name: "",
-                Email: "",
-                Mobile: "",
-                Company: "",
-                City: "",
-                Designation: "",
-                Category: webinar?.organisedBy,
-                FORM_NAME: `${webinar?.organisedBy} Landing page`,
-                Lead_Status: "No Contact Initiated",
-                Lead_Source: "Knotral Trainings",
-              }
+              First_Name: "",
+              Last_Name: "",
+              Email: "",
+              Mobile: "",
+              Company: "",
+              City: "",
+              Designation: "",
+              Category: webinar?.organisedBy,
+              FORM_NAME: `${webinar?.organisedBy} Landing page`,
+              Lead_Status: "No Contact Initiated",
+              Lead_Source: "Knotral Trainings",
+            }
         );
 
         setShowModal(true);
@@ -204,14 +212,138 @@ export default function ZohoForm({ webinar }) {
       <div className="container">
         <div className={styles.formcontainer}>
           <div className={styles.formcard}>
-            <h2>Register for the Trainings</h2>
-            {/* <p className={styles.subtitle}>{webinar.registerFormSubheading}</p> */}
+            <h2>
+              {isOnFire
+                ? "Register for the Open Day"
+                : "Register for the Trainings"
+                }
+            </h2>          
             <p className={styles.subheading}>
               {webinar.registerFormSubheading}
             </p>
 
             <form onSubmit={handleSubmit}>
-              {isTilliKids ? (
+              {isOnFire ? (
+                <>
+                  {/* On Fire Fields */}
+                  <div className={styles.formgroup}>
+                    <label>Full Name (Parent / Guardian) <span className="required">*</span></label>
+                    <input
+                      type="text"
+                      name="Name"
+                      value={formData.Name}
+                      onChange={handleChange}
+                      placeholder="Full Name"
+                      required
+                    />
+                  </div>
+
+                  <div className={styles.formgroup}>
+                    <label>Email Address (for webinar link & reminders) <span className="required">*</span></label>
+                    <input
+                      type="email"
+                      name="Email"
+                      value={formData.Email}
+                      onChange={handleChange}
+                      placeholder="you@example.com"
+                      required
+                    />
+                  </div>
+
+                  <div className={styles.formgroup}>
+                    <label>Mobile Number (WhatsApp enabled) <span className="required">*</span></label>
+                    <input
+                      type="tel"
+                      name="Mobile"
+                      value={formData.Mobile}
+                      onChange={handleChange}
+                      placeholder="+91 98765 43210"
+                      required
+                    />
+                  </div>
+
+                  <div className={styles.formgroup}>
+                    <label>City & State <span className="required">*</span></label>
+                    <input
+                      type="text"
+                      name="City"
+                      value={formData.City}
+                      onChange={handleChange}
+                      placeholder="City, State"
+                      required
+                    />
+                  </div>
+
+                  <div className={styles.formgroup}>
+                    <label>Student’s Name <span className="required">*</span></label>
+                    <input
+                      type="text"
+                      name="Student_Name"
+                      value={formData.Student_Name}
+                      onChange={handleChange}
+                      placeholder="Student's Name"
+                      required
+                    />
+                  </div>
+
+                  <div className={styles.formgroup}>
+                    <label>Student’s Current Grade <span className="required">*</span></label>
+                    <select
+                      name="Grade"
+                      value={formData.Grade}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select grade</option>
+                      {["KG", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5", "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12"].map(g => (
+                        <option key={g} value={g}>{g}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className={styles.formgroup}>
+                    <label>Student’s Age <span className="required">*</span></label>
+                    <input
+                      type="number"
+                      name="Student_Age"
+                      value={formData.Student_Age}
+                      onChange={handleChange}
+                      placeholder="Student's age"
+                      required
+                    />
+                  </div>
+
+                  <div className={styles.formgroup}>
+                    <label>Current School Board <span className="required">*</span></label>
+                    <select
+                      name="School_Board"
+                      value={formData.School_Board}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select board</option>
+                      {["CBSE", "ICSE", "State Board", "IGCSE / IB", "Homeschooled", "Other"].map(b => (
+                        <option key={b} value={b}>{b}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className={styles.formgroup}>
+                    <label>Preferred Program Level <span className="required">*</span></label>
+                    <select
+                      name="Preferred_Program_Level"
+                      value={formData.Preferred_Program_Level}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select program level</option>
+                      {["Elementary (KG–5)", "Middle School (6–8)", "High School (9–12)", "Not sure yet"].map(l => (
+                        <option key={l} value={l}>{l}</option>
+                      ))}
+                    </select>
+                  </div>
+                </>
+              ) : isTilliKids ? (
                 <>
                   {/* Tilli Kids Fields */}
                   <div className={styles.formgroup}>
@@ -264,7 +396,7 @@ export default function ZohoForm({ webinar }) {
                 </>
               ) : (
                 <>
-                  {/* Non-Tilli Kids Fields */}
+                  {/* Default Non-Tilli Fields */}
                   <div className={styles.formrow}>
                     <div className={styles.formgroup}>
                       <label>First Name <span className="required">*</span></label>
@@ -321,6 +453,7 @@ export default function ZohoForm({ webinar }) {
                 Confirm Registration
               </button>
             </form>
+
 
             <div className={styles.agreement}>
               <label className={styles.agreementLabel}>
