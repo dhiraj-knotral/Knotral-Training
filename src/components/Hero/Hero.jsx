@@ -42,9 +42,9 @@ const Hero = ({ webinars }) => {
 
             <div className="container">
                 <h1>
-                    Free Professional Development
+                    Professional Development
                     <br />
-                    from Global EdTech Leaders
+                    from Global Education Leaders
                 </h1>
 
                 <p>Live webinars • Certifications • Classroom-ready strategies</p>
