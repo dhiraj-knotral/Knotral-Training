@@ -9,36 +9,30 @@ export default function ZohoForm({ webinar }) {
   const [showModal, setShowModal] = useState(false);
   const [agreed, setAgreed] = useState(false);
 
+  const isTilliKids = webinar?.organisedBy === "Tilli Kids";
 
   useEffect(() => {
-    if (showModal) {
-      document.body.style.overflow = "hidden";  // ❌ disable scroll
-    } else {
-      document.body.style.overflow = "auto";    // ✅ enable scroll back
-    }
-
+    document.body.style.overflow = showModal ? "hidden" : "auto";
     return () => {
-      document.body.style.overflow = "auto";    // cleanup
+      document.body.style.overflow = "auto";
     };
   }, [showModal]);
 
-
+  // Load Razorpay script
   useEffect(() => {
     if (!window.Razorpay) {
       const script = document.createElement("script");
       script.src = "https://checkout.razorpay.com/v1/checkout.js";
       script.async = true;
-      script.onload = () => console.log("Razorpay loaded successfully");
-      script.onerror = () => console.error("Razorpay failed to load");
       document.body.appendChild(script);
     }
   }, []);
-
 
   // Form state
   const [formData, setFormData] = useState({
     First_Name: "",
     Last_Name: "",
+    Name: "", // For Tilli Kids
     Email: "",
     Mobile: "",
     Company: "",
@@ -48,11 +42,7 @@ export default function ZohoForm({ webinar }) {
     FORM_NAME: `${webinar?.organisedBy} Landing page`,
     Lead_Status: "No Contact Initiated",
     Lead_Source: "Knotral Trainings",
-    ...(webinar?.organisedBy === "Tilli Kids" && {
-      Grade: "",
-      Address: "",
-      Landmark: ""
-    })
+    ...(isTilliKids && { Region_To_Operate: "" }),
   });
 
   // Update state on input change
@@ -60,6 +50,24 @@ export default function ZohoForm({ webinar }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Generate payload for submission
+  const getSubmitPayload = () => {
+    if (isTilliKids) {
+      return {
+        Name: formData.Name,
+        Email: formData.Email,
+        Mobile: formData.Mobile,
+        Region_To_Operate: formData.Region_To_Operate,
+        Category: formData.Category,
+        FORM_NAME: formData.FORM_NAME,
+        Lead_Status: formData.Lead_Status,
+        Lead_Source: formData.Lead_Source,
+      };
+    }
+    return formData;
+  };
+
+  // Form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -68,15 +76,14 @@ export default function ZohoForm({ webinar }) {
       return;
     }
 
-    // 1️⃣ If webinar is free, directly submit the form (same as before)
+    // Free webinar
     if (webinar?.isFree) {
-      submitRegistration(formData, setFormData, setShowModal, webinar);
-      return; // stop further execution
+      await submitRegistration(getSubmitPayload());
+      return;
     }
 
-    // 2️⃣ If PAID webinar -> start payment process
     try {
-      // Step A: Create order from backend
+      // Step A: Create payment order
       const orderRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/create-payment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -86,37 +93,34 @@ export default function ZohoForm({ webinar }) {
           webinarId: webinar?._id,
           webinarTitle: webinar?.title,
           category: webinar?.organisedBy,
-          userData: formData   // store user info before payment
+          userData: getSubmitPayload(),
         }),
       });
 
       const orderData = await orderRes.json();
       if (!orderData?.orderId) return alert("Order creation failed");
 
-      // Step B: Open Razorpay Checkout
+      // Step B: Open Razorpay checkout
       const rzp = new window.Razorpay({
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: orderData.amount,
         currency: orderData.currency,
-        name: webinar.title,                 // shows in checkout popup
+        name: webinar.title,
         description: "Webinar Registration Payment",
         order_id: orderData.orderId,
-
-        // Prefill customer info
         prefill: {
-          name: formData.First_Name + " " + formData.Last_Name,
+          name: isTilliKids
+            ? formData.Name
+            : `${formData.First_Name} ${formData.Last_Name}`,
           email: formData.Email,
-          contact: formData.Mobile
+          contact: formData.Mobile,
         },
-
-        // Store webinar organizer and ID in Razorpay notes
         notes: {
-          organisedBy: webinar.organisedBy,  // your custom "App Name"
-          webinarName: webinar.title
+          organisedBy: webinar.organisedBy,
+          webinarName: webinar.title,
         },
-
         handler: async function (response) {
-          // Step C: Verify Payment on backend
+          // Step C: Verify payment
           const verifyRes = await fetch(
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/verify-payment`,
             {
@@ -125,12 +129,11 @@ export default function ZohoForm({ webinar }) {
               body: JSON.stringify(response),
             }
           );
-
           const verifyData = await verifyRes.json();
 
           if (verifyData.success) {
-            // Step D: Final form submission after payment success
-            await submitRegistration(formData, setFormData, setShowModal, webinar);
+            // Step D: Submit form after successful payment
+            await submitRegistration(getSubmitPayload());
             setShowModal(true);
           } else {
             alert("Payment verification failed. Try again.");
@@ -146,48 +149,55 @@ export default function ZohoForm({ webinar }) {
     }
   };
 
-
-  // Separated function: Submit registration form
-  async function submitRegistration(formData, setFormData, setShowModal, webinar) {
+  // Submit registration to Zoho
+  const submitRegistration = async (payload) => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/zoho/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
 
       if (data.success) {
+        // Reset form
+        setFormData(
+          isTilliKids
+            ? {
+                Name: "",
+                Email: "",
+                Mobile: "",
+                Region_To_Operate: "",
+                Category: webinar?.organisedBy,
+                FORM_NAME: `${webinar?.organisedBy} Landing page`,
+                Lead_Status: "No Contact Initiated",
+                Lead_Source: "Knotral Trainings",
+              }
+            : {
+                First_Name: "",
+                Last_Name: "",
+                Email: "",
+                Mobile: "",
+                Company: "",
+                City: "",
+                Designation: "",
+                Category: webinar?.organisedBy,
+                FORM_NAME: `${webinar?.organisedBy} Landing page`,
+                Lead_Status: "No Contact Initiated",
+                Lead_Source: "Knotral Trainings",
+              }
+        );
 
-        // 👉 Reset the form properly
-        setFormData({
-          First_Name: "",
-          Last_Name: "",
-          Mobile: "",
-          Email: "",
-          FORM_NAME: webinar?.title || "",
-          Category: webinar?.category || "",
-          Company: "",
-          City: "",
-          Designation: "",
-          Lead_Status: "No Contact Initiated",
-          Lead_Source: "Knotral Trainings",
-          Grade: "",
-          Address: "",
-          Landmark: "",
-        });
-
-        setShowModal(true); // Show success modal
+        setShowModal(true);
       } else {
         alert("❌ Something went wrong. Try again.");
       }
-
     } catch (error) {
       console.error("Registration error:", error);
       alert("❌ Something went wrong. Try again.");
     }
-  }
+  };
 
   return (
     <section className={styles.formpage}>
@@ -201,144 +211,108 @@ export default function ZohoForm({ webinar }) {
             </p>
 
             <form onSubmit={handleSubmit}>
-              <div className={styles.formrow}>
-                <div className={styles.formgroup}>
-                  <label>
-                    First Name <span className="required">*</span>
-                  </label>
-                  <input type="text" name="First_Name"
-                    onChange={handleChange} placeholder="Enter first name" required />
-                </div>
+              {isTilliKids ? (
+                <>
+                  {/* Tilli Kids Fields */}
+                  <div className={styles.formgroup}>
+                    <label>Name <span className="required">*</span></label>
+                    <input
+                      type="text"
+                      name="Name"
+                      value={formData.Name}
+                      onChange={handleChange}
+                      placeholder="Your full name"
+                      required
+                    />
+                  </div>
 
-                <div className={styles.formgroup}>
-                  <label>
-                    Last Name <span className="required">*</span>
-                  </label>
-                  <input type="text" name="Last_Name"
-                    onChange={handleChange} placeholder="Enter last name" required />
-                </div>
-              </div>
+                  <div className={styles.formgroup}>
+                    <label>Email <span className="required">*</span></label>
+                    <input
+                      type="email"
+                      name="Email"
+                      value={formData.Email}
+                      onChange={handleChange}
+                      placeholder="you@school.edu"
+                      required
+                    />
+                  </div>
 
-              <div className={styles.formgroup}>
-                <label>
-                  Email Address <span className="required">*</span>
-                </label>
-                <input type="email" name="Email"
-                  onChange={handleChange} placeholder="you@school.edu" required />
-                <div className={styles.hint}>We'll send the webinar link here</div>
-              </div>
+                  <div className={styles.formgroup}>
+                    <label>WhatsApp Number <span className="required">*</span></label>
+                    <input
+                      type="tel"
+                      name="Mobile"
+                      value={formData.Mobile}
+                      onChange={handleChange}
+                      placeholder="+91 98765 43210"
+                      required
+                    />
+                  </div>
 
-              <div className={styles.formgroup}>
-                <label>
-                  WhatsApp Number <span className="required">*</span>
-                </label>
-                <input type="tel" name="Mobile"
-                  onChange={handleChange} placeholder="+91 98765 43210" required />
-                <div className={styles.hint}>For reminders and follow-up resources</div>
-              </div>
+                  <div className={styles.formgroup}>
+                    <label>Region you operate in <span className="required">*</span></label>
+                    <input
+                      type="text"
+                      name="Region_To_Operate"
+                      value={formData.Region_To_Operate}
+                      onChange={handleChange}
+                      placeholder="Your region"
+                      required
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Non-Tilli Kids Fields */}
+                  <div className={styles.formrow}>
+                    <div className={styles.formgroup}>
+                      <label>First Name <span className="required">*</span></label>
+                      <input type="text" name="First_Name" onChange={handleChange} placeholder="Enter first name" required />
+                    </div>
 
-              <div className={styles.formgroup}>
-                <label>
-                  Category <span className="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="Category"
-                  value={formData.Category}
-                  readOnly
-                  style={{ background: "#f5f5f5", cursor: "not-allowed" }} // optional styling
-                />
-              </div>
+                    <div className={styles.formgroup}>
+                      <label>Last Name <span className="required">*</span></label>
+                      <input type="text" name="Last_Name" onChange={handleChange} placeholder="Enter last name" required />
+                    </div>
+                  </div>
 
-              {/* <div className={styles.formgroup}>
-                <label>
-                  Organised By <span className="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="FORM_NAME"
-                  value={formData.FORM_NAME}
-                  readOnly
-                  style={{ background: "#f5f5f5", cursor: "not-allowed" }} // optional styling
-                />
-              </div> */}
+                  <div className={styles.formgroup}>
+                    <label>Email Address <span className="required">*</span></label>
+                    <input type="email" name="Email" onChange={handleChange} placeholder="you@school.edu" required />
+                  </div>
 
-              <div className={styles.formgroup}>
-                <label>
-                  School/Organization Name <span className="required">*</span>
-                </label>
-                <input type="text" name="Company"
-                  onChange={handleChange} placeholder="Your school or organization" />
-              </div>
-              {webinar?.organisedBy === "Tilli Kids" && (
-                <div className={styles.formgroup}>
-                  <label>
-                    Grade <span className="required">*</span>
-                  </label>
-                  <select
-                    name="Grade"
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Select your Grade...</option>
-                    <option>KG</option>
-                    <option>Grade 1</option>
-                    <option>Grade 2</option>
-                    <option>Grade 3</option>
-                    <option>Grade 4</option>
-                    <option>Grade 5</option>
-                  </select>
-                </div>
-              )}
+                  <div className={styles.formgroup}>
+                    <label>WhatsApp Number <span className="required">*</span></label>
+                    <input type="tel" name="Mobile" onChange={handleChange} placeholder="+91 98765 43210" required />
+                  </div>
 
-              <div className={styles.formrow}>
-                <div className={styles.formgroup}>
-                  <label>
-                    Your Designation <span className="required">*</span>
-                  </label>
-                  <select name="Designation"
-                    onChange={handleChange}
-                    required>
-                    <option value="">Select your designation...</option>
-                    <option>Teacher</option>
-                    <option>Academic Coordinator</option>
-                    <option>Head of Department</option>
-                    <option>Vice Principal</option>
-                    <option>Principal</option>
-                    <option>Curriculum Head</option>
-                    <option>Other</option>
-                  </select>
-                </div>
+                  <div className={styles.formgroup}>
+                    <label>School/Organization Name <span className="required">*</span></label>
+                    <input type="text" name="Company" onChange={handleChange} placeholder="Your school or organization" />
+                  </div>
 
-                <div className={styles.formgroup}>
-                  <label>
-                    City <span className="required">*</span>
-                  </label>
-                  <input type="text" name="City"
-                    onChange={handleChange} placeholder="Your city" />
-                </div>
-              </div>
+                  <div className={styles.formrow}>
+                    <div className={styles.formgroup}>
+                      <label>Your Designation <span className="required">*</span></label>
+                      <select name="Designation" onChange={handleChange} required>
+                        <option value="">Select your designation...</option>
+                        <option>Teacher</option>
+                        <option>Academic Coordinator</option>
+                        <option>Head of Department</option>
+                        <option>Vice Principal</option>
+                        <option>Principal</option>
+                        <option>Curriculum Head</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
 
-              {webinar?.organisedBy === "Tilli Kids" && (
-                <div className={styles.formgroup}>
-                  <label>
-                    Address <span className="required">*</span>
-                  </label>
-                  <input type="text" name="Address"
-                    onChange={handleChange} placeholder="Your full address" required />
-                  <div className={styles.hint}>The Workbook will be dispatched to this address. Share the Correct Address...</div>
-
-                </div>
-              )}
-
-              {webinar?.organisedBy === "Tilli Kids" && (
-                <div className={styles.formgroup}>
-                  <label>
-                    Landmark <span className="required">*</span>
-                  </label>
-                  <input type="text" name="Landmark"
-                    onChange={handleChange} placeholder="Landmark" required />
-                </div>
+                    <div className={styles.formgroup}>
+                      <label>City <span className="required">*</span></label>
+                      <input type="text" name="City" onChange={handleChange} placeholder="Your city" />
+                    </div>
+                  </div>
+                </>
               )}
 
               <div className={styles.formdivider}></div>
@@ -346,7 +320,6 @@ export default function ZohoForm({ webinar }) {
               <button className="btn btnprimary btnlg btnblock">
                 Confirm Registration
               </button>
-
             </form>
 
             <div className={styles.agreement}>
