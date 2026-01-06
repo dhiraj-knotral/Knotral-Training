@@ -66,8 +66,8 @@ export default function ZohoForm({ webinar }) {
         Email: formData.Email,
         Mobile: formData.Mobile,
         Region_To_Operate: formData.Region_To_Operate,
-        Category: formData.Category,
-        FORM_NAME: formData.FORM_NAME,
+        Category: webinar?.organisedBy,
+        FORM_NAME: `${webinar?.organisedBy} Landing page`,
         Lead_Status: formData.Lead_Status,
         Lead_Source: formData.Lead_Source,
       };
