@@ -62,7 +62,8 @@ export default function ZohoForm({ webinar }) {
   const getSubmitPayload = () => {
     if (isTilliKids) {
       return {
-        Name: formData.Name,
+        First_Name: formData.First_Name,
+        Last_Name: formData.Last_Name,
         Email: formData.Email,
         Mobile: formData.Mobile,
         Region_To_Operate: formData.Region_To_Operate,
@@ -117,9 +118,7 @@ export default function ZohoForm({ webinar }) {
         description: "Webinar Registration Payment",
         order_id: orderData.orderId,
         prefill: {
-          name: isTilliKids
-            ? formData.Name
-            : `${formData.First_Name} ${formData.Last_Name}`,
+          name: `${formData.First_Name} ${formData.Last_Name}`.trim(),
           email: formData.Email,
           contact: formData.Mobile,
         },
@@ -216,8 +215,8 @@ export default function ZohoForm({ webinar }) {
               {isOnFire
                 ? "Register for the Open Day"
                 : "Register for the Trainings"
-                }
-            </h2>          
+              }
+            </h2>
             <p className={styles.subheading}>
               {webinar.registerFormSubheading}
             </p>
@@ -226,16 +225,30 @@ export default function ZohoForm({ webinar }) {
               {isOnFire ? (
                 <>
                   {/* On Fire Fields */}
-                  <div className={styles.formgroup}>
-                    <label>Full Name (Parent / Guardian) <span className="required">*</span></label>
-                    <input
-                      type="text"
-                      name="Name"
-                      value={formData.Name}
-                      onChange={handleChange}
-                      placeholder="Full Name"
-                      required
-                    />
+                  <div className={styles.formrow}>
+                    <div className={styles.formgroup}>
+                      <label>First Name <span className="required">*</span></label>
+                      <input
+                        type="text"
+                        name="First_Name"
+                        value={formData.First_Name}
+                        onChange={handleChange}
+                        placeholder="First name"
+                        required
+                      />
+                    </div>
+
+                    <div className={styles.formgroup}>
+                      <label>Last Name <span className="required">*</span></label>
+                      <input
+                        type="text"
+                        name="Last_Name"
+                        value={formData.Last_Name}
+                        onChange={handleChange}
+                        placeholder="Last name"
+                        required
+                      />
+                    </div>
                   </div>
 
                   <div className={styles.formgroup}>
@@ -346,16 +359,30 @@ export default function ZohoForm({ webinar }) {
               ) : isTilliKids ? (
                 <>
                   {/* Tilli Kids Fields */}
-                  <div className={styles.formgroup}>
-                    <label>Name <span className="required">*</span></label>
-                    <input
-                      type="text"
-                      name="Name"
-                      value={formData.Name}
-                      onChange={handleChange}
-                      placeholder="Your full name"
-                      required
-                    />
+                  <div className={styles.formrow}>
+                    <div className={styles.formgroup}>
+                      <label>First Name <span className="required">*</span></label>
+                      <input
+                        type="text"
+                        name="First_Name"
+                        value={formData.First_Name}
+                        onChange={handleChange}
+                        placeholder="First name"
+                        required
+                      />
+                    </div>
+
+                    <div className={styles.formgroup}>
+                      <label>Last Name <span className="required">*</span></label>
+                      <input
+                        type="text"
+                        name="Last_Name"
+                        value={formData.Last_Name}
+                        onChange={handleChange}
+                        placeholder="Last name"
+                        required
+                      />
+                    </div>
                   </div>
 
                   <div className={styles.formgroup}>
