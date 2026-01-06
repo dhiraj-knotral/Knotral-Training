@@ -8,6 +8,8 @@ export default function ZohoForm({ webinar }) {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [agreed, setAgreed] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
 
   const isTilliKids = webinar?.organisedBy === "Tilli Kids";
 
@@ -35,7 +37,6 @@ export default function ZohoForm({ webinar }) {
   const [formData, setFormData] = useState({
     First_Name: "",
     Last_Name: "",
-    Name: "",
     Email: "",
     Mobile: "",
     City: "",
@@ -80,14 +81,22 @@ export default function ZohoForm({ webinar }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
+    // ✅ Show alert if not agreed
     if (!agreed) {
       alert("Please agree to the Terms of Service and Privacy Policy before registering.");
       return;
     }
 
+    // ✅ Prevent double submit
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+
     // Free webinar
     if (webinar?.isFree) {
       await submitRegistration(getSubmitPayload());
+      setIsSubmitting(false);
       return;
     }
 
@@ -107,7 +116,12 @@ export default function ZohoForm({ webinar }) {
       });
 
       const orderData = await orderRes.json();
-      if (!orderData?.orderId) return alert("Order creation failed");
+      if (!orderData?.orderId) {
+        setIsSubmitting(false);
+        alert("Order creation failed");
+        return;
+
+      }
 
       // Step B: Open Razorpay checkout
       const rzp = new window.Razorpay({
@@ -172,7 +186,8 @@ export default function ZohoForm({ webinar }) {
         setFormData(
           isTilliKids
             ? {
-              Name: "",
+              First_Name: "",
+              Last_Name: "",
               Email: "",
               Mobile: "",
               Region_To_Operate: "",
@@ -476,8 +491,11 @@ export default function ZohoForm({ webinar }) {
 
               <div className={styles.formdivider}></div>
 
-              <button className="btn btnprimary btnlg btnblock">
-                Confirm Registration
+              <button
+                className="btn btnprimary btnlg btnblock"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Submitting..." : "Confirm Registration"}
               </button>
             </form>
 
