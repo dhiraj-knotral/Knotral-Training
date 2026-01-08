@@ -45,7 +45,7 @@ export async function generateMetadata({ params }) {
 
 export default async function Register({ params }) {
   const { slug } = await params;
- const cookieStore = await cookies();
+  const cookieStore = await cookies(); // synchronous
 
   const utm = {
     utm_source: cookieStore.get("utm_source")?.value || null,
@@ -54,6 +54,9 @@ export default async function Register({ params }) {
     utm_term: cookieStore.get("utm_term")?.value || null,
     utm_content: cookieStore.get("utm_content")?.value || null,
   };
+
+    console.log("[Server] UTMs:", utm);
+
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/webinars/get-webinar-by-slug?slug=${slug}`,
