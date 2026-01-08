@@ -12,6 +12,8 @@ export function middleware(request) {
   const response = NextResponse.next();
   const searchParams = request.nextUrl.searchParams;
 
+    const pathname = request.nextUrl.pathname;
+
 
   if (searchParams.toString()) {
     console.log("[UTM Middleware]", pathname, Object.fromEntries(searchParams));
