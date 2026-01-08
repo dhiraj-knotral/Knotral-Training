@@ -1,31 +1,22 @@
 import { NextResponse } from "next/server";
 
-const UTM_KEYS = [
-  "utm_source",
-  "utm_medium",
-  "utm_campaign",
-  "utm_term",
-  "utm_content",
-];
-
 export function middleware(request) {
   const response = NextResponse.next();
-  const searchParams = request.nextUrl.searchParams;
+  const url = request.nextUrl;
+  const searchParams = Object.fromEntries(url.searchParams);
 
-    const pathname = request.nextUrl.pathname;
-
-
-  if (searchParams.toString()) {
-    console.log("[UTM Middleware]", pathname, Object.fromEntries(searchParams));
+  // Log everything
+  if (Object.keys(searchParams).length > 0) {
+    console.log("[UTM Middleware]", url.pathname, searchParams);
   }
 
-  UTM_KEYS.forEach((key) => {
-    const value = searchParams.get(key);
-
+  // Save all query params as cookies
+  Object.entries(searchParams).forEach(([key, value]) => {
     if (value) {
       response.cookies.set(key, value, {
         maxAge: 60 * 60 * 24 * 30, // 30 days
         path: "/",
+        sameSite: "lax",
       });
     }
   });
@@ -34,5 +25,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/:path*"], // capture UTMs on all pages
+  matcher: ["/:path*"], // runs on all routes
 };
