@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import RegisterComp from "@/components/RegisterComp/RegisterComp";
+import { cookies } from "next/headers";
 import Link from "next/link";
 
 export async function generateMetadata({ params }) {
@@ -44,10 +45,21 @@ export async function generateMetadata({ params }) {
 
 export default async function Register({ params }) {
   const { slug } = await params;
+ const cookieStore = await cookies();
+
+  const utm = {
+    utm_source: cookieStore.get("utm_source")?.value || null,
+    utm_medium: cookieStore.get("utm_medium")?.value || null,
+    utm_campaign: cookieStore.get("utm_campaign")?.value || null,
+    utm_term: cookieStore.get("utm_term")?.value || null,
+    utm_content: cookieStore.get("utm_content")?.value || null,
+  };
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/webinars/get-webinar-by-slug?slug=${slug}`,
     { cache: "no-store" }
   );
+
 
   const data = await res.json();
 
@@ -61,6 +73,7 @@ export default async function Register({ params }) {
       .join(' ');             // join back with spaces
   };
 
+
   return (
     <>
       <Header />
@@ -73,7 +86,7 @@ export default async function Register({ params }) {
           </div>
         </div>
       </section>
-      <RegisterComp webinar={webinar} />
+      <RegisterComp webinar={webinar} utms={utm} />
       <Footer />
     </>
   );

@@ -3,7 +3,7 @@ import styles from "./Register.module.css"
 import Link from "next/link";
 import moment from "moment";
 
-const RegisterComp = ({ webinar }) => {
+const RegisterComp = ({ webinar, utms }) => {
 
   // Determine button text and style based on webinar actions
   const buttonText = webinar.actions?.canStartProgram
@@ -16,10 +16,10 @@ const RegisterComp = ({ webinar }) => {
     ? "btn btnsecondary btnblock"
     : "btn btnprimary btnblock";
 
-  // Determine link destination (e.g., registration page)
-  const href = webinar.actions?.canStartProgram || webinar.actions?.canEnroll
-    ? `/course/${webinar.slug}`     // Course page
-    : `/register/${webinar.slug}`;  // Registration page
+const href =
+  webinar.actions?.canStartProgram || webinar.actions?.canEnroll
+    ? `/course/${webinar.slug}`
+    : `/register/${webinar.slug}`;
 
   return (
     <section className={styles.landingcontent}>

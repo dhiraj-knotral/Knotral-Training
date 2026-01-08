@@ -4,7 +4,7 @@ import styles from "./ZohoForms.module.css"
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function ZohoForm({ webinar }) {
+export default function ZohoForm({ webinar, utms }) {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [agreed, setAgreed] = useState(false);
@@ -52,6 +52,11 @@ export default function ZohoForm({ webinar }) {
     Category: webinar?.organisedBy || "",
     Lead_Status: "No Contact Initiated",
     Lead_Source: "Knotral Trainings",
+
+    // ✅ UTM fields
+    utm_source: utms?.utm_source || "",
+    utm_medium: utms?.utm_medium || "",
+    utm_campaign: utms?.utm_campaign || "",
   });
 
   // Update state on input change
@@ -72,6 +77,11 @@ export default function ZohoForm({ webinar }) {
         FORM_NAME: `${webinar?.organisedBy} Landing page`,
         Lead_Status: formData.Lead_Status,
         Lead_Source: formData.Lead_Source,
+
+        // ✅ UTM fields
+        utm_source: utms?.utm_source || "",
+        utm_medium: utms?.utm_medium || "",
+        utm_campaign: utms?.utm_campaign || "",
       };
     }
     return formData;
