@@ -12,6 +12,11 @@ export function middleware(request) {
   const response = NextResponse.next();
   const searchParams = request.nextUrl.searchParams;
 
+
+  if (searchParams.toString()) {
+    console.log("[UTM Middleware]", pathname, Object.fromEntries(searchParams));
+  }
+
   UTM_KEYS.forEach((key) => {
     const value = searchParams.get(key);
 
