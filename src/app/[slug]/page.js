@@ -3,6 +3,7 @@ import Header from "@/components/Header/Header";
 import RegisterComp from "@/components/RegisterComp/RegisterComp";
 import { cookies } from "next/headers";
 import Link from "next/link";
+import Script from "next/script";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -55,7 +56,7 @@ export default async function Register({ params }) {
     utm_content: cookieStore.get("utm_content")?.value || null,
   };
 
-    console.log("[Server] UTMs:", utm);
+  console.log("[Server] UTMs:", utm);
 
 
   const res = await fetch(
@@ -79,6 +80,14 @@ export default async function Register({ params }) {
 
   return (
     <>
+      <Script
+        id="webinar-schema"
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webinar?.schemaMarkup || {}),
+        }}
+      />
       <Header />
       <section className="landinghero">
         <div className="container">
