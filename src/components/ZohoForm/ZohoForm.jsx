@@ -501,14 +501,6 @@ export default function ZohoForm({ webinar, utms }) {
 
               <div className={styles.formdivider}></div>
 
-              <button
-                className="btn btnprimary btnlg btnblock"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Submitting..." : "Confirm Registration"}
-              </button>
-            </form>
-
 
             <div className={styles.agreement}>
               <label className={styles.agreementLabel}>
@@ -530,6 +522,15 @@ export default function ZohoForm({ webinar, utms }) {
                 </span>
               </label>
             </div>
+
+              <button
+                className="btn btnprimary btnlg btnblock"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Submitting..." : "Confirm Registration"}
+              </button>
+            </form>
+
           </div>
         </div>
       </div>
