@@ -38,7 +38,7 @@ export default function ZohoForm({ webinar, utms }) {
     First_Name: "",
     Last_Name: "",
     Email: "",
-    Mobile: "",
+    Mobile: "+91",
     City: "",
     Company: "",
     Designation: "",
@@ -59,9 +59,42 @@ export default function ZohoForm({ webinar, utms }) {
     utm_campaign: utms?.utm_campaign || "",
   });
 
-  // Update state on input change
+  // Generic handler
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Mobile handler
+  const handleMobileChange = (e) => {
+    let value = e.target.value;
+
+    // Always enforce +91 prefix
+    if (!value.startsWith("+91")) value = "+91";
+
+    // Only digits after +91
+    const digitsOnly = value.slice(3).replace(/\D/g, "");
+
+    // Limit to 10 digits
+    if (digitsOnly.length > 10) return;
+
+    setFormData((prev) => ({
+      ...prev,
+      Mobile: "+91" + digitsOnly,
+    }));
+  };
+
+  const handleKeyDown = (e) => {
+    // Prevent deleting +91
+    if (
+      (e.key === "Backspace" || e.key === "Delete") &&
+      e.target.selectionStart <= 3
+    ) {
+      e.preventDefault();
+    }
   };
 
   // Generate payload for submission
@@ -199,7 +232,7 @@ export default function ZohoForm({ webinar, utms }) {
               First_Name: "",
               Last_Name: "",
               Email: "",
-              Mobile: "",
+              Mobile: "+91",
               Region_To_Operate: "",
               Category: webinar?.organisedBy,
               FORM_NAME: `${webinar?.organisedBy} Landing page`,
@@ -210,7 +243,7 @@ export default function ZohoForm({ webinar, utms }) {
               First_Name: "",
               Last_Name: "",
               Email: "",
-              Mobile: "",
+              Mobile: "+91",
               Company: "",
               City: "",
               Designation: "",
@@ -294,9 +327,8 @@ export default function ZohoForm({ webinar, utms }) {
                       type="tel"
                       name="Mobile"
                       value={formData.Mobile}
-                      onChange={handleChange}
-                      placeholder="+91 98765 43210"
-                      required
+                      onChange={handleMobileChange}
+                      onKeyDown={handleKeyDown}
                     />
                   </div>
 
@@ -428,9 +460,8 @@ export default function ZohoForm({ webinar, utms }) {
                       type="tel"
                       name="Mobile"
                       value={formData.Mobile}
-                      onChange={handleChange}
-                      placeholder="+91 98765 43210"
-                      required
+                      onChange={handleMobileChange}
+                      onKeyDown={handleKeyDown}
                     />
                   </div>
 
@@ -468,7 +499,13 @@ export default function ZohoForm({ webinar, utms }) {
 
                   <div className={styles.formgroup}>
                     <label>WhatsApp Number <span className="required">*</span></label>
-                    <input type="tel" name="Mobile" onChange={handleChange} placeholder="+91 98765 43210" required />
+                    <input
+                      type="tel"
+                      name="Mobile"
+                      value={formData.Mobile}
+                      onChange={handleMobileChange}
+                      onKeyDown={handleKeyDown}
+                    />
                   </div>
 
                   <div className={styles.formgroup}>
@@ -502,26 +539,26 @@ export default function ZohoForm({ webinar, utms }) {
               <div className={styles.formdivider}></div>
 
 
-            <div className={styles.agreement}>
-              <label className={styles.agreementLabel}>
-                <input
-                  type="checkbox"
-                  checked={agreed}
-                  onChange={() => setAgreed(!agreed)}
-                  required
-                />
-                <span>
-                  By registering, you agree to Knotral's{" "}
-                  <a href="/terms-and-conditions" style={{ color: "var(--secondary-blue)" }}>
-                    Terms of Service
-                  </a>{" "}
-                  and{" "}
-                  <Link href="/privacy-policy" style={{ color: "var(--secondary-blue)" }}>
-                    Privacy Policy
-                  </Link>
-                </span>
-              </label>
-            </div>
+              <div className={styles.agreement}>
+                <label className={styles.agreementLabel}>
+                  <input
+                    type="checkbox"
+                    checked={agreed}
+                    onChange={() => setAgreed(!agreed)}
+                    required
+                  />
+                  <span>
+                    By registering, you agree to Knotral's{" "}
+                    <a href="/terms-and-conditions" style={{ color: "var(--secondary-blue)" }}>
+                      Terms of Service
+                    </a>{" "}
+                    and{" "}
+                    <Link href="/privacy-policy" style={{ color: "var(--secondary-blue)" }}>
+                      Privacy Policy
+                    </Link>
+                  </span>
+                </label>
+              </div>
 
               <button
                 className="btn btnprimary btnlg btnblock"
