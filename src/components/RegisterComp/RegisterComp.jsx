@@ -1,9 +1,72 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import styles from "./Register.module.css"
 import Link from "next/link";
 import moment from "moment";
 
-const RegisterComp = ({ webinar, utms }) => {
+const pastSessionsMock = [
+  {
+    id: 1,
+    youtubeId: "dQw4w9WgXcQ",
+    date: "December 15, 2025",
+    title: "December Session",
+    views: "1,234",
+    rating: "4.8/5",
+  },
+  {
+    id: 2,
+    youtubeId: "dQw4w9WgXcQ",
+    date: "November 20, 2025",
+    title: "November Session",
+    views: "987",
+    rating: "4.6/5",
+  },
+  {
+    id: 3,
+    youtubeId: "dQw4w9WgXcQ",
+    date: "October 10, 2025",
+    title: "October Session",
+    views: "1,540",
+    rating: "4.9/5",
+  },
+];
+
+
+const RegisterComp = ({ webinar }) => {
+
+  const [activeVideo, setActiveVideo] = useState(null);
+
+  const [activeTab, setActiveTab] = useState("teachers-content");
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
+  const playRecording = (session) => {
+    setActiveVideo(session);
+  };
+
+  const closeVideoPlayer = () => {
+    setActiveVideo(null);
+  };
+
+  useEffect(() => {
+    if (activeVideo) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeVideo]);
+
+  const isCurrentMonthWebinar = moment(webinar.date).isSame(moment(), "month");
+
+const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"));
+
 
   // Determine button text and style based on webinar actions
   const buttonText = webinar.actions?.canStartProgram
@@ -16,10 +79,10 @@ const RegisterComp = ({ webinar, utms }) => {
     ? "btn btnsecondary btnblock"
     : "btn btnprimary btnblock";
 
-const href =
-  webinar.actions?.canStartProgram || webinar.actions?.canEnroll
-    ? `/course/${webinar.slug}`
-    : `/register/${webinar.slug}`;
+  const href =
+    webinar.actions?.canStartProgram || webinar.actions?.canEnroll
+      ? `/course/${webinar.slug}`
+      : `/register/${webinar.slug}`;
 
   return (
     <section className={styles.landingcontent}>
@@ -65,38 +128,313 @@ const href =
               </ul>
             </div>
 
-            <div className={styles.contentsection}>
-              <h2>Who Should Attend</h2>
-              <div className={styles.audiencegrid}>
-                {webinar.whoCanAttend && webinar.whoCanAttend.map((audience) => {
-                  // Map keys to image URLs
-                  const audienceIcons = {
-                    teachers: "/attend1.png",
-                    counsellors: "/attend2.png",
-                    tuition_owners: "/attend3.png",
-                    coaching_owners: "/attend4.png",
-                    consultants: "/attend5.png",
-                    leaders: "/attend6.png",
-                    heads: "/attend7.png",
-                  };
+            {isCurrentMonthWebinar ? (
 
-                  return (
-                    <div className={styles.audienceitem} key={audience._id}>
-                      <div className={styles.icon}>
-                        <img
-                          src={audienceIcons[audience.key] || "/icons/default.png"}
-                          alt={audience.title}
-                          className={styles.audienceIcon}
-                        />
+              <div className={styles.contentsection}>
+                <h2>Who Should Attend</h2>
+                <div className={styles.audiencegrid}>
+                  {webinar.whoCanAttend && webinar.whoCanAttend.map((audience) => {
+                    // Map keys to image URLs
+                    const audienceIcons = {
+                      teachers: "/attend1.png",
+                      counsellors: "/attend2.png",
+                      tuition_owners: "/attend3.png",
+                      coaching_owners: "/attend4.png",
+                      consultants: "/attend5.png",
+                      leaders: "/attend6.png",
+                      heads: "/attend7.png",
+                    };
+
+                    return (
+                      <div className={styles.audienceitem} key={audience._id}>
+                        <div className={styles.icon}>
+                          <img
+                            src={audienceIcons[audience.key] || "/icons/default.png"}
+                            alt={audience.title}
+                            className={styles.audienceIcon}
+                          />
+                        </div>
+                        <div className={styles.label}>
+                          {audience.title}
+                        </div>
                       </div>
-                      <div className={styles.label}>
-                        {audience.title}
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className={styles.audiencetabs}>
+                  <div
+                    className={`${styles.audiencetab} ${activeTab === "teachers-content" ? styles.active : ""
+                      }`}
+                    onClick={() => handleTabClick("teachers-content")}
+                  >
+                    <img
+                      src="/attend1.png"
+                      alt="Teachers"
+                      className={styles.tabicon}
+                    />
+                    For Teachers
+                  </div>
+
+                  <div
+                    className={`${styles.audiencetab} ${activeTab === "schools-content" ? styles.active : ""
+                      }`}
+                    onClick={() => handleTabClick("schools-content")}
+                  >
+                    <img
+                      src="/attend6.png"
+                      alt="Schools"
+                      className={styles.tabicon}
+                    />
+                    For Schools
+                  </div>
+
+                  <div
+                    className={`${styles.audiencetab} ${activeTab === "resellers-content" ? styles.active : ""
+                      }`}
+                    onClick={() => handleTabClick("resellers-content")}
+                  >
+                    <img
+                      src="/attend5.png"
+                      alt="Resellers"
+                      className={styles.tabicon}
+                    />
+                    For Resellers
+                  </div>
+                </div>
+
+                <div
+                  id="teachers-content"
+                  className={`${styles.tabcontent} ${activeTab === "teachers-content" ? styles.active : ""
+                    }`}
+                >
+                  <div className={styles.contentsection}>
+                    <h2 className={styles.sectiontitle}>What You'll Learn</h2>
+
+                    <ul className={styles.learninglist}>
+                      <li className={styles.learningitem}>
+                        <span className={styles.learningtext}>
+                          What "student engagement" really looks like inside your classroom
+                        </span>
+                      </li>
+
+                      <li className={styles.learningitem}>
+                        <span className={styles.learningtext}>
+                          How to use classroom evidence to identify engagement gaps
+                        </span>
+                      </li>
+
+                      <li className={styles.learningitem}>
+                        <span className={styles.learningtext}>
+                          Practical teaching practices that improve participation and interaction
+                        </span>
+                      </li>
+
+                      <li className={styles.learningitem}>
+                        <span className={styles.learningtext}>
+                          How guided reflection leads to sustained improvement in your teaching
+                        </span>
+                      </li>
+
+                      <li className={styles.learningitem}>
+                        <span className={styles.learningtext}>
+                          Using AI-supported coaching to enhance your professional development
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className={styles.contentsection}>
+                    <h2 className={styles.sectiontitle}>Why Attend as a Teacher</h2>
+
+                    <div className={styles.whyattendgrid}>
+                      <div className={styles.whycard}>
+                        <div className={styles.whyicon}>
+                          <img
+                            src="/attend1.png"
+                            alt="Immediate Impact"
+                            className={styles.whyiconImage}
+                          />
+                        </div>
+                        <h3 className={styles.whytitle}>Immediate Impact</h3>
+                        <p className={styles.whydescription}>
+                          Apply strategies in your classroom from day one
+                        </p>
+                      </div>
+
+                      <div className={styles.whycard}>
+                        <div className={styles.whyicon}>
+                          <img
+                            src="/attend4.png"
+                            alt="Personal Growth"
+                            className={styles.whyiconImage}
+                          />
+                        </div>
+                        <h3 className={styles.whytitle}>Personal Growth</h3>
+                        <p className={styles.whydescription}>
+                          Develop reflective teaching practices for career advancement
+                        </p>
+                      </div>
+
+                      <div className={styles.whycard}>
+                        <div className={styles.whyicon}>
+                          <img
+                            src="/attend7.png"
+                            alt="Certificate"
+                            className={styles.whyiconImage}
+                          />
+                        </div>
+                        <h3 className={styles.whytitle}>Certificate</h3>
+                        <p className={styles.whydescription}>
+                          Earn CPD hours and professional certification
+                        </p>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
-            </div>
+                  </div>
+                </div>
+
+
+                <div
+                  id="schools-content"
+                  className={`${styles.tabcontent} ${activeTab === "schools-content" ? styles.active : ""
+                    }`}
+                >
+                  <div className={styles.contentsection}>
+                    <h2 className={styles.sectiontitle}>Benefits for Your School</h2>
+
+                    <div className={styles.benefitsgrid}>
+                      <div className={styles.benefitcard}>
+                        <span className={styles.benefiticon}>
+                          <img
+                            src="/attend1.png"
+                            alt="Teacher Development"
+                            className={styles.benefiticonImage}
+                          />
+                        </span>
+                        <h3 className={styles.benefittitle}>Teacher Development</h3>
+                        <p className={styles.benefitdescription}>
+                          Upskill your entire teaching staff with evidence-based practices that improve student outcomes and teacher retention.
+                        </p>
+                      </div>
+
+                      <div className={styles.benefitcard}>
+                        <span className={styles.benefiticon}>
+                          <img
+                            src="/attend6.png"
+                            alt="Teacher Development"
+                            className={styles.benefiticonImage}
+                          />
+                        </span>
+                        <h3 className={styles.benefittitle}>Measurable Results</h3>
+                        <p className={styles.benefitdescription}>
+                          Track improvement in student engagement through classroom observations and data-driven insights.
+                        </p>
+                      </div>
+
+                      <div className={styles.benefitcard}>
+                        <span className={styles.benefiticon}>
+                          <img
+                            src="/attend5.png"
+                            alt="Teacher Development"
+                            className={styles.benefiticonImage}
+                          />
+                        </span>
+                        <h3 className={styles.benefittitle}>School-Wide Impact</h3>
+                        <p className={styles.benefitdescription}>
+                          Create a culture of reflective practice that elevates teaching quality across all departments.
+                        </p>
+                      </div>
+
+                      <div className={styles.benefitcard}>
+                        <span className={styles.benefiticon}>
+                          <img
+                            src="/attend3.png"
+                            alt="Teacher Development"
+                            className={styles.benefiticonImage}
+                          />
+                        </span>
+                        <h3 className={styles.benefittitle}>Ongoing Support</h3>
+                        <p className={styles.benefitdescription}>
+                          Access to resources, follow-up sessions, and implementation support for sustainable change.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div
+                  id="resellers-content"
+                  className={`${styles.tabcontent} ${activeTab === "resellers-content" ? styles.active : ""
+                    }`}
+                >
+                  <div className={styles.contentsection}>
+                    <h2 className={styles.sectiontitle}>Partner Opportunities</h2>
+
+                    <div className={styles.benefitsgrid}>
+                      <div className={styles.benefitcard}>
+                        <span className={styles.benefiticon}>
+                          <img
+                            src="/attend5.png"
+                            alt="Teacher Development"
+                            className={styles.benefiticonImage}
+                          />
+                        </span>
+                        <h3 className={styles.benefittitle}>Lead Generation</h3>
+                        <p className={styles.benefitdescription}>
+                          Connect with schools actively seeking professional development solutions and teacher training programs.
+                        </p>
+                      </div>
+
+                      <div className={styles.benefitcard}>
+                        <span className={styles.benefiticon}>
+                          <img
+                            src="/attend1.png"
+                            alt="Teacher Development"
+                            className={styles.benefiticonImage}
+                          />
+                        </span>
+                        <h3 className={styles.benefittitle}>Product Knowledge</h3>
+                        <p className={styles.benefitdescription}>
+                          Deep-dive into solution features, implementation strategies, and ROI to better serve your clients.
+                        </p>
+                      </div>
+
+                      <div className={styles.benefitcard}>
+                        <span className={styles.benefiticon}>
+                          <img
+                            src="/attend7.png"
+                            alt="Teacher Development"
+                            className={styles.benefiticonImage}
+                          />
+                        </span>
+                        <h3 className={styles.benefittitle}>Sales Enablement</h3>
+                        <p className={styles.benefitdescription}>
+                          Gain presentation materials, case studies, and demo access to accelerate your sales cycle.
+                        </p>
+                      </div>
+
+                      <div className={styles.benefitcard}>
+                        <span className={styles.benefiticon}>
+                          <img
+                            src="/attend2.png"
+                            alt="Teacher Development"
+                            className={styles.benefiticonImage}
+                          />
+                        </span>
+                        <h3 className={styles.benefittitle}>Partnership Support</h3>
+                        <p className={styles.benefitdescription}>
+                          Direct access to provider representatives for co-selling opportunities and client support.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+
 
             <div className={styles.contentsection}>
               {webinar.trainer[0] && (
@@ -157,6 +495,102 @@ const href =
                 </Link>
               </div>
             </div>
+
+
+            {isNextMonthOrLater && (
+              <>
+                <div className={styles.pastsessionssection}>
+                  <div className={styles.pastsessionsheader}>
+                    <h2 className={styles.pastsessionstitle}>Past Sessions</h2>
+                  </div>
+
+                  <div className={styles.pastrecordingsgrid}>
+                    {pastSessionsMock.map((session) => (
+                      <div
+                        key={session.id}
+                        className={styles.recordingcard}
+                        onClick={() => playRecording(session)}
+                      >
+                        <div className={styles.recordingthumbnail}>
+                          <img
+                            src={`https://img.youtube.com/vi/${session.youtubeId}/maxresdefault.jpg`}
+                            alt={session.title}
+                          />
+                          <div className={styles.playoverlay}>▶</div>
+                        </div>
+
+                        <div className={styles.recordinginfo}>
+                          <div className={styles.recordingdate}>{session.date}</div>
+                          <div className={styles.recordingtitle}>{session.title}</div>
+
+                          <div className={styles.recordingstats}>
+                            <div className={styles.stat}>
+                              <span>👁️</span>
+                              <span>{session.views} views</span>
+                            </div>
+                            <div className={styles.stat}>
+                              <span>⭐</span>
+                              <span>{session.rating}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {activeVideo && (
+                  <div
+                    className={styles.videooverlay}
+                    onClick={closeVideoPlayer}
+                  >
+                    <div
+                      className={styles.videoplayersection}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className={styles.videoplayerheader}>
+                        <button
+                          className={styles.backbtn}
+                          onClick={closeVideoPlayer}
+                        >
+                          ← Back to All Sessions
+                        </button>
+                        <span>{activeVideo.date}</span>
+                      </div>
+
+                      <div className={styles.videocontainer}>
+                        <iframe
+                          src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1`}
+                          title={activeVideo.title}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      </div>
+
+                      <div className={styles.videometa}>
+                        <div className={styles.videostatslist}>
+                          <div className={styles.stat}>
+                            <span>👁️</span>
+                            <span>{activeVideo.views} views</span>
+                          </div>
+                          <div className={styles.stat}>
+                            <span>⭐</span>
+                            <span>{activeVideo.rating}</span>
+                          </div>
+                        </div>
+
+                        <div className={styles.videoactions}>
+                          <button className={styles.actionbtn}>🔗 Share</button>
+                          <button className={styles.actionbtn}>📥 Download Resources</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+              </>
+            )}
           </div>
 
           {/* Registration Card */}

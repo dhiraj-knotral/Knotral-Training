@@ -313,6 +313,482 @@
      object-fit: contain;
  }
 
+ /* Past Sessions Section */
+ .pastsessionssection {
+     background: linear-gradient(135deg, var(--bg-light), #e5e7eb);
+     border-radius: 20px;
+     padding: 2.5rem;
+     margin-bottom: 3rem;
+     border: 2px solid #e5e7eb;
+ }
+
+ .pastsessionsheader {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 2rem;
+ }
+
+ .pastsessionstitle {
+     font-size: 20px;
+ }
+
+ /* .viewtoggle {
+     display: flex;
+     gap: 0.5rem;
+     background: white;
+     padding: 0.3rem;
+     border-radius: 10px;
+ }
+
+ .togglebtn {
+     padding: 0.6rem 1.2rem;
+     background: transparent;
+     border: none;
+     border-radius: 8px;
+     font-weight: 700;
+     cursor: pointer;
+     transition: all 0.3s;
+     color: var(--text-gray);
+ }
+
+ .togglebtn.active {
+     background: var(--primary-navy);
+     color: white;
+ } */
+
+ /* Video Grid for Past Sessions */
+ .pastrecordingsgrid {
+     display: grid;
+     grid-template-columns: repeat(2, minmax(300px, 1fr));
+     gap: 2rem;
+ }
+
+ .recordingcard {
+     background: var(--white);
+     border-radius: 16px;
+     overflow: hidden;
+     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+     transition: all 0.3s ease;
+     cursor: pointer;
+ }
+
+ .recordingcard:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+ }
+
+ .recordingthumbnail {
+     position: relative;
+     padding-bottom: 56.25%;
+     background: linear-gradient(135deg, var(--primary-navy), #2a4565);
+     overflow: hidden;
+ }
+
+ .recordingthumbnail img {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+ }
+
+ .playoverlay {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     width: 60px;
+     height: 60px;
+     background: var(--cta-orange);
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 2rem;
+     color: white;
+     transition: all 0.3s ease;
+ }
+
+ .recordingcard:hover .playoverlay {
+     transform: translate(-50%, -50%) scale(1.1);
+     box-shadow: 0 0 30px rgba(254, 46, 0, 0.6);
+ }
+
+ .recordinginfo {
+     padding: 1.5rem;
+ }
+
+ .recordingdate {
+     font-size: 0.85rem;
+     color: var(--text-gray);
+     font-weight: 600;
+     margin-bottom: 0.5rem;
+ }
+
+ .recordingtitle {
+     font-size: 1.1rem;
+     color: var(--primary-navy);
+     font-weight: 700;
+     margin-bottom: 1rem;
+ }
+
+ .recordingstats {
+     display: flex;
+     gap: 1.5rem;
+     font-size: 0.9rem;
+     color: var(--text-gray);
+ }
+
+ .stat {
+     display: flex;
+     align-items: center;
+     gap: 0.4rem;
+ }
+
+ .videoplayerheader {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 1.5rem;
+ }
+
+ .backbtn {
+     display: flex;
+     align-items: center;
+     gap: 0.5rem;
+     padding: 0.8rem 1.5rem;
+     background: var(--bg-light);
+     border: none;
+     border-radius: 8px;
+     font-weight: 700;
+     cursor: pointer;
+     transition: all 0.3s;
+     color: var(--primary-navy);
+ }
+
+ .backbtn:hover {
+     background: var(--primary-navy);
+     color: white;
+ }
+
+ .videocontainer {
+     position: relative;
+     padding-bottom: 56.25%;
+     height: 0;
+     overflow: hidden;
+     border-radius: 12px;
+     background: #000;
+     margin-bottom: 2rem;
+ }
+
+ .videocontainer iframe {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+ }
+
+ .videometa {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 1.5rem;
+     background: var(--bg-light);
+     border-radius: 12px;
+ }
+
+ .videostatslist {
+     display: flex;
+     gap: 2rem;
+ }
+
+ .videoactions {
+     display: flex;
+     gap: 1rem;
+ }
+
+ .actionbtn {
+     padding: 0.8rem 1.5rem;
+     border: 2px solid var(--bg-light);
+     background: white;
+     border-radius: 8px;
+     font-weight: 600;
+     cursor: pointer;
+     transition: all 0.3s;
+ }
+
+ .actionbtn:hover {
+     border-color: var(--cta-orange);
+     color: var(--cta-orange);
+ }
+
+
+ .videooverlay {
+     position: fixed;
+     inset: 0;
+     background: rgba(0, 0, 0, 0.65);
+     backdrop-filter: blur(4px);
+     z-index: 9999;
+
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     padding: 1.5rem;
+ }
+
+ /* Player Container */
+ .videoplayersection {
+     max-width: 800px;
+     width: 100%;
+     max-height: 100vh;
+     overflow-y: auto;
+
+     background: white;
+     border-radius: 20px;
+     padding: 1.8rem;
+
+     animation: scaleIn 0.25s ease;
+ }
+
+
+ /* Audience Tabs */
+ .audiencetabs {
+     display: flex;
+     align-items: center;
+     gap: 1rem;
+     margin-bottom: 3rem;
+     border-bottom: 3px solid var(--bg-light);
+     flex-wrap: wrap;
+ }
+
+ .audiencetab {
+     padding: 1.2rem 2.5rem;
+     background: white;
+     border: 2px solid var(--bg-light);
+     border-bottom: none;
+     border-radius: 12px 12px 0 0;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     font-weight: 700;
+     font-size: 1.1rem;
+     color: var(--text-gray);
+     position: relative;
+     bottom: -3px;
+     display: flex;
+     align-items: center;
+     gap: 5px;
+ }
+
+ .audiencetab:hover {
+     background: var(--bg-light);
+     color: var(--primary-navy);
+ }
+
+ .audiencetab.active {
+     display: flex;
+     align-items: center;
+     gap: 5px;
+     background: var(--primary-navy);
+     color: white;
+     border-color: var(--primary-navy);
+     transform: translateY(-3px);
+ }
+
+ .tabicon {
+     width: 30px;
+     height: 30px;
+     object-fit: contain;
+ }
+
+ .tabcontent {
+     display: none;
+ }
+
+ .tabcontent.active {
+     display: block;
+     animation: fadeIn 0.5s ease;
+ }
+
+ @keyframes fadeIn {
+     from {
+         opacity: 0;
+         transform: translateY(10px);
+     }
+
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ /* Content Sections */
+ .contentsection {
+     margin-bottom: 4rem;
+ }
+
+ .sectiontitle {
+     font-size: 2.5rem;
+     color: var(--primary-navy);
+     text-transform: uppercase;
+     margin-bottom: 2rem;
+     position: relative;
+     padding-bottom: 1rem;
+ }
+
+ .sectiontitle::after {
+     content: '';
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     width: 80px;
+     height: 4px;
+     background: var(--cta-orange);
+ }
+
+ .learninglist {
+     list-style: none;
+     display: grid;
+     gap: 1.2rem;
+ }
+
+ .learningitem {
+     display: flex;
+     gap: 1rem;
+     align-items: flex-start;
+     padding: 1.5rem;
+     background: var(--bg-light);
+     transition: all 0.3s ease;
+ }
+
+ .learningicon {
+     font-size: 1.5rem;
+     color: var(--cta-orange);
+ }
+
+ .learningtext {
+     font-size: 1.05rem;
+     line-height: 1.6;
+     font-weight: 500;
+ }
+
+ /* Benefits Grid */
+ .benefitsgrid {
+     display: grid;
+     grid-template-columns: repeat(2, 1fr);
+     gap: 2rem;
+ }
+
+ .benefitcard {
+     background: linear-gradient(135deg, var(--bg-light), white);
+     padding: 2.5rem;
+     border-radius: 16px;
+     border-left: 5px solid var(--cta-orange);
+     transition: all 0.3s;
+ }
+
+ .benefitcard:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+ }
+
+ .benefiticon {
+     width: 70px;
+     height: 70px;
+     display: flex;
+     align-items: center;
+     justify-content: flex-start;
+     margin-bottom: 1.5rem;
+ }
+
+ .benefiticonImage {
+     display: block;
+     width: 100%;
+     height: 100%;
+     object-fit: contain;
+ }
+
+ .benefittitle {
+     font-size: 1.2rem;
+     color: var(--primary-navy);
+     margin-bottom: 1rem;
+     text-transform: uppercase;
+ }
+
+ .benefitdescription {
+     color: var(--text-gray);
+     line-height: 1.8;
+ }
+
+ /* Why Attend Grid */
+ .whyattendgrid {
+     display: grid;
+     grid-template-columns: repeat(3, 1fr);
+     gap: 2rem;
+ }
+
+ .whycard {
+     text-align: center;
+     padding: 2.5rem 2rem;
+     background: white;
+     border: 2px solid var(--bg-light);
+     border-radius: 16px;
+     transition: all 0.3s;
+ }
+
+ .whycard:hover {
+     border-color: var(--accent-orange);
+     transform: translateY(-5px);
+     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+ }
+
+ .whyicon {
+     width: 64px;
+     height: 64px;
+     margin: 0 auto 1.5rem auto;
+     /* ⬅️ centers horizontally */
+
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
+ .whyiconImage {
+     display: block;
+     /* ⬅️ removes inline-img spacing */
+     width: 100%;
+     height: 100%;
+     object-fit: contain;
+ }
+
+ .whytitle {
+     font-size: 1.5rem;
+     color: var(--primary-navy);
+     margin-bottom: 1rem;
+     text-transform: uppercase;
+ }
+
+ .whytext {
+     color: var(--text-gray);
+     line-height: 1.7;
+ }
+
+ /* Smooth entry */
+ @keyframes scaleIn {
+     from {
+         transform: scale(0.96);
+         opacity: 0;
+     }
+
+     to {
+         transform: scale(1);
+         opacity: 1;
+     }
+ }
+
+
 
  /* RESPONSIVE */
  @media (max-width: 1024px) {
@@ -360,6 +836,67 @@
 
      .contentsection ul li::before {
          font-size: 16px;
+     }
+
+     .pastsessionssection {
+         padding: 2rem;
+         border-radius: 18px;
+     }
+
+     .pastsessionsheader {
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 1rem;
+     }
+
+     .pastsessionstitle {
+         font-size: 18px;
+     }
+
+     .pastrecordingsgrid {
+         grid-template-columns: 1fr;
+         gap: 1.5rem;
+     }
+
+     .playoverlay {
+         width: 52px;
+         height: 52px;
+         font-size: 1.6rem;
+     }
+
+     .recordinginfo {
+         padding: 1.3rem;
+     }
+
+     .videoplayersection {
+         max-width: 100%;
+         padding: 1.5rem;
+         border-radius: 16px;
+     }
+
+     .videometa {
+         gap: 1rem;
+     }
+
+     .videostatslist {
+         gap: 1.5rem;
+     }
+
+     .audiencetab {
+         padding: 1rem 2rem;
+         font-size: 1rem;
+     }
+
+     .sectiontitle {
+         font-size: 2.1rem;
+     }
+
+     .benefitsgrid {
+         grid-template-columns: 1fr;
+     }
+
+     .whyattendgrid {
+         grid-template-columns: repeat(2, 1fr);
      }
  }
 
@@ -409,6 +946,102 @@
      .contentsection ul li::before {
          font-size: 15px;
      }
+
+     .pastsessionssection {
+         padding: 1.6rem;
+         border-radius: 16px;
+     }
+
+     .pastsessionstitle {
+         font-size: 17px;
+     }
+
+     .recordingtitle {
+         font-size: 1rem;
+     }
+
+     .recordingstats {
+         gap: 1rem;
+         font-size: 0.85rem;
+         flex-wrap: wrap;
+     }
+
+     .videoplayerheader {
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 1rem;
+     }
+
+     .backbtn {
+         padding: 0.7rem 1.2rem;
+         font-size: 0.95rem;
+     }
+
+     .videometa {
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 1rem;
+         padding: 1.2rem;
+     }
+
+     .videostatslist {
+         flex-wrap: wrap;
+         gap: 1rem;
+     }
+
+     .videoactions {
+         width: 100%;
+         flex-wrap: wrap;
+         gap: 0.75rem;
+     }
+
+     .actionbtn {
+         flex: 1;
+         text-align: center;
+         padding: 0.7rem 1rem;
+     }
+
+     .audiencetabs {
+         width: 100%;
+         display: flex;
+         flex-direction: row;
+         justify-content: space-between;
+         /* spread across full width */
+         align-items: stretch;
+         gap: 0.5rem;
+     }
+
+     .audiencetab {
+         flex: 1;
+         /* 🔥 key: equal width */
+         display: flex;
+         align-items: center;
+         justify-content: center;
+
+         padding: 0.9rem 1.5rem;
+         font-size: 0.95rem;
+         border-radius: 10px 10px 0 0;
+         text-align: center;
+         white-space: nowrap;
+     }
+
+
+     .tabicon {
+         width: 24px;
+         height: 24px;
+     }
+
+     .sectiontitle {
+         font-size: 1.9rem;
+     }
+
+     .learningitem {
+         padding: 1.2rem;
+     }
+
+     .whyattendgrid {
+         grid-template-columns: 1fr;
+     }
  }
 
  /* Small Phones <=468px */
@@ -451,6 +1084,81 @@
      .contentsection ul li::before {
          font-size: 14px;
      }
+
+     .pastsessionssection {
+         padding: 1.3rem;
+         border-radius: 14px;
+     }
+
+     .pastsessionstitle {
+         font-size: 16px;
+     }
+
+     .recordinginfo {
+         padding: 1rem;
+     }
+
+     .recordingtitle {
+         font-size: 0.95rem;
+     }
+
+     .playoverlay {
+         width: 46px;
+         height: 46px;
+         font-size: 1.4rem;
+     }
+
+     .videooverlay {
+         padding: 1rem;
+     }
+
+     .videoplayersection {
+         padding: 1.2rem;
+         border-radius: 14px;
+     }
+
+     .videocontainer {
+         margin-bottom: 1.2rem;
+         border-radius: 10px;
+     }
+
+     .videometa {
+         padding: 1rem;
+     }
+
+     .videostatslist {
+         font-size: 0.9rem;
+     }
+
+     .actionbtn {
+         padding: 0.65rem 0.9rem;
+         font-size: 0.9rem;
+     }
+
+     .regprice {
+         font-size: 20px;
+     }
+
+     .regfooter p {
+         font-size: 12px;
+     }
+
+     .sectiontitle {
+         font-size: 1.4rem;
+     }
+
+     .tabicon {
+         width: 22px;
+         height: 22px;
+     }
+
+     .benefittitle {
+         font-size: 1.05rem;
+     }
+
+     .whytitle {
+         font-size: 1.2rem;
+     }
  }
 
  /* Extra Small Phones <=360px */
@@ -492,5 +1200,64 @@
 
      .contentsection ul li::before {
          font-size: 13px;
+     }
+
+     .pastsessionstitle {
+         font-size: 15px;
+     }
+
+     .recordingtitle {
+         font-size: 0.9rem;
+     }
+
+     .playoverlay {
+         width: 40px;
+         height: 40px;
+         font-size: 1.2rem;
+     }
+
+     .recordingstats {
+         font-size: 0.75rem;
+     }
+
+     .videoplayersection {
+         padding: 1rem;
+     }
+
+     .backbtn {
+         width: 100%;
+         justify-content: center;
+         font-size: 0.85rem;
+     }
+
+     .videostatslist {
+         flex-direction: column;
+         gap: 0.5rem;
+     }
+
+     .videoactions {
+         flex-direction: column;
+     }
+
+     .actionbtn {
+         width: 100%;
+         font-size: 0.85rem;
+     }
+
+     .audiencetab {
+         font-size: 0.9rem;
+         padding: 0.8rem 1rem;
+     }
+
+     .sectiontitle {
+         font-size: 1.3rem;
+     }
+
+     .learningitem {
+         padding: 1rem;
+     }
+
+     .whycard {
+         padding: 1.5rem 1.2rem;
      }
  }
