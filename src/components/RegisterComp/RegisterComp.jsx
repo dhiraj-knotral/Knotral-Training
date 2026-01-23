@@ -5,34 +5,6 @@ import styles from "./Register.module.css"
 import Link from "next/link";
 import moment from "moment";
 
-const pastSessionsMock = [
-  {
-    id: 1,
-    youtubeId: "dQw4w9WgXcQ",
-    date: "December 15, 2025",
-    title: "December Session",
-    views: "1,234",
-    rating: "4.8/5",
-  },
-  {
-    id: 2,
-    youtubeId: "dQw4w9WgXcQ",
-    date: "November 20, 2025",
-    title: "November Session",
-    views: "987",
-    rating: "4.6/5",
-  },
-  {
-    id: 3,
-    youtubeId: "dQw4w9WgXcQ",
-    date: "October 10, 2025",
-    title: "October Session",
-    views: "1,540",
-    rating: "4.9/5",
-  },
-];
-
-
 const RegisterComp = ({ webinar }) => {
 
   const [activeVideo, setActiveVideo] = useState(null);
@@ -51,6 +23,29 @@ const RegisterComp = ({ webinar }) => {
     setActiveVideo(null);
   };
 
+ const shareVideo = async () => {
+  if (!activeVideo) return;
+
+  const url = `https://youtu.be/${activeVideo.youtubeId}`;
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: activeVideo.title || webinar.title,
+        url,
+      });
+    } catch (err) {
+      // User cancelled share → ignore
+      if (err.name !== "AbortError") {
+        console.error("Share failed:", err);
+      }
+    }
+  } else {
+    await navigator.clipboard.writeText(url);
+    alert("Link copied to clipboard");
+  }
+};
+
   useEffect(() => {
     if (activeVideo) {
       document.body.style.overflow = "hidden";
@@ -65,7 +60,7 @@ const RegisterComp = ({ webinar }) => {
 
   const isCurrentMonthWebinar = moment(webinar.date).isSame(moment(), "month");
 
-const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"));
+  const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"));
 
 
   // Determine button text and style based on webinar actions
@@ -214,35 +209,22 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                     <h2 className={styles.sectiontitle}>What You'll Learn</h2>
 
                     <ul className={styles.learninglist}>
-                      <li className={styles.learningitem}>
+                      {/* <li className={styles.learningitem}>
                         <span className={styles.learningtext}>
                           What "student engagement" really looks like inside your classroom
+                          
                         </span>
-                      </li>
+                      </li> */}
 
-                      <li className={styles.learningitem}>
-                        <span className={styles.learningtext}>
-                          How to use classroom evidence to identify engagement gaps
-                        </span>
-                      </li>
+                      {webinar?.teachersBenifits?.features?.map((item, index) => (
+                        <li key={index} className={styles.learningitem}>
+                          <span className={styles.learningtext}>
+                            {item}
+                          </span>
+                        </li>
+                      ))}
 
-                      <li className={styles.learningitem}>
-                        <span className={styles.learningtext}>
-                          Practical teaching practices that improve participation and interaction
-                        </span>
-                      </li>
-
-                      <li className={styles.learningitem}>
-                        <span className={styles.learningtext}>
-                          How guided reflection leads to sustained improvement in your teaching
-                        </span>
-                      </li>
-
-                      <li className={styles.learningitem}>
-                        <span className={styles.learningtext}>
-                          Using AI-supported coaching to enhance your professional development
-                        </span>
-                      </li>
+                  
                     </ul>
                   </div>
 
@@ -254,13 +236,12 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                         <div className={styles.whyicon}>
                           <img
                             src="/attend1.png"
-                            alt="Immediate Impact"
+                            alt="Why attend 1"
                             className={styles.whyiconImage}
                           />
                         </div>
-                        <h3 className={styles.whytitle}>Immediate Impact</h3>
                         <p className={styles.whydescription}>
-                          Apply strategies in your classroom from day one
+                          {webinar?.teachersBenifits?.whyNeeded?.[0]}
                         </p>
                       </div>
 
@@ -268,13 +249,12 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                         <div className={styles.whyicon}>
                           <img
                             src="/attend4.png"
-                            alt="Personal Growth"
+                            alt="Why attend 2"
                             className={styles.whyiconImage}
                           />
                         </div>
-                        <h3 className={styles.whytitle}>Personal Growth</h3>
                         <p className={styles.whydescription}>
-                          Develop reflective teaching practices for career advancement
+                          {webinar?.teachersBenifits?.whyNeeded?.[1]}
                         </p>
                       </div>
 
@@ -282,16 +262,29 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                         <div className={styles.whyicon}>
                           <img
                             src="/attend7.png"
-                            alt="Certificate"
+                            alt="Why attend 3"
                             className={styles.whyiconImage}
                           />
                         </div>
-                        <h3 className={styles.whytitle}>Certificate</h3>
                         <p className={styles.whydescription}>
-                          Earn CPD hours and professional certification
+                          {webinar?.teachersBenifits?.whyNeeded?.[2]}
                         </p>
                       </div>
+
+                      {/* <div className={styles.whycard}>
+                        <div className={styles.whyicon}>
+                          <img
+                            src="/attend5.png"
+                            alt="Why attend 4"
+                            className={styles.whyiconImage}
+                          />
+                        </div>
+                        <p className={styles.whydescription}>
+                          {webinar?.teachersBenifits?.whyNeeded?.[3]}
+                        </p>
+                      </div> */}
                     </div>
+
                   </div>
                 </div>
 
@@ -313,9 +306,10 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                             className={styles.benefiticonImage}
                           />
                         </span>
-                        <h3 className={styles.benefittitle}>Teacher Development</h3>
+                        {/* <h3 className={styles.benefittitle}>Teacher Development</h3> */}
                         <p className={styles.benefitdescription}>
-                          Upskill your entire teaching staff with evidence-based practices that improve student outcomes and teacher retention.
+                          {/* Upskill your entire teaching staff with evidence-based practices that improve student outcomes and teacher retention. */}
+                          {webinar?.schoolBenifits?.features?.[0]}
                         </p>
                       </div>
 
@@ -327,9 +321,11 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                             className={styles.benefiticonImage}
                           />
                         </span>
-                        <h3 className={styles.benefittitle}>Measurable Results</h3>
+                        {/* <h3 className={styles.benefittitle}>Measurable Results</h3> */}
                         <p className={styles.benefitdescription}>
-                          Track improvement in student engagement through classroom observations and data-driven insights.
+                          {/* Track improvement in student engagement through classroom observations and data-driven insights. */}
+                          {webinar?.schoolBenifits?.features?.[1]}
+
                         </p>
                       </div>
 
@@ -341,9 +337,10 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                             className={styles.benefiticonImage}
                           />
                         </span>
-                        <h3 className={styles.benefittitle}>School-Wide Impact</h3>
+                        {/* <h3 className={styles.benefittitle}>School-Wide Impact</h3> */}
                         <p className={styles.benefitdescription}>
-                          Create a culture of reflective practice that elevates teaching quality across all departments.
+                          {/* Create a culture of reflective practice that elevates teaching quality across all departments. */}
+                          {webinar?.schoolBenifits?.features?.[2]}
                         </p>
                       </div>
 
@@ -355,9 +352,10 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                             className={styles.benefiticonImage}
                           />
                         </span>
-                        <h3 className={styles.benefittitle}>Ongoing Support</h3>
+                        {/* <h3 className={styles.benefittitle}>Ongoing Support</h3> */}
                         <p className={styles.benefitdescription}>
-                          Access to resources, follow-up sessions, and implementation support for sustainable change.
+                          {/* Access to resources, follow-up sessions, and implementation support for sustainable change. */}
+                          {webinar?.schoolBenifits?.features?.[3]}
                         </p>
                       </div>
                     </div>
@@ -382,9 +380,11 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                             className={styles.benefiticonImage}
                           />
                         </span>
-                        <h3 className={styles.benefittitle}>Lead Generation</h3>
+                        {/* <h3 className={styles.benefittitle}>Lead Generation</h3> */}
                         <p className={styles.benefitdescription}>
-                          Connect with schools actively seeking professional development solutions and teacher training programs.
+                          {/* Connect with schools actively seeking professional development solutions and teacher training programs. */}
+                          {webinar?.resellerBenifits?.features?.[0]}
+
                         </p>
                       </div>
 
@@ -396,9 +396,11 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                             className={styles.benefiticonImage}
                           />
                         </span>
-                        <h3 className={styles.benefittitle}>Product Knowledge</h3>
+                        {/* <h3 className={styles.benefittitle}>Product Knowledge</h3> */}
                         <p className={styles.benefitdescription}>
-                          Deep-dive into solution features, implementation strategies, and ROI to better serve your clients.
+                          {/* Deep-dive into solution features, implementation strategies, and ROI to better serve your clients. */}
+                          {webinar?.resellerBenifits?.features?.[1]}
+
                         </p>
                       </div>
 
@@ -410,9 +412,11 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                             className={styles.benefiticonImage}
                           />
                         </span>
-                        <h3 className={styles.benefittitle}>Sales Enablement</h3>
+                        {/* <h3 className={styles.benefittitle}>Sales Enablement</h3> */}
                         <p className={styles.benefitdescription}>
-                          Gain presentation materials, case studies, and demo access to accelerate your sales cycle.
+                          {/* Gain presentation materials, case studies, and demo access to accelerate your sales cycle. */}
+                          {webinar?.resellerBenifits?.features?.[2]}
+
                         </p>
                       </div>
 
@@ -424,9 +428,11 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                             className={styles.benefiticonImage}
                           />
                         </span>
-                        <h3 className={styles.benefittitle}>Partnership Support</h3>
+                        {/* <h3 className={styles.benefittitle}>Partnership Support</h3> */}
                         <p className={styles.benefitdescription}>
-                          Direct access to provider representatives for co-selling opportunities and client support.
+                          {/* Direct access to provider representatives for co-selling opportunities and client support. */}
+                          {webinar?.resellerBenifits?.features?.[3]}
+
                         </p>
                       </div>
                     </div>
@@ -505,9 +511,9 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                   </div>
 
                   <div className={styles.pastrecordingsgrid}>
-                    {pastSessionsMock.map((session) => (
+                    {webinar?.pastSessions?.map((session) => (
                       <div
-                        key={session.id}
+                        key={session._id}
                         className={styles.recordingcard}
                         onClick={() => playRecording(session)}
                       >
@@ -520,10 +526,10 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                         </div>
 
                         <div className={styles.recordinginfo}>
-                          <div className={styles.recordingdate}>{session.date}</div>
+                          <div className={styles.recordingdate}>{moment(session.date).format("D MMMM")}</div>
                           <div className={styles.recordingtitle}>{session.title}</div>
 
-                          <div className={styles.recordingstats}>
+                          {/* <div className={styles.recordingstats}>
                             <div className={styles.stat}>
                               <span>👁️</span>
                               <span>{session.views} views</span>
@@ -532,7 +538,7 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                               <span>⭐</span>
                               <span>{session.rating}</span>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     ))}
@@ -555,7 +561,7 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                         >
                           ← Back to All Sessions
                         </button>
-                        <span>{activeVideo.date}</span>
+                        <span>{moment(activeVideo.date).format("D MMMM")}</span>
                       </div>
 
                       <div className={styles.videocontainer}>
@@ -569,7 +575,7 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                       </div>
 
                       <div className={styles.videometa}>
-                        <div className={styles.videostatslist}>
+                        {/* <div className={styles.videostatslist}>
                           <div className={styles.stat}>
                             <span>👁️</span>
                             <span>{activeVideo.views} views</span>
@@ -578,10 +584,10 @@ const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"))
                             <span>⭐</span>
                             <span>{activeVideo.rating}</span>
                           </div>
-                        </div>
+                        </div> */}
 
                         <div className={styles.videoactions}>
-                          <button className={styles.actionbtn}>🔗 Share</button>
+                          <button className={styles.actionbtn} onClick={shareVideo}>🔗 Share</button>
                           <button className={styles.actionbtn}>📥 Download Resources</button>
                         </div>
                       </div>
