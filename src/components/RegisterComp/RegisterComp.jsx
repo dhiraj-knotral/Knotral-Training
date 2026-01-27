@@ -25,7 +25,6 @@ const RegisterComp = ({ webinar }) => {
 
  const shareVideo = async () => {
   if (!activeVideo) return;
-
   const url = `https://youtu.be/${activeVideo.youtubeId}`;
 
   if (navigator.share) {
