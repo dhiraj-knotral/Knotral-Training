@@ -2,36 +2,36 @@ import React from 'react'
 import styles from "./FeaturedPrograms.module.css"
 import Link from 'next/link'
 
-export const certificationsStatic = [
-    {
-        title: "Reggio Emilia Certification for Professional Development",
-        provider: "We Skoolhouse",
-        slug: "reggio-emilia-certification",
-        meta: "Early Years Educators • 5 Modules • 5 Hours",
-        logo: {
-            url: "/logo16.png",
-            alt: "We Skoolhouse Logo",
-        },
-        cta: {
-            text: "Get Certified",
-            url: "https://www.weskoolhouseindia.com/reggio-emilia-certification-enroll-now",
-        },
-    },
-    {
-        title: "Social Emotional Learning Certification",
-        provider: "Tilli Kids",
-        slug: "sel-certification-tilli-kids",
-        meta: "For Teachers of KG – Grade 5",
-        logo: {
-            url: "/logo5.png",
-            alt: "Tilli Kids Logo",
-        },
-        cta: {
-            text: "Join Webinar",
-            url: "/", // replace if needed
-        },
-    },
-];
+// export const certificationsStatic = [
+//     {
+//         title: "Reggio Emilia Certification for Professional Development",
+//         provider: "We Skoolhouse",
+//         slug: "reggio-emilia-certification",
+//         meta: "Early Years Educators • 5 Modules • 5 Hours",
+//         logo: {
+//             url: "/logo16.png",
+//             alt: "We Skoolhouse Logo",
+//         },
+//         cta: {
+//             text: "Get Certified",
+//             url: "https://www.weskoolhouseindia.com/reggio-emilia-certification-enroll-now",
+//         },
+//     },
+//     {
+//         title: "Social Emotional Learning Certification",
+//         provider: "Tilli Kids",
+//         slug: "sel-certification-tilli-kids",
+//         meta: "For Teachers of KG – Grade 5",
+//         logo: {
+//             url: "/logo5.png",
+//             alt: "Tilli Kids Logo",
+//         },
+//         cta: {
+//             text: "Join Webinar",
+//             url: "/", // replace if needed
+//         },
+//     },
+// ];
 
 
 const FeaturedPrograms = ({ webinars }) => {
@@ -47,12 +47,20 @@ const FeaturedPrograms = ({ webinars }) => {
                 <div className={styles.certgrid}>
                     {certifiedWebinars.map((item, index) => (
                         <div key={index} className={styles.certcard}>
-                            <div className={styles.certlogo}>
-                                <img
-                                    src={item.logo?.url}
-                                    alt={item.title || "Certification Logo"}
-                                />
-                            </div>
+                            <Link
+                                href={item.link || "/"}
+                                target={item.link ? "_blank" : "_self"}
+                                rel={item.link ? "noopener noreferrer" : undefined}
+                                className={styles.productlink}
+                            >
+                                <div className={styles.certlogo}>
+                                    <img
+                                        src={item.logo?.url}
+                                        alt={item.title || "Certification Logo"}
+                                    />
+                                </div>
+
+                            </Link>
 
                             <div className={styles.certcontent}>
                                 <h3>{item.title}</h3>
@@ -60,16 +68,16 @@ const FeaturedPrograms = ({ webinars }) => {
 
                                 <p>{item.meta}</p>
 
-<div className={styles.rating}>
-  <div className={styles.ratingInner}>
-    <img
-      src="/star.png"
-      alt="Star rating"
-      className={styles.starIcon}
-    />
-    <span>{item?.rating || "4.8"}</span>
-  </div>
-</div>
+                                <div className={styles.rating}>
+                                    <div className={styles.ratingInner}>
+                                        <img
+                                            src="/star.png"
+                                            alt="Star rating"
+                                            className={styles.starIcon}
+                                        />
+                                        <span>{item?.rating || "4.8"}</span>
+                                    </div>
+                                </div>
 
                                 {/* <Link href={`/${item.slug}`} className="btn btnsecondary btnsm" style={{ marginTop: "12px" }}>
                                     Start Program

@@ -134,12 +134,20 @@ const WebinarsList = ({ webinars, pagination, filters }) => {
                         {webinars.map((item) => (
                             <React.Fragment key={item._id}>
                                 <div className={styles.webinarcard}>
+                                     <Link
+                                href={item.link || "/"}
+                                target={item.link ? "_blank" : "_self"}
+                                rel={item.link ? "noopener noreferrer" : undefined}
+                                className={styles.productlink}
+                            >
                                     <div className={styles.splogo}>
                                         <img
                                             src={item.logo.url}
                                             alt={item.title || "Webinar Logo"}
                                         />
                                     </div>
+
+                                    </Link>
 
                                     <div className={styles.content}>
                                         <div className={styles.badges}>
@@ -248,6 +256,7 @@ const WebinarsList = ({ webinars, pagination, filters }) => {
                         })()}
 
                     </div>
+                    
                 </div>
             </section>
         </>

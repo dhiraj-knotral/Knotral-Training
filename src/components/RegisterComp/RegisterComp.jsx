@@ -23,27 +23,27 @@ const RegisterComp = ({ webinar }) => {
     setActiveVideo(null);
   };
 
- const shareVideo = async () => {
-  if (!activeVideo) return;
-  const url = `https://youtu.be/${activeVideo.youtubeId}`;
+  const shareVideo = async () => {
+    if (!activeVideo) return;
+    const url = `https://youtu.be/${activeVideo.youtubeId}`;
 
-  if (navigator.share) {
-    try {
-      await navigator.share({
-        title: activeVideo.title || webinar.title,
-        url,
-      });
-    } catch (err) {
-      // User cancelled share → ignore
-      if (err.name !== "AbortError") {
-        console.error("Share failed:", err);
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: activeVideo.title || webinar.title,
+          url,
+        });
+      } catch (err) {
+        // User cancelled share → ignore
+        if (err.name !== "AbortError") {
+          console.error("Share failed:", err);
+        }
       }
+    } else {
+      await navigator.clipboard.writeText(url);
+      alert("Link copied to clipboard");
     }
-  } else {
-    await navigator.clipboard.writeText(url);
-    alert("Link copied to clipboard");
-  }
-};
+  };
 
   useEffect(() => {
     if (activeVideo) {
@@ -85,22 +85,29 @@ const RegisterComp = ({ webinar }) => {
           {/* Main Content */}
           <div className={styles.maincontent}>
             <div className={styles.spbadge}>
-              <div
-                className={styles.logo}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontWeight: 600,
-                  color: "var(--secondary-blue)",
-                }}
+              <Link
+                href={webinar.link || "/"}
+                target={webinar.link ? "_blank" : "_self"}
+                rel={webinar.link ? "noopener noreferrer" : undefined}
+                className={styles.productlink}
               >
-                <img
-                  src={webinar.logo.url}
-                  alt="Logo"
-                  style={{ width: "65px", height: "65px" }}
-                />
-              </div>
+                <div
+                  className={styles.logo}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: 600,
+                    color: "var(--secondary-blue)",
+                  }}
+                >
+                  <img
+                    src={webinar.logo.url}
+                    alt="Logo"
+                    style={{ width: "65px", height: "65px" }}
+                  />
+                </div>
+              </Link>
               {webinar.isLive && (
                 <span className="badge badgelive">LIVE WEBINAR</span>
               )}
@@ -223,7 +230,7 @@ const RegisterComp = ({ webinar }) => {
                         </li>
                       ))}
 
-                  
+
                     </ul>
                   </div>
 

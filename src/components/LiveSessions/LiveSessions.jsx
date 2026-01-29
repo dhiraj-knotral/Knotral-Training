@@ -31,9 +31,16 @@ const LiveSessions = ({ webinars }) => {
               <div className={styles.trainingcard}>
                 <div className={styles.cardheader}>
                   {item.logo?.url && (
-                    <div className={styles.splogo}>
-                      <img src={item.logo.url} alt={item.title} />
-                    </div>
+                    <Link
+                      href={item.link || "/"}
+                      target={item.link ? "_blank" : "_self"}
+                      rel={item.link ? "noopener noreferrer" : undefined}
+                      className={styles.productlink}
+                    >
+                      <div className={styles.splogo}>
+                        <img src={item.logo.url} alt={item.title} />
+                      </div>
+                    </Link>
                   )}
                   <span className="badge badgelive">LIVE</span>
                 </div>
