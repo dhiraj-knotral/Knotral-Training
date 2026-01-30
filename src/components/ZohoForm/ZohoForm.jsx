@@ -33,6 +33,8 @@ export default function ZohoForm({ webinar, utms }) {
     }
   }, []);
 
+  const cleanTime = webinar.startTime.replace(" IST", "");
+
   // Form state
   const [formData, setFormData] = useState({
     First_Name: "",
@@ -52,6 +54,10 @@ export default function ZohoForm({ webinar, utms }) {
     Category: webinar?.organisedBy || "",
     Lead_Status: "No Contact Initiated",
     Lead_Source: "Knotral Trainings",
+    Webinar_Date_TIme: moment(
+      `${moment(webinar.date).format("YYYY-MM-DD")} ${cleanTime}`,
+      "YYYY-MM-DD h:mm A"
+    ).format("MMM DD, YYYY, h:mm A"),
 
     // ✅ UTM fields
     utm_source: utms?.utm_source || "",
@@ -110,6 +116,11 @@ export default function ZohoForm({ webinar, utms }) {
         FORM_NAME: `${webinar?.organisedBy} Landing page`,
         Lead_Status: formData.Lead_Status,
         Lead_Source: formData.Lead_Source,
+        Webinar_Date_TIme: moment(
+          `${moment(webinar.date).format("YYYY-MM-DD")} ${cleanTime}`,
+          "YYYY-MM-DD h:mm A"
+        ).format("MMM DD, YYYY, h:mm A"),
+
 
         // ✅ UTM fields
         utm_source: utms?.utm_source || "",
@@ -238,6 +249,11 @@ export default function ZohoForm({ webinar, utms }) {
               FORM_NAME: `${webinar?.organisedBy} Landing page`,
               Lead_Status: "No Contact Initiated",
               Lead_Source: "Knotral Trainings",
+              Webinar_Date_TIme: moment(
+                `${moment(webinar.date).format("YYYY-MM-DD")} ${cleanTime}`,
+                "YYYY-MM-DD h:mm A"
+              ).format("MMM DD, YYYY, h:mm A"),
+
             }
             : {
               First_Name: "",
@@ -251,6 +267,11 @@ export default function ZohoForm({ webinar, utms }) {
               FORM_NAME: `${webinar?.organisedBy} Landing page`,
               Lead_Status: "No Contact Initiated",
               Lead_Source: "Knotral Trainings",
+              Webinar_Date_TIme: moment(
+                `${moment(webinar.date).format("YYYY-MM-DD")} ${cleanTime}`,
+                "YYYY-MM-DD h:mm A"
+              ).format("MMM DD, YYYY, h:mm A"),
+
             }
         );
 
