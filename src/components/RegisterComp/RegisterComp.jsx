@@ -78,6 +78,11 @@ const RegisterComp = ({ webinar }) => {
       ? `/course/${webinar.slug}`
       : `/register/${webinar.slug}`;
 
+
+      const hasPastSessions = Boolean(
+  webinar?.pastSessions && webinar.pastSessions.length > 0
+);
+
   return (
     <section className={styles.landingcontent}>
       <div className="container">
@@ -509,7 +514,7 @@ const RegisterComp = ({ webinar }) => {
             </div>
 
 
-            {isNextMonthOrLater && (
+            {hasPastSessions && (
               <>
                 <div className={styles.pastsessionssection}>
                   <div className={styles.pastsessionsheader}>
