@@ -59,9 +59,6 @@ const RegisterComp = ({ webinar }) => {
 
   const isJanuaryWebinar = moment(webinar?.date).month() === 0; // January = 0
 
-  const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"));
-
-
   // Determine button text and style based on webinar actions
   const buttonText = webinar.actions?.canStartProgram
     ? "Start Course"
