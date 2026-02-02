@@ -57,7 +57,7 @@ const RegisterComp = ({ webinar }) => {
     };
   }, [activeVideo]);
 
-  const isCurrentMonthWebinar = moment(webinar.date).isSame(moment(), "month");
+const isJanuaryWebinar = moment(webinar?.date).month() === 0; // January = 0
 
   const isNextMonthOrLater = moment(webinar.date).isAfter(moment().endOf("month"));
 
@@ -134,7 +134,7 @@ const RegisterComp = ({ webinar }) => {
               </ul>
             </div>
 
-            {isCurrentMonthWebinar ? (
+            {isJanuaryWebinar ? (
 
               <div className={styles.contentsection}>
                 <h2>Who Should Attend</h2>
@@ -450,7 +450,7 @@ const RegisterComp = ({ webinar }) => {
                   </div>
                 </div>
               </>
-            )}
+             )} 
 
 
             <div className={styles.contentsection}>
