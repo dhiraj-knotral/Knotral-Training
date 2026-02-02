@@ -6,6 +6,8 @@
      display: grid;
      grid-template-columns: 1fr 400px;
      gap: 48px;
+       align-items: start; /* 🔥 THIS FIXES EVERYTHING */
+
  }
 
  .maincontent .spbadge {
