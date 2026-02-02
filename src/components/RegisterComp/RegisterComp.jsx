@@ -511,138 +511,138 @@ const RegisterComp = ({ webinar }) => {
             </div>
 
 
-      {/* 🟢 SHOW PAST SESSIONS ONLY WHEN WEBINAR IS STOPPED */}
-{!webinar.isStopped && hasPastSessions && (
-  <>
-    <div className={styles.pastsessionssection}>
-      <div className={styles.pastsessionsheader}>
-        <h2 className={styles.pastsessionstitle}>Past Sessions</h2>
-      </div>
+            {/* 🟢 SHOW PAST SESSIONS ONLY WHEN WEBINAR IS STOPPED */}
+            {!webinar.isStopped && hasPastSessions && (
+              <>
+                <div className={styles.pastsessionssection}>
+                  <div className={styles.pastsessionsheader}>
+                    <h2 className={styles.pastsessionstitle}>Past Sessions</h2>
+                  </div>
 
-      <div className={styles.pastrecordingsgrid}>
-        {webinar?.pastSessions?.map((session) => (
-          <div
-            key={session._id}
-            className={styles.recordingcard}
-            onClick={() => playRecording(session)}
-          >
-            <div className={styles.recordingthumbnail}>
-              <img
-                src={`https://img.youtube.com/vi/${session.youtubeId}/maxresdefault.jpg`}
-                alt={session.title}
-              />
-              <div className={styles.playoverlay}>▶</div>
-            </div>
+                  <div className={styles.pastrecordingsgrid}>
+                    {webinar?.pastSessions?.map((session) => (
+                      <div
+                        key={session._id}
+                        className={styles.recordingcard}
+                        onClick={() => playRecording(session)}
+                      >
+                        <div className={styles.recordingthumbnail}>
+                          <img
+                            src={`https://img.youtube.com/vi/${session.youtubeId}/maxresdefault.jpg`}
+                            alt={session.title}
+                          />
+                          <div className={styles.playoverlay}>▶</div>
+                        </div>
 
-            <div className={styles.recordinginfo}>
-              <div className={styles.recordingdate}>
-                {moment(session.date).format("D MMMM")}
-              </div>
-              <div className={styles.recordingtitle}>
-                {session.title}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+                        <div className={styles.recordinginfo}>
+                          <div className={styles.recordingdate}>
+                            {moment(session.date).format("D MMMM")}
+                          </div>
+                          <div className={styles.recordingtitle}>
+                            {session.title}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-    {activeVideo && (
-      <div
-        className={styles.videooverlay}
-        onClick={closeVideoPlayer}
-      >
-        <div
-          className={styles.videoplayersection}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className={styles.videoplayerheader}>
-            <button
-              className={styles.backbtn}
-              onClick={closeVideoPlayer}
-            >
-              ← Back to All Sessions
-            </button>
-            <span>{moment(activeVideo.date).format("D MMMM")}</span>
-          </div>
+                {activeVideo && (
+                  <div
+                    className={styles.videooverlay}
+                    onClick={closeVideoPlayer}
+                  >
+                    <div
+                      className={styles.videoplayersection}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className={styles.videoplayerheader}>
+                        <button
+                          className={styles.backbtn}
+                          onClick={closeVideoPlayer}
+                        >
+                          ← Back to All Sessions
+                        </button>
+                        <span>{moment(activeVideo.date).format("D MMMM")}</span>
+                      </div>
 
-          <div className={styles.videocontainer}>
-            <iframe
-              src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1`}
-              title={activeVideo.title}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
+                      <div className={styles.videocontainer}>
+                        <iframe
+                          src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1`}
+                          title={activeVideo.title}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      </div>
 
-          <div className={styles.videometa}>
-            <div className={styles.videoactions}>
-              <button className={styles.actionbtn} onClick={shareVideo}>
-                🔗 Share
-              </button>
-              <button className={styles.actionbtn}>📥 Download Resources</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    )}
-  </>
-)}
+                      <div className={styles.videometa}>
+                        <div className={styles.videoactions}>
+                          <button className={styles.actionbtn} onClick={shareVideo}>
+                            🔗 Share
+                          </button>
+                          <button className={styles.actionbtn}>📥 Download Resources</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
 
           </div>
 
           {/* 🔴 ACTIVE WEBINAR → Show Registration */}
           {!webinar.isStopped && (
-              <div className={styles.registrationcard}>
-                <div className={styles.regmeta}>
-                  <div className={styles.item}>
-                    <img src="/form2.png" alt="date" className={styles.icon} />
-                    {moment(webinar.date).format("MMM DD, YYYY")}
-                  </div>
-                  <div className={styles.item}>
-                    <img src="/form1.png" alt="start time" className={styles.icon} />
-                    {webinar.startTime}
-                  </div>
-                  <div className={styles.item}>
-                    <img src="/form3.png" alt="duration" className={styles.icon} />
-                    {webinar.duration}
-                  </div>
-                  <div className={styles.item}>
-                    <img src="/form4.png" alt="mode" className={styles.icon} />
-                    {webinar.mode}
-                  </div>
+            <div className={styles.registrationcard}>
+              <div className={styles.regmeta}>
+                <div className={styles.item}>
+                  <img src="/form2.png" alt="date" className={styles.icon} />
+                  {moment(webinar.date).format("MMM DD, YYYY")}
                 </div>
-
-                <div className={styles.regdivider}></div>
-
-                <div className={`${styles.regprice} ${webinar.isFree ? styles.free : ""}`}>
-                  {webinar.isFree ? "FREE" : `₹${webinar.price}`}
+                <div className={styles.item}>
+                  <img src="/form1.png" alt="start time" className={styles.icon} />
+                  {webinar.startTime}
                 </div>
-
-                <Link href={href} className={buttonClass}>
-                  {buttonText}
-                </Link>
-
-                {webinar.bonus?.title && (
-                  <div className={styles.regbonus}>
-                    <div className={styles.label}>BONUS</div>
-                    <p>{webinar.bonus.title}</p>
-                    <p>{webinar.bonus.description || ""}</p>
-                  </div>
-                )}
-
-                <div className={styles.regdivider}></div>
-
-                <div className={styles.regfooter}>
-                  <p className={styles.metaInfo}>
-                    <img src="/form5.png" alt="registered" className={styles.iconSmall} />
-                    {webinar?.views} registered{" "}
-                    <img src="/form6.png" alt="limited seats" className={styles.iconSmall} />
-                    Limited seats
-                  </p>
+                <div className={styles.item}>
+                  <img src="/form3.png" alt="duration" className={styles.icon} />
+                  {webinar.duration}
+                </div>
+                <div className={styles.item}>
+                  <img src="/form4.png" alt="mode" className={styles.icon} />
+                  {webinar.mode}
                 </div>
               </div>
+
+              <div className={styles.regdivider}></div>
+
+              <div className={`${styles.regprice} ${webinar.isFree ? styles.free : ""}`}>
+                {webinar.isFree ? "FREE" : `₹${webinar.price}`}
+              </div>
+
+              <Link href={href} className={buttonClass}>
+                {buttonText}
+              </Link>
+
+              {webinar.bonus?.title && (
+                <div className={styles.regbonus}>
+                  <div className={styles.label}>BONUS</div>
+                  <p>{webinar.bonus.title}</p>
+                  <p>{webinar.bonus.description || ""}</p>
+                </div>
+              )}
+
+              <div className={styles.regdivider}></div>
+
+              <div className={styles.regfooter}>
+                <p className={styles.metaInfo}>
+                  <img src="/form5.png" alt="registered" className={styles.iconSmall} />
+                  {webinar?.views} registered{" "}
+                  <img src="/form6.png" alt="limited seats" className={styles.iconSmall} />
+                  Limited seats
+                </p>
+              </div>
+            </div>
           )}
 
           {/* 🟢 STOPPED WEBINAR → Show Past Sessions */}
