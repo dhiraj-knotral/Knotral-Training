@@ -1,0 +1,443 @@
+.filterbar {
+    background: var(--white);
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filterbar label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 8px;
+}
+
+.filterbar select,
+.filterbar input {
+    height: 40px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    padding: 0 12px;
+    font-size: 14px;
+    min-width: 160px;
+}
+
+.filterbar select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background: url('/dropdownIcon.png') no-repeat;
+    background-position: right 6px center;
+    background-size: 16px;
+}
+
+.filterbar .searchinput {
+    flex: 1;
+    min-width: 250px;
+    padding-left: 36px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") 12px center no-repeat;
+}
+
+.webinarlist {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.webinarcard {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 80px 1fr 200px;
+    gap: 24px;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.webinarcard:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+}
+
+.webinarcard .splogo {
+    width: 90px;
+    height: 90px;
+    background: var(--bg-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--secondary-blue);
+}
+
+.splogo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* or cover depending on how you want it to scale */
+    border-radius: 8px;
+    /* same as container to match corners */
+}
+
+.webinarcard .content {
+    flex: 1;
+}
+
+.webinarcard .badges {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.webinarcard h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.webinarcard .meta {
+    display: flex;
+    gap: 24px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.webinarcard .actions {
+    text-align: right;
+}
+
+.webinarcard .price {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.webinarcard .price.free {
+    color: var(--free-green);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 40px;
+}
+
+.pagination a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.pagination a.active {
+    background: var(--primary-navy);
+    color: var(--white);
+    border-color: var(--primary-navy);
+}
+
+.pagination a:hover:not(.active) {
+    background: var(--bg-light);
+}
+
+.filterselect {
+    height: 36px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    padding: 0 12px;
+    font-size: 14px;
+}
+
+.filterselect {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background: url('/dropdownIcon.png') no-repeat;
+    background-position: right 0.5px center;
+    background-size: 14px;
+}
+
+.filterlabel {
+    font-size: 14px;
+    margin-right: 8px;
+    display: inline-block;
+}
+
+.trainingscount {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* === Responsive Adjustments for Filterbar & Webinar Cards === */
+
+/* Tablets <=1024px */
+@media (max-width: 1024px) {
+    .filterbar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .filterbar label {
+        font-size: 13px;
+        margin-right: 4px;
+    }
+
+    .filterbar select,
+    .filterbar input {
+        width: 100%;
+        min-width: auto;
+        font-size: 13px;
+        height: 36px;
+    }
+
+    .filterbar .searchinput {
+        flex: none;
+        width: 100%;
+        min-width: auto;
+        padding-left: 32px;
+    }
+
+    .webinarcard {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 20px;
+        gap: 16px;
+    }
+
+    .webinarcard .splogo {
+        /* margin: 0 auto 12px auto; */
+        width: 70px;
+        height: 70px;
+    }
+
+    .webinarcard h3 {
+        font-size: 16px;
+    }
+
+    .webinarcard .meta {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 13px;
+    }
+
+    .webinarcard .actions {
+        text-align: center;
+        margin-top: 12px;
+    }
+
+    .webinarcard .price {
+        font-size: 18px;
+    }
+
+    .filterselect {
+        width: 100%;
+        font-size: 13px;
+        height: 36px;
+    }
+
+    .filterlabel {
+        font-size: 13px;
+    }
+
+    .trainingscount {
+        font-size: 15px;
+    }
+}
+
+/* Small Tablets <=768px */
+@media (max-width: 768px) {
+    .filterbar {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .filterbar label {
+        font-size: 12px;
+    }
+
+    .filterbar select,
+    .filterbar input {
+        height: 34px;
+        font-size: 12px;
+    }
+
+    .filterbar .searchinput {
+        padding-left: 28px;
+    }
+
+    .webinarcard {
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .webinarcard .splogo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .webinarcard h3 {
+        font-size: 15px;
+    }
+
+    .webinarcard .meta {
+        font-size: 12px;
+        gap: 10px;
+    }
+
+    .webinarcard .price {
+        font-size: 17px;
+    }
+
+    .filterselect {
+        height: 34px;
+        font-size: 12px;
+    }
+
+    .filterlabel {
+        font-size: 12px;
+    }
+
+    .trainingscount {
+        font-size: 14px;
+    }
+}
+
+/* Small Phones <=468px */
+@media (max-width: 468px) {
+    .filterbar {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .filterbar label {
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .filterbar select,
+    .filterbar input {
+        height: 32px;
+        font-size: 11px;
+    }
+
+    .filterbar .searchinput {
+        padding-left: 30px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") 12px center no-repeat;
+
+    }
+
+    .webinarcard {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .webinarcard .splogo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .webinarcard h3 {
+        font-size: 14px;
+    }
+
+    .webinarcard .meta {
+        font-size: 11px;
+        gap: 8px;
+    }
+
+    .webinarcard .price {
+        font-size: 16px;
+    }
+
+    .filterselect {
+        height: 32px;
+        font-size: 11px;
+    }
+
+    .filterlabel {
+        font-size: 11px;
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .trainingscount {
+        font-size: 13px;
+    }
+}
+
+/* Extra Small Phones <=360px */
+@media (max-width: 360px) {
+    .filterbar {
+        padding: 8px;
+        gap: 6px;
+    }
+
+    .filterbar label {
+        font-size: 10px;
+    }
+
+    .filterbar select,
+    .filterbar input {
+        height: 30px;
+        font-size: 10px;
+    }
+
+    .filterbar .searchinput {
+        padding-left: 30px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") 12px center no-repeat;
+
+    }
+
+    .webinarcard {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .webinarcard .splogo {
+        width: 45px;
+        height: 45px;
+    }
+
+    .webinarcard h3 {
+        font-size: 13px;
+    }
+
+    .webinarcard .meta {
+        font-size: 10px;
+        gap: 6px;
+    }
+
+    .webinarcard .price {
+        font-size: 15px;
+    }
+
+    .filterselect {
+        height: 30px;
+        font-size: 10px;
+    }
+
+    .filterlabel {
+        font-size: 10px;
+    }
+
+    .trainingscount {
+        font-size: 12px;
+    }
+}

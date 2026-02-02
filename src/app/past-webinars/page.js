@@ -1,6 +1,6 @@
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
-import WebinarsList from "@/components/Webinars/Webinars";
+import PastWebinars from "@/components/PastWebinars/PastWebinars";
 import Link from "next/link";
 
 export default async function Webinars({ searchParams }) {
@@ -11,7 +11,7 @@ export default async function Webinars({ searchParams }) {
   const type = params.type || "";
   const price = params.price || "";
   const search = params.search || "";
-  const sort = params.sort || "dateOld"; // ✅ ADD THIS
+    const sort = params.sort || "dateOld"; // ✅ ADD THIS
 
 
   // Build query string safely
@@ -25,20 +25,19 @@ export default async function Webinars({ searchParams }) {
   }).toString();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/webinars/get-limited-webinars?${query}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/webinars/get-past-webinars?${query}`,
     { cache: "no-store" }
   );
 
   const data = await res.json();
-  const webinars = data.success
-    ? data.response.filter(webinar => !webinar.isStopped)
-    : [];
+  const webinars = data.success ? data.response : [];
+
   const dataPagination = data.success ? data.pagination : {};
 
   return (
     <>
       <Header />
-      <WebinarsList
+      <PastWebinars
         webinars={webinars}
         pagination={dataPagination}
         filters={{ category, type, price, search, sort }}
