@@ -12,7 +12,7 @@ const inter = Inter({
 
 
 export const metadata = {
-  title: "Knotral-Training",
+  title: "Knotral Trainings",
   description: "Free professional development from global EdTech leaders. Live webinars, certifications, and classroom-ready strategies for Indian educators.",
   icons: {
     icon: "/knotralicon.jpeg", // ✅ custom favicon path
