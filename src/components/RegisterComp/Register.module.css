@@ -573,7 +573,7 @@
  }
 
  .audiencetab {
-     padding: 1.2rem 2.5rem;
+     padding: 10px 25px;
      background: white;
      border: 2px solid var(--bg-light);
      border-bottom: none;
