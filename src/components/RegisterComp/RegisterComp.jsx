@@ -653,7 +653,7 @@ const RegisterComp = ({ webinar }) => {
                   <h2 className={styles.pastsessionstitle}>Past Sessions</h2>
                 </div>
 
-                <div className={styles.pastrecordingsgrid}>
+                <div className={styles.pastrecordingsgrid1}>
                   {webinar.pastSessions.map((session) => (
                     <div
                       key={session._id}

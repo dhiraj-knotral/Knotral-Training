@@ -366,6 +366,12 @@
      gap: 2rem;
  }
 
+ .pastrecordingsgrid1 {
+     display: grid;
+     grid-template-columns: repeat(1, minmax(300px, 1fr));
+     gap: 2rem;
+ }
+
  .recordingcard {
      background: var(--white);
      border-radius: 16px;
