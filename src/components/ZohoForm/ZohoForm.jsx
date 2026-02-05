@@ -58,7 +58,7 @@ export default function ZohoForm({ webinar, utms }) {
     Webinar_Date_TIme: moment(
       `${moment(webinar.date).format("YYYY-MM-DD")} ${cleanTime}`,
       "YYYY-MM-DD h:mm A"
-    ).format("MMM DD, YYYY, h:mm A"),
+    ).format("YYYY-MM-DDTHH:mm:ssZ"),
 
     // ✅ UTM fields
     utm_source: utms?.utm_source || "",
@@ -120,7 +120,7 @@ export default function ZohoForm({ webinar, utms }) {
         Webinar_Date_TIme: moment(
           `${moment(webinar.date).format("YYYY-MM-DD")} ${cleanTime}`,
           "YYYY-MM-DD h:mm A"
-        ).format("MMM DD, YYYY, h:mm A"),
+        ).format("YYYY-MM-DDTHH:mm:ssZ"),
 
 
         // ✅ UTM fields
@@ -253,7 +253,7 @@ export default function ZohoForm({ webinar, utms }) {
               Webinar_Date_TIme: moment(
                 `${moment(webinar.date).format("YYYY-MM-DD")} ${cleanTime}`,
                 "YYYY-MM-DD h:mm A"
-              ).format("MMM DD, YYYY, h:mm A"),
+              ).format("YYYY-MM-DDTHH:mm:ssZ"),
 
             }
             : {
@@ -271,7 +271,7 @@ export default function ZohoForm({ webinar, utms }) {
               Webinar_Date_TIme: moment(
                 `${moment(webinar.date).format("YYYY-MM-DD")} ${cleanTime}`,
                 "YYYY-MM-DD h:mm A"
-              ).format("MMM DD, YYYY, h:mm A"),
+              ).format("YYYY-MM-DDTHH:mm:ssZ"),
 
             }
         );
