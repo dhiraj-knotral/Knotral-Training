@@ -20,6 +20,32 @@ export const metadata = {
    alternates: {
     canonical: "https://training.knotral.com/",
   },
+
+   openGraph: {
+    title: "Knotral Trainings",
+    description:
+      "Free professional development from global EdTech leaders. Live webinars, certifications, and classroom-ready strategies for Indian educators.",
+    url: "https://training.knotral.com/",
+    siteName: "Knotral Trainings",
+    images: [
+      {
+        url: "https://training.knotral.com/icon.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Knotral Trainings",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Knotral Trainings",
+    description:
+      "Free professional development from global EdTech leaders. Live webinars, certifications, and classroom-ready strategies for Indian educators.",
+    images: ["https://training.knotral.com/icon.jpeg"],
+  },
 };
 
 export default function RootLayout({ children }) {
