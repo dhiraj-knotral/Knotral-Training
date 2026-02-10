@@ -15,7 +15,7 @@ export const metadata = {
   title: "Knotral Trainings",
   description: "Free professional development from global EdTech leaders. Live webinars, certifications, and classroom-ready strategies for Indian educators.",
   icons: {
-    icon: "/knotralicon.jpeg", // ✅ custom favicon path
+    icon: "/icon.jpeg", 
   },
    alternates: {
     canonical: "https://training.knotral.com/",
