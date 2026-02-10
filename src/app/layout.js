@@ -17,6 +17,9 @@ export const metadata = {
   icons: {
     icon: "/knotralicon.jpeg", // ✅ custom favicon path
   },
+   alternates: {
+    canonical: "https://training.knotral.com/",
+  },
 };
 
 export default function RootLayout({ children }) {
