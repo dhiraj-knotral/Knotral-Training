@@ -198,7 +198,7 @@ const PastWebinars = ({ webinars, pagination, filters }) => {
                                                 ? "Start Course"
                                                 : item.actions?.canEnroll
                                                     ? "Watch Now"
-                                                    : "Register"}
+                                                    : "View"}
                                         </Link>
                                     </div>
                                 </div>
