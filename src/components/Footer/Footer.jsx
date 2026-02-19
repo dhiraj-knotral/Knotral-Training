@@ -20,7 +20,8 @@ const Footer = () => {
             <p>
               Knowledge. Trade. Link.<br />
               Connecting global education solutions with Indian schools.<br />
-              Ph No: 9311526122
+              Ph No: 9311526122 <br />
+              Email: <a href="mailto:training@knotral.com" className={styles.emailLink}>training@knotral.com</a>
             </p>
           </div>
 
