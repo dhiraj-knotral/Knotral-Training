@@ -103,14 +103,8 @@ const ContactUs = () => {
               <p className={styles.infotext}>
                 For general inquiries
                 <br />
-                <a href="mailto:info@knotral.com">info@knotral.com</a>
+                <a href="mailto:training@knotral.com">training@knotral.com</a>
                 <br />
-                <br />
-                For partnerships
-                <br />
-                <a href="mailto:partners@knotral.com">
-                  partners@knotral.com
-                </a>
               </p>
             </div>
 
