@@ -49,16 +49,16 @@ const WebinarsList = ({ webinars, pagination, filters }) => {
                                 onChange={(e) => updateFilter("category", e.target.value)}
                             >
                                 <option value="">All Categories</option>
-                                <option value="Mathematics">Mathematics</option>
-                                <option value="Literacy">Literacy</option>
-                                <option value="Science">Science</option>
-                                <option value="EdTech">EdTech</option>
-                                <option value="SEL & Wellbeing">SEL & Wellbeing</option>
-                                <option value="Assessment">Assessment</option>
-                                <option value="NEP 2020">NEP 2020</option>
-                                <option value="Arts & Music">Arts & Music</option>
-                                <option value="Languages">Languages</option>
+                                <option value="Franchise & Edupreneurs">Franchise & Edupreneurs</option>
+                                <option value="Curriculum & Publishers">Curriculum & Publishers</option>
                                 <option value="Early Years">Early Years</option>
+                                <option value="EdTech & Digital Learning">EdTech & Digital Learning</option>
+                                <option value="SEL & Wellbeing">SEL & Wellbeing</option>
+                                <option value="Teacher Professional Development">Teacher Professional Development</option>
+                                <option value="Inclusion & Special Needs">Inclusion & Special Needs</option>
+                                <option value="Higher Education">Higher Education</option>
+                                <option value="Corporate & Professional Development">Corporate & Professional Development</option>
+                                <option value="Online & Alternate Schooling">Online & Alternate Schooling</option>
                             </select>
                         </div>
 
