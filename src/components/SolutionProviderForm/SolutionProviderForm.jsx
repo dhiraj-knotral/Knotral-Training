@@ -22,20 +22,52 @@ export default function SolutionProvidersForm() {
 
     // Form state
     const [formData, setFormData] = useState({
-        // First_Name: "",
-        // Last_Name: "",
-        Name: "",
+        First_Name: "",
+        Last_Name: "",
         Email: "",
-        Mobile: "",
+        Mobile: "+91",
         Designation: "",
         FORM_NAME: "Solution Providers Landing Page",
-        Solution_Type: "",
-        Target_Audience: ""
+        Type_of_Solution_You_Offer: "",
+        Primary_Target_Audience: ""
     });
 
     // Update state on input change
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    // Mobile handler
+    const handleMobileChange = (e) => {
+        let value = e.target.value;
+
+        // Always enforce +91 prefix
+        if (!value.startsWith("+91")) value = "+91";
+
+        // Only digits after +91
+        const digitsOnly = value.slice(3).replace(/\D/g, "");
+
+        // Limit to 10 digits
+        if (digitsOnly.length > 10) return;
+
+        setFormData((prev) => ({
+            ...prev,
+            Mobile: "+91" + digitsOnly,
+        }));
+    };
+
+    const handleKeyDown = (e) => {
+        // Prevent deleting +91
+        if (
+            (e.key === "Backspace" || e.key === "Delete") &&
+            e.target.selectionStart <= 3
+        ) {
+            e.preventDefault();
+        }
     };
 
     // Submit form
@@ -56,13 +88,14 @@ export default function SolutionProvidersForm() {
                 // Reset form
                 // Reset form to initial fields
                 setFormData({
-                    Name: "",
+                    First_Name: "",
+                    Last_Name: "",
                     Email: "",
-                    Mobile: "",
+                    Mobile: "+91",
                     Designation: "",
                     FORM_NAME: "Solution Providers Landing Page",
-                    Solution_Type: "",
-                    Target_Audience: ""
+                    Type_of_Solution_You_Offer: "",
+                    Primary_Target_Audience: ""
                 });
                 // Redirect to home page
             } else {
@@ -86,22 +119,22 @@ export default function SolutionProvidersForm() {
                         </p>
 
                         <form onSubmit={handleSubmit}>
-                                <div className={styles.formgroup}>
-                                    <label>
-                                        Name <span className="required">*</span>
-                                    </label>
-                                    <input type="text" name="Name"
-                                        onChange={handleChange} placeholder="Enter name" required />
-                                </div>
+                            <div className={styles.formgroup}>
+                                <label>
+                                    First Name <span className="required">*</span>
+                                </label>
+                                <input type="text" name="First_Name"
+                                    onChange={handleChange} placeholder="Enter first name" required />
+                            </div>
 
-                                {/* <div className={styles.formgroup}>
-                                    <label>
-                                        Last Name <span className="required">*</span>
-                                    </label>
-                                    <input type="text" name="Last_Name"
-                                        onChange={handleChange} placeholder="Enter last name" required />
-                                </div> */}
-                      
+                            <div className={styles.formgroup}>
+                                <label>
+                                    Last Name <span className="required">*</span>
+                                </label>
+                                <input type="text" name="Last_Name"
+                                    onChange={handleChange} placeholder="Enter last name" required />
+                            </div>
+
 
                             <div className={styles.formgroup}>
                                 <label>
@@ -116,65 +149,70 @@ export default function SolutionProvidersForm() {
                                 <label>
                                     Phone <span className="required">*</span>
                                 </label>
-                                <input type="tel" name="Mobile"
-                                    onChange={handleChange} placeholder="+91 98765 43210" required />
+                                <input
+                                    type="tel"
+                                    name="Mobile"
+                                    value={formData.Mobile}
+                                    onChange={handleMobileChange}
+                                    onKeyDown={handleKeyDown}
+                                />
                                 <div className={styles.hint}>For reminders and follow-up resources</div>
                             </div>
 
-                        
-                                <div className={styles.formgroup}>
-                                    <label>
-                                        Job Role/Designation <span className="required">*</span>
-                                    </label>
-                                    <select name="Designation"
-                                        onChange={handleChange}
-                                        required>
-                                        <option value="">Select your designation...</option>
-                                        <option>Founder / Co-Founder</option>
-                                        <option>CEO / Managing Director</option>
-                                        <option>Product Manager</option>
-                                        <option>Sales / Partnerships</option>
-                                        <option>Marketing / Growth</option>
-                                        <option>Training / Academic Lead</option>
-                                        <option>Other</option>
-                                    </select>
-                                </div>
 
-                                <div className={styles.formgroup}>
-                                    <label>
-                                        Type of Solution You Offer <span className="required">*</span>
-                                    </label>
-                                    <select name="Solution_Type"
-                                        onChange={handleChange}
-                                        required>
-                                        <option value="">Select solution type you provide...</option>
-                                        <option>EdTech Platform / SaaS</option>
-                                        <option>Curriculum / Content Provider</option>
-                                        <option>Assessment & Testing</option>
-                                        <option>Teacher Training / Certification</option>
-                                        <option>School Management Software</option>
-                                        <option>Early Years / K–12 Solution</option>
-                                        <option>Higher Education Solution</option>
-                                        <option>Other</option>
-                                    </select>
-                                </div>
+                            <div className={styles.formgroup}>
+                                <label>
+                                    Job Role/Designation <span className="required">*</span>
+                                </label>
+                                <select name="Designation"
+                                    onChange={handleChange}
+                                    required>
+                                    <option value="">Select your designation...</option>
+                                    <option>Founder / Co-Founder</option>
+                                    <option>CEO / Managing Director</option>
+                                    <option>Product Manager</option>
+                                    <option>Sales / Partnerships</option>
+                                    <option>Marketing / Growth</option>
+                                    <option>Training / Academic Lead</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+
+                            <div className={styles.formgroup}>
+                                <label>
+                                    Type of Solution You Offer <span className="required">*</span>
+                                </label>
+                                <select name="Type_of_Solution_You_Offer"
+                                    onChange={handleChange}
+                                    required>
+                                    <option value="">Select solution type you provide...</option>
+                                    <option>EdTech Platform / SaaS</option>
+                                    <option>Curriculum / Content Provider</option>
+                                    <option>Assessment & Testing</option>
+                                    <option>Teacher Training / Certification</option>
+                                    <option>School Management Software</option>
+                                    <option>Early Years / K–12 Solution</option>
+                                    <option>Higher Education Solution</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
 
 
-                                <div className={styles.formgroup}>
-                                    <label>
-                                        Primary Target Audience <span className="required">*</span>
-                                    </label>
-                                    <select name="Solution_Type"
-                                        onChange={handleChange}
-                                        required>
-                                        <option value="">Select your target audience...</option>
-                                        <option>Teachers</option>
-                                        <option>School Chains / Groups</option>
-                                        <option>Students</option>
-                                        <option>Parents</option>
-                                        <option>Government / Institutions</option>
-                                    </select>
-                                </div>
+                            <div className={styles.formgroup}>
+                                <label>
+                                    Primary Target Audience <span className="required">*</span>
+                                </label>
+                                <select name="Primary_Target_Audience"
+                                    onChange={handleChange}
+                                    required>
+                                    <option value="">Select your target audience...</option>
+                                    <option>Teachers</option>
+                                    <option>School Chains / Groups</option>
+                                    <option>Students</option>
+                                    <option>Parents</option>
+                                    <option>Government / Institutions</option>
+                                </select>
+                            </div>
 
 
                             <div className={styles.formdivider}></div>
