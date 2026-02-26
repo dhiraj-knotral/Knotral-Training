@@ -4,30 +4,30 @@ import styles from "./Schools.module.css"
 
 const schools = [
     "/logo1.png",
-  "/logo2.png",
-  "/logo3.png",
-  "/logo4.png",
-  "/logo5.png",
-  "/logo6.png",
-  "/logo7.png",
-  "/logo8.png",
-  "/logo9.png",
-  "/logo10.png",
-  "/logo11.png",
-  "/logo12.png",
-  "/logo13.png",
-  "/logo14.png",
-  "/logo15.png",
-  "/logo16.png",
-  "/logo17.png",
-  "/logo18.png",
-  "/logo19.png",
-  "/logo20.png",
-  "/logo21.png",
-  "/logo22.png",
-  "/logo23.png",
-  "/logo24.png",
-  "/logo25.png",
+    "/logo2.png",
+    "/logo3.png",
+    "/logo4.png",
+    "/logo5.png",
+    "/logo6.png",
+    "/logo7.png",
+    "/logo8.png",
+    "/logo9.png",
+    "/logo10.png",
+    "/logo11.png",
+    "/logo12.png",
+    "/logo13.png",
+    "/logo14.png",
+    "/logo15.png",
+    "/logo16.png",
+    "/logo17.png",
+    "/logo18.png",
+    "/logo19.png",
+    "/logo20.png",
+    "/logo21.png",
+    "/logo22.png",
+    "/logo23.png",
+    "/logo24.png",
+    "/logo25.png",
 ];
 
 const Schools = () => {
@@ -42,7 +42,7 @@ const Schools = () => {
                         Curated professional development from 45+ global EdTech brands.
                         Flexible packages for schools of all sizes.
                     </p>
-                    <Link href="/" className="btn btnprimary btnlg">
+                    <Link href="/contact-us" className="btn btnprimary btnlg">
                         Request School Demo
                     </Link>
                 </div>
@@ -279,9 +279,12 @@ const Schools = () => {
                     <p className={styles.content}>
                         Schedule a free demo and see how Knotral can work for your school.
                     </p>
-                    <a href="#" className="btn btnprimary btnlg">
+                    {/* <a href="#" className="btn btnprimary btnlg">
                         Book Free Demo
-                    </a>
+                    </a> */}
+                    <Link href="/contact-us" className="btn btnprimary btnlg">
+                        Book Free Demo
+                    </Link>
                 </div>
             </section>
         </>
