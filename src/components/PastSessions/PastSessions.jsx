@@ -13,7 +13,7 @@ const PastSessions = ({ webinars }) => {
         .sort((a, b) => moment(a.date).diff(moment(b.date)));
 
     return (
-        <section className="section">
+        <section className="section" style={{ background: "white" }}>
             <div className="container">
                 <div className="sectionheader">
                     <h2 className="sectiontitle">Past Sessions</h2>

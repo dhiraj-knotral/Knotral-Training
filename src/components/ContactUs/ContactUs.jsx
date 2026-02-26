@@ -23,16 +23,45 @@ const ContactUs = () => {
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
+    Mobile: "+91",
     category: "",
     organization: "",
-    subject: "",
+    city: "",
     message: ""
   });
 
   // Update state on input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Mobile handler
+  const handleMobileChange = (e) => {
+    let value = e.target.value;
+
+    // Always enforce +91 prefix
+    if (!value.startsWith("+91")) value = "+91";
+
+    // Only digits after +91
+    const digitsOnly = value.slice(3).replace(/\D/g, "");
+
+    // Limit to 10 digits
+    if (digitsOnly.length > 10) return;
+
+    setFormData((prev) => ({
+      ...prev,
+      Mobile: "+91" + digitsOnly,
+    }));
+  };
+
+  const handleKeyDown = (e) => {
+    // Prevent deleting +91
+    if (
+      (e.key === "Backspace" || e.key === "Delete") &&
+      e.target.selectionStart <= 3
+    ) {
+      e.preventDefault();
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -55,10 +84,10 @@ const ContactUs = () => {
           firstName: "",
           lastName: "",
           email: "",
-          phone: "",
+          Mobile: "+91",
           category: "",
           organization: "",
-          subject: "",
+          city: "",
           message: ""
         });
         // Redirect to home page
@@ -227,12 +256,11 @@ const ContactUs = () => {
                   </label>
                   <input
                     type="tel"
-                    id="phone"
-                    name="phone"
+                    name="Mobile"
+                    value={formData.Mobile}
                     className={styles.forminput}
-                    placeholder="+91 98765 43210"
-                    value={formData.phone}
-                    onChange={handleChange}
+                    onChange={handleMobileChange}
+                    onKeyDown={handleKeyDown}
                   />
                 </div>
               </div>
@@ -272,7 +300,7 @@ const ContactUs = () => {
                 <input
                   type="text"
                   id="school"
-                  name="school"
+                  name="organization"
                   className={styles.forminput}
                   placeholder="Your school or organization name"
                   value={formData.organization}
@@ -281,17 +309,17 @@ const ContactUs = () => {
               </div>
 
               <div className={styles.formgroup}>
-                <label className={styles.formlabel} htmlFor="subject">
-                  Subject *
+                <label className={styles.formlabel} htmlFor="city">
+                  City *
                 </label>
                 <input
                   type="text"
-                  id="subject"
-                  name="subject"
+                  id="city"
+                  name="city"
                   className={styles.forminput}
                   required
-                  placeholder="How can we help you?"
-                  value={formData.subject}
+                  placeholder="City"
+                  value={formData.city}
                   onChange={handleChange}
                 />
               </div>

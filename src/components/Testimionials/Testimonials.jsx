@@ -25,7 +25,7 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="section">
+    <section className="section" style={{ background: "white" }}>
       <div className="container">
         <div className="sectionheader">
           <h2 className="sectiontitle">What Teachers Say</h2>

@@ -11,6 +11,32 @@ const RegisterComp = ({ webinar }) => {
 
   const [activeTab, setActiveTab] = useState("teachers-content");
 
+  const [certificate, setCertificate] = useState(null);
+
+  useEffect(() => {
+    const fetchCertificate = async () => {
+      try {
+        if (!webinar?._id) return;
+
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/certificates/get-webinar-certificate?webinarId=${webinar._id}`
+        );
+
+        const data = await response.json();
+
+        if (data.success) {
+          setCertificate(data.response);   // ✅ store full object
+        }
+      } catch (error) {
+        console.error("Failed to fetch certificate:", error);
+      }
+    };
+
+    if (webinar.isCertified) {
+      fetchCertificate();
+    }
+  }, [webinar]);
+
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
@@ -113,6 +139,11 @@ const RegisterComp = ({ webinar }) => {
               {webinar.isLive && (
                 <span className="badge badgelive">LIVE WEBINAR</span>
               )}
+
+              {webinar.isCertified && (
+                <span className="badge badgecert">Participation Certificate Included</span>
+              )}
+
             </div>
 
             <h1>
@@ -488,6 +519,23 @@ const RegisterComp = ({ webinar }) => {
                 ))}
               </div>
             </div>
+
+            {webinar?.isCertified && certificate?.certificateFile?.url && (
+              <div className={styles.contentsection}>
+                <h2>Sample Certificate</h2>
+
+                <div className={styles.certificateWrapper}>
+                  <img
+                    src={certificate.certificateFile.url}
+                    alt="Sample Certificate"
+                    className={styles.certificateImage}
+                    draggable="false"
+                    onContextMenu={(e) => e.preventDefault()}
+
+                  />
+                </div>
+              </div>
+            )}
 
 
             <div className={styles.contentsection}>
