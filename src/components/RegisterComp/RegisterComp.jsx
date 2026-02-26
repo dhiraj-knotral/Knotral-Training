@@ -520,26 +520,24 @@ const RegisterComp = ({ webinar }) => {
               </div>
             </div>
 
-            {webinar?.isCertified && certificate?.certificateFile?.url && (
-              <div className={styles.contentsection}>
-                <h2>Sample Certificate</h2>
-
-                <div className={styles.certificateWrapper}>
-                  <img
-                    src={certificate.certificateFile.url}
-                    alt="Sample Certificate"
-                    className={styles.certificateImage}
-                    draggable="false"
-                    onContextMenu={(e) => e.preventDefault()}
-
-                  />
-                </div>
-              </div>
-            )}
-
 
             <div className={styles.contentsection}>
               <h2>Exclusive Attendee Benefits</h2>
+
+              {webinar?.isCertified && certificate?.certificateFile?.url && (
+                <div className={styles.contentsection}>
+
+                  <div className={styles.certificateWrapper}>
+                    <img
+                      src={certificate.sampleCertificateFile.url}
+                      alt="Sample Certificate"
+                      className={styles.certificateImage}
+                      draggable="false"
+                      onContextMenu={(e) => e.preventDefault()}
+                    />
+                  </div>
+                </div>
+              )}
               <div className={styles.benefitbox}>
                 <h3>{webinar.attendeeBenefits.title}</h3>
                 {/* <p style={{ marginBottom: "16px", opacity: 0.9 }}>
