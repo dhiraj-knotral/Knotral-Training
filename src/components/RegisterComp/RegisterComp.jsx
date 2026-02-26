@@ -525,8 +525,6 @@ const RegisterComp = ({ webinar }) => {
               <h2>Exclusive Attendee Benefits</h2>
 
               {webinar?.isCertified && certificate?.certificateFile?.url && (
-                <div className={styles.contentsection}>
-
                   <div className={styles.certificateWrapper}>
                     <img
                       src={certificate.sampleCertificateFile.url}
@@ -536,7 +534,6 @@ const RegisterComp = ({ webinar }) => {
                       onContextMenu={(e) => e.preventDefault()}
                     />
                   </div>
-                </div>
               )}
               <div className={styles.benefitbox}>
                 <h3>{webinar.attendeeBenefits.title}</h3>
