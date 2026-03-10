@@ -1,6 +1,8 @@
+User-agent: Googlebot
+Disallow: /nogooglebot/
+
 User-agent: *
 Allow: /
-
-Sitemap: https://knotral.com/sitemap.xml
-Sitemap: https://knotral.com/sitemap
-LLMs: https://knotral.com/llms.txt
+Sitemap: https://training.knotral.com/sitemap.xml
+Sitemap: https://training.knotral.com/sitemap
+LLMs: https://training.knotral.com/llms.txt
