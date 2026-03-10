@@ -214,8 +214,6 @@ export const GET = async () => {
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
-
-</urlset>
 `;
 
     webinars.forEach((webinar) => {
