@@ -15,102 +15,205 @@ export const GET = async () => {
 
     // Build XML
     let xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-            
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- ── CORE PAGES ─────────────────────────────────────────────────────── -->
+
   <url>
     <loc>https://training.knotral.com/</loc>
-      </url>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
 
   <url>
     <loc>https://training.knotral.com/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://training.knotral.com/contact-us</loc>
-      </url>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 
   <url>
     <loc>https://training.knotral.com/faq</loc>
-     </url>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
 
- <url>
+  <!-- ── AUDIENCE PAGES ─────────────────────────────────────────────────── -->
+
+  <url>
     <loc>https://training.knotral.com/for-teachers</loc>
-   
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://training.knotral.com/for-schools</loc>
-   
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://training.knotral.com/for-solution-providers</loc>
-   
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
+
+  <!-- ── WEBINARS – MAIN LISTING ────────────────────────────────────────── -->
 
   <url>
     <loc>https://training.knotral.com/webinars</loc>
-      </url>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
 
+  <!-- ── WEBINARS – BY CATEGORY ─────────────────────────────────────────── -->
+
+  <url>
+    <loc>https://training.knotral.com/webinars?category=Early+Years</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://training.knotral.com/webinars?category=Teacher+Professional+Development</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://training.knotral.com/webinars?category=Franchise+%26+Edupreneurs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://training.knotral.com/webinars?category=EdTech+%26+Digital+Learning</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://training.knotral.com/webinars?category=Curriculum+%26+Publishers</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://training.knotral.com/webinars?category=SEL+%26+Wellbeing</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://training.knotral.com/webinars?category=Inclusion+%26+Special+Needs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://training.knotral.com/webinars?category=Higher+Education</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://training.knotral.com/webinars?category=Corporate+%26+Professional+Development</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://training.knotral.com/webinars?category=Online+%26+Alternate+Schooling</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ── WEBINAR SESSION PAGES ──────────────────────────────────────────── -->
 
   <url>
     <loc>https://training.knotral.com/how-spelling-builds-literacy-and-engagement</loc>
-     </url>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <url>
     <loc>https://training.knotral.com/improving-student-engagement-through-evidence-based-teaching-practice</loc>
-      </url>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <url>
     <loc>https://training.knotral.com/teach-from-dehart</loc>
-    </url>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <url>
     <loc>https://training.knotral.com/building-strong-english-foundations-with-hamilton-house-for-teachers-schools-and-education-partners</loc>
-     </url>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <url>
     <loc>https://training.knotral.com/from-teaching-english-to-offering-a-uk-certified-english-program</loc>
-     </url>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <url>
     <loc>https://training.knotral.com/av1-telepresence-robot-india-launch-webinar</loc>
-     </url>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <url>
     <loc>https://training.knotral.com/unlocking-knowledge-with-world-book-digital-libraries-and-encyclopedias-for-modern-learning</loc>
-    </url>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <url>
     <loc>https://training.knotral.com/inclusive-adaptive-play-based-learning-webinar-schools</loc>
-     </url>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <url>
     <loc>https://training.knotral.com/elevate-teaching-with-video-coaching</loc>
-     </url>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <url>
     <loc>https://training.knotral.com/onfire-learning-academy-open-dayaccredited-online-k-12-pathway-for-indian-students</loc>
-      </url>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <url>
     <loc>https://training.knotral.com/building-strong-english-foundations-phonics-to-fluent-language-learning</loc>
-     </url>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <url>
     <loc>https://training.knotral.com/become-a-certified-reggio-emilia-teacher</loc>
-     </url>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ── SITEMAP PAGE ───────────────────────────────────────────────────── -->
 
   <url>
-    <loc>https://training.knotral.com/privacy-policy</loc>
-     </url>
-  <url>
     <loc>https://training.knotral.com/sitemap</loc>
-    </url>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
 
 </urlset>
 `;
