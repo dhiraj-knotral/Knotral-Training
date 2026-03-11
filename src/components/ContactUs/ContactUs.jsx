@@ -261,6 +261,9 @@ const ContactUs = () => {
                     className={styles.forminput}
                     onChange={handleMobileChange}
                     onKeyDown={handleKeyDown}
+                           required
+                        pattern="^\+91[0-9]{10}$"
+                        title="Please enter a valid 10 digit WhatsApp number"
                   />
                 </div>
               </div>

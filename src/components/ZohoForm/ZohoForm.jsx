@@ -303,263 +303,269 @@ export default function ZohoForm({ webinar, utms }) {
 
             <form onSubmit={handleSubmit}>
               {
-              // isOnFire ? (
-              //   <>
-              //     {/* On Fire Fields */}
-              //     <div className={styles.formrow}>
-              //       <div className={styles.formgroup}>
-              //         <label>First Name <span className="required">*</span></label>
-              //         <input
-              //           type="text"
-              //           name="First_Name"
-              //           value={formData.First_Name}
-              //           onChange={handleChange}
-              //           placeholder="First name"
-              //           required
-              //         />
-              //       </div>
+                // isOnFire ? (
+                //   <>
+                //     {/* On Fire Fields */}
+                //     <div className={styles.formrow}>
+                //       <div className={styles.formgroup}>
+                //         <label>First Name <span className="required">*</span></label>
+                //         <input
+                //           type="text"
+                //           name="First_Name"
+                //           value={formData.First_Name}
+                //           onChange={handleChange}
+                //           placeholder="First name"
+                //           required
+                //         />
+                //       </div>
 
-              //       <div className={styles.formgroup}>
-              //         <label>Last Name <span className="required">*</span></label>
-              //         <input
-              //           type="text"
-              //           name="Last_Name"
-              //           value={formData.Last_Name}
-              //           onChange={handleChange}
-              //           placeholder="Last name"
-              //           required
-              //         />
-              //       </div>
-              //     </div>
+                //       <div className={styles.formgroup}>
+                //         <label>Last Name <span className="required">*</span></label>
+                //         <input
+                //           type="text"
+                //           name="Last_Name"
+                //           value={formData.Last_Name}
+                //           onChange={handleChange}
+                //           placeholder="Last name"
+                //           required
+                //         />
+                //       </div>
+                //     </div>
 
-              //     <div className={styles.formgroup}>
-              //       <label>Email Address (for webinar link & reminders) <span className="required">*</span></label>
-              //       <input
-              //         type="email"
-              //         name="Email"
-              //         value={formData.Email}
-              //         onChange={handleChange}
-              //         placeholder="you@example.com"
-              //         required
-              //       />
-              //     </div>
+                //     <div className={styles.formgroup}>
+                //       <label>Email Address (for webinar link & reminders) <span className="required">*</span></label>
+                //       <input
+                //         type="email"
+                //         name="Email"
+                //         value={formData.Email}
+                //         onChange={handleChange}
+                //         placeholder="you@example.com"
+                //         required
+                //       />
+                //     </div>
 
-              //     <div className={styles.formgroup}>
-              //       <label>Mobile Number (WhatsApp enabled) <span className="required">*</span></label>
-              //       <input
-              //         type="tel"
-              //         name="Mobile"
-              //         value={formData.Mobile}
-              //         onChange={handleMobileChange}
-              //         onKeyDown={handleKeyDown}
-              //       />
-              //     </div>
+                //     <div className={styles.formgroup}>
+                //       <label>Mobile Number (WhatsApp enabled) <span className="required">*</span></label>
+                //       <input
+                //         type="tel"
+                //         name="Mobile"
+                //         value={formData.Mobile}
+                //         onChange={handleMobileChange}
+                //         onKeyDown={handleKeyDown}
+                //       />
+                //     </div>
 
-              //     <div className={styles.formgroup}>
-              //       <label>City & State <span className="required">*</span></label>
-              //       <input
-              //         type="text"
-              //         name="City"
-              //         value={formData.City}
-              //         onChange={handleChange}
-              //         placeholder="City, State"
-              //         required
-              //       />
-              //     </div>
+                //     <div className={styles.formgroup}>
+                //       <label>City & State <span className="required">*</span></label>
+                //       <input
+                //         type="text"
+                //         name="City"
+                //         value={formData.City}
+                //         onChange={handleChange}
+                //         placeholder="City, State"
+                //         required
+                //       />
+                //     </div>
 
-              //     <div className={styles.formgroup}>
-              //       <label>Student’s Name <span className="required">*</span></label>
-              //       <input
-              //         type="text"
-              //         name="Student_Name"
-              //         value={formData.Student_Name}
-              //         onChange={handleChange}
-              //         placeholder="Student's Name"
-              //         required
-              //       />
-              //     </div>
+                //     <div className={styles.formgroup}>
+                //       <label>Student’s Name <span className="required">*</span></label>
+                //       <input
+                //         type="text"
+                //         name="Student_Name"
+                //         value={formData.Student_Name}
+                //         onChange={handleChange}
+                //         placeholder="Student's Name"
+                //         required
+                //       />
+                //     </div>
 
-              //     <div className={styles.formgroup}>
-              //       <label>Student’s Current Grade <span className="required">*</span></label>
-              //       <select
-              //         name="Grade"
-              //         value={formData.Grade}
-              //         onChange={handleChange}
-              //         required
-              //       >
-              //         <option value="">Select grade</option>
-              //         {["KG", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5", "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12"].map(g => (
-              //           <option key={g} value={g}>{g}</option>
-              //         ))}
-              //       </select>
-              //     </div>
+                //     <div className={styles.formgroup}>
+                //       <label>Student’s Current Grade <span className="required">*</span></label>
+                //       <select
+                //         name="Grade"
+                //         value={formData.Grade}
+                //         onChange={handleChange}
+                //         required
+                //       >
+                //         <option value="">Select grade</option>
+                //         {["KG", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5", "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12"].map(g => (
+                //           <option key={g} value={g}>{g}</option>
+                //         ))}
+                //       </select>
+                //     </div>
 
-              //     <div className={styles.formgroup}>
-              //       <label>Student’s Age <span className="required">*</span></label>
-              //       <input
-              //         type="number"
-              //         name="Student_Age"
-              //         value={formData.Student_Age}
-              //         onChange={handleChange}
-              //         placeholder="Student's age"
-              //         required
-              //       />
-              //     </div>
+                //     <div className={styles.formgroup}>
+                //       <label>Student’s Age <span className="required">*</span></label>
+                //       <input
+                //         type="number"
+                //         name="Student_Age"
+                //         value={formData.Student_Age}
+                //         onChange={handleChange}
+                //         placeholder="Student's age"
+                //         required
+                //       />
+                //     </div>
 
-              //     <div className={styles.formgroup}>
-              //       <label>Current School Board <span className="required">*</span></label>
-              //       <select
-              //         name="School_Board"
-              //         value={formData.School_Board}
-              //         onChange={handleChange}
-              //         required
-              //       >
-              //         <option value="">Select board</option>
-              //         {["CBSE", "ICSE", "State Board", "IGCSE / IB", "Homeschooled", "Other"].map(b => (
-              //           <option key={b} value={b}>{b}</option>
-              //         ))}
-              //       </select>
-              //     </div>
+                //     <div className={styles.formgroup}>
+                //       <label>Current School Board <span className="required">*</span></label>
+                //       <select
+                //         name="School_Board"
+                //         value={formData.School_Board}
+                //         onChange={handleChange}
+                //         required
+                //       >
+                //         <option value="">Select board</option>
+                //         {["CBSE", "ICSE", "State Board", "IGCSE / IB", "Homeschooled", "Other"].map(b => (
+                //           <option key={b} value={b}>{b}</option>
+                //         ))}
+                //       </select>
+                //     </div>
 
-              //     <div className={styles.formgroup}>
-              //       <label>Preferred Program Level <span className="required">*</span></label>
-              //       <select
-              //         name="Preferred_Program_Level"
-              //         value={formData.Preferred_Program_Level}
-              //         onChange={handleChange}
-              //         required
-              //       >
-              //         <option value="">Select program level</option>
-              //         {["Elementary (KG–5)", "Middle School (6–8)", "High School (9–12)", "Not sure yet"].map(l => (
-              //           <option key={l} value={l}>{l}</option>
-              //         ))}
-              //       </select>
-              //     </div>
-              //   </>
-              // ) 
-              // :
-               isTilliKids ? (
-                <>
-                  {/* Tilli Kids Fields */}
-                  <div className={styles.formrow}>
+                //     <div className={styles.formgroup}>
+                //       <label>Preferred Program Level <span className="required">*</span></label>
+                //       <select
+                //         name="Preferred_Program_Level"
+                //         value={formData.Preferred_Program_Level}
+                //         onChange={handleChange}
+                //         required
+                //       >
+                //         <option value="">Select program level</option>
+                //         {["Elementary (KG–5)", "Middle School (6–8)", "High School (9–12)", "Not sure yet"].map(l => (
+                //           <option key={l} value={l}>{l}</option>
+                //         ))}
+                //       </select>
+                //     </div>
+                //   </>
+                // ) 
+                // :
+                isTilliKids ? (
+                  <>
+                    {/* Tilli Kids Fields */}
+                    <div className={styles.formrow}>
+                      <div className={styles.formgroup}>
+                        <label>First Name <span className="required">*</span></label>
+                        <input
+                          type="text"
+                          name="First_Name"
+                          value={formData.First_Name}
+                          onChange={handleChange}
+                          placeholder="First name"
+                          required
+                        />
+                      </div>
+
+                      <div className={styles.formgroup}>
+                        <label>Last Name <span className="required">*</span></label>
+                        <input
+                          type="text"
+                          name="Last_Name"
+                          value={formData.Last_Name}
+                          onChange={handleChange}
+                          placeholder="Last name"
+                          required
+                        />
+                      </div>
+                    </div>
+
                     <div className={styles.formgroup}>
-                      <label>First Name <span className="required">*</span></label>
+                      <label>Email <span className="required">*</span></label>
                       <input
-                        type="text"
-                        name="First_Name"
-                        value={formData.First_Name}
+                        type="email"
+                        name="Email"
+                        value={formData.Email}
                         onChange={handleChange}
-                        placeholder="First name"
+                        placeholder="you@school.edu"
                         required
                       />
                     </div>
 
                     <div className={styles.formgroup}>
-                      <label>Last Name <span className="required">*</span></label>
+                      <label>WhatsApp Number <span className="required">*</span></label>
+                      <input
+                        type="tel"
+                        name="Mobile"
+                        value={formData.Mobile}
+                        onChange={handleMobileChange}
+                        onKeyDown={handleKeyDown}
+                        required
+                        pattern="^\+91[0-9]{10}$"
+                        title="Please enter a valid 10 digit WhatsApp number"
+                      />
+                    </div>
+
+                    <div className={styles.formgroup}>
+                      <label>Region you operate in <span className="required">*</span></label>
                       <input
                         type="text"
-                        name="Last_Name"
-                        value={formData.Last_Name}
+                        name="Region_To_Operate"
+                        value={formData.Region_To_Operate}
                         onChange={handleChange}
-                        placeholder="Last name"
+                        placeholder="Your region"
                         required
                       />
                     </div>
-                  </div>
+                  </>
+                ) : (
+                  <>
+                    {/* Default Non-Tilli Fields */}
+                    <div className={styles.formrow}>
+                      <div className={styles.formgroup}>
+                        <label>First Name <span className="required">*</span></label>
+                        <input type="text" name="First_Name" onChange={handleChange} placeholder="Enter first name" required />
+                      </div>
 
-                  <div className={styles.formgroup}>
-                    <label>Email <span className="required">*</span></label>
-                    <input
-                      type="email"
-                      name="Email"
-                      value={formData.Email}
-                      onChange={handleChange}
-                      placeholder="you@school.edu"
-                      required
-                    />
-                  </div>
-
-                  <div className={styles.formgroup}>
-                    <label>WhatsApp Number <span className="required">*</span></label>
-                    <input
-                      type="tel"
-                      name="Mobile"
-                      value={formData.Mobile}
-                      onChange={handleMobileChange}
-                      onKeyDown={handleKeyDown}
-                    />
-                  </div>
-
-                  <div className={styles.formgroup}>
-                    <label>Region you operate in <span className="required">*</span></label>
-                    <input
-                      type="text"
-                      name="Region_To_Operate"
-                      value={formData.Region_To_Operate}
-                      onChange={handleChange}
-                      placeholder="Your region"
-                      required
-                    />
-                  </div>
-                </>
-              ) : (
-                <>
-                  {/* Default Non-Tilli Fields */}
-                  <div className={styles.formrow}>
-                    <div className={styles.formgroup}>
-                      <label>First Name <span className="required">*</span></label>
-                      <input type="text" name="First_Name" onChange={handleChange} placeholder="Enter first name" required />
+                      <div className={styles.formgroup}>
+                        <label>Last Name <span className="required">*</span></label>
+                        <input type="text" name="Last_Name" onChange={handleChange} placeholder="Enter last name" required />
+                      </div>
                     </div>
 
                     <div className={styles.formgroup}>
-                      <label>Last Name <span className="required">*</span></label>
-                      <input type="text" name="Last_Name" onChange={handleChange} placeholder="Enter last name" required />
-                    </div>
-                  </div>
-
-                  <div className={styles.formgroup}>
-                    <label>Email Address <span className="required">*</span></label>
-                    <input type="email" name="Email" onChange={handleChange} placeholder="you@school.edu" required />
-                  </div>
-
-                  <div className={styles.formgroup}>
-                    <label>WhatsApp Number <span className="required">*</span></label>
-                    <input
-                      type="tel"
-                      name="Mobile"
-                      value={formData.Mobile}
-                      onChange={handleMobileChange}
-                      onKeyDown={handleKeyDown}
-                    />
-                  </div>
-
-                  <div className={styles.formgroup}>
-                    <label>School/Organization Name <span className="required">*</span></label>
-                    <input type="text" name="Company" onChange={handleChange} placeholder="Your school or organization" />
-                  </div>
-
-                  <div className={styles.formrow}>
-                    <div className={styles.formgroup}>
-                      <label>Your Designation <span className="required">*</span></label>
-                      <select name="Designation" onChange={handleChange} required>
-                        <option value="">Select your designation...</option>
-                        <option>Teacher</option>
-                        <option>Academic Coordinator</option>
-                        <option>Head of Department</option>
-                        <option>Vice Principal</option>
-                        <option>Principal</option>
-                        <option>Curriculum Head</option>
-                        <option>Other</option>
-                      </select>
+                      <label>Email Address <span className="required">*</span></label>
+                      <input type="email" name="Email" onChange={handleChange} placeholder="you@school.edu" required />
                     </div>
 
                     <div className={styles.formgroup}>
-                      <label>City <span className="required">*</span></label>
-                      <input type="text" name="City" onChange={handleChange} placeholder="Your city" />
+                      <label>WhatsApp Number <span className="required">*</span></label>
+                      <input
+                        type="tel"
+                        name="Mobile"
+                        value={formData.Mobile}
+                        onChange={handleMobileChange}
+                        onKeyDown={handleKeyDown}
+                        required
+                        pattern="^\+91[0-9]{10}$"
+                        title="Please enter a valid 10 digit WhatsApp number"
+                      />
                     </div>
-                  </div>
-                </>
-              )}
+
+                    <div className={styles.formgroup}>
+                      <label>School/Organization Name <span className="required">*</span></label>
+                      <input type="text" name="Company" onChange={handleChange} placeholder="Your school or organization" />
+                    </div>
+
+                    <div className={styles.formrow}>
+                      <div className={styles.formgroup}>
+                        <label>Your Designation <span className="required">*</span></label>
+                        <select name="Designation" onChange={handleChange} required>
+                          <option value="">Select your designation...</option>
+                          <option>Teacher</option>
+                          <option>Academic Coordinator</option>
+                          <option>Head of Department</option>
+                          <option>Vice Principal</option>
+                          <option>Principal</option>
+                          <option>Curriculum Head</option>
+                          <option>Other</option>
+                        </select>
+                      </div>
+
+                      <div className={styles.formgroup}>
+                        <label>City <span className="required">*</span></label>
+                        <input type="text" name="City" onChange={handleChange} placeholder="Your city" />
+                      </div>
+                    </div>
+                  </>
+                )}
 
               <div className={styles.formdivider}></div>
 

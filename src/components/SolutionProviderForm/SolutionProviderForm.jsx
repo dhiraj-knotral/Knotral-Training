@@ -155,6 +155,9 @@ export default function SolutionProvidersForm() {
                                     value={formData.Mobile}
                                     onChange={handleMobileChange}
                                     onKeyDown={handleKeyDown}
+                                    required
+                                    pattern="^\+91[0-9]{10}$"
+                                    title="Please enter a valid 10 digit WhatsApp number"
                                 />
                                 <div className={styles.hint}>For reminders and follow-up resources</div>
                             </div>
