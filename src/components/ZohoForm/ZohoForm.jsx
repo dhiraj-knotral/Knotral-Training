@@ -150,7 +150,10 @@ export default function ZohoForm({ webinar, utms }) {
 
     // Free webinar
     if (webinar?.isFree) {
-      await submitRegistration(getSubmitPayload());
+     const success = await submitRegistration(getSubmitPayload());
+      if (success) {
+        router.push(`/thank-you/${webinar.slug}`);
+      }
       setIsSubmitting(false);
       return;
     }
@@ -209,8 +212,11 @@ export default function ZohoForm({ webinar, utms }) {
 
           if (verifyData.success) {
             // Step D: Submit form after successful payment
-            await submitRegistration(getSubmitPayload());
-            setShowModal(true);
+           const success = await submitRegistration(getSubmitPayload());
+            if (success) {
+              router.push(`/thank-you/${webinar.slug}`);
+            }
+            // setShowModal(true);
           } else {
             alert("Payment verification failed. Try again.");
           }
@@ -276,7 +282,10 @@ export default function ZohoForm({ webinar, utms }) {
             }
         );
 
-        setShowModal(true);
+        console.log("form Data",formData)
+
+        return true; 
+        // setShowModal(true);
       } else {
         alert("❌ Something went wrong. Try again.");
       }

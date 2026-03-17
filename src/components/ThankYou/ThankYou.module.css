@@ -1,0 +1,720 @@
+/* HERO */
+.hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #0d3b5e 100%);
+    padding: 72px 40px 96px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 600px 400px at 80% 20%, rgba(0, 184, 160, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 400px 300px at 10% 80%, rgba(245, 166, 35, 0.10) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.checkmarkRing {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--teal-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    box-shadow: 0 0 0 14px rgba(0, 184, 160, 0.15), 0 0 0 28px rgba(0, 184, 160, 0.06);
+    animation: pulse 2.4s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+}
+
+.checkmarkRing svg {
+    width: 36px;
+    height: 36px;
+    stroke: white;
+    stroke-width: 3;
+    fill: none;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 14px rgba(0, 184, 160, 0.15), 0 0 0 28px rgba(0, 184, 160, 0.06);
+    }
+
+    50% {
+        box-shadow: 0 0 0 18px rgba(0, 184, 160, 0.22), 0 0 0 38px rgba(0, 184, 160, 0.08);
+    }
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 5vw, 50px);
+    font-weight: 700;
+    color: white;
+    line-height: 1.15;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp .7s ease both;
+}
+
+.hero h1 span {
+    color: var(--teal-light);
+}
+
+.hero .sub {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 17px;
+    margin: 14px auto 0;
+    max-width: 500px;
+    line-height: 1.65;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp .7s .15s ease both;
+}
+
+.sessionCard {
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radius);
+    padding: 18px 24px;
+    max-width: 460px;
+    margin: 28px auto 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp .7s .25s ease both;
+}
+
+.sessionLogo {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sessionLogo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.sessionInfo .label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--teal-light);
+}
+
+.sessionInfo .name {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    margin-top: 3px;
+    line-height: 1.35;
+}
+
+.sessionInfo .meta {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.55);
+    margin-top: 4px;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MAIN */
+.main {
+    flex: 1;
+    max-width: 940px;
+    margin: -44px auto 60px;
+    padding: 0 24px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/* STEPS */
+.stepsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.stepCard {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 26px 22px;
+    box-shadow: 0 2px 18px rgba(15, 30, 61, 0.07);
+    border: 1px solid rgba(15, 30, 61, 0.06);
+    animation: fadeUp .6s ease both;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.stepCard:nth-child(1) {
+    animation-delay: .35s;
+}
+
+.stepCard:nth-child(2) {
+    animation-delay: .45s;
+}
+
+.stepCard:nth-child(3) {
+    animation-delay: .55s;
+}
+
+.stepIcon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    font-size: 20px;
+}
+
+.iconTeal {
+    background: rgba(0, 184, 160, 0.11);
+}
+
+.iconGold {
+    background: rgba(245, 166, 35, 0.11);
+}
+
+.iconNavy {
+    background: rgba(15, 30, 61, 0.07);
+}
+
+.stepCard h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.stepCard p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.55;
+}
+
+/* PRODUCT CTA */
+.productCta {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    border-radius: var(--radius);
+    padding: 36px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    flex-wrap: wrap;
+    box-shadow: 0 8px 40px rgba(15, 30, 61, 0.18);
+    animation: fadeUp .7s .6s ease both;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 48px;
+}
+
+.productCta::after {
+    content: '';
+    position: absolute;
+    right: -50px;
+    top: -50px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 184, 160, 0.22), transparent 70%);
+    pointer-events: none;
+}
+
+.ctaLeft {
+    flex: 1;
+    min-width: 200px;
+}
+
+.ctaEyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--teal-light);
+    margin-bottom: 8px;
+}
+
+.productCta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 2.8vw, 28px);
+    font-weight: 700;
+    color: white;
+    line-height: 1.25;
+    margin-bottom: 9px;
+}
+
+.productCta p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.6;
+    max-width: 360px;
+}
+
+.countdownWrap {
+    text-align: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.countdownLabel {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 8px;
+}
+
+.countdown {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--teal-light);
+    line-height: 1;
+}
+
+.countdown small {
+    display: block;
+    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.45);
+    margin-top: 3px;
+}
+
+.btnExplore {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 22px;
+    padding: 13px 26px;
+    background: var(--teal);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background .2s, transform .2s, box-shadow .2s;
+    box-shadow: 0 4px 14px rgba(0, 184, 160, 0.35);
+}
+
+.btnExplore:hover {
+    background: var(--teal-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 184, 160, 0.45);
+}
+
+.btnExplore svg {
+    width: 17px;
+    height: 17px;
+    stroke: white;
+    stroke-width: 2.5;
+    fill: none;
+    flex-shrink: 0;
+}
+
+/* UPCOMING WEBINARS */
+.sectionHeader {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    animation: fadeUp .6s .65s ease both;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.sectionHeader h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.sectionHeader h2 span {
+    color: var(--teal);
+}
+
+.seeAll {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color .2s;
+    white-space: nowrap;
+}
+
+.seeAll:hover {
+    color: var(--navy);
+}
+
+.seeAll svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    fill: none;
+}
+
+.webinarsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+    gap: 16px;
+    margin-bottom: 60px;
+}
+
+.wbCard {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid rgba(15, 30, 61, 0.07);
+    box-shadow: 0 2px 16px rgba(15, 30, 61, 0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform .2s, box-shadow .2s;
+    animation: fadeUp .5s ease both;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.wbCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(15, 30, 61, 0.12);
+}
+
+.wbTop {
+    height: 150px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.wbTop::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 200px 150px at 80% 30%, rgba(0, 184, 160, 0.2), transparent 70%);
+}
+
+.wbLogo {
+    width: 58px;
+    height: 58px;
+    border-radius: 12px;
+    object-fit: cover;
+    background: white;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.wbBadges {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 5px;
+    z-index: 2;
+    flex-wrap: wrap;
+}
+
+.badge {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 3px 8px;
+    border-radius: 20px;
+}
+
+.badgeLIVE {
+    background: #e53935;
+    color: white;
+}
+
+.badgeFREE {
+    background: rgba(0, 184, 160, 0.2);
+    color: var(--teal-light);
+    border: 1px solid rgba(0, 184, 160, 0.4);
+}
+
+.badgeCERTIFIED {
+    background: rgba(245, 166, 35, 0.15);
+    color: var(--gold);
+    border: 1px solid rgba(245, 166, 35, 0.4);
+}
+
+.wbBody {
+    padding: 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.wbProvider {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--teal);
+    margin-bottom: 6px;
+}
+
+.wbTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+    line-height: 1.4;
+    margin-bottom: 10px;
+    flex: 1;
+}
+
+.wbMeta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+.wbFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    border-top: 1px solid rgba(15, 30, 61, 0.06);
+    background: rgba(15, 30, 61, 0.025);
+}
+
+.wbPrice {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--teal);
+    text-transform: uppercase;
+}
+
+.wbRegister {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 16px;
+    background: var(--navy);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background .2s, transform .15s;
+}
+
+.wbRegister:hover {
+    background: var(--teal);
+    transform: translateY(-1px);
+}
+
+.wbRegister svg {
+    width: 12px;
+    height: 12px;
+    stroke: white;
+    stroke-width: 2.5;
+    fill: none;
+}
+
+/* PROGRESS BAR */
+.progressBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--teal);
+    width: 0%;
+    transition: width .4s linear;
+    z-index: 999;
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    padding: 60px 30px 80px;
+  }
+
+  .main {
+    max-width: 90%;
+  }
+
+  .productCta {
+    padding: 30px;
+    gap: 20px;
+  }
+
+  .webinarsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 50px 20px 70px;
+  }
+
+  .checkmarkRing {
+    width: 70px;
+    height: 70px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero .sub {
+    font-size: 15px;
+  }
+
+  .sessionCard {
+    flex-direction: column;
+    text-align: center;
+    padding: 18px;
+  }
+
+  .main {
+    margin-top: -30px;
+  }
+
+  .stepsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .productCta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 26px 22px;
+  }
+
+  .countdownWrap {
+    width: 100%;
+    text-align: left;
+    margin-top: 10px;
+  }
+
+  .webinarsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 40px 16px 60px;
+  }
+
+  .hero h1 {
+    font-size: 26px;
+  }
+
+  .hero .sub {
+    font-size: 14px;
+  }
+
+  .checkmarkRing {
+    width: 60px;
+    height: 60px;
+  }
+
+  .sessionCard {
+    padding: 14px;
+  }
+
+  .sessionLogo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .productCta {
+    padding: 20px 16px;
+  }
+
+  .productCta h2 {
+    font-size: 20px;
+  }
+
+  .productCta p {
+    font-size: 13px;
+  }
+
+  .btnExplore {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .countdown {
+    font-size: 32px;
+  }
+
+  .wbTop {
+    height: 130px;
+  }
+
+  .wbTitle {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 320px) {
+  .hero h1 {
+    font-size: 22px;
+  }
+
+  .hero .sub {
+    font-size: 13px;
+  }
+
+  .btnExplore {
+    font-size: 13px;
+    padding: 10px 18px;
+  }
+
+  .countdown {
+    font-size: 28px;
+  }
+}

@@ -43,6 +43,16 @@
     --bg-gradient: linear-gradient(135deg, #1E3A5F 0%, #2B5A8A 100%);
     --footer: #0F1F2E;
     --warm-cream: #fef3e2;
+    --navy: #0f1e3d;
+    --navy-mid: #1a2f5a;
+      --teal: #00b8a0;
+      --teal-light: #00d4b8;
+        --gold: #f5a623;
+      --cream: #f7f5f1;
+      --white: #ffffff;
+      --text-main: #1c2b4a;
+      --text-muted: #6b7a96;
+      --radius: 16px;
 
   }
 
