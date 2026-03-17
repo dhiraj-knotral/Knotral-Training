@@ -4,85 +4,35 @@ import styles from "./ThankYou.module.css";
 import moment from "moment";
 
 
-const WEBINARS = [
-    {
-        title: "Certified English Language Platform Training",
-        provider: "Klik2learn",
-        logo: "https://res.cloudinary.com/dpynxkjfq/image/upload/v1766492782/webinars/logos/x5lllsgfsegvvycytmiv.png",
-        date: "Mar 17, 2026", duration: "1 hour", price: "FREE",
-        badges: ["LIVE", "FREE", "CERTIFIED"],
-        link: "https://training.knotral.com/from-teaching-english-to-offering-a-uk-certified-english-program"
-    },
-    {
-        title: "Launch Webinar: How AV1 Helps Schools Keep Every Student Connected",
-        provider: "No Isolation",
-        logo: "https://res.cloudinary.com/dpynxkjfq/image/upload/v1772800598/webinars/logos/luqzj9t0phhedhxe7nmw.png",
-        date: "Mar 17, 2026", duration: "1 hour", price: "FREE",
-        badges: ["LIVE", "FREE", "CERTIFIED"],
-        link: "https://training.knotral.com/av1-telepresence-robot-india-launch-webinar"
-    },
-    {
-        title: "Certified Reggio Emilia Workshop",
-        provider: "We Skoolhouse",
-        logo: "https://res.cloudinary.com/dpynxkjfq/image/upload/v1766492742/webinars/logos/l9yciosm9f0ympx69wyp.png",
-        date: "Mar 18, 2026", duration: "1 hour", price: "FREE",
-        badges: ["LIVE", "FREE", "CERTIFIED"],
-        link: "https://training.knotral.com/become-a-certified-reggio-emilia-teacher"
-    },
-    {
-        title: "Discover Global ELT Solutions with Certification",
-        provider: "Express Publishing",
-        logo: "https://res.cloudinary.com/dpynxkjfq/image/upload/v1770704839/webinars/logos/gaqw0cy169hbbibo86k7.jpg",
-        date: "Mar 18, 2026", duration: "1 hour", price: "FREE",
-        badges: ["LIVE", "FREE", "CERTIFIED"],
-        link: "https://training.knotral.com/building-strong-english-foundations-phonics-to-fluent-language-learning"
-    },
-    {
-        title: "Accredited Online K-12 Pathway (Certificate Included)",
-        provider: "Onfire",
-        logo: "https://res.cloudinary.com/dpynxkjfq/image/upload/v1767594713/webinars/logos/kp12jgtdm4vdvnz95eiy.png",
-        date: "Mar 24, 2026", duration: "1 hour", price: "FREE",
-        badges: ["LIVE", "FREE", "CERTIFIED"],
-        link: "https://training.knotral.com/onfire-learning-academy-open-dayaccredited-online-k-12-pathway-for-indian-students"
-    },
-    {
-        title: "Certified Video-based Collaborative Teacher Development Training",
-        provider: "Edthena",
-        logo: "https://res.cloudinary.com/dpynxkjfq/image/upload/v1771593954/webinars/logos/xht15tyiouaaycq53tjg.png",
-        date: "Mar 24, 2026", duration: "1 hour", price: "FREE",
-        badges: ["LIVE", "FREE", "CERTIFIED"],
-        link: "https://training.knotral.com/elevate-teaching-with-video-coaching"
-    }
-];
-
 const ThankYou = ({ webinar }) => {
 
     const [webinars, setWebinars] = useState([]);
 
     const [remaining, setRemaining] = useState(15);
 
-      // ✅ Countdown
-      useEffect(() => {
+    // ✅ Countdown
+    useEffect(() => {
         if (!webinar) return;
 
         const timer = setInterval(() => {
-          setRemaining((prev) => {
-            if (prev <= 1) {
-              clearInterval(timer);
-              window.location.href = webinar?.productUrl || "/";
-              return 0;
-            }
-            return prev - 1;
-          });
+            setRemaining((prev) => {
+                if (prev <= 1) {
+                    clearInterval(timer);
+                    window.location.href = webinar?.productUrl || "/";
+                    return 0;
+                }
+                return prev - 1;
+            });
         }, 1000);
 
         return () => clearInterval(timer);
-      }, [webinar]);
+    }, [webinar]);
 
-      if (!webinar) return <p>Loading...</p>;
+    if (!webinar) return <p>Loading...</p>;
 
     const handleClick = () => {
-        window.location.href = "https://knotral.com";
+        const redirectUrl = webinar?.link ? webinar.link : "https://knotral.com";
+        window.location.href = redirectUrl;
     };
 
 
