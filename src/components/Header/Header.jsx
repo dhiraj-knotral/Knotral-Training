@@ -13,17 +13,17 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-  if (menuOpen) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "";
-  }
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
-  // Cleanup on unmount
-  return () => {
-    document.body.style.overflow = "";
-  };
-}, [menuOpen]);
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   return (
     <header className={styles.header}>
@@ -61,9 +61,12 @@ const Header = () => {
             For Solution Providers</Link>
         </nav>
         <div className={styles.headerActions}>
-          {/* <button className="btn btnghost">Login</button> */}
-          <Link href="/contact-us" className="btn btnprimary">Get in touch</Link>
+          <button className="btn btnghost">Login</button>
+          {/* <Link href="/contact-us" className="btn btnprimary">Get in touch</Link> */}
+          <Link href="/sign-up" className="btn btnprimary">Sign Up</Link>
         </div>
+
+
 
         {/* Hamburger */}
         <button
