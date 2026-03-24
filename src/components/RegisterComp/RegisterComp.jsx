@@ -232,10 +232,10 @@ const RegisterComp = ({ webinar }) => {
                   >
                     <img
                       src="/attend5.png"
-                      alt="Resellers"
+                      alt="Partners"
                       className={styles.tabicon}
                     />
-                    For Resellers
+                    For Partners
                   </div>
                 </div>
 
