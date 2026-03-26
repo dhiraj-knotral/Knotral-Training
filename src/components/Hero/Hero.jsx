@@ -55,13 +55,15 @@ const popularTags = useMemo(() => {
         <section className={styles.hero}>
 
             <div className="container">
+                  <div class={styles.heroeyebrow}>Global Education Hub</div>
+
                 <h1>
-                    Professional Development
+                    Discover Global <span className={styles.span}>Educational Products</span>
                     <br />
-                    from Global Education Leaders
+                    & Acquire Trainings
                 </h1>
 
-                <p>Live webinars • Certifications • Classroom-ready strategies</p>
+                <p>Live webinars • <span className={styles.ptext}>Classroom-ready strategies</span></p>
 
                 <div className={styles.searchBar}>
                     <input
