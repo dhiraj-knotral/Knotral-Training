@@ -55,7 +55,7 @@ const popularTags = useMemo(() => {
         <section className={styles.hero}>
 
             <div className="container">
-                  <div class={styles.heroeyebrow}>Global Education Hub</div>
+                  <div className={styles.heroeyebrow}>Global Education Hub</div>
 
                 <h1>
                     Discover Global <span className={styles.span}>Educational Products</span>
