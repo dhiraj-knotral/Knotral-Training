@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import styles from "./Login.module.css"; // reuse your SignUp styles
+import { FaEye, FaEyeSlash, FaHome } from "react-icons/fa";
+import Link from "next/link";
+import styles from "./Login.module.css";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -14,31 +15,32 @@ export default function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const res = await fetch(`${API}/user/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+  try {
+    const res = await fetch(`${API}/user/login-user`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify(form),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (data.success) {
-        alert("Login successful ✅");
-        window.location.href = "/dashboard"; // redirect
-      } else {
-        alert(data.message || "Login failed ❌");
-      }
-    } catch {
-      alert("Server error ❌");
-    } finally {
-      setLoading(false);
+    if (data.success) {
+      window.location.href = "/"; // redirect
+    } else {
+      alert(data.message || "Login failed ❌");
     }
-  };
+
+  } catch {
+    alert("Server error ❌");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className={styles.container}>
@@ -54,9 +56,14 @@ export default function Login() {
       {/* RIGHT SIDE */}
       <div className={styles.right}>
         <form onSubmit={handleSubmit} className={styles.card}>
+
+          {/* HOME BUTTON */}
+          <Link href="/" className={styles.homeBtn}>
+            <FaHome /> Home
+          </Link>
+
           <h2>Login</h2>
 
-          {/* EMAIL */}
           <input
             type="email"
             name="email"
@@ -67,7 +74,6 @@ export default function Login() {
             required
           />
 
-          {/* PASSWORD */}
           <div className={styles.passwordWrapper}>
             <input
               type={showPassword ? "text" : "password"}
@@ -86,14 +92,12 @@ export default function Login() {
             </span>
           </div>
 
-          {/* FORGOT PASSWORD */}
           <div className={styles.actions}>
             <a href="/forgot-password" className={styles.forgot}>
               Forgot Password?
             </a>
           </div>
 
-          {/* SUBMIT BUTTON */}
           <button
             type="submit"
             className={`${styles.submitBtn} ${styles.enabled}`}

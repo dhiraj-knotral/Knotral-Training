@@ -6,11 +6,16 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 
 import { FiMenu, FiX } from "react-icons/fi";
+import { useAuth } from '@/context/AuthContext';
 
 
 const Header = () => {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const [open, setOpen] = useState(false);
+
+  console.log("user in header:", user);
 
   useEffect(() => {
     if (menuOpen) {
@@ -59,13 +64,48 @@ const Header = () => {
               }`}
           >
             For Solution Providers</Link>
-        </nav>
-        <div className={styles.headerActions}>
-          <button className="btn btnghost">Login</button>
-          {/* <Link href="/contact-us" className="btn btnprimary">Get in touch</Link> */}
-          <Link href="/sign-up" className="btn btnprimary">Sign Up</Link>
-        </div>
 
+          {user && (
+            <Link
+              href="/user-dashboard"
+              className={`${styles.navLink} ${pathname === "/user-dashboard" ? styles.active : ""}`}
+            >
+              Dashboard
+            </Link>
+          )}
+        </nav>
+
+        {/* <div className={styles.headerActions}>
+          <Link href="/login" className="btn btnghost">Login</Link>
+          <Link href="/sign-up" className="btn btnprimary">Sign Up</Link>
+        </div> */}
+
+        <div className={styles.headerActions}>
+          {user ? (
+            <div className={styles.userMenu}>
+              <button
+                className={styles.userButton}
+                onClick={() => setOpen(!open)}
+              >
+                <div className={styles.avatar}>
+                  {user.name?.charAt(0).toUpperCase()}
+                </div>
+                <span>{user.name}</span>
+              </button>
+
+              {open && (
+                <div className={styles.dropdown}>
+                  <button onClick={logout}>Logout</button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              <Link href="/login" className="btn btnghost">Login</Link>
+              <Link href="/sign-up" className="btn btnprimary">Sign Up</Link>
+            </>
+          )}
+        </div>
 
 
         {/* Hamburger */}

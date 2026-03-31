@@ -202,7 +202,7 @@ grid-template-columns: repeat(4, 1fr);
   margin-top: 12px;
   padding: 12px;
   border-radius: 20px;
-  background: #000;
+  background: var(--cta-orange);
   color: white;
   border: none;
   cursor: pointer;

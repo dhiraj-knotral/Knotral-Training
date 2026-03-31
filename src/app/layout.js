@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import { AuthProvider } from "@/context/AuthContext";
+import CookieWarning from "@/components/CookieWarning/CookieWarning";
 
 
 const inter = Inter({
@@ -15,13 +17,13 @@ export const metadata = {
   title: "Knotral Trainings",
   description: "Free professional development from global EdTech leaders. Live webinars, certifications, and classroom-ready strategies for Indian educators.",
   icons: {
-    icon: "/icon.jpeg", 
+    icon: "/icon.jpeg",
   },
-   alternates: {
+  alternates: {
     canonical: "https://training.knotral.com/",
   },
 
-   openGraph: {
+  openGraph: {
     title: "Knotral Trainings",
     description:
       "Free professional development from global EdTech leaders. Live webinars, certifications, and classroom-ready strategies for Indian educators.",
@@ -79,18 +81,22 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
       <body>
-         {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PJS7MZW6"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          ></iframe>
-        </noscript>
-        {/* End Google Tag Manager (noscript) */}
+        <CookieWarning />
+        <AuthProvider>
 
-        {children}
+          {/* Google Tag Manager (noscript) */}
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-PJS7MZW6"
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            ></iframe>
+          </noscript>
+          {/* End Google Tag Manager (noscript) */}
+
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
