@@ -810,7 +810,67 @@
  }
 
 
+ .learningSection {
+  margin-top: 2rem;
+}
 
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.cardContent h3 {
+  font-size: 18px;         /* adjust as needed */
+  white-space: nowrap;      /* keep text on one line */
+  overflow: hidden;         /* hide overflowing text */
+  text-overflow: ellipsis;  /* show ... at the end */
+}
+
+.cardContent p {
+  font-size: 14px;         /* adjust as needed */
+}
+
+
+.imagePlaceholder {
+  width: 100%;
+  height: 150px; /* same size for all placeholders */
+  background: #f5f5f5;
+  position: relative;
+  overflow: hidden;
+}
+
+.imagePlaceholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ensures image fills the placeholder */
+  display: block;
+}
+
+
+
+.bgTan { background: #f0e6d2; }
+.bgDark { background: #333; }
+
+.cardContent { padding: 1rem; }
+
+
+.originalPrice {
+  text-decoration: line-through; /* strikes through original price */
+  color: #999;
+  margin-right: 0.5rem;
+}
+
+.discountedPrice {
+  font-weight: bold;
+}
  /* RESPONSIVE */
  @media (max-width: 1024px) {
      .landinggrid {

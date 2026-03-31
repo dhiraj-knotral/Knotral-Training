@@ -155,11 +155,72 @@ const RegisterComp = ({ webinar }) => {
 
             <div className={styles.contentsection}>
               <h2>What You'll Learn</h2>
-              <ul>
+              {/* <ul>
                 {webinar.features.map((item) => (
                   <li key={item._id}>{item.feature}</li>
                 ))}
-              </ul>
+              </ul> */}
+              {webinar.organisedBy === "We Skoolhouse" ? (
+                <section className={styles.learningSection}>
+                  <div className={styles.cardGrid}>
+                    <div className={styles.card}>
+                      <div className={`${styles.imagePlaceholder} ${styles.bgTan}`}>
+                        <img src="/weShoolHouse1.jpg" alt="Reggio Emilia History" />
+                      </div>
+                      <div className={styles.cardContent}>
+                        <h3>History of the Reggio Emilia Approach</h3>
+                        <p>Explore the origins and evolution of this groundbreaking philosophy.</p>
+                      </div>
+                    </div>
+
+                    <div className={styles.card}>
+                      <div className={styles.imagePlaceholder}>
+                        <img src="/weShoolHouse2.jpg" alt="Child portrait" />
+                      </div>
+                      <div className={styles.cardContent}>
+                        <h3>The Image of the Child</h3>
+                        <p>Reframe how you view children as capable, curious, and full of potential.</p>
+                      </div>
+                    </div>
+
+                    <div className={styles.card}>
+                      <div className={styles.imagePlaceholder}>
+                        <img src="/weShoolHouse3.jpg" alt="Classroom environment" />
+                      </div>
+                      <div className={styles.cardContent}>
+                        <h3>The Environment as the Third Teacher</h3>
+                        <p>Learn how thoughtful, responsive spaces can shape learning and behavior.</p>
+                      </div>
+                    </div>
+
+                    <div className={styles.card}>
+                      <div className={`${styles.imagePlaceholder} ${styles.bgDark}`}>
+                        <img src="/weShoolHouse4.jpg" alt="Documentation and Advocacy" />
+                      </div>
+                      <div className={styles.cardContent}>
+                        <h3>Documentation</h3>
+                        <p>Discover powerful tools to observe, reflect, and make learning visible.</p>
+                      </div>
+                    </div>
+
+                    <div className={styles.card}>
+                      <div className={styles.imagePlaceholder}>
+                        <img src="/weShoolHouse5.jpg" alt="Teachers collaborating" />
+                      </div>
+                      <div className={styles.cardContent}>
+                        <h3>Community and Collaboration</h3>
+                        <p>Understand how relationships among children, families, and educators form the heart of this approach.</p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              ) : (
+                <ul>
+                  {webinar.features.map((item) => (
+                    <li key={item._id}>{item.feature}</li>
+                  ))}
+                </ul>
+              )}
             </div>
 
             {isJanuaryWebinar ? (
@@ -525,15 +586,15 @@ const RegisterComp = ({ webinar }) => {
               <h2>Exclusive Attendee Benefits</h2>
 
               {webinar?.isCertified && certificate?.certificateFile?.url && (
-                  <div className={styles.certificateWrapper}>
-                    <img
-                      src={certificate.sampleCertificateFile.url}
-                      alt="Sample Certificate"
-                      className={styles.certificateImage}
-                      draggable="false"
-                      onContextMenu={(e) => e.preventDefault()}
-                    />
-                  </div>
+                <div className={styles.certificateWrapper}>
+                  <img
+                    src={certificate.sampleCertificateFile.url}
+                    alt="Sample Certificate"
+                    className={styles.certificateImage}
+                    draggable="false"
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                </div>
               )}
               <div className={styles.benefitbox}>
                 <h3>{webinar.attendeeBenefits.title}</h3>
@@ -660,7 +721,16 @@ const RegisterComp = ({ webinar }) => {
               <div className={styles.regdivider}></div>
 
               <div className={`${styles.regprice} ${webinar.isFree ? styles.free : ""}`}>
-                {webinar.isFree ? "FREE" : `₹${webinar.price}`}
+                {webinar.isFree ? (
+                  "FREE"
+                ) : webinar.organisedBy === "We Skoolhouse" ? (
+                  <>
+                    <span className={styles.originalPrice}>₹4774</span>{" "}
+                    <span className={styles.discountedPrice}>₹{webinar.price}</span>
+                  </>
+                ) : (
+                  `₹${webinar.price}`
+                )}
               </div>
 
               <Link href={href} className={buttonClass}>
