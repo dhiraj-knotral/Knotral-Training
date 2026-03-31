@@ -81,7 +81,6 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
       <body>
-        <CookieWarning />
         <AuthProvider>
 
           {/* Google Tag Manager (noscript) */}
