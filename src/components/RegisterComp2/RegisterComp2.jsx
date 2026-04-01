@@ -9,7 +9,7 @@ const RegisterComp2 = ({ webinar }) => {
 
     const [activeVideo, setActiveVideo] = useState(null);
 
-    const [activeTab, setActiveTab] = useState("teachers-content");
+    const [activeTab, setActiveTab] = useState("organizers-content");
 
     const [certificate, setCertificate] = useState(null);
 
@@ -200,6 +200,18 @@ const RegisterComp2 = ({ webinar }) => {
                             <>
                                 <div className={styles.audiencetabs}>
                                     <div
+                                        className={`${styles.audiencetab} ${activeTab === "organizers-content" ? styles.active : ""
+                                            }`}
+                                        onClick={() => handleTabClick("organizers-content")}
+                                    >
+                                        <img
+                                            src="/attend2.png"
+                                            alt="Organizers"
+                                            className={styles.tabicon}
+                                        />
+                                        For Organizers
+                                    </div>
+                                    <div
                                         className={`${styles.audiencetab} ${activeTab === "teachers-content" ? styles.active : ""
                                             }`}
                                         onClick={() => handleTabClick("teachers-content")}
@@ -238,18 +250,6 @@ const RegisterComp2 = ({ webinar }) => {
                                         For Partners
                                     </div>
 
-                                    <div
-                                        className={`${styles.audiencetab} ${activeTab === "competitors-content" ? styles.active : ""
-                                            }`}
-                                        onClick={() => handleTabClick("competitors-content")}
-                                    >
-                                        <img
-                                            src="/attend2.png"
-                                            alt="Competitors"
-                                            className={styles.tabicon}
-                                        />
-                                        For Organizers
-                                    </div>
                                 </div>
 
 
@@ -619,8 +619,8 @@ const RegisterComp2 = ({ webinar }) => {
                                 </div>
 
                                        <div
-                                    id="competitors-content"
-                                    className={`${styles.tabcontent} ${activeTab === "competitors-content" ? styles.active : ""
+                                    id="organizers-content"
+                                    className={`${styles.tabcontent} ${activeTab === "organizers-content" ? styles.active : ""
                                         }`}
                                 >
                                     <div className={styles.contentsection}>
