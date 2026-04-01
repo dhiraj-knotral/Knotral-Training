@@ -86,11 +86,14 @@ const RegisterComp = ({ webinar }) => {
   const isJanuaryWebinar = moment(webinar?.date).month() === 0; // January = 0
 
   // Determine button text and style based on webinar actions
-  const buttonText = webinar.actions?.canStartProgram
-    ? "Start Course"
-    : webinar.actions?.canEnroll
-      ? "Watch Now"
-      : "Register Now";
+const buttonText =
+  webinar.organisedBy === "We Skoolhouse"
+    ? "Pay and Register"
+    : webinar.actions?.canStartProgram
+      ? "Start Course"
+      : webinar.actions?.canEnroll
+        ? "Watch Now"
+        : "Register Now";
 
   const buttonClass = webinar.actions?.canStartProgram || webinar.actions?.canEnroll
     ? "btn btnsecondary btnblock"

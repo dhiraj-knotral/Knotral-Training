@@ -56,7 +56,7 @@
     }
 
     .span {
-        color: #7ec8f8;
+        color: var(--cta-orange);
     }
 
     .hero p {
