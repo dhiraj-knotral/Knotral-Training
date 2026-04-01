@@ -183,9 +183,9 @@ export default function ZohoForm2({ webinar, utms }) {
             console.log("form data:", formData);
 
             console.log(
-  "Mobile sent to Razorpay:",
-  formData.Mobile.replace(/\D/g, "").slice(-10)
-);
+                "Mobile sent to Razorpay:",
+                formData.Mobile.replace(/\D/g, "").slice(-10)
+            );
             // Step B: Open Razorpay checkout
             const rzp = new window.Razorpay({
                 key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
