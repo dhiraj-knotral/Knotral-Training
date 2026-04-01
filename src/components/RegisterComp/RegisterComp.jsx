@@ -4,14 +4,22 @@ import React, { useEffect, useState } from "react";
 import styles from "./Register.module.css"
 import Link from "next/link";
 import moment from "moment";
+import { useAuth } from "@/context/AuthContext";
+import { usePathname } from "next/navigation";
 
 const RegisterComp = ({ webinar }) => {
+
 
   const [activeVideo, setActiveVideo] = useState(null);
 
   const [activeTab, setActiveTab] = useState("teachers-content");
 
   const [certificate, setCertificate] = useState(null);
+
+  const { user } = useAuth();
+
+  const pathname = usePathname();
+
 
   useEffect(() => {
     const fetchCertificate = async () => {
@@ -525,15 +533,15 @@ const RegisterComp = ({ webinar }) => {
               <h2>Exclusive Attendee Benefits</h2>
 
               {webinar?.isCertified && certificate?.certificateFile?.url && (
-                  <div className={styles.certificateWrapper}>
-                    <img
-                      src={certificate.sampleCertificateFile.url}
-                      alt="Sample Certificate"
-                      className={styles.certificateImage}
-                      draggable="false"
-                      onContextMenu={(e) => e.preventDefault()}
-                    />
-                  </div>
+                <div className={styles.certificateWrapper}>
+                  <img
+                    src={certificate.sampleCertificateFile.url}
+                    alt="Sample Certificate"
+                    className={styles.certificateImage}
+                    draggable="false"
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                </div>
               )}
               <div className={styles.benefitbox}>
                 <h3>{webinar.attendeeBenefits.title}</h3>
@@ -663,9 +671,19 @@ const RegisterComp = ({ webinar }) => {
                 {webinar.isFree ? "FREE" : `₹${webinar.price}`}
               </div>
 
-              <Link href={href} className={buttonClass}>
+              {/* <Link href={href} className={buttonClass}>
                 {buttonText}
-              </Link>
+              </Link> */}
+
+              {user ? (
+                <Link href={href} className={buttonClass}>
+                  {buttonText}
+                </Link>
+              ) : (
+                <Link href={`/login?redirect=${encodeURIComponent(pathname)}`} className={buttonClass}>
+                  {buttonText}
+                </Link>
+              )}
 
               {webinar.bonus?.title && (
                 <div className={styles.regbonus}>

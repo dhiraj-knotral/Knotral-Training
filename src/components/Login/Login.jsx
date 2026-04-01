@@ -3,11 +3,16 @@ import React, { useState } from "react";
 import { FaEye, FaEyeSlash, FaHome } from "react-icons/fa";
 import Link from "next/link";
 import styles from "./Login.module.css";
+import { useSearchParams } from "next/navigation";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/";
 
   const API = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -15,32 +20,33 @@ export default function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  try {
-    const res = await fetch(`${API}/user/login-user`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(form),
-    });
+    try {
+      const res = await fetch(`${API}/user/login-user`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(form),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (data.success) {
-      window.location.href = "/"; // redirect
-    } else {
-      alert(data.message || "Login failed ❌");
+      if (data.success) {
+        localStorage.setItem("token", data.token); // ⭐ add this
+        window.location.href = redirect;
+      } else {
+        alert(data.message || "Login failed ❌");
+      }
+
+    } catch {
+      alert("Server error ❌");
+    } finally {
+      setLoading(false);
     }
-
-  } catch {
-    alert("Server error ❌");
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
     <div className={styles.container}>
@@ -93,9 +99,9 @@ const handleSubmit = async (e) => {
           </div>
 
           <div className={styles.actions}>
-            <a href="/forgot-password" className={styles.forgot}>
+            <Link href="/forget-password" className={styles.forgot}>
               Forgot Password?
-            </a>
+            </Link>
           </div>
 
           <button

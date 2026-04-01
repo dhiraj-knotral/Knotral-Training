@@ -2,8 +2,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import { AuthProvider } from "@/context/AuthContext";
-import CookieWarning from "@/components/CookieWarning/CookieWarning";
-
 
 const inter = Inter({
   subsets: ["latin"],

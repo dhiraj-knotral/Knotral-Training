@@ -11,8 +11,11 @@ export const AuthProvider = ({ children }) => {
 
   const getUser = async () => {
     try {
+      const token = localStorage.getItem("token");
+
       const res = await fetch(`${API}/user/user-info`, {
         credentials: "include",
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
 
       const data = await res.json();
@@ -34,18 +37,19 @@ export const AuthProvider = ({ children }) => {
     getUser();
   }, []);
 
-  const logout = async () => {
-    try {
-      await fetch(`${API}/user/logout-user`, {
-        method: "POST",
-        credentials: "include",
-      });
+const logout = async () => {
+  try {
+    await fetch(`${API}/user/logout-user`, {
+      method: "POST",
+      credentials: "include",
+    });
 
-      setUser(null);
-    } catch (err) {
-      console.error("Logout error:", err);
-    }
-  };
+    localStorage.removeItem("token"); // ⭐ add
+    setUser(null);
+  } catch (err) {
+    console.error("Logout error:", err);
+  }
+};
 
   return (
     <AuthContext.Provider value={{ user, loading, logout }}>

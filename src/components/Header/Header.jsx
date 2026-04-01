@@ -15,8 +15,6 @@ const Header = () => {
   const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
 
-  console.log("user in header:", user);
-
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
