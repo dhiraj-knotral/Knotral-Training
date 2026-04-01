@@ -248,7 +248,7 @@ const RegisterComp2 = ({ webinar }) => {
                                             alt="Competitors"
                                             className={styles.tabicon}
                                         />
-                                        For Competitors
+                                        For Organizers
                                     </div>
                                 </div>
 

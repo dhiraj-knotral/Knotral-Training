@@ -4,8 +4,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./Register.module.css"
 import Link from "next/link";
 import moment from "moment";
+import ZohoForm2 from "../ZohoForm2/ZohoForm2";
+import { IoClose } from "react-icons/io5";
 
-const RegisterComp = ({ webinar }) => {
+const RegisterComp = ({ webinar, utms }) => {
 
   const [activeVideo, setActiveVideo] = useState(null);
 
@@ -13,6 +15,10 @@ const RegisterComp = ({ webinar }) => {
 
   const [certificate, setCertificate] = useState(null);
 
+  const [showModal, setShowModal] = useState(false);
+
+  const isSkoolhouse = webinar.organisedBy === "We Skoolhouse";
+  
   useEffect(() => {
     const fetchCertificate = async () => {
       try {
@@ -71,29 +77,44 @@ const RegisterComp = ({ webinar }) => {
     }
   };
 
-  useEffect(() => {
-    if (activeVideo) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+  // useEffect(() => {
+  //   if (activeVideo) {
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     document.body.style.overflow = "";
+  //   }
 
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [activeVideo]);
+  //   return () => {
+  //     document.body.style.overflow = "";
+  //   };
+  // }, [activeVideo]);
+
+  useEffect(() => {
+  if (showModal || activeVideo) {
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+  } else {
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
+  }
+
+  return () => {
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
+  };
+}, [showModal, activeVideo]);
 
   const isJanuaryWebinar = moment(webinar?.date).month() === 0; // January = 0
 
   // Determine button text and style based on webinar actions
-const buttonText =
-  webinar.organisedBy === "We Skoolhouse"
-    ? "Pay and Register"
-    : webinar.actions?.canStartProgram
-      ? "Start Course"
-      : webinar.actions?.canEnroll
-        ? "Watch Now"
-        : "Register Now";
+  const buttonText =
+    webinar.organisedBy === "We Skoolhouse"
+      ? "Pay and Get Certified"
+      : webinar.actions?.canStartProgram
+        ? "Start Course"
+        : webinar.actions?.canEnroll
+          ? "Watch Now"
+          : "Register Now";
 
   const buttonClass = webinar.actions?.canStartProgram || webinar.actions?.canEnroll
     ? "btn btnsecondary btnblock"
@@ -736,13 +757,26 @@ const buttonText =
                 )}
               </div>
 
-              <Link href={href} className={buttonClass}>
-                {buttonText}
-              </Link>
+              {isSkoolhouse ? (
+                <button
+                  className={buttonClass}
+                  onClick={() => setShowModal(true)}
+                >
+                  {buttonText}
+                </button>
+              ) : (
+                <Link href={href} className={buttonClass}>
+                  {buttonText}
+                </Link>
+              )}
 
               {webinar.bonus?.title && (
                 <div className={styles.regbonus}>
-                  <div className={styles.label}>BONUS</div>
+                  <div className={styles.label}>
+                    {webinar.organisedBy === "We Skoolhouse"
+                      ? "Limited Time Offer"
+                      : "Bonus"}
+                  </div>
                   <p>{webinar.bonus.title}</p>
                   <p>{webinar.bonus.description || ""}</p>
                 </div>
@@ -839,6 +873,23 @@ const buttonText =
 
         </div>
       </div>
+
+      {showModal && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modal}>
+
+            <button
+              className={styles.closeBtn}
+              onClick={() => setShowModal(false)}
+            >
+              <IoClose size={26} />
+            </button>
+
+            <ZohoForm2 webinar={webinar} utms={utms} />
+
+          </div>
+        </div>
+      )}
     </section>
   );
 };

@@ -274,6 +274,7 @@
      color: var(--accent-teal);
      font-weight: 600;
      margin-bottom: 4px;
+     text-transform: uppercase;
  }
 
  .regbonus p {
@@ -871,6 +872,53 @@
 .discountedPrice {
   font-weight: bold;
 }
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1000;
+}
+
+.modal {
+  position: relative;
+  width: 900px;
+  max-width: 95%;
+  height: 90vh;
+
+  background: #fff;
+  border-radius: 12px;
+
+  overflow-y: auto;
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+
+  font-size: 26px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  color: #333;
+}
+
+.closeBtn:hover {
+  color: #000;
+}
+
  /* RESPONSIVE */
  @media (max-width: 1024px) {
      .landinggrid {
@@ -979,6 +1027,17 @@
      .whyattendgrid {
          grid-template-columns: repeat(2, 1fr);
      }
+       .modal {
+    width: 90%;
+    height: 88vh;
+    padding: 18px;
+  }
+
+  .closeBtn {
+    font-size: 24px;
+    top: 10px;
+    right: 14px;
+  }
  }
 
  @media (max-width: 768px) {
@@ -1123,6 +1182,26 @@
      .whyattendgrid {
          grid-template-columns: 1fr;
      }
+
+      .modalOverlay {
+    align-items: flex-start;
+    padding: 20px 10px;
+  }
+
+  .modal {
+    width: 100%;
+    height: auto;
+    max-height: 92vh;
+
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .closeBtn {
+    font-size: 22px;
+    top: 10px;
+    right: 12px;
+  }
  }
 
  /* Small Phones <=468px */
@@ -1240,6 +1319,24 @@
      .whytitle {
          font-size: 1.2rem;
      }
+
+     .modalOverlay {
+    padding: 10px;
+  }
+
+  .modal {
+    width: 100%;
+    height: 95vh;
+    border-radius: 8px;
+
+    padding: 14px;
+  }
+
+  .closeBtn {
+    font-size: 20px;
+    top: 8px;
+    right: 10px;
+  }
  }
 
  /* Extra Small Phones <=360px */
@@ -1341,4 +1438,14 @@
      .whycard {
          padding: 1.5rem 1.2rem;
      }
+
+     .modal {
+    padding: 12px;
+  }
+
+  .closeBtn {
+    font-size: 18px;
+    top: 6px;
+    right: 8px;
+  }
  }
