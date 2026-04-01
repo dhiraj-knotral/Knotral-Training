@@ -180,7 +180,7 @@ export default function ZohoForm2({ webinar, utms }) {
                 return;
 
             }
-
+            console.log("form data:", formData);
             // Step B: Open Razorpay checkout
             const rzp = new window.Razorpay({
                 key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
@@ -192,13 +192,14 @@ export default function ZohoForm2({ webinar, utms }) {
                 prefill: {
                     name: `${formData.First_Name} ${formData.Last_Name}`.trim(),
                     email: formData.Email,
-                    contact: formData.Mobile,
+                    contact: formData.Mobile.replace("+91", ""),
                 },
                 notes: {
                     organisedBy: webinar.organisedBy,
                     webinarName: webinar.title,
                 },
                 handler: async function (response) {
+                    console.log("Razorpay response:", response);
                     // Step C: Verify payment
                     const verifyRes = await fetch(
                         `${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/verify-payment`,
