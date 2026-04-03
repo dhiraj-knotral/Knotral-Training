@@ -59,6 +59,7 @@ export default function ZohoForm2({ webinar, utms }) {
             `${moment(webinar.date).format("YYYY-MM-DD")} ${cleanTime}`,
             "YYYY-MM-DD h:mm A"
         ).format("YYYY-MM-DDTHH:mm:ssZ"),
+        webinarId: webinar?._id,
 
         // ✅ UTM fields
         utm_source: utms?.utm_source || "",
@@ -121,6 +122,7 @@ export default function ZohoForm2({ webinar, utms }) {
                     `${moment(webinar.date).format("YYYY-MM-DD")} ${cleanTime}`,
                     "YYYY-MM-DD h:mm A"
                 ).format("YYYY-MM-DDTHH:mm:ssZ"),
+                webinarId: webinar?._id,
 
 
                 // ✅ UTM fields
