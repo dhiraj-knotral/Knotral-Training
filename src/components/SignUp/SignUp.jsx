@@ -10,14 +10,14 @@ export default function SignUp() {
   const [sendingOtp, setSendingOtp] = useState(false);
   const [step, setStep] = useState("form");
   const [timer, setTimer] = useState(30);
-const [canResend, setCanResend] = useState(false);
+  const [canResend, setCanResend] = useState(false);
 
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
     password: "",
-    userType: "",
+    // userType: "",
   });
 
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -37,17 +37,17 @@ const [canResend, setCanResend] = useState(false);
     setForm({ ...form, phone: value });
   };
 
- const handleOtpChange = (value, index) => {
-  if (!/^[a-zA-Z0-9]?$/.test(value)) return; // ✅ allow letters + numbers
+  const handleOtpChange = (value, index) => {
+    if (!/^[a-zA-Z0-9]?$/.test(value)) return; // ✅ allow letters + numbers
 
-  const newOtp = [...otp];
-  newOtp[index] = value; // optional: normalize
-  setOtp(newOtp);
+    const newOtp = [...otp];
+    newOtp[index] = value; // optional: normalize
+    setOtp(newOtp);
 
-  if (value && index < otp.length - 1) {
-    inputsRef.current[index + 1]?.focus();
-  }
-};
+    if (value && index < otp.length - 1) {
+      inputsRef.current[index + 1]?.focus();
+    }
+  };
 
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
@@ -56,57 +56,57 @@ const [canResend, setCanResend] = useState(false);
   };
 
   // ✅ Send OTP
- const handleSendOtp = async () => {
-  if (!form.email) return alert("Enter email first");
+  const handleSendOtp = async () => {
+    if (!form.email) return alert("Enter email first");
 
-  try {
-    setSendingOtp(true);
+    try {
+      setSendingOtp(true);
 
-    const res = await fetch(`${API}/user/send-otp`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: form.email }),
-    });
+      const res = await fetch(`${API}/user/send-otp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: form.email }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (!data.success) {
-      alert(data.message || "Failed to send OTP");
-      return;
+      if (!data.success) {
+        alert(data.message || "Failed to send OTP");
+        return;
+      }
+
+      alert("OTP sent ✅");
+      setStep("otp");
+
+      // ✅ Start timer
+      setTimer(30);
+      setCanResend(false);
+
+    } catch {
+      alert("Error sending OTP");
+    } finally {
+      setSendingOtp(false);
+    }
+  };
+
+  useEffect(() => {
+    let interval;
+
+    if (step === "otp" && timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
     }
 
-    alert("OTP sent ✅");
-    setStep("otp");
+    if (timer === 0) {
+      setCanResend(true);
+      clearInterval(interval);
+    }
 
-    // ✅ Start timer
-    setTimer(30);
-    setCanResend(false);
-
-  } catch {
-    alert("Error sending OTP");
-  } finally {
-    setSendingOtp(false);
-  }
-};
-
-useEffect(() => {
-  let interval;
-
-  if (step === "otp" && timer > 0) {
-    interval = setInterval(() => {
-      setTimer((prev) => prev - 1);
-    }, 1000);
-  }
-
-  if (timer === 0) {
-    setCanResend(true);
-    clearInterval(interval);
-  }
-
-  return () => clearInterval(interval);
-}, [timer, step]);
+    return () => clearInterval(interval);
+  }, [timer, step]);
 
   // ✅ Verify OTP
   const handleVerifyOtp = async () => {
@@ -150,9 +150,9 @@ useEffect(() => {
       return alert("Verify email first ❌");
     }
 
-    if (!form.userType) {
-      return alert("Select user type");
-    }
+    // if (!form.userType) {
+    //   return alert("Select user type");
+    // }
 
     setLoading(true);
 
@@ -197,7 +197,7 @@ useEffect(() => {
           <h2>Create Account</h2>
 
           {/* USER TYPE */}
-          <div className={styles.userType}>
+          {/* <div className={styles.userType}>
             {["student", "teacher", "school", "solutionProvider"].map((type) => (
               <button
                 key={type}
@@ -212,7 +212,7 @@ useEffect(() => {
                 {type}
               </button>
             ))}
-          </div>
+          </div> */}
 
           {/* NAME */}
           <input
@@ -237,74 +237,74 @@ useEffect(() => {
           </div>
 
           {/* EMAIL */}
-       <div className={styles.emailWrapper}>
-  <input
-    name="email"
-    className={styles.input}
-    placeholder="Email"
-    onChange={handleChange}
-    value={form.email}
-    disabled={emailVerified} // ✅ disable after verification
-  />
+          <div className={styles.emailWrapper}>
+            <input
+              name="email"
+              className={styles.input}
+              placeholder="Email"
+              onChange={handleChange}
+              value={form.email}
+              disabled={emailVerified} // ✅ disable after verification
+            />
 
-  {!emailVerified ? (
-    <button
-      type="button"
-      className={styles.verifyBtn}
-      onClick={handleSendOtp}
-      disabled={sendingOtp}
-    >
-      {sendingOtp ? "Sending..." : "Verify"}
-    </button>
-  ) : (
-    <div className={styles.verifiedBadge}>
-      ✔ Verified
-    </div>
-  )}
-</div>
+            {!emailVerified ? (
+              <button
+                type="button"
+                className={styles.verifyBtn}
+                onClick={handleSendOtp}
+                disabled={sendingOtp}
+              >
+                {sendingOtp ? "Sending..." : "Verify"}
+              </button>
+            ) : (
+              <div className={styles.verifiedBadge}>
+                ✔ Verified
+              </div>
+            )}
+          </div>
 
           {/* OTP */}
-         {step === "otp" && (
-  <div className={styles.otpBox}>
-    <div className={styles.otpInputs}>
-      {otp.map((digit, i) => (
-        <input
-          key={i}
-          ref={(el) => (inputsRef.current[i] = el)}
-          maxLength={1}
-          value={digit}
-          onChange={(e) => handleOtpChange(e.target.value, i)}
-          onKeyDown={(e) => handleKeyDown(e, i)}
-        />
-      ))}
-    </div>
+          {step === "otp" && (
+            <div className={styles.otpBox}>
+              <div className={styles.otpInputs}>
+                {otp.map((digit, i) => (
+                  <input
+                    key={i}
+                    ref={(el) => (inputsRef.current[i] = el)}
+                    maxLength={1}
+                    value={digit}
+                    onChange={(e) => handleOtpChange(e.target.value, i)}
+                    onKeyDown={(e) => handleKeyDown(e, i)}
+                  />
+                ))}
+              </div>
 
-    <button
-      type="button"
-      className={styles.verifyOtpBtn}
-      onClick={handleVerifyOtp}
-    >
-      Verify OTP
-    </button>
+              <button
+                type="button"
+                className={styles.verifyOtpBtn}
+                onClick={handleVerifyOtp}
+              >
+                Verify OTP
+              </button>
 
-    {/* 🔥 NEW RESEND SECTION */}
-    <div className={styles.resendBox}>
-      {canResend ? (
-        <button
-          type="button"
-          onClick={handleSendOtp}
-          className={styles.resendBtn}
-        >
-          Resend OTP
-        </button>
-      ) : (
-        <p className={styles.timerText}>
-          Resend OTP in {timer}s
-        </p>
-      )}
-    </div>
-  </div>
-)}
+              {/* 🔥 NEW RESEND SECTION */}
+              <div className={styles.resendBox}>
+                {canResend ? (
+                  <button
+                    type="button"
+                    onClick={handleSendOtp}
+                    className={styles.resendBtn}
+                  >
+                    Resend OTP
+                  </button>
+                ) : (
+                  <p className={styles.timerText}>
+                    Resend OTP in {timer}s
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* PASSWORD */}
           <div className={styles.passwordWrapper}>
@@ -327,9 +327,8 @@ useEffect(() => {
 
           {/* SUBMIT */}
           <button
-            className={`${styles.submitBtn} ${
-              emailVerified ? styles.enabled : styles.disabled
-            }`}
+            className={`${styles.submitBtn} ${emailVerified ? styles.enabled : styles.disabled
+              }`}
             disabled={!emailVerified || loading}
           >
             {loading ? "Creating..." : "Sign Up"}
