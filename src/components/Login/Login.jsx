@@ -64,9 +64,9 @@ export default function Login() {
         <form onSubmit={handleSubmit} className={styles.card}>
 
           {/* HOME BUTTON */}
-          <Link href="/" className={styles.homeBtn}>
+          {/* <Link href="/" className={styles.homeBtn}>
             <FaHome /> Home
-          </Link>
+          </Link> */}
 
           <h2>Login</h2>
 

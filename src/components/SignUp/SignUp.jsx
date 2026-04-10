@@ -4,6 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import PhoneInput from "react-phone-input-2";
 import styles from "./SignUp.module.css";
 import "react-phone-input-2/lib/style.css";
+import { useSearchParams } from "next/navigation";
 
 export default function SignUp() {
   const [loading, setLoading] = useState(false);
@@ -11,34 +12,48 @@ export default function SignUp() {
   const [step, setStep] = useState("form");
   const [timer, setTimer] = useState(30);
   const [canResend, setCanResend] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const [form, setForm] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
     password: "",
-    // userType: "",
+    roleDescription: "",
+    otherRoleDescription: "",
+    organizationName: "",
   });
 
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [otp, setOtp] = useState(["", "", "", ""]);
   const inputsRef = useRef([]);
 
   const [showPassword, setShowPassword] = useState(false);
   const [emailVerified, setEmailVerified] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const API = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/login";
+
   // ✅ Handle Input
   const handleChange = (e) => {
+    setError("");
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handlePhoneChange = (value) => {
+    setError("");
     setForm({ ...form, phone: value });
   };
 
   const handleOtpChange = (value, index) => {
     if (!/^[a-zA-Z0-9]?$/.test(value)) return; // ✅ allow letters + numbers
+
+    setError("");
+    setSuccess("");
 
     const newOtp = [...otp];
     newOtp[index] = value; // optional: normalize
@@ -57,8 +72,10 @@ export default function SignUp() {
 
   // ✅ Send OTP
   const handleSendOtp = async () => {
-    if (!form.email) return alert("Enter email first");
-
+    if (!form.email) {
+      setError("Please enter your email first.");
+      return;
+    }
     try {
       setSendingOtp(true);
 
@@ -73,11 +90,13 @@ export default function SignUp() {
       const data = await res.json();
 
       if (!data.success) {
-        alert(data.message || "Failed to send OTP");
+        setError(data.message || "Failed to send OTP");
         return;
       }
 
-      alert("OTP sent ✅");
+      setSuccess("OTP sent successfully to email ✅");
+      setError("");
+
       setStep("otp");
 
       // ✅ Start timer
@@ -85,7 +104,7 @@ export default function SignUp() {
       setCanResend(false);
 
     } catch {
-      alert("Error sending OTP");
+      setError("Error sending OTP. Try again.");
     } finally {
       setSendingOtp(false);
     }
@@ -112,8 +131,10 @@ export default function SignUp() {
   const handleVerifyOtp = async () => {
     const enteredOtp = otp.join("");
 
-    if (enteredOtp.length !== 6) {
-      return alert("Enter complete OTP");
+    if (enteredOtp.length !== 4) {
+      setError("Please enter the complete OTP.");
+      setSuccess("");
+      return;
     }
 
     try {
@@ -131,14 +152,17 @@ export default function SignUp() {
       const data = await res.json();
 
       if (data.success) {
-        alert("Email verified ✅");
+        setSuccess("Email verified successfully ✅");
+        setError("");
         setEmailVerified(true);
         setStep("verified");
       } else {
-        alert(data.message || "Invalid OTP");
+        setError(data.message || "Invalid OTP");
+        setSuccess("");
       }
     } catch {
-      alert("Verification failed");
+      setError("Verification failed");
+      setSuccess("");
     }
   };
 
@@ -146,9 +170,11 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!emailVerified) {
-      return alert("Verify email first ❌");
-    }
+   if (!emailVerified) {
+  setError("Please verify your email first ❌");
+  setSuccess("");
+  return;
+}
 
     // if (!form.userType) {
     //   return alert("Select user type");
@@ -168,8 +194,8 @@ export default function SignUp() {
       const data = await res.json();
 
       if (data.success) {
-        alert("Signup successful ✅");
-        window.location.href = "/login";
+        // alert("Signup successful ✅");
+        window.location.href = redirect;
       } else {
         alert(data.message || "Signup failed");
       }
@@ -215,12 +241,21 @@ export default function SignUp() {
           </div> */}
 
           {/* NAME */}
-          <input
-            name="name"
-            className={styles.input}
-            placeholder="Full Name"
-            onChange={handleChange}
-          />
+          <div className={styles.nameRow}>
+            <input
+              name="firstName"
+              className={styles.input}
+              placeholder="First Name"
+              onChange={handleChange}
+            />
+
+            <input
+              name="lastName"
+              className={styles.input}
+              placeholder="Last Name"
+              onChange={handleChange}
+            />
+          </div>
 
           {/* PHONE */}
           <div className={styles.phoneWrapper}>
@@ -262,6 +297,8 @@ export default function SignUp() {
               </div>
             )}
           </div>
+          {error && <p className={styles.error}>{error}</p>}
+          {success && <p className={styles.success}>{success}</p>}
 
           {/* OTP */}
           {step === "otp" && (
@@ -325,6 +362,38 @@ export default function SignUp() {
             </span>
           </div>
 
+          <select
+            name="roleDescription"
+            className={styles.input}
+            value={form.roleDescription}
+            onChange={handleChange}
+            disabled={!emailVerified}
+          >
+            <option value="">Select your role</option>
+            <option value="Teacher">Teacher</option>
+            <option value="School Leader">School Leader</option>
+            <option value="Education Solution Partner">Education Solution Partner</option>
+            <option value="Education Consultants">Education Consultants</option>
+            <option value="Other">Other</option>
+          </select>
+
+          {form.roleDescription === "Other" && (
+            <input
+              name="otherRoleDescription"
+              className={styles.input}
+              placeholder="Specify your role"
+              onChange={handleChange}
+            />
+          )}
+
+          <input
+            name="organizationName"
+            className={styles.input}
+            placeholder="School/Organization Name"
+            onChange={handleChange}
+            disabled={!emailVerified}
+          />
+
           {/* SUBMIT */}
           <button
             className={`${styles.submitBtn} ${emailVerified ? styles.enabled : styles.disabled
@@ -339,6 +408,23 @@ export default function SignUp() {
           </p>
         </form>
       </div>
+
+      {/* {showSuccessModal && (
+  <div className={styles.modalOverlay}>
+    <div className={styles.modal}>
+      <h3>Signup Successful 🎉</h3>
+      <p>Your account has been created successfully.</p>
+
+      <button
+        className={styles.modalBtn}
+        onClick={() => router.push("/login")}
+      >
+        Go to Login
+      </button>
     </div>
+  </div>
+)} */}
+    </div>
+    
   );
 }

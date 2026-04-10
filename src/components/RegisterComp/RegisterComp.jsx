@@ -6,8 +6,11 @@ import Link from "next/link";
 import moment from "moment";
 import { useAuth } from "@/context/AuthContext";
 import { usePathname } from "next/navigation";
+import LoginModal from "../LoginModal/LoginModal";
+import WebinarRegisterModal from "../WebinarRegisterModal/WebinarRegisterModal";
+import { IoCheckmark } from "react-icons/io5";
 
-const RegisterComp = ({ webinar }) => {
+const RegisterComp = ({ webinar, utms }) => {
 
 
   const [activeVideo, setActiveVideo] = useState(null);
@@ -16,9 +19,39 @@ const RegisterComp = ({ webinar }) => {
 
   const [certificate, setCertificate] = useState(null);
 
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+
+  const [registeredWebinars, setRegisteredWebinars] = useState([]);
+
   const { user } = useAuth();
 
   const pathname = usePathname();
+
+
+  useEffect(() => {
+    if (showLoginModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showLoginModal]);
+
+
+  useEffect(() => {
+    if (showRegisterModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showRegisterModal]);
 
 
   useEffect(() => {
@@ -44,6 +77,44 @@ const RegisterComp = ({ webinar }) => {
       fetchCertificate();
     }
   }, [webinar]);
+
+
+  useEffect(() => {
+    const fetchRegistered = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/get-user-registered-webinars`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              email: user.email
+            })
+          }
+        );
+
+        const data = await res.json();
+
+        // ✅ Console the full response
+        console.log("Registered Webinar API Response:", data);
+
+        if (data.success) {
+          console.log("Registered Webinars:", data.response); // ✅ only webinars
+          setRegisteredWebinars(data.response);
+        }
+
+      } catch (error) {
+        console.error("Error fetching registered webinars:", error);
+      }
+    };
+
+    if (user?.email) {
+      fetchRegistered();
+    }
+
+  }, [user]);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -113,6 +184,20 @@ const RegisterComp = ({ webinar }) => {
   const hasPastSessions = Boolean(
     webinar?.pastSessions && webinar.pastSessions.length > 0
   );
+
+  console.log("Registered Webinars in Component:", registeredWebinars); // ✅ log registered webinars
+  console.log("Current Webinar ID:", webinar._id, webinar.date); // ✅ log current webinar ID
+
+  const isRegistered = (registeredWebinars || []).some(r => {
+    const sameWebinar = String(r.webinarId) === String(webinar._id);
+
+    const regDate = new Date(r.webinarDate).toISOString().split("T")[0];
+    const webinarDate = new Date(webinar.date).toISOString().split("T")[0];
+
+    const sameDate = regDate === webinarDate;
+
+    return sameWebinar && sameDate;
+  });
 
   return (
     <section className={styles.landingcontent}>
@@ -675,15 +760,30 @@ const RegisterComp = ({ webinar }) => {
                 {buttonText}
               </Link> */}
 
-              {user ? (
-                <Link href={href} className={buttonClass}>
+              {!user ? (
+                <button
+                  className={buttonClass}
+                  onClick={() => setShowLoginModal(true)}
+                >
                   {buttonText}
-                </Link>
+                </button>
+              ) : isRegistered ? (
+                <button
+                  className={`${buttonClass} btndisabled`}
+                  disabled
+                >
+                  <IoCheckmark style={{ marginRight: "6px" }} />
+                  Registered
+                </button>
               ) : (
-                <Link href={`/login?redirect=${encodeURIComponent(pathname)}`} className={buttonClass}>
+                <button
+                  className={buttonClass}
+                  onClick={() => setShowRegisterModal(true)}
+                >
                   {buttonText}
-                </Link>
+                </button>
               )}
+
 
               {webinar.bonus?.title && (
                 <div className={styles.regbonus}>
@@ -784,6 +884,24 @@ const RegisterComp = ({ webinar }) => {
 
         </div>
       </div>
+
+      <LoginModal
+        show={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onLoginSuccess={() => {
+          setShowLoginModal(false);
+          setShowRegisterModal(true);
+        }}
+      />
+
+      {showRegisterModal && (
+        <WebinarRegisterModal
+          webinar={webinar}
+          user={user}
+          onClose={() => setShowRegisterModal(false)}
+          utms={utms}
+        />
+      )}
     </section>
   );
 };

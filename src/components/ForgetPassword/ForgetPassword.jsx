@@ -18,34 +18,34 @@ export default function ForgetPassword() {
     confirmPassword: ""
   });
 
-  const [otp, setOtp] = useState(["","","","","",""]);
+  const [otp, setOtp] = useState(["", "", "", ""]);
   const inputsRef = useRef([]);
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleChange = (e)=>{
-    setForm({...form,[e.target.name]:e.target.value});
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   /* ================= SEND OTP ================= */
 
-  const handleSendOtp = async ()=>{
+  const handleSendOtp = async () => {
 
-    if(!form.email) return alert("Enter email");
+    if (!form.email) return alert("Enter email");
 
-    try{
+    try {
 
       setSendingOtp(true);
 
-      const res = await fetch(`${API}/user/send-otp`,{
-        method:"POST",
-        headers:{ "Content-Type":"application/json"},
+      const res = await fetch(`${API}/user/send-otp`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: form.email })
       });
 
       const data = await res.json();
 
-      if(!data.success){
+      if (!data.success) {
         alert(data.message);
         return;
       }
@@ -56,74 +56,74 @@ export default function ForgetPassword() {
       setTimer(30);
       setCanResend(false);
 
-    }catch{
+    } catch {
       alert("Error sending OTP");
     }
-    finally{
+    finally {
       setSendingOtp(false);
     }
   };
 
   /* ================= OTP TIMER ================= */
 
-  useEffect(()=>{
+  useEffect(() => {
 
     let interval;
 
-    if(step==="otp" && timer>0){
-      interval=setInterval(()=>{
-        setTimer(prev=>prev-1);
-      },1000);
+    if (step === "otp" && timer > 0) {
+      interval = setInterval(() => {
+        setTimer(prev => prev - 1);
+      }, 1000);
     }
 
-    if(timer===0){
+    if (timer === 0) {
       setCanResend(true);
       clearInterval(interval);
     }
 
-    return ()=> clearInterval(interval);
+    return () => clearInterval(interval);
 
-  },[timer,step]);
+  }, [timer, step]);
 
   /* ================= OTP INPUT ================= */
 
-  const handleOtpChange=(value,index)=>{
+  const handleOtpChange = (value, index) => {
 
-    if(!/^[a-zA-Z0-9]?$/.test(value)) return;
+    if (!/^[a-zA-Z0-9]?$/.test(value)) return;
 
-    const newOtp=[...otp];
-    newOtp[index]=value;
+    const newOtp = [...otp];
+    newOtp[index] = value;
     setOtp(newOtp);
 
-    if(value && index<otp.length-1){
-      inputsRef.current[index+1]?.focus();
+    if (value && index < otp.length - 1) {
+      inputsRef.current[index + 1]?.focus();
     }
 
   };
 
-  const handleKeyDown=(e,index)=>{
+  const handleKeyDown = (e, index) => {
 
-    if(e.key==="Backspace" && !otp[index] && index>0){
-      inputsRef.current[index-1]?.focus();
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      inputsRef.current[index - 1]?.focus();
     }
 
   };
 
   /* ================= VERIFY OTP ================= */
 
-  const handleVerifyOtp = async ()=>{
+  const handleVerifyOtp = async () => {
 
     const enteredOtp = otp.join("");
 
-    if(enteredOtp.length !== 6){
+    if (enteredOtp.length !== 4) {
       return alert("Enter full OTP");
     }
 
-    try{
+    try {
 
-      const res = await fetch(`${API}/user/verify-otp`,{
-        method:"POST",
-        headers:{ "Content-Type":"application/json"},
+      const res = await fetch(`${API}/user/verify-otp`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: form.email,
           otp: enteredOtp
@@ -132,14 +132,14 @@ export default function ForgetPassword() {
 
       const data = await res.json();
 
-      if(data.success){
+      if (data.success) {
         alert("OTP verified ✅");
         setStep("password");
-      }else{
+      } else {
         alert(data.message);
       }
 
-    }catch{
+    } catch {
       alert("Verification failed");
     }
 
@@ -147,19 +147,19 @@ export default function ForgetPassword() {
 
   /* ================= RESET PASSWORD ================= */
 
-  const handleResetPassword = async (e)=>{
+  const handleResetPassword = async (e) => {
 
     e.preventDefault();
 
-    if(form.password !== form.confirmPassword){
+    if (form.password !== form.confirmPassword) {
       return alert("Passwords do not match");
     }
 
-    try{
+    try {
 
-      const res = await fetch(`${API}/user/reset-password`,{
-        method:"POST",
-        headers:{ "Content-Type":"application/json"},
+      const res = await fetch(`${API}/user/reset-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: form.email,
           password: form.password
@@ -168,20 +168,26 @@ export default function ForgetPassword() {
 
       const data = await res.json();
 
-      if(data.success){
+      if (data.success) {
+
+        // clear auth data
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+
         alert("Password reset successful ✅");
-        window.location.href="/login";
-      }else{
+        window.location.href = "/login";
+      } else {
         alert(data.message);
       }
 
-    }catch{
+    }
+    catch {
       alert("Server error");
     }
 
   };
 
-  return(
+  return (
 
     <div className={styles.container}>
 
@@ -191,7 +197,7 @@ export default function ForgetPassword() {
 
         {/* EMAIL STEP */}
 
-        {step==="email" &&(
+        {step === "email" && (
 
           <>
             <input
@@ -214,19 +220,19 @@ export default function ForgetPassword() {
 
         {/* OTP STEP */}
 
-        {step==="otp" &&(
+        {step === "otp" && (
 
           <div className={styles.otpBox}>
 
             <div className={styles.otpInputs}>
-              {otp.map((digit,i)=>(
+              {otp.map((digit, i) => (
                 <input
                   key={i}
-                  ref={(el)=>inputsRef.current[i]=el}
+                  ref={(el) => inputsRef.current[i] = el}
                   maxLength={1}
                   value={digit}
-                  onChange={(e)=>handleOtpChange(e.target.value,i)}
-                  onKeyDown={(e)=>handleKeyDown(e,i)}
+                  onChange={(e) => handleOtpChange(e.target.value, i)}
+                  onKeyDown={(e) => handleKeyDown(e, i)}
                 />
               ))}
             </div>
@@ -252,13 +258,13 @@ export default function ForgetPassword() {
 
         {/* PASSWORD STEP */}
 
-        {step==="password" &&(
+        {step === "password" && (
 
           <form onSubmit={handleResetPassword}>
 
             <div className={styles.passwordWrapper}>
               <input
-                type={showPassword?"text":"password"}
+                type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="New Password"
                 className={styles.input}
@@ -267,9 +273,9 @@ export default function ForgetPassword() {
 
               <span
                 className={styles.eye}
-                onClick={()=>setShowPassword(!showPassword)}
+                onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? <FaEyeSlash/> : <FaEye/>}
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
 
