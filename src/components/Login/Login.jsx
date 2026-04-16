@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash, FaHome } from "react-icons/fa";
 import Link from "next/link";
 import styles from "./Login.module.css";
@@ -12,9 +12,19 @@ export default function Login() {
 
 
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") || "/";
+  const redirect = searchParams.get("redirect") || "/user-dashboard";
 
   const API = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+  useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("token");
+
+  if (token) {
+    localStorage.setItem("token", token);
+    window.location.replace("/user-dashboard");
+  }
+}, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -47,6 +57,28 @@ export default function Login() {
       setLoading(false);
     }
   };
+
+ const handleGoogleLogin = () => {
+    const redirectUrl = window.location.href;
+
+    window.location.href =
+      `${API}/google/google-login?redirect=${encodeURIComponent(
+        redirectUrl
+      )}`;
+  };
+
+  // handle google callback
+  useEffect(() => {
+    const token = searchParams.get("token");
+
+    if (token) {
+      localStorage.setItem("token", token);
+
+      const cleanUrl = window.location.pathname;
+
+      window.location.replace(cleanUrl);
+    }
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -111,6 +143,21 @@ export default function Login() {
           >
             {loading ? "Logging in..." : "Login"}
           </button>
+
+          <div className={styles.divider}>OR</div>
+
+<button
+    type="button"
+    onClick={handleGoogleLogin}
+    className={styles.googleBtn}
+>
+    <img
+        src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+        alt="google"
+        style={{ width: "18px", marginRight: "8px" }}
+    />
+    Continue with Google
+</button>
 
           <p className={styles.footer}>
             Don’t have an account? <a href="/sign-up">Sign Up</a>

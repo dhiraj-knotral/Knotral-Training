@@ -7,6 +7,7 @@ import "react-phone-input-2/lib/style.css";
 import { useSearchParams } from "next/navigation";
 
 export default function SignUp() {
+  console.log("PAGE LOADED:", typeof window !== "undefined" ? window.location.href : "SSR");
   const [loading, setLoading] = useState(false);
   const [sendingOtp, setSendingOtp] = useState(false);
   const [step, setStep] = useState("form");
@@ -32,21 +33,63 @@ export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [emailVerified, setEmailVerified] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showGoogleModal, setShowGoogleModal] = useState(false);
+
 
   const API = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const searchParams = useSearchParams();
+  const signupSuccess = searchParams.get("signup") === "success";
   const redirect = searchParams.get("redirect") || "/login";
 
+
+  useEffect(() => {
+    const email = searchParams.get("email");
+    const signup = searchParams.get("signup") || searchParams.get("sign-up");
+
+    if (email) {
+      setForm((prev) => ({ ...prev, email }));
+    }
+
+    if (signup === "success") {
+      setShowGoogleModal(true);
+      setStep("google");
+      setSuccess("Complete your profile");
+    }
+
+    if (email || signup) {
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, [searchParams]);
+
+
+
+
+  // const postLoginRedirect = signupSuccess ? null : redirect;
   // ✅ Handle Input
   const handleChange = (e) => {
     setError("");
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handlePhoneChange = (value) => {
-    setError("");
-    setForm({ ...form, phone: value });
+  const handlePhoneChange = (value, data) => {
+    const dialCode = data.dialCode || "";
+
+    // Remove country code safely
+    let phoneNumber = value;
+
+    if (value.startsWith(dialCode)) {
+      phoneNumber = value.slice(dialCode.length);
+    }
+
+    // Keep only digits
+    phoneNumber = phoneNumber.replace(/\D/g, "");
+
+    setForm((prev) => ({
+      ...prev,
+      phone: phoneNumber ? Number(phoneNumber) : "", // ✅ number
+      countryCode: `+${dialCode}`,                  // ✅ separate
+    }));
   };
 
   const handleOtpChange = (value, index) => {
@@ -170,11 +213,11 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-   if (!emailVerified) {
-  setError("Please verify your email first ❌");
-  setSuccess("");
-  return;
-}
+    if (!emailVerified) {
+      setError("Please verify your email first ❌");
+      setSuccess("");
+      return;
+    }
 
     // if (!form.userType) {
     //   return alert("Select user type");
@@ -199,10 +242,62 @@ export default function SignUp() {
       } else {
         alert(data.message || "Signup failed");
       }
-    } catch {
-      alert("Server error");
+    } catch (err) {
+      console.error("❌ Signup Error:", err);
+      setError(err.message || "Server error");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleSignup = () => {
+    const redirectUrl =
+      typeof window !== "undefined"
+        ? window.location.href
+        : "/";
+
+    window.location.href =
+      `${API}/google/google-signup?redirect=${encodeURIComponent(redirectUrl)}`;
+  };
+
+  // =========================
+  // ✅ GOOGLE COMPLETE PROFILE
+  // =========================
+  const handleCompleteProfile = async () => {
+    try {
+      if (!form.email) {
+        setError("Email is missing. Please try again.");
+        return;
+      }
+
+      const res = await fetch(`${API}/user/complete-profile`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: form.email, // ✅ from query param
+          phone: Number(form.phone), // ✅ ensure number
+          countryCode: form.countryCode || "+91", // ✅ include this
+          roleDescription: form.roleDescription,
+          otherRoleDescription: form.otherRoleDescription || "",
+          organizationName: form.organizationName,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        // ✅ optional: clear URL params before redirect
+        window.history.replaceState({}, "", window.location.pathname);
+
+        window.location.href = "/login";
+      } else {
+        setError(data.message || "Something went wrong");
+      }
+    } catch (err) {
+      console.error("Complete profile error:", err);
+      setError("Something went wrong");
     }
   };
 
@@ -261,7 +356,11 @@ export default function SignUp() {
           <div className={styles.phoneWrapper}>
             <PhoneInput
               country={"in"}
-              value={form.phone}
+              value={
+                form.countryCode
+                  ? form.countryCode.replace("+", "") + form.phone
+                  : form.phone
+              }
               onChange={handlePhoneChange}
               inputClass={styles.phoneInput}
               containerClass={styles.phoneContainer}
@@ -403,11 +502,29 @@ export default function SignUp() {
             {loading ? "Creating..." : "Sign Up"}
           </button>
 
+          <div className={styles.divider}>OR</div>
+
+          <button
+            type="button"
+            className={styles.googleBtn}
+            onClick={handleGoogleSignup}
+          >
+            <img
+              src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+              alt="google"
+              className={styles.googleIcon}
+            />
+            Continue with Google
+          </button>
+
           <p className={styles.footer}>
             Already have account? <a href="/login">Login</a>
           </p>
         </form>
+
       </div>
+
+
 
       {/* {showSuccessModal && (
   <div className={styles.modalOverlay}>
@@ -424,7 +541,74 @@ export default function SignUp() {
     </div>
   </div>
 )} */}
+
+      {showGoogleModal && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modal}>
+            <h3>Complete Your Profile 🚀</h3>
+            <p>Please fill remaining details</p>
+
+            {/* PHONE */}
+            <div className={styles.phoneWrapper}>
+              <PhoneInput
+                country={"in"}
+                value={
+                  form.countryCode
+                    ? form.countryCode.replace("+", "") + form.phone
+                    : form.phone
+                }
+                onChange={handlePhoneChange}
+                inputClass={styles.phoneInput}
+                containerClass={styles.phoneContainer}
+                buttonClass={styles.phoneDropdown}
+                dropdownClass={styles.phoneDropdownList}
+                countryCodeEditable={false}
+              />
+            </div>
+
+
+            <select
+              name="roleDescription"
+              className={styles.input}
+              value={form.roleDescription}
+              onChange={handleChange}
+            >
+              <option value="">Select your role</option>
+              <option value="Teacher">Teacher</option>
+              <option value="School Leader">School Leader</option>
+              <option value="Education Solution Partner">Education Solution Partner</option>
+              <option value="Education Consultants">Education Consultants</option>
+              <option value="Other">Other</option>
+            </select>
+
+            {form.roleDescription === "Other" && (
+              <input
+                name="otherRoleDescription"
+                className={styles.input}
+                placeholder="Specify your role"
+                onChange={handleChange}
+              />
+            )}
+
+            {/* ORGANIZATION */}
+            <input
+              name="organizationName"
+              placeholder="Organization Name"
+              value={form.organizationName}
+              onChange={handleChange}
+              className={styles.input}
+            />
+
+            <button
+              className={styles.modalBtn}
+              onClick={handleCompleteProfile}
+            >
+              Complete Signup
+            </button>
+          </div>
+        </div>
+      )}
     </div>
-    
+
   );
 }

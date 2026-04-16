@@ -180,6 +180,20 @@ export default function WebinarRegisterModal({
         }
     };
 
+const handleGoogleConnect = async () => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/google/connect?userId=${user._id}&redirect=${window.location.href}`
+    );
+
+    const data = await res.json();
+
+    window.location.href = data.url;
+  } catch (err) {
+    console.error("Google connect error:", err);
+  }
+};
+
     return (<div className={styles.overlay}> <div className={styles.modal}>
 
         <button className={styles.close} onClick={onClose}>
@@ -267,6 +281,15 @@ export default function WebinarRegisterModal({
             </label>
         </div>
 
+        {!user?.isCalendarConnected && (
+  <button
+    className="btn btnsecondary btnblock"
+    onClick={handleGoogleConnect}
+  >
+    Connect Google Calendar
+  </button>
+)}
+
         <button
             className="btn btnprimary btnlg btnblock"
             onClick={handleSubmit}
@@ -278,3 +301,4 @@ export default function WebinarRegisterModal({
     </div>
     );
 }
+

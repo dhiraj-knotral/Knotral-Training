@@ -154,7 +154,7 @@ const Header = () => {
                     Edit Profile
                   </button>
                   <button onClick={() => router.push("/forget-password")}>
-                    Update Password
+                    Change Password
                   </button>
                   <button onClick={logout}>Logout</button>
                 </div>
@@ -248,7 +248,7 @@ const Header = () => {
                 onClick={() => setMenuOpen(false)}
                 className={`${styles.mobileLink} ${pathname === "/forget-password" ? styles.active : ""}`}
               >
-                Update Password
+                Change Password
               </Link>
             </>
           )}

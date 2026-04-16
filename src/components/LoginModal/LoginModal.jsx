@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import styles from "./LoginModal.module.css";
@@ -16,8 +16,29 @@ export default function LoginModal({ show, onClose, onLoginSuccess }) {
 
     const router = useRouter();
     const searchParams = useSearchParams();
-    const redirect = searchParams.get("redirect");
     const API = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+    const redirect =
+        typeof window !== "undefined"
+            ? window.location.href
+            : "/";
+
+
+    // 👇 PUT IT HERE (RIGHT AFTER ALL HOOKS)
+    useEffect(() => {
+        const url = new URL(window.location.href);
+        const token = url.searchParams.get("token");
+
+        if (!token) return;
+
+        localStorage.setItem("token", token);
+
+        window.history.replaceState({}, "", window.location.pathname);
+
+        onLoginSuccess()
+
+        refreshUser?.();
+    }, []);
 
     if (!show) return null;
 
@@ -39,30 +60,38 @@ export default function LoginModal({ show, onClose, onLoginSuccess }) {
 
             const data = await res.json();
 
-            if (data.success) {
-                localStorage.setItem("token", data.token);
+            if (!res.ok || !data.success) {
+                throw new Error(data.message || "Login failed");
+            }
 
-                await refreshUser();   // ⭐ update auth context
+            localStorage.setItem("token", data.token);
 
-                onClose();
+            await refreshUser();
+            onClose();
 
-                if (onLoginSuccess) {
-                    onLoginSuccess();   // ⭐ open register modal
-                } else if (redirect) {
-                    router.push(redirect);
-                } else {
-                    router.refresh();
-                }
+            if (onLoginSuccess) {
+                onLoginSuccess();
             } else {
-                alert(data.message || "Login failed ❌");
+                router.refresh();
             }
 
         } catch (error) {
             console.error("Login error:", error);
-            alert("Server error ❌");
+            alert(error.message); // ✅ show error to user
+
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleGoogleLogin = () => {
+        const redirectUrl =
+            typeof window !== "undefined"
+                ? window.location.href
+                : "/";
+
+        window.location.href =
+            `${API}/google/google-login?redirect=${encodeURIComponent(redirectUrl)}`;
     };
 
     return (
@@ -119,12 +148,28 @@ export default function LoginModal({ show, onClose, onLoginSuccess }) {
                         {loading ? "Logging in..." : "Login"}
                     </button>
 
+                    <div className={styles.divider}>OR</div>
+
+                    <button
+                        type="button"
+                        className={styles.googleBtn}
+                        onClick={handleGoogleLogin}
+                    >
+                        <img
+                            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                            alt="google"
+                            className={styles.googleIcon}
+                        />
+                        Continue with Google
+                    </button>
+
+{/* 
                     <p className={styles.footer}>
                         Don’t have an account?{" "}
                         <Link href={`/sign-up?redirect=${redirect || window.location.pathname}`}>
                             Sign Up
                         </Link>
-                    </p>
+                    </p> */}
                 </form>
             </div>
         </div>
