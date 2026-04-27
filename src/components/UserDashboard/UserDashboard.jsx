@@ -11,7 +11,6 @@ import "react-day-picker/dist/style.css";
 
 const UserDashboard = () => {
   const router = useRouter();
-
   const { user, logout } = useAuth();
   const [webinars, setWebinars] = useState([]);
   const [allWebinars, setAllWebinars] = useState([]);
