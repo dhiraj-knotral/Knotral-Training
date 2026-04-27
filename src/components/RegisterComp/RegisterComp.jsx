@@ -109,7 +109,7 @@ const RegisterComp = ({ webinar, utms }) => {
   // Determine button text and style based on webinar actions
   const buttonText =
     webinar.organisedBy === "We Skoolhouse"
-      ? "Pay and Get Certified"
+      ? "Pay and Register"
       : webinar.actions?.canStartProgram
         ? "Start Course"
         : webinar.actions?.canEnroll
@@ -749,7 +749,7 @@ const RegisterComp = ({ webinar, utms }) => {
                   "FREE"
                 ) : webinar.organisedBy === "We Skoolhouse" ? (
                   <>
-                    <span className={styles.originalPrice}>₹4774</span>{" "}
+                    {/* <span className={styles.originalPrice}>₹4774</span>{" "} */}
                     <span className={styles.discountedPrice}>₹{webinar.price}</span>
                   </>
                 ) : (

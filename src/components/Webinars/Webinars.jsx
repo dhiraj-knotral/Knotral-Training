@@ -193,7 +193,7 @@ const WebinarsList = ({ webinars, pagination, filters }) => {
                                                 "FREE"
                                             ) : item.organisedBy === "We Skoolhouse" ? (
                                                 <>
-                                                    <span className={styles.originalPrice}>₹4774</span>{" "}
+                                                    {/* <span className={styles.originalPrice}>₹4774</span>{" "} */}
                                                     <span className={styles.discountedPrice}>₹{item.price}</span>
                                                 </>
                                             ) : (
