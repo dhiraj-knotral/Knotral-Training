@@ -9,6 +9,7 @@ export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
 
   const searchParams = useSearchParams();
@@ -16,15 +17,42 @@ export default function Login() {
 
   const API = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-  useEffect(() => {
-  const params = new URLSearchParams(window.location.search);
-  const token = params.get("token");
+  // useEffect(() => {
+  //   const params = new URLSearchParams(window.location.search);
+  //   const token = params.get("token");
 
-  if (token) {
-    localStorage.setItem("token", token);
-    window.location.replace("/user-dashboard");
-  }
-}, []);
+  //   if (token) {
+  //     localStorage.setItem("token", token);
+  //     window.location.replace("/user-dashboard");
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    const errorParam = searchParams.get("error");
+
+    if (!errorParam) return;
+
+    let message = "";
+
+    switch (errorParam) {
+      case "use_password":
+        message = "This account uses email & password. Please login manually.";
+        break;
+
+      case "invalid_provider":
+        message = "Please login using the correct method.";
+        break;
+
+      case "no_account":
+        message = "No account found. Please sign up first.";
+        break;
+
+      default:
+        message = "Login failed. Try again.";
+    }
+
+    setError(message);
+  }, [searchParams]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -58,8 +86,10 @@ export default function Login() {
     }
   };
 
- const handleGoogleLogin = () => {
+  const handleGoogleLogin = () => {
     const redirectUrl = window.location.href;
+
+    console.log("Redirect URL for Google Login:", redirectUrl); // Debug log
 
     window.location.href =
       `${API}/google/google-login?redirect=${encodeURIComponent(
@@ -68,17 +98,40 @@ export default function Login() {
   };
 
   // handle google callback
+  // useEffect(() => {
+  //   const token = searchParams.get("token");
+
+  //   if (token) {
+  //     localStorage.setItem("token", token);
+
+  //     const cleanUrl = window.location.pathname;
+
+  //     window.location.replace(cleanUrl);
+  //   }
+  // }, []);
+
   useEffect(() => {
-    const token = searchParams.get("token");
+  if (typeof window === "undefined") return;
 
-    if (token) {
-      localStorage.setItem("token", token);
+  const url = new URL(window.location.href);
+  const token = url.searchParams.get("token");
 
-      const cleanUrl = window.location.pathname;
+  if (!token) return;
 
-      window.location.replace(cleanUrl);
-    }
-  }, []);
+  // ✅ save token
+  localStorage.setItem("token", token);
+
+  // ✅ get redirect OR fallback
+  const redirectUrl =
+    url.searchParams.get("redirect") || "/user-dashboard";
+
+  // ✅ clean URL (remove token)
+  window.history.replaceState({}, "", url.pathname);
+
+  // ✅ now redirect
+  window.location.replace(redirectUrl);
+
+}, []);
 
   return (
     <div className={styles.container}>
@@ -101,7 +154,7 @@ export default function Login() {
           </Link> */}
 
           <h2>Login</h2>
-
+          {error && <div className={styles.errorBox}>{error}</div>}
           <input
             type="email"
             name="email"
@@ -146,18 +199,18 @@ export default function Login() {
 
           <div className={styles.divider}>OR</div>
 
-<button
-    type="button"
-    onClick={handleGoogleLogin}
-    className={styles.googleBtn}
->
-    <img
-        src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-        alt="google"
-        style={{ width: "18px", marginRight: "8px" }}
-    />
-    Continue with Google
-</button>
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className={styles.googleBtn}
+          >
+            <img
+              src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+              alt="google"
+              style={{ width: "18px", marginRight: "8px" }}
+            />
+            Continue with Google
+          </button>
 
           <p className={styles.footer}>
             Don’t have an account? <a href="/sign-up">Sign Up</a>

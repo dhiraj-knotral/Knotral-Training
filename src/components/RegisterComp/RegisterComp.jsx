@@ -185,8 +185,8 @@ const RegisterComp = ({ webinar, utms }) => {
     webinar?.pastSessions && webinar.pastSessions.length > 0
   );
 
-  console.log("Registered Webinars in Component:", registeredWebinars); // ✅ log registered webinars
-  console.log("Current Webinar ID:", webinar?._id, webinar?.date); // ✅ log current webinar ID
+  // console.log("Registered Webinars in Component:", registeredWebinars); // ✅ log registered webinars
+  // console.log("Current Webinar ID:", webinar?._id, webinar?.date); // ✅ log current webinar ID
 
   const isRegistered = (registeredWebinars || []).some(r => {
     const sameWebinar = String(r.webinarId) === String(webinar?._id);

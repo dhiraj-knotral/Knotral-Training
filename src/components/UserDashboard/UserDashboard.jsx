@@ -107,17 +107,33 @@ const UserDashboard = () => {
 
   const uniqueCategories = [...new Set(upcomingCategories)];
 
-  const registeredIds = webinars.map((w) => w.webinar?._id);
+  const registeredWebinars = webinars.map((w) => ({
+  webinarId: w.webinar?._id,
+  date: w.date, // 👈 IMPORTANT (must exist in your data)
+}));
 
-  const recommendedWebinars = allWebinars
-  .filter((webinar) =>
-    webinar.category?.some((cat) => uniqueCategories.includes(cat)) &&
-    !registeredIds.includes(webinar._id) &&
-    moment(webinar.date).isAfter(moment()) &&
-    !webinar.isStopped
-  )
+const recommendedWebinars = allWebinars
+  .filter((webinar) => {
+    const matchCategory = webinar.category?.some((cat) =>
+      uniqueCategories.includes(cat)
+    );
+
+    const isFuture = moment(webinar.date).isAfter(moment());
+    const isActive = !webinar.isStopped;
+
+    // ✅ FIX: check BOTH id + date
+    const notRegistered = !registeredWebinars.some(
+      (r) =>
+        r.webinarId === webinar._id &&
+        moment(r.date).isSame(webinar.date, "day")
+    );
+
+    return matchCategory && notRegistered && isFuture && isActive;
+  })
   .sort((a, b) => new Date(a.date) - new Date(b.date))
   .slice(0, 4);
+
+  console.log("Recommended webinars:", recommendedWebinars);
 
   const certifiedWebinars = allWebinars
     .filter(
@@ -130,8 +146,6 @@ const UserDashboard = () => {
     )
     .sort((a, b) => new Date(a.date) - new Date(b.date))
     .slice(0, 4);
-
-  console.log("Certified webinars:", certifiedWebinars);
 
   const hasEvent = (date) => {
     return upcomingWebinars.some((w) => {

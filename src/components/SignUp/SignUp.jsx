@@ -39,28 +39,62 @@ export default function SignUp() {
   const API = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const searchParams = useSearchParams();
-  const signupSuccess = searchParams.get("signup") === "success";
   const redirect = searchParams.get("redirect") || "/login";
 
 
-  useEffect(() => {
-    const email = searchParams.get("email");
-    const signup = searchParams.get("signup") || searchParams.get("sign-up");
+ useEffect(() => {
+  const email = searchParams.get("email");
+  const signup = searchParams.get("signup") || searchParams.get("sign-up");
+  const errorParam = searchParams.get("error");
 
-    if (email) {
-      setForm((prev) => ({ ...prev, email }));
+  if (email) {
+    setForm((prev) => ({ ...prev, email }));
+  }
+
+  // ✅ SUCCESS CASE
+  if (signup === "success") {
+    setShowGoogleModal(true);
+    setStep("google");
+    setSuccess("Complete your profile");
+    setError("");
+  }
+
+  // ✅ ERROR CASES
+  if (errorParam) {
+    let message = "";
+
+    switch (errorParam) {
+      case "local_exists":
+        message = "Account already exists with email & password. Please login.";
+        break;
+
+      case "google_exists":
+        message = "Account already exists with Google. Please login using Google.";
+        break;
+
+      case "exists":
+        message = "Account already exists. Please login.";
+        break;
+
+      default:
+        message = "Something went wrong. Try again.";
     }
 
-    if (signup === "success") {
-      setShowGoogleModal(true);
-      setStep("google");
-      setSuccess("Complete your profile");
-    }
+    setError(message);
+    setSuccess("");
+  }
 
-    if (email || signup) {
-      window.history.replaceState({}, "", window.location.pathname);
-    }
-  }, [searchParams]);
+  // ✅ CLEAN URL BUT KEEP redirect
+  if (email || signup || errorParam) {
+    const redirect = searchParams.get("redirect");
+
+    const newUrl = redirect
+      ? `${window.location.pathname}?redirect=${encodeURIComponent(redirect)}`
+      : window.location.pathname;
+
+    window.history.replaceState({}, "", newUrl);
+  }
+}, [searchParams]);
 
 
 
@@ -263,43 +297,58 @@ export default function SignUp() {
   // =========================
   // ✅ GOOGLE COMPLETE PROFILE
   // =========================
-  const handleCompleteProfile = async () => {
-    try {
-      if (!form.email) {
-        setError("Email is missing. Please try again.");
-        return;
-      }
-
-      const res = await fetch(`${API}/user/complete-profile`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: form.email, // ✅ from query param
-          phone: Number(form.phone), // ✅ ensure number
-          countryCode: form.countryCode || "+91", // ✅ include this
-          roleDescription: form.roleDescription,
-          otherRoleDescription: form.otherRoleDescription || "",
-          organizationName: form.organizationName,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        // ✅ optional: clear URL params before redirect
-        window.history.replaceState({}, "", window.location.pathname);
-
-        window.location.href = "/login";
-      } else {
-        setError(data.message || "Something went wrong");
-      }
-    } catch (err) {
-      console.error("Complete profile error:", err);
-      setError("Something went wrong");
+const handleCompleteProfile = async () => {
+  try {
+    if (!form.email) {
+      setError("Email is missing. Please try again.");
+      return;
     }
-  };
+
+    const res = await fetch(`${API}/user/complete-profile`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: form.email,
+        phone: Number(form.phone),
+        countryCode: form.countryCode || "+91",
+        roleDescription: form.roleDescription,
+        otherRoleDescription: form.otherRoleDescription || "",
+        organizationName: form.organizationName,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      const redirect = searchParams.get("redirect");
+
+      // ✅ decode safely
+      let finalRedirect = "/login";
+
+      if (redirect) {
+        try {
+          finalRedirect = decodeURIComponent(redirect);
+        } catch {
+          finalRedirect = redirect;
+        }
+      }
+
+      // ✅ clear URL but KEEP redirect if needed
+      window.history.replaceState({}, "", window.location.pathname);
+
+      // ✅ redirect properly
+      window.location.href = finalRedirect;
+
+    } else {
+      setError(data.message || "Something went wrong");
+    }
+  } catch (err) {
+    console.error("Complete profile error:", err);
+    setError("Something went wrong");
+  }
+};
 
   return (
     <div className={styles.container}>
@@ -316,24 +365,6 @@ export default function SignUp() {
       <div className={styles.right}>
         <form onSubmit={handleSubmit} className={styles.card}>
           <h2>Create Account</h2>
-
-          {/* USER TYPE */}
-          {/* <div className={styles.userType}>
-            {["student", "teacher", "school", "solutionProvider"].map((type) => (
-              <button
-                key={type}
-                type="button"
-                onClick={() => setForm({ ...form, userType: type })}
-                className={
-                  form.userType === type
-                    ? `${styles.typeBtn} ${styles.active}`
-                    : styles.typeBtn
-                }
-              >
-                {type}
-              </button>
-            ))}
-          </div> */}
 
           {/* NAME */}
           <div className={styles.nameRow}>

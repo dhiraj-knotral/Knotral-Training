@@ -35,29 +35,29 @@ export default function WebinarRegisterModal({
     // Generate payload for submission
     const getSubmitPayload = () => {
         const payload = {
-    First_Name: user.firstName,
-    Last_Name: user.lastName,
-    Email: user.email,
-    Mobile: `${user.countryCode}${user.mobileNumber}`,
-    Category: webinar?.organisedBy,
-    FORM_NAME: `${webinar?.organisedBy} Landing page`,
-    Lead_Status: "No Contact Initiated",
-    Lead_Source: "Knotral Trainings",
-    Webinar_Date_TIme: moment(
-      `${moment(webinar.date).format("YYYY-MM-DD")} ${cleanTime}`,
-      "YYYY-MM-DD h:mm A"
-    ).format("YYYY-MM-DDTHH:mm:ssZ"),
-    webinarId: webinar?._id,
+            First_Name: user.firstName,
+            Last_Name: user.lastName,
+            Email: user.email,
+            Mobile: `${user.countryCode}${user.mobileNumber}`,
+            Category: webinar?.organisedBy,
+            FORM_NAME: `${webinar?.organisedBy} Landing page`,
+            Lead_Status: "No Contact Initiated",
+            Lead_Source: "Knotral Trainings",
+            Webinar_Date_TIme: moment(
+                `${moment(webinar.date).format("YYYY-MM-DD")} ${cleanTime}`,
+                "YYYY-MM-DD h:mm A"
+            ).format("YYYY-MM-DDTHH:mm:ssZ"),
+            webinarId: webinar?._id,
 
-    // UTM fields
-    utm_source: utms?.utm_source || "",
-    utm_medium: utms?.utm_medium || "",
-    utm_campaign: utms?.utm_campaign || "",
-  };
+            // UTM fields
+            utm_source: utms?.utm_source || "",
+            utm_medium: utms?.utm_medium || "",
+            utm_campaign: utms?.utm_campaign || "",
+        };
 
-  console.log("🚀 Webinar Registration Payload:", payload);
+        console.log("🚀 Webinar Registration Payload:", payload);
 
-  return payload;
+        return payload;
     };
 
 
@@ -180,19 +180,12 @@ export default function WebinarRegisterModal({
         }
     };
 
-const handleGoogleConnect = async () => {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/google/connect?userId=${user._id}&redirect=${window.location.href}`
-    );
+    const handleGoogleConnect = () => {
+        const redirect = window.location.href;
 
-    const data = await res.json();
-
-    window.location.href = data.url;
-  } catch (err) {
-    console.error("Google connect error:", err);
-  }
-};
+        window.location.href =
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/google/connect?userId=${user._id}&redirect=${encodeURIComponent(redirect)}`;
+    };
 
     return (<div className={styles.overlay}> <div className={styles.modal}>
 
@@ -280,20 +273,23 @@ const handleGoogleConnect = async () => {
                 </span>
             </label>
         </div>
-
-        {!user?.isCalendarConnected && (
-  <button
-    className="btn btnsecondary btnblock"
-    onClick={handleGoogleConnect}
-  >
-    Connect Google Calendar
-  </button>
-)}
+{/* 
+        {user?.authType === "local" &&
+            user?.email?.endsWith("@gmail.com") &&
+            !user?.isCalendarConnected && (
+                <button
+                    className="btn btnsecondary btnblock"
+                    onClick={handleGoogleConnect}
+                    style={{ marginBottom: "16px" }}
+                >
+                    Connect Google Calendar
+                </button>
+            )} */}
 
         <button
             className="btn btnprimary btnlg btnblock"
             onClick={handleSubmit}
-            // disabled={!agreed || isSubmitting}
+        // disabled={!agreed || isSubmitting}
         >
             {isSubmitting ? "Registering..." : "Confirm Registration"}
         </button>

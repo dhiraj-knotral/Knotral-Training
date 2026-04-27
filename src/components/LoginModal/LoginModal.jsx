@@ -11,6 +11,7 @@ export default function LoginModal({ show, onClose, onLoginSuccess }) {
     const [form, setForm] = useState({ email: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
     const { refreshUser } = useAuth();
 
@@ -18,11 +19,26 @@ export default function LoginModal({ show, onClose, onLoginSuccess }) {
     const searchParams = useSearchParams();
     const API = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-    const redirect =
-        typeof window !== "undefined"
-            ? window.location.href
-            : "/";
 
+  const getCleanRedirect = () => {
+  if (typeof window === "undefined") return "/";
+
+  const url = new URL(window.location.href);
+  const existingRedirect = url.searchParams.get("redirect");
+
+  if (existingRedirect) {
+    try {
+      return decodeURIComponent(existingRedirect);
+    } catch {
+      return existingRedirect;
+    }
+  }
+
+  // ✅ ONLY path (NO domain)
+  return url.pathname + url.search;
+};
+
+    const redirect = getCleanRedirect();
 
     // 👇 PUT IT HERE (RIGHT AFTER ALL HOOKS)
     useEffect(() => {
@@ -39,6 +55,45 @@ export default function LoginModal({ show, onClose, onLoginSuccess }) {
 
         refreshUser?.();
     }, []);
+
+
+     useEffect(() => {
+  const url = new URL(window.location.href);
+  const errorParam = url.searchParams.get("error");
+  const redirectParam = url.searchParams.get("redirect");
+
+  if (!errorParam) return;
+
+  let message = "";
+
+  switch (errorParam) {
+    case "use_password":
+      message = "This account uses email & password. Please login manually.";
+      break;
+
+    case "invalid_provider":
+      message = "Please login using the correct method.";
+      break;
+
+    case "no_account":
+      message = "No account found. Please sign up first.";
+      break;
+
+    default:
+      message = "Login failed. Try again.";
+  }
+
+  setError(message);
+
+  // ✅ CLEAN URL BUT KEEP redirect
+  const newUrl = redirectParam
+    ? `${window.location.pathname}?redirect=${encodeURIComponent(redirectParam)}`
+    : window.location.pathname;
+
+  window.history.replaceState({}, "", newUrl);
+
+}, []);
+
 
     if (!show) return null;
 
@@ -110,7 +165,7 @@ export default function LoginModal({ show, onClose, onLoginSuccess }) {
                     </button>
 
                     <h2>Login</h2>
-
+          {error && <div className={styles.errorBox}>{error}</div>}
                     <input
                         type="email"
                         name="email"
@@ -163,13 +218,13 @@ export default function LoginModal({ show, onClose, onLoginSuccess }) {
                         Continue with Google
                     </button>
 
-{/* 
+
                     <p className={styles.footer}>
                         Don’t have an account?{" "}
-                        <Link href={`/sign-up?redirect=${redirect || window.location.pathname}`}>
+                        <Link href={`/sign-up?redirect=${encodeURIComponent(redirect)}`}>
                             Sign Up
                         </Link>
-                    </p> */}
+                    </p>
                 </form>
             </div>
         </div>

@@ -139,7 +139,8 @@
 }
 
 .footer a {
-  color: var(--text-secondary);
+  font-size: 15px;
+  color: var(--secondary-blue);
   text-decoration: none;
   font-weight: 500;
 }
@@ -224,6 +225,14 @@ border-radius: 24px;
 .googleIcon {
   width: 20px;
   height: 20px;
+}
+
+.errorBox {
+  color: #d93025;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-size: 14px;
 }
 
 /* ===== RESPONSIVE ===== */
