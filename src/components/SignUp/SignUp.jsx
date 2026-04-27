@@ -4,10 +4,11 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import PhoneInput from "react-phone-input-2";
 import styles from "./SignUp.module.css";
 import "react-phone-input-2/lib/style.css";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SignUp() {
-  console.log("PAGE LOADED:", typeof window !== "undefined" ? window.location.href : "SSR");
+  const router = useRouter();
+
   const [loading, setLoading] = useState(false);
   const [sendingOtp, setSendingOtp] = useState(false);
   const [step, setStep] = useState("form");
@@ -321,27 +322,24 @@ const handleCompleteProfile = async () => {
 
     const data = await res.json();
 
-    if (data.success) {
-      const redirect = searchParams.get("redirect");
+if (data.success) {
 
-      // ✅ decode safely
-      let finalRedirect = "/login";
+  let finalRedirect = "/login";
+  
+  // ✅ close modal first
+  setShowGoogleModal(false);
 
-      if (redirect) {
-        try {
-          finalRedirect = decodeURIComponent(redirect);
-        } catch {
-          finalRedirect = redirect;
-        }
-      }
+  // optional cleanup
+  setStep("form");
+  setError("");
+  setSuccess("");
 
-      // ✅ clear URL but KEEP redirect if needed
-      window.history.replaceState({}, "", window.location.pathname);
+  console.log("REDIRECTING TO:", finalRedirect);
 
-      // ✅ redirect properly
-      window.location.href = finalRedirect;
-
-    } else {
+  // ✅ correct Next.js navigation
+  router.replace(finalRedirect);
+}
+ else {
       setError(data.message || "Something went wrong");
     }
   } catch (err) {
