@@ -325,7 +325,7 @@ const handleCompleteProfile = async () => {
 if (data.success) {
 
   let finalRedirect = "/login";
-  
+
   // ✅ close modal first
   setShowGoogleModal(false);
 
@@ -553,24 +553,6 @@ if (data.success) {
 
       </div>
 
-
-
-      {/* {showSuccessModal && (
-  <div className={styles.modalOverlay}>
-    <div className={styles.modal}>
-      <h3>Signup Successful 🎉</h3>
-      <p>Your account has been created successfully.</p>
-
-      <button
-        className={styles.modalBtn}
-        onClick={() => router.push("/login")}
-      >
-        Go to Login
-      </button>
-    </div>
-  </div>
-)} */}
-
       {showGoogleModal && (
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
@@ -594,7 +576,6 @@ if (data.success) {
                 countryCodeEditable={false}
               />
             </div>
-
 
             <select
               name="roleDescription"

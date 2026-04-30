@@ -37,7 +37,7 @@ export default function ForgetPassword() {
 
       setSendingOtp(true);
 
-      const res = await fetch(`${API}/user/send-otp`, {
+      const res = await fetch(`${API}/user/send-forget-password-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: form.email })
